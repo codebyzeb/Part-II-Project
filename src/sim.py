@@ -15,11 +15,11 @@ class Simulation:
 
     def run(self, debug=True):
         self.entity = Entity()
+        env = Environment()
+        env.placeEntity()
 
         # Do whole simulation
         for epoch in range(self.numEpochs):
-            env = Environment()
-            env.placeEntity()
 
             # Do an epoch
             for step in range(self.numCycles):
@@ -28,7 +28,7 @@ class Simulation:
 
                 angle = env.getAngle(entityPos, mushPos)
                 mush = env.getCell(mushPos) if env.adjacent(entityPos, mushPos) else 0
-                action, _ = self.entity.action(angle, mush, (0.5, 0.5, 0.5))
+                action, _ = self.entity.behaviourManual(angle, mush, (0.5, 0.5, 0.5))
 
                 if (debug):
                     print("Epoch:", epoch, "   Cycle:", step)
@@ -47,6 +47,9 @@ class Simulation:
                 if (env.entityPosition == mushPos):
                     self.entity.eat(env.getCell(mushPos))
                     env.clearCell(mushPos)
+
+            env.reset()
+            env.placeEntity()
                 
 
 sim = Simulation(5, 50, Entity())
