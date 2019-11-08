@@ -35,7 +35,7 @@ class Simulation:
                     print(env)
                     print("Entity energy:", self.entity.energy)
                     print("Entity position: (", entityPos[0], ",", entityPos[1],")",sep="")
-                    print("Closest mushroom position: (", mushPos[0], ",", mushPos[1],")",sep="")
+                        print("Closest mushroom position: (", mushPos[0], ",", mushPos[1],")",sep="")
                     print("Direction: ", env.entityDirection)
                     print("Angle: ", angle)
                     print("Mushroom input: ", mush)
