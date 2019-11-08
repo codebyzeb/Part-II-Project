@@ -1,0 +1,33 @@
+Subject: Phase 1 - Goriely: Simulating Language Learning and Evolution
+
+Phase 1 Project Selection Status Report
+
+Name: Zébulon Youra Goriely                                                           
+
+College: Queens' College                                                         
+
+User Identifier: zg258                                            
+
+Director of Studies: Professor Alastair Beresford                              
+
+Please complete 1, 2 and 3 below.
+
+1. Please write 100 words on your current project ideas.
+                                                                 
+Using a simulated toy world where agents interact with an environment of mushrooms that are edible and poisonous, I will explore how the fitness of different populations is affected by the introduction of an externally imposed language and with an evolved language. The agents will be controlled by neural networks to simulate learning, and a genetic algorithm will be used to simulate evolution. I will further compare two ways of acquiring categories where the mushrooms have features that need to be identified; sensorimotor toil (feedback-corrected trial and error) and symbolic theft (acquiring categories by hearsay).                                               
+
+2. Please list names of potential project supervisors.
+                                                                 
+Professor Paula Buttery                                                                                                                      
+
+3. Is there any chance that your project will involve any
+computing resources other than the Computing Service's MCS and
+software that is already installed there, for example: your own
+machine, machines in College, special peripherals, imported
+software packages, special hardware, network access, substantial
+extra disc space on the MCS.
+
+If so indicate below what, and what it is needed for.
+                                                                 
+- My own laptop, a 2013 MacBook Pro for the purpose of completing work outside of the department
+- The use of the HPC in the department for running the simulation at a large scale                                                                
