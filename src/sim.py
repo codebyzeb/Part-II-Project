@@ -2,6 +2,7 @@ from environment import Environment
 from entity import Entity, ACTION
 import time
 
+
 class Simulation:
 
     numEpochs = 0
@@ -27,15 +28,27 @@ class Simulation:
                 mushDist, mushPos = env.closestMushroom(entityPos)
 
                 angle = env.getAngle(entityPos, mushPos)
-                mush = env.getCell(mushPos) if env.adjacent(entityPos, mushPos) else 0
-                action, _ = self.entity.behaviourManual(angle, mush, (0.5, 0.5, 0.5))
+                mush = env.getCell(mushPos) if env.adjacent(
+                    entityPos, mushPos) else 0
+                action, _ = self.entity.behaviourManual(
+                    angle, mush, (0.5, 0.5, 0.5))
 
                 if (debug):
                     print("Epoch:", epoch, "   Cycle:", step)
                     print(env)
                     print("Entity energy:", self.entity.energy)
-                    print("Entity position: (", entityPos[0], ",", entityPos[1],")",sep="")
-                        print("Closest mushroom position: (", mushPos[0], ",", mushPos[1],")",sep="")
+                    print("Entity position: (",
+                          entityPos[0],
+                          ",",
+                          entityPos[1],
+                          ")",
+                          sep="")
+                    print("Closest mushroom position: (",
+                          mushPos[0],
+                          ",",
+                          mushPos[1],
+                          ")",
+                          sep="")
                     print("Direction: ", env.entityDirection)
                     print("Angle: ", angle)
                     print("Mushroom input: ", mush)
@@ -50,7 +63,7 @@ class Simulation:
 
             env.reset()
             env.placeEntity()
-                
+
 
 sim = Simulation(5, 50, Entity())
 sim.run(debug=True)
