@@ -1,12 +1,1 @@
 language: python
-
-install:
-  - pip install -r requirements.txt
-
-script:
-  - pytest
-
-  - yapf -rd .
-  - echo "Code is YAPF formatted."
-  - echo "PyLint: "
-  - pylint .
