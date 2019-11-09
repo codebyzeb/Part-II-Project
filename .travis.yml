@@ -3,6 +3,8 @@ python: 3.7
 cache: pip
 script:
 - pytest .
+- yapf -rd .
+- pylint --rcfile=.pylintrc --exit-zero simulating
 notifications:
   slack:
     secure: vn93QyGCO6M7Cvm/uFhoZ8gkWYHoEBOeRIu8x+VoqrkDRWj3FB2oryhCsTgLx7fswpYz6BDlBwojxFbPr3Gv9eH4dLWQdK7T2o8dr9n63peFoq7N2tCttAr+l92t5f+un8rWSflppr5bkpJ5FkdWUXTmwRXLBz4Jh6sSB58Gse73QjtG9sFGU7eWmK+66eO54mYjjlS6lpMqjS0+PniAZc5dl247waG7U/eLYTE2EG2m4xyyt3E5MJmNeQA1lGhAAeASQ47eLVipW+a3VB4veonVn+rGTxBHmWdnXCfpy0SBBInzUlFZXkkJhbmAJCdS4hn2erV4C365zK+x2HjyzS84pKtecrrjwnYTcBw7OSjlrU2Dkht0qcIXwR6bHRSQWoiMLaTsobCBM1ayh+GKbubWLbS797MMN0ZDmtE05XGLYQJtkvgZ9mVa8rey/nzisjxGRN/o1czBvM79ervrSNaCVVz7u1YyVbRHKwMvSBeUPzp1hz5lmL27Peyah6COBtdWKsTixTZeOvz+kkWHWbwaUsgVWNOKoiPK5+ZvpY/YW8J9B5ClQai5E5Kym81mu+EiMj2QxPc8U5qtQweBNjyYnNuzPBet6f7B/IgoVeqJNe83EoDjmBo1UWSAlZvKfkyVkcNHfzV2U4N8eQL4ZouAlvyOvSi4eFluWdKHBB0=

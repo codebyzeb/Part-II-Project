@@ -91,7 +91,7 @@ def test_behaviour_manual_behind():
 
     ent = entity.Entity()
     action, _ = ent.behaviour_manual(0.5)
-    assert action == entity.Action.LEFT or action == entity.Action.RIGHT
+    assert action in (entity.Action.LEFT or action, entity.Action.RIGHT)
 
 
 def test_behaviour_manual_output_vocal():
