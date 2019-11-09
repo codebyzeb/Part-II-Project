@@ -10,6 +10,7 @@ import random
 
 from simulating import entity
 
+
 class DIRECTION(Enum):
     """ Abstracts the concept of direction within the world """
 
@@ -45,6 +46,7 @@ class DIRECTION(Enum):
         elif (self == DIRECTION.SOUTH): return "▽"
         return "◁"
 
+
 def getRandomDirection():
     """ Returns a random direction """
     x = random.randrange(0, 4)
@@ -53,13 +55,16 @@ def getRandomDirection():
     if (x == 2): return DIRECTION.SOUTH
     if (x == 3): return DIRECTION.WEST
 
+
 class MushroomNotFound(RuntimeError):
     def __init__(self, arg):
-      self.args = args
+        self.args = args
+
 
 class WorldFull(RuntimeError):
-   def __init__(self, arg):
-      self.args = args
+    def __init__(self, arg):
+        self.args = args
+
 
 class Environment:
     """ Representation of the simulated world
@@ -145,7 +150,8 @@ class Environment:
 
         """
 
-        if len(self.world) == 0: raise MushroomNotFound("No Mushrooms in World")
+        if len(self.world) == 0:
+            raise MushroomNotFound("No Mushrooms in World")
         x, y = pos
         dist = self.dimX + self.dimY + 1
         pos = (-1, -1)
@@ -156,7 +162,7 @@ class Environment:
                 dist = distToMushroom
                 pos = (i, j)
         return dist, pos
-                
+
     def isMushroom(self, pos):
         """ Returns whether or not there is a mushroom in a given position """
         return pos in self.world
@@ -205,17 +211,20 @@ class Environment:
 
     def randomPosition(self):
         """ Return a random position within the world dimensions """
-        return (random.randint(0, self.dimX-1), random.randint(0, self.dimY-1))
+        return (random.randint(0, self.dimX - 1),
+                random.randint(0, self.dimY - 1))
 
     def randomAvailablePosition(self):
         """ Return a random available position within the world dimensions """
 
-        if len(self.world) == self.dimX * self.dimY: raise WorldFull("No available spaces remaining in world")
+        if len(self.world) == self.dimX * self.dimY:
+            raise WorldFull("No available spaces remaining in world")
         cellOccupied = True
         pos = (-1, -1)
         while (cellOccupied):
-            newPos = random.randint(0, self.dimX-1), random.randint(0, self.dimY-1)
-            if not newPos in self.world: 
+            newPos = random.randint(0, self.dimX - 1), random.randint(
+                0, self.dimY - 1)
+            if not newPos in self.world:
                 pos = newPos
                 cellOccupied = False
         return pos
@@ -246,19 +255,19 @@ class Environment:
 
         x1, y1 = posFrom
         x2, y2 = posTo
-        angle = -math.degrees(math.atan2(y1-y2, x2-x1))
+        angle = -math.degrees(math.atan2(y1 - y2, x2 - x1))
         print(angle)
-        if (self.entityDirection == DIRECTION.NORTH): angle+=90
-        if (self.entityDirection == DIRECTION.WEST): angle+=180
-        if (self.entityDirection == DIRECTION.SOUTH): angle-=90
+        if (self.entityDirection == DIRECTION.NORTH): angle += 90
+        if (self.entityDirection == DIRECTION.WEST): angle += 180
+        if (self.entityDirection == DIRECTION.SOUTH): angle -= 90
         print(angle % 360)
-        return (angle % 360)/360
+        return (angle % 360) / 360
 
     def getCell(self, pos):
         """ Returns the value of the cell at position pos, 0 if empty"""
 
         return self.world.get(pos, 0)
-    
+
     def clearCell(self, pos):
         """ Clears the cell at a specified position """
 
@@ -282,7 +291,9 @@ class Environment:
             out.append(' '.join(row))
         return '\n'.join(out)
 
+
 # -- Various utility methods for mushrooms -- #
+
 
 def cellToString(cell):
     """ Converts a cell to a string """
@@ -292,15 +303,18 @@ def cellToString(cell):
     if (isEdible(cell)): return '🍄'
     return '@'
 
+
 def makePoisonous():
     """ Generates a poisonous mushroom """
 
     return mutate(0b1111100000)
 
+
 def makeEdible():
     """ Generates an edible mushroom """
 
     return mutate(0b0000011111)
+
 
 def isPoisonous(cell):
     """ Checks if a mushroom is poisonous """
@@ -308,15 +322,15 @@ def isPoisonous(cell):
     lowerBits = cell & 0b111
     return not ((lowerBits - 1) & lowerBits)
 
+
 def isEdible(cell):
     """ Checks if a mushroom is edible """
 
-    return not(isPoisonous(cell))
+    return not (isPoisonous(cell))
+
 
 def mutate(mushroom):
     """ Randomly flips one bit in a mushroom bit string"""
 
     i = random.randint(0, 9)
     return mushroom ^ 1 << i
-
-
