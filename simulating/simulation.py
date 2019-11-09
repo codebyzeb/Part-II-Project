@@ -1,7 +1,7 @@
-from environment import Environment
-from entity import Entity, ACTION
 import time
 
+from simulating.entity import Entity as Entity
+from simulating.environment import Environment as Environment
 
 class Simulation:
 
@@ -63,7 +63,3 @@ class Simulation:
 
             env.reset()
             env.placeEntity()
-
-
-sim = Simulation(5, 50, Entity())
-sim.run(debug=True)

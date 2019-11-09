@@ -2,7 +2,7 @@
 This module runs all the tests for the Entity class
 """
 
-import entity
+import simulating.entity as entity
 
 
 def test_initial_energy():

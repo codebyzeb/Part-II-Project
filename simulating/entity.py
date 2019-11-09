@@ -1,7 +1,3 @@
-from enum import Enum
-import environment
-import random
-
 """
 Entity module manages the Entity class and the Action Enum.
 
@@ -12,6 +8,11 @@ The ACTION enum represents the entity's response of moving forwards, turning lef
 or right or doing nothing.
 
 """
+
+from enum import Enum
+import random
+
+from simulating import environment
 
 ENERGY_POISON = -11
 ENERGY_EDIBLE = 10

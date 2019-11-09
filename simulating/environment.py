@@ -4,10 +4,11 @@ Environment module deals with storing and representing a simulated world for the
 Contains the DIRECTION enum for dealing with orientation. 
 """
 
-import random
-from entity import ACTION
 from enum import Enum
 import math
+import random
+
+from simulating import entity
 
 class DIRECTION(Enum):
     """ Abstracts the concept of direction within the world """
