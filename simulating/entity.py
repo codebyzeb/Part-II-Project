@@ -2,29 +2,21 @@
 Entity module manages the Entity class and the Action Enum.
 
 The Entity class is used to represent individual creatures; specifically their energy
-value and the behaviour method that decides on an action given perceptual inputs.
+value and the behaviour method that decides on an Action given perceptual inputs.
 
-The ACTION enum represents the entity's response of moving forwards, turning left
+The Action enum represents the entity's response of moving forwards, turning left
 or right or doing nothing.
 
 """
 
-from enum import Enum
 import random
 
+from simulating.action import Action
 from simulating import environment
 
 ENERGY_POISON = -11
 ENERGY_EDIBLE = 10
 
-class ACTION(Enum):
-    """ Representation of an Action
-    """
-
-    FORWARDS = 0b11
-    LEFT = 0b10
-    RIGHT = 0b01
-    NOTHING = 0b00
 
 class Entity:
     """ Representation of an Entity
@@ -52,12 +44,12 @@ class Entity:
             mushroom: The mushroom to be eaten
         """
 
-        if (environment.isEdible(mushroom)):
+        if environment.is_edible(mushroom):
             self.energy += ENERGY_EDIBLE
-        elif (environment.isPoisonous(mushroom)):
+        elif environment.is_poisonous(mushroom):
             self.energy += ENERGY_POISON
 
-    def behaviourManual(self, location, perception, listening):
+    def behaviour_manual(self, location):
         """ Given perceptual inputs, just moves towards and eats the nearest mushroom.
 
         Args:
@@ -65,24 +57,36 @@ class Entity:
             perception: 10-bit properties of the adjacent mushroom
             listening: Audio inputs
         Returns:
-            (action, vocal): An action to be taken and the vocal response
+            (Action, vocal): An Action to be taken and the vocal response
         """
 
-        action = ACTION.NOTHING
+        action = Action.NOTHING
 
-        if ((location + 0.125) % 1 < 0.25):
-            action = ACTION.FORWARDS
-        
-        elif (location < 0.5):
-            action = ACTION.RIGHT
+        if (location + 0.125) % 1 < 0.25:
+            action = Action.FORWARDS
 
-        elif (location > 0.5):
-            action = ACTION.LEFT
+        elif location < 0.5:
+            action = Action.RIGHT
+
+        elif location > 0.5:
+            action = Action.LEFT
 
         else:
-            if (random.randrange(0, 2) == 0):
-                action = ACTION.LEFT
+            if random.randrange(0, 2) == 0:
+                action = Action.LEFT
             else:
-                action = ACTION.RIGHT
+                action = Action.RIGHT
 
         return action, (0, 0, 0)
+
+
+# def behaviour_net(self, location, perception, listening):
+#         """ Given perceptual inputs, uses the neural network to determine an action.
+
+#         Args:
+#             location (float): Location of the nearest mushroom in angle from 0 to 1.
+#             perception: 10-bit properties of the adjacent mushroom
+#             listening: Audio inputs
+#         Returns:
+#             (Action, vocal): An Action to be taken and the vocal response
+#         """

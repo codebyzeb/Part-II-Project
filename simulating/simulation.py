@@ -1,65 +1,91 @@
-import time
+"""
+Simulation module deals with managing the different simulations of 
+placing entities into environments, getting behaviour and having
+the environments update accordingly. The simulations should run and
+return the final energy of the initial entities given.
 
-from simulating.entity import Entity as Entity
-from simulating.environment import Environment as Environment
+"""
+
+from simulating.entity import Entity
+from simulating.environment import Environment
+
 
 class Simulation:
+    """ Represents a full simulation of an entity in an environment
 
-    numEpochs = 0
-    numCycles = 0
+    Attributes:
+        num_epochs: The number of epochs to run
+        num_cycles: The number of time steps in each cycle
+        entity: The entity whose behaviour is tested        
+    """
+
+    num_epochs = 0
+    num_cycles = 0
     entity = None
 
     def __init__(self, epochs, cycles, ent):
-        self.numEpochs = epochs
-        self.numCycles = cycles
+        self.num_epochs = epochs
+        self.num_cycles = cycles
         self.entity = ent
 
     def run(self, debug=True):
+        """ Runs a full simulation
+
+        Runs num_epochs epochs, each of which contains num_cycles time steps.
+        At each time step, the world is updated according to the behaviour
+        of the entity. The entity returns an action given inputs that depend
+        on its position in the simulated world. 
+
+        Args:
+            debug (bool): If true, prints debugging information and pauses
+            at each step.
+        """
+
         self.entity = Entity()
         env = Environment()
-        env.placeEntity()
+        env.place_entity()
 
         # Do whole simulation
-        for epoch in range(self.numEpochs):
+        for epoch in range(self.num_epochs):
 
             # Do an epoch
-            for step in range(self.numCycles):
-                entityPos = env.getEntityPosition()
-                mushDist, mushPos = env.closestMushroom(entityPos)
+            for step in range(self.num_cycles):
+                entity_pos = env.get_entity_position()
+                _, mush_pos = env.closest_mushroom(entity_pos)
 
-                angle = env.getAngle(entityPos, mushPos)
-                mush = env.getCell(mushPos) if env.adjacent(
-                    entityPos, mushPos) else 0
-                action, _ = self.entity.behaviourManual(
-                    angle, mush, (0.5, 0.5, 0.5))
+                angle = env.get_angle(entity_pos, mush_pos)
+                mush = env.get_cell(mush_pos) if env.adjacent(
+                    entity_pos, mush_pos) else 0
+                action, _ = self.entity.behaviour_manual(angle)
 
-                if (debug):
+                if debug:
                     print("Epoch:", epoch, "   Cycle:", step)
                     print(env)
                     print("Entity energy:", self.entity.energy)
                     print("Entity position: (",
-                          entityPos[0],
+                          entity_pos[0],
                           ",",
-                          entityPos[1],
+                          entity_pos[1],
                           ")",
                           sep="")
                     print("Closest mushroom position: (",
-                          mushPos[0],
+                          mush_pos[0],
                           ",",
-                          mushPos[1],
+                          mush_pos[1],
                           ")",
                           sep="")
-                    print("Direction: ", env.entityDirection)
+                    print("Direction: ", env.entity_direction)
                     print("Angle: ", angle)
                     print("Mushroom input: ", mush)
                     print("Action chosen: ", action)
                     ##time.sleep(0.1)
                     input()
 
-                env.moveEntity(action)
-                if (env.entityPosition == mushPos):
-                    self.entity.eat(env.getCell(mushPos))
-                    env.clearCell(mushPos)
+                env.move_entity(action)
+                if env.entity_position == mush_pos:
+                    self.entity.eat(env.get_cell(mush_pos))
+                    env.clear_cell(mush_pos)
 
+            # After an epoch, reset the world
             env.reset()
-            env.placeEntity()
+            env.place_entity()
