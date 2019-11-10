@@ -50,55 +50,11 @@ def test_eat_one_of_each():
     assert ent.energy == entity.ENERGY_EDIBLE + entity.ENERGY_POISON
 
 
-def test_behaviour_manual_forwards():
+def test_behaviour():
     """
-    This tests that the manual behaviour returns a forwards action when
-    the input location is 0.
-    """
-
-    ent = entity.Entity()
-    action, _ = ent.behaviour_manual(0)
-    assert action == entity.Action.FORWARDS
-
-
-def test_behaviour_manual_right():
-    """
-    This tests that the manual behaviour returns a right action when
-    the input location is between 0.25 and 0.5
+    Ensures that the default behaviour is to return Nothing
     """
 
     ent = entity.Entity()
-    action, _ = ent.behaviour_manual(0.375)
-    assert action == entity.Action.RIGHT
-
-
-def test_behaviour_manual_left():
-    """
-    This tests that the manual behaviour returns a left action when
-    the input location is between 0.25 and 0.5
-    """
-
-    ent = entity.Entity()
-    action, _ = ent.behaviour_manual(0.785)
-    assert action == entity.Action.LEFT
-
-
-def test_behaviour_manual_behind():
-    """
-    This tests that the manual behaviour returns either left or
-    right action when the input location is exatly 0.5
-    """
-
-    ent = entity.Entity()
-    action, _ = ent.behaviour_manual(0.5)
-    assert action in (entity.Action.LEFT or action, entity.Action.RIGHT)
-
-
-def test_behaviour_manual_output_vocal():
-    """
-    This tests that the manual behaviour returns an empty vocal response.
-    """
-
-    ent = entity.Entity()
-    _, vocal = ent.behaviour_manual(0.5)
-    assert vocal == (0, 0, 0)
+    action, _ = ent.behaviour()
+    assert action == entity.Action.NOTHING

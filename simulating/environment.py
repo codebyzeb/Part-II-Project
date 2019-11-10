@@ -153,14 +153,15 @@ class Environment:
         if len(self.world) == 0:
             raise MushroomNotFound("No Mushrooms in World")
         dist = self.dim_x + self.dim_y + 1
-        pos = (-1, -1)
+        mush_pos = (-1, -1)
         for (i, j) in self.world:
             # Use manhattan distance
             dist_to_mushroom = abs(pos[0] - i) + abs(pos[1] - j)
             if dist_to_mushroom < dist:
                 dist = dist_to_mushroom
-                pos = (i, j)
-        return dist, pos
+                mush_pos = (i, j)
+
+        return dist, mush_pos
 
     def is_mushroom(self, pos):
         """ Returns whether or not there is a mushroom in a given position """
@@ -193,7 +194,6 @@ class Environment:
         if action == Action.FORWARDS:
             x = self.entity_position[0] + self.entity_direction.value[0]
             y = self.entity_position[1] + self.entity_direction.value[1]
-            print(x, y)
             if self.within_bounds((x, y)):
                 self.entity_position = (x, y)
         elif action == Action.LEFT:
@@ -260,14 +260,12 @@ class Environment:
         if x1 == x2 and y1 == y2:
             return 0
         angle = -math.degrees(math.atan2(y1 - y2, x2 - x1))
-        print(angle)
         if self.entity_direction == Direction.NORTH:
             angle += 90
         if self.entity_direction == Direction.WEST:
             angle += 180
         if self.entity_direction == Direction.SOUTH:
             angle -= 90
-        print(angle % 360)
         return (angle % 360) / 360
 
     def get_cell(self, pos):

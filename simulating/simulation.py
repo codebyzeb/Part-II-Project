@@ -10,7 +10,7 @@ from simulating.entity import Entity
 from simulating.environment import Environment
 
 
-class Simulation:
+class Simulation:  #pylint: disable=R0903
     """ Represents a full simulation of an entity in an environment
 
     Attributes:
@@ -41,7 +41,6 @@ class Simulation:
             at each step.
         """
 
-        self.entity = Entity()
         env = Environment()
         env.place_entity()
 
@@ -50,14 +49,26 @@ class Simulation:
 
             # Do an epoch
             for step in range(self.num_cycles):
+                # Get entity position and closest mushroom
                 entity_pos = env.get_entity_position()
                 _, mush_pos = env.closest_mushroom(entity_pos)
 
+                # Eat a mushroom if currently on one
+                if env.entity_position == mush_pos:
+                    self.entity.eat(env.get_cell(mush_pos))
+                    env.clear_cell(mush_pos)
+                    if debug:
+                        print("EATING MUSHROOM")
+
+                # Calculate the angle and get mushroom properties if close enough
                 angle = env.get_angle(entity_pos, mush_pos)
                 mush = env.get_cell(mush_pos) if env.adjacent(
                     entity_pos, mush_pos) else 0
-                action, _ = self.entity.behaviour_manual(angle)
 
+                # Get the behaviour of the entity given perceptual inputs
+                action, _ = self.entity.behaviour(angle, mush, 0)
+
+                # Print debug information
                 if debug:
                     print("Epoch:", epoch, "   Cycle:", step)
                     print(env)
@@ -81,10 +92,8 @@ class Simulation:
                     ##time.sleep(0.1)
                     input()
 
+                # Finally, do the action
                 env.move_entity(action)
-                if env.entity_position == mush_pos:
-                    self.entity.eat(env.get_cell(mush_pos))
-                    env.clear_cell(mush_pos)
 
             # After an epoch, reset the world
             env.reset()

@@ -430,7 +430,8 @@ good-names=i,
            x2,
            y1,
            y2,
-           c
+           c,
+           z
 
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
