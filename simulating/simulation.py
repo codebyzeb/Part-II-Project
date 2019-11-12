@@ -11,8 +11,10 @@ import math
 
 from multiprocessing import Pool
 
+from simulating.action import Action
 from simulating.entity import NeuralEntity
 from simulating.environment import Environment
+from simulating import environment
 
 
 class Simulation:  #pylint: disable=R0903
@@ -73,8 +75,12 @@ class Simulation:  #pylint: disable=R0903
                 mush = env.get_cell(mush_pos) if env.adjacent(
                     entity_pos, mush_pos) else 0
 
+                # Get audio signal
+                signal = 0
+                # signal = 0b100 if (environment.is_edible(env.get_cell(mush_pos))) else 0b010
+
                 # Get the behaviour of the entity given perceptual inputs
-                action, _ = entity.behaviour(angle, mush, 0)
+                action, _ = entity.behaviour(angle, mush, signal)
 
                 # Print debug information
                 if debug:
@@ -102,6 +108,15 @@ class Simulation:  #pylint: disable=R0903
                     if usr_input == chr(27):
                         return entity
 
+                # If the action is NOTHING, it will stay that way,
+                # so we can make some optimisations
+                if action == Action.NOTHING:
+                    break
+
+                # We can also break if the entity tries to move forward but can't
+                if action == Action.FORWARDS and env.entity_facing_out():
+                    break
+
                 # Finally, do the action
                 env.move_entity(action)
 
@@ -126,7 +141,7 @@ class Simulation:  #pylint: disable=R0903
         # First, generate the initial population of neural entities
         entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
 
-        abcdefg = 100
+        abcdefg = 40
 
         # Run evolution loop
         for generation in range(self.num_generations):
@@ -170,6 +185,7 @@ class Simulation:  #pylint: disable=R0903
                                 " - enter yes to continue: "))
                         if if_yes == "yes":
                             energy = entities[i].energy
+                            entities[i].energy = 0
                             self.run_single(entities[i], debug=True)
                             entities[i].energy = energy
                     elif len(usr_input) == 0:

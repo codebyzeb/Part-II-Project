@@ -232,6 +232,46 @@ def test_adjacent_true():
     assert env.adjacent((4, 4), (4, 4))
 
 
+def test_entity_facing_out_true():
+    """
+    Tests that entity_facing_out returns true at each edge
+    """
+
+    env = Environment(5, 5, 0, 0)
+    env.entity_direction = Direction.NORTH
+    env.entity_position = (3, 0)
+    assert env.entity_facing_out()
+    env.entity_direction = Direction.EAST
+    env.entity_position = (4, 2)
+    assert env.entity_facing_out()
+    env.entity_direction = Direction.SOUTH
+    env.entity_position = (3, 4)
+    assert env.entity_facing_out()
+    env.entity_direction = Direction.WEST
+    env.entity_position = (0, 3)
+    assert env.entity_facing_out()
+
+
+def test_entity_facing_out_false():
+    """
+    Tests that entity_facing_out returns true at each edge
+    """
+
+    env = Environment(5, 5, 0, 0)
+    env.entity_direction = Direction.NORTH
+    env.entity_position = (2, 3)
+    assert not env.entity_facing_out()
+    env.entity_direction = Direction.EAST
+    env.entity_position = (3, 0)
+    assert not env.entity_facing_out()
+    env.entity_direction = Direction.SOUTH
+    env.entity_position = (0, 0)
+    assert not env.entity_facing_out()
+    env.entity_direction = Direction.WEST
+    env.entity_position = (4, 0)
+    assert not env.entity_facing_out()
+
+
 def test_get_angle():
     """
     Tests the angle function.

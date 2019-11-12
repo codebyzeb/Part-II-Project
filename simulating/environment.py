@@ -243,6 +243,23 @@ class Environment:
         x2, y2 = pos_b
         return abs(x1 - x2) <= 1 and abs(y1 - y2) <= 1
 
+    def entity_facing_out(self):
+        """ Returns true if the entity is at the edge of the world and facing out
+        """
+        if self.entity_direction == Direction.NORTH and self.entity_position[
+                1] == 0:
+            return True
+        if self.entity_direction == Direction.EAST and self.entity_position[
+                0] == self.dim_x - 1:
+            return True
+        if self.entity_direction == Direction.SOUTH and self.entity_position[
+                1] == self.dim_y - 1:
+            return True
+        if self.entity_direction == Direction.WEST and self.entity_position[
+                0] == 0:
+            return True
+        return False
+
     def get_angle(self, pos_from, pos_to):
         """ Returns the angle from one position to another, from 0 to 1.
 
