@@ -90,3 +90,16 @@ def test_behaviour_output_correct():
         Action.FORWARDS, Action.LEFT, Action.RIGHT, Action.NOTHING
     ]
     assert 0 <= vocal < 8
+
+
+def test_reproduce():
+    """
+    Test that reproduction creates offspring
+    """
+
+    ent = entity.NeuralEntity(100, [5])
+    children = ent.reproduce(5, 0.5)
+    assert len(children) == 5
+    for child in children:
+        assert child.energy == 0
+        assert len(child.parameters) == len(ent.parameters)

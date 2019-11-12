@@ -9,6 +9,7 @@ or right or doing nothing.
 
 """
 
+import copy
 import random
 
 import numpy as np
@@ -195,6 +196,49 @@ class NeuralEntity(Entity):
 
         return cache
 
+    def reproduce(self, num_offspring, percentage_mutate):
+        """ Produce children through asexual reproduction with random mutation
+
+        A specified percentage of the weights are mutated in the children, by
+        adding a value taken from the rectangular distribution [-1, 1].
+
+        Args:
+            num_offspring: The number of children to produce
+            percentage_mutate: The percentage of weights to be mutated
+        Returns:
+            children: An array of children produced
+        """
+
+        children = []
+
+        for _ in range(num_offspring):
+            # Do a deep copy of self
+            child = NeuralEntity(0)
+            child.parameters = copy.deepcopy(self.parameters)
+            num_layers = len(self.parameters) // 2 + 1
+
+            # Randomly alter a percentage of the weights by adding a value in [-1, 1]
+            for layer in range(1, num_layers):
+                weights = child.parameters['W' + str(layer)]
+                weights = np.array([[
+                    x + random.random() * 2 -
+                    1 if random.random() < percentage_mutate else x for x in xs
+                ] for xs in weights])
+                child.parameters['W' + str(layer)] = weights
+
+            for layer in range(1, num_layers):
+                weights = child.parameters['b' + str(layer)]
+                weights = np.array([[
+                    x + random.random() * 2 -
+                    1 if random.random() < percentage_mutate else x for x in xs
+                ] for xs in weights])
+                child.parameters['b' + str(layer)] = weights
+
+            # Add child to output
+            children.append(child)
+
+        return children
+
     def behaviour(self, location=0, perception=0, listening=0):
         """ Given perceptual inputs, just moves towards and eats the nearest mushroom.
 
@@ -211,7 +255,7 @@ class NeuralEntity(Entity):
         inputs.append(location)
         inputs.extend(bits_to_array(perception, 10))
         inputs.extend(bits_to_array(listening, 3))
-        inputs = np.expand_dims(inputs, 1)
+        inputs = np.array([[inp] for inp in inputs])
 
         # Feed forward through the neural network
         cache = self.forward_propagation(inputs, linear=False)

@@ -6,30 +6,37 @@ return the final energy of the initial entities given.
 
 """
 
-from simulating.entity import Entity
+import itertools
+import math
+
+from multiprocessing import Pool
+
+from simulating.entity import NeuralEntity
 from simulating.environment import Environment
 
 
 class Simulation:  #pylint: disable=R0903
-    """ Represents a full simulation of an entity in an environment
+    """ Represents a simulation environment for a population of entities.
 
     Attributes:
         num_epochs: The number of epochs to run
         num_cycles: The number of time steps in each cycle
-        entity: The entity whose behaviour is tested        
+        num_entities: The number of entities in the population
     """
 
     num_epochs = 0
     num_cycles = 0
-    entity = None
+    num_entities = 0
+    num_generations = 0
 
-    def __init__(self, epochs, cycles, ent):
+    def __init__(self, epochs, cycles, population_size, generations):
         self.num_epochs = epochs
         self.num_cycles = cycles
-        self.entity = ent
+        self.num_entities = population_size
+        self.num_generations = generations
 
-    def run(self, debug=True):
-        """ Runs a full simulation
+    def run_single(self, entity, debug=False):
+        """ Runs a single simulation for one entity
 
         Runs num_epochs epochs, each of which contains num_cycles time steps.
         At each time step, the world is updated according to the behaviour
@@ -37,6 +44,7 @@ class Simulation:  #pylint: disable=R0903
         on its position in the simulated world. 
 
         Args:
+            entity: The entity whose behaviour is tested        
             debug (bool): If true, prints debugging information and pauses
             at each step.
         """
@@ -55,7 +63,7 @@ class Simulation:  #pylint: disable=R0903
 
                 # Eat a mushroom if currently on one
                 if env.entity_position == mush_pos:
-                    self.entity.eat(env.get_cell(mush_pos))
+                    entity.eat(env.get_cell(mush_pos))
                     env.clear_cell(mush_pos)
                     if debug:
                         print("EATING MUSHROOM")
@@ -66,13 +74,13 @@ class Simulation:  #pylint: disable=R0903
                     entity_pos, mush_pos) else 0
 
                 # Get the behaviour of the entity given perceptual inputs
-                action, _ = self.entity.behaviour(angle, mush, 0)
+                action, _ = entity.behaviour(angle, mush, 0)
 
                 # Print debug information
                 if debug:
                     print("Epoch:", epoch, "   Cycle:", step)
                     print(env)
-                    print("Entity energy:", self.entity.energy)
+                    print("Entity energy:", entity.energy)
                     print("Entity position: (",
                           entity_pos[0],
                           ",",
@@ -90,7 +98,9 @@ class Simulation:  #pylint: disable=R0903
                     print("Mushroom input: ", mush)
                     print("Action chosen: ", action)
                     ##time.sleep(0.1)
-                    input()
+                    usr_input = input()
+                    if usr_input == chr(27):
+                        return entity
 
                 # Finally, do the action
                 env.move_entity(action)
@@ -98,3 +108,78 @@ class Simulation:  #pylint: disable=R0903
             # After an epoch, reset the world
             env.reset()
             env.place_entity()
+        return entity
+
+    def run_population(self, debug=False):
+        """ Run a population of entities without any energies
+
+        Loop for num_generations evolutionary steps. At each step,
+        run a single simulation for each entity, choose the best 20
+        in terms of fitness and let them asexually reproduce for the
+        next generation.
+
+        Args:
+            debug (bool): If true, prints debugging information and pauses
+            at each step.
+        """
+
+        # First, generate the initial population of neural entities
+        entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
+
+        abcdefg = 100
+
+        # Run evolution loop
+        for generation in range(self.num_generations):
+
+            # Run a simulation for each entity
+            with Pool() as pool:
+                entities = pool.map(self.run_single, entities)
+
+            # Sort the entities by final energy value
+            entities.sort(key=lambda entity: entity.energy, reverse=True)
+
+            if debug:
+                loop_debug = True
+                while loop_debug:
+                    print("----- GENERATION ", generation, " -----", sep="")
+                    print("Sorted energy values: ")
+                    print([entity.energy for entity in entities])
+                    print(
+                        "Average energy:",
+                        sum([entity.energy
+                             for entity in entities]) / len(entities))
+                    usr_input = ""
+                    if abcdefg == 0:
+                        usr_input = input("\n")
+                    else:
+                        abcdefg -= 1
+                    if usr_input.split(" ")[0] == "watch":
+                        if len(usr_input.split(" ")) < 2:
+                            print("INVALID NUMBER\n")
+                            continue
+                        try:
+                            i = int(usr_input.split(" ")[1])
+                        except ValueError:
+                            print("INVALID NUMBER\n")
+                            continue
+                        if not 0 <= i < len(entities):
+                            print("INVALID NUMBER\n")
+                            continue
+                        if_yes = input(
+                            str("Watching behaviour of entity " + str(i) +
+                                " - enter yes to continue: "))
+                        if if_yes == "yes":
+                            energy = entities[i].energy
+                            self.run_single(entities[i], debug=True)
+                            entities[i].energy = energy
+                    elif len(usr_input) == 0:
+                        loop_debug = False
+                    else:
+                        print("INVALID INPUT\n")
+
+            # Select the best 20% to reproduce for the next generation
+            best_entities = entities[:math.ceil(self.num_entities / 5)]
+            entities = [
+                child for entity in best_entities
+                for child in entity.reproduce(5, 0.1)
+            ]
