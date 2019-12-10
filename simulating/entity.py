@@ -183,7 +183,7 @@ class NeuralEntity(Entity):
                   str(layer)] = (np.dot(self.parameters['W' + str(layer)],
                                         cache['A' + str(layer - 1)]) +
                                  self.parameters['b' + str(layer)])
-            cache['A' + str(layer)] = relu(cache['Z' + str(layer)])
+            cache['A' + str(layer)] = sigmoid(cache['Z' + str(layer)])
 
         # Calculate the final layer using the sigmoid function (or not)
         cache['Z' + str(final_layer)] = (
@@ -224,15 +224,16 @@ class NeuralEntity(Entity):
                     x + random.random() * 2 -
                     1 if random.random() < percentage_mutate else x for x in xs
                 ] for xs in weights])
+                # weights.clip(-2, 2)
                 child.parameters['W' + str(layer)] = weights
 
             for layer in range(1, num_layers):
-                weights = child.parameters['b' + str(layer)]
-                weights = np.array([[
+                biases = child.parameters['b' + str(layer)]
+                biases = np.array([[
                     x + random.random() * 2 -
                     1 if random.random() < percentage_mutate else x for x in xs
-                ] for xs in weights])
-                child.parameters['b' + str(layer)] = weights
+                ] for xs in biases])
+                child.parameters['b' + str(layer)] = biases
 
             # Add child to output
             children.append(child)

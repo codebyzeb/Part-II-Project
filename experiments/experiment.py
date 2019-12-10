@@ -2,10 +2,10 @@
 Module for running simulation experiments.
 """
 
+import cProfile
+
 import simulating.simulation as simulation
 import simulating.entity as entity
-
-import cProfile
 
 
 def basic_single_debug_simulation():
@@ -13,7 +13,7 @@ def basic_single_debug_simulation():
     """
 
     sim = simulation.Simulation(5, 50, 100, 1000)
-    sim.run_single(entity.ManualEntity(), debug=True)
+    sim.run_single(entity.ManualEntity())
 
 
 def neural_single_debug_simulation():
@@ -23,15 +23,15 @@ def neural_single_debug_simulation():
     ent = entity.NeuralEntity()
     print(ent.parameters)
     sim = simulation.Simulation(5, 50, 100, 1000)
-    sim.run_single(ent, debug=True)
+    sim.run_single(ent, interactive=True)
 
 
-def neural_population_debug_simulation_1000():
+def neural_population_simulation_1000():
     """ Run a neural simulation for debugging
     """
 
     sim = simulation.Simulation(15, 75, 100, 1000)
-    sim.run_population(debug=True)
+    sim.run_population("out.txt")
 
 
 def neural_population_debug_simulation_1():
@@ -39,10 +39,12 @@ def neural_population_debug_simulation_1():
     """
 
     sim = simulation.Simulation(15, 75, 100, 1)
-    sim.run_population(debug=True)
+    sim.run_population(True)
 
 
 def print_some_weights():
+    """ Simply prints weights of children
+    """
 
     ent = entity.NeuralEntity()
     children = ent.reproduce(5, 0.1)
@@ -56,5 +58,5 @@ def print_some_weights():
 
 
 if __name__ == "__main__":
-    neural_population_debug_simulation_1000()
+    neural_population_simulation_1000()
     #cProfile.run("neural_population_debug_simulation_1()")

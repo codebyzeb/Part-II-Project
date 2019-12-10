@@ -6,11 +6,11 @@ return the final energy of the initial entities given.
 
 """
 
-import itertools
 import math
 
 from multiprocessing import Pool
 
+from analysis.plotting import Plotter
 from simulating.action import Action
 from simulating.entity import NeuralEntity
 from simulating.environment import Environment
@@ -37,7 +37,7 @@ class Simulation:  #pylint: disable=R0903
         self.num_entities = population_size
         self.num_generations = generations
 
-    def run_single(self, entity, debug=False):
+    def run_single(self, entity, interactive=False):
         """ Runs a single simulation for one entity
 
         Runs num_epochs epochs, each of which contains num_cycles time steps.
@@ -67,7 +67,7 @@ class Simulation:  #pylint: disable=R0903
                 if env.entity_position == mush_pos:
                     entity.eat(env.get_cell(mush_pos))
                     env.clear_cell(mush_pos)
-                    if debug:
+                    if interactive:
                         print("EATING MUSHROOM")
 
                 # Calculate the angle and get mushroom properties if close enough
@@ -83,7 +83,7 @@ class Simulation:  #pylint: disable=R0903
                 action, _ = entity.behaviour(angle, mush, signal)
 
                 # Print debug information
-                if debug:
+                if interactive:
                     print("Epoch:", epoch, "   Cycle:", step)
                     print(env)
                     print("Entity energy:", entity.energy)
@@ -125,7 +125,7 @@ class Simulation:  #pylint: disable=R0903
             env.place_entity()
         return entity
 
-    def run_population(self, debug=False):
+    def run_population(self, filename):
         """ Run a population of entities without any energies
 
         Loop for num_generations evolutionary steps. At each step,
@@ -138,10 +138,13 @@ class Simulation:  #pylint: disable=R0903
             at each step.
         """
 
+        # Plotter and file to plot and save energy values
+        plotter = Plotter()
+        out = open(filename, "w")
+        out.close()
+
         # First, generate the initial population of neural entities
         entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
-
-        abcdefg = 40
 
         # Run evolution loop
         for generation in range(self.num_generations):
@@ -153,45 +156,17 @@ class Simulation:  #pylint: disable=R0903
             # Sort the entities by final energy value
             entities.sort(key=lambda entity: entity.energy, reverse=True)
 
-            if debug:
-                loop_debug = True
-                while loop_debug:
-                    print("----- GENERATION ", generation, " -----", sep="")
-                    print("Sorted energy values: ")
-                    print([entity.energy for entity in entities])
-                    print(
-                        "Average energy:",
-                        sum([entity.energy
-                             for entity in entities]) / len(entities))
-                    usr_input = ""
-                    if abcdefg == 0:
-                        usr_input = input("\n")
-                    else:
-                        abcdefg -= 1
-                    if usr_input.split(" ")[0] == "watch":
-                        if len(usr_input.split(" ")) < 2:
-                            print("INVALID NUMBER\n")
-                            continue
-                        try:
-                            i = int(usr_input.split(" ")[1])
-                        except ValueError:
-                            print("INVALID NUMBER\n")
-                            continue
-                        if not 0 <= i < len(entities):
-                            print("INVALID NUMBER\n")
-                            continue
-                        if_yes = input(
-                            str("Watching behaviour of entity " + str(i) +
-                                " - enter yes to continue: "))
-                        if if_yes == "yes":
-                            energy = entities[i].energy
-                            entities[i].energy = 0
-                            self.run_single(entities[i], debug=True)
-                            entities[i].energy = energy
-                    elif len(usr_input) == 0:
-                        loop_debug = False
-                    else:
-                        print("INVALID INPUT\n")
+            # Get average energy and add to the live graph
+            average_energy = sum([entity.energy
+                                  for entity in entities]) / len(entities)
+            plotter.add_point(generation, average_energy)
+
+            # Run interactive menu
+            self.interactive_viewer(generation, entities, average_energy)
+
+            # Save the average energy values
+            with open(filename, "a") as out:
+                out.write(str(average_energy) + "\n")
 
             # Select the best 20% to reproduce for the next generation
             best_entities = entities[:math.ceil(self.num_entities / 5)]
@@ -199,3 +174,54 @@ class Simulation:  #pylint: disable=R0903
                 child for entity in best_entities
                 for child in entity.reproduce(5, 0.1)
             ]
+
+    skip_interactive_count = 0
+
+    def interactive_viewer(self, generation, entities, average_energy):
+        """ At each generation, display information about the simulation
+
+        Loops to allow for viewing individual entities' behaviour, 
+
+        Args:
+            generation: The current generation
+            entities: The list of entities at this generation
+        """
+
+        loop_interactive = True
+        while loop_interactive:
+            print("----- GENERATION ", generation, " -----", sep="")
+            print("Sorted energy values: ")
+            print([entity.energy for entity in entities])
+            print("Average energy:", average_energy)
+            if self.skip_interactive_count > 0:
+                self.skip_interactive_count -= 1
+                usr_input = ""
+            else:
+                usr_input = input("\n")
+            if usr_input.split(" ")[0] == "watch":
+                if len(usr_input.split(" ")) < 2:
+                    print("INVALID NUMBER\n")
+                    continue
+                try:
+                    i = int(usr_input.split(" ")[1])
+                except ValueError:
+                    print("INVALID NUMBER\n")
+                    continue
+                if not 0 <= i < len(entities):
+                    print("INVALID NUMBER\n")
+                    continue
+                if_yes = input(
+                    str("Watching behaviour of entity " + str(i) +
+                        " - enter yes to continue: "))
+                if if_yes == "yes":
+                    energy = entities[i].energy
+                    entities[i].energy = 0
+                    self.run_single(entities[i], interactive=True)
+                    entities[i].energy = energy
+            elif len(usr_input) == 0:
+                loop_interactive = False
+            elif usr_input.isdecimal():
+                self.skip_interactive_count = int(usr_input)
+                loop_interactive = False
+            else:
+                print("INVALID INPUT\n")
