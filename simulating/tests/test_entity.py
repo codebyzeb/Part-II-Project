@@ -56,5 +56,5 @@ def test_behaviour():
     """
 
     ent = entity.Entity()
-    action, _ = ent.behaviour()
+    action, _ = ent.behaviour(0.5, 0b1111100000, (0, 1, 1))
     assert action == entity.Action.NOTHING

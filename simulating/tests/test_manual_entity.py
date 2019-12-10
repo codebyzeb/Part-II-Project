@@ -12,7 +12,7 @@ def test_behaviour_forwards():
     """
 
     ent = entity.ManualEntity()
-    action, _ = ent.behaviour(0)
+    action, _ = ent.behaviour(0, 0b1111100000, (0, 1, 1))
     assert action == entity.Action.FORWARDS
 
 
@@ -23,7 +23,7 @@ def test_behaviour_right():
     """
 
     ent = entity.ManualEntity()
-    action, _ = ent.behaviour(0.375)
+    action, _ = ent.behaviour(0.375, 0b1111100000, (0, 1, 1))
     assert action == entity.Action.RIGHT
 
 
@@ -34,7 +34,7 @@ def test_behaviour_left():
     """
 
     ent = entity.ManualEntity()
-    action, _ = ent.behaviour(0.785)
+    action, _ = ent.behaviour(0.785, 0b1111100000, (0, 1, 1))
     assert action == entity.Action.LEFT
 
 
@@ -45,7 +45,7 @@ def test_behaviour_behind():
     """
 
     ent = entity.ManualEntity()
-    action, _ = ent.behaviour(0.5)
+    action, _ = ent.behaviour(0.5, 0b1111100000, (0, 1, 1))
     assert action in (entity.Action.LEFT or action, entity.Action.RIGHT)
 
 
@@ -55,5 +55,5 @@ def test_behaviour_output_vocal():
     """
 
     ent = entity.ManualEntity()
-    _, vocal = ent.behaviour(0.5)
+    _, vocal = ent.behaviour(0.5, 0b1111100000, (0, 1, 1))
     assert vocal == (0, 0, 0)

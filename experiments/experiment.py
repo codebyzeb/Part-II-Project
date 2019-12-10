@@ -26,12 +26,12 @@ def neural_single_debug_simulation():
     sim.run_single(ent, interactive=True)
 
 
-def neural_population_simulation_1000():
+def neural_population_debug_simulation_1000(language_type):
     """ Run a neural simulation for debugging
     """
 
     sim = simulation.Simulation(15, 75, 100, 1000)
-    sim.run_population("out.txt")
+    sim.run_population("out.txt", language_type, interactive=True)
 
 
 def neural_population_debug_simulation_1():
@@ -57,6 +57,14 @@ def print_some_weights():
         print()
 
 
+def neural_population_simulation_1000(filename, language_type):
+    """ Run a full simulation for 1000 generations
+    """
+
+    sim = simulation.Simulation(15, 75, 100, 1000)
+    sim.run_population(filename, language_type, interactive=False)
+
+
 if __name__ == "__main__":
-    neural_population_simulation_1000()
+    neural_population_debug_simulation_1000("External")
     #cProfile.run("neural_population_debug_simulation_1()")

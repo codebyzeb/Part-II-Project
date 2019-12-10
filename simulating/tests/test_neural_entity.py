@@ -85,7 +85,7 @@ def test_behaviour_output_correct():
     """
 
     ent = entity.NeuralEntity(0, [5])
-    action, vocal = ent.behaviour(0.4, 0b1111100000, 3)
+    action, vocal = ent.behaviour(0.4, 0b1111100000, (0, 1, 1))
     assert action in [
         Action.FORWARDS, Action.LEFT, Action.RIGHT, Action.NOTHING
     ]

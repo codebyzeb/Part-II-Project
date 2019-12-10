@@ -52,7 +52,7 @@ class Entity:
         elif environment.is_poisonous(mushroom):
             self.energy += ENERGY_POISON
 
-    def behaviour(self, location=0, perception=0, listening=0):  #pylint: disable=W0613
+    def behaviour(self, location, perception, listening):  #pylint: disable=W0613
         """ Given perceptual inputs, returns an action.
 
         Args:
@@ -68,7 +68,7 @@ class Entity:
 class ManualEntity(Entity):
     """ An entity that just moves to the closest mushroom
     """
-    def behaviour(self, location=0, perception=0, listening=0):
+    def behaviour(self, location, perception, listening):
         """ Given perceptual inputs, just moves towards and eats the nearest mushroom.
 
         Args:
@@ -183,7 +183,7 @@ class NeuralEntity(Entity):
                   str(layer)] = (np.dot(self.parameters['W' + str(layer)],
                                         cache['A' + str(layer - 1)]) +
                                  self.parameters['b' + str(layer)])
-            cache['A' + str(layer)] = sigmoid(cache['Z' + str(layer)])
+            cache['A' + str(layer)] = relu(cache['Z' + str(layer)])
 
         # Calculate the final layer using the sigmoid function (or not)
         cache['Z' + str(final_layer)] = (
@@ -240,7 +240,7 @@ class NeuralEntity(Entity):
 
         return children
 
-    def behaviour(self, location=0, perception=0, listening=0):
+    def behaviour(self, location, perception, listening):
         """ Given perceptual inputs, just moves towards and eats the nearest mushroom.
 
         Args:
@@ -255,7 +255,7 @@ class NeuralEntity(Entity):
         inputs = []
         inputs.append(location)
         inputs.extend(bits_to_array(perception, 10))
-        inputs.extend(bits_to_array(listening, 3))
+        inputs.extend(listening)
         inputs = np.array([[inp] for inp in inputs])
 
         # Feed forward through the neural network

@@ -7,14 +7,17 @@ return the final energy of the initial entities given.
 """
 
 import math
+import random
 
 from multiprocessing import Pool
+from itertools import product
 
 from analysis.plotting import Plotter
 from simulating.action import Action
 from simulating.entity import NeuralEntity
 from simulating.environment import Environment
 from simulating import environment
+from simulating.entity import bits_to_array
 
 
 class Simulation:  #pylint: disable=R0903
@@ -37,7 +40,11 @@ class Simulation:  #pylint: disable=R0903
         self.num_entities = population_size
         self.num_generations = generations
 
-    def run_single(self, entity, interactive=False):
+    def run_single(self,
+                   entity,
+                   language_type="None",
+                   partner_entity=None,
+                   interactive=False):
         """ Runs a single simulation for one entity
 
         Runs num_epochs epochs, each of which contains num_cycles time steps.
@@ -76,8 +83,14 @@ class Simulation:  #pylint: disable=R0903
                     entity_pos, mush_pos) else 0
 
                 # Get audio signal
-                signal = 0
-                # signal = 0b100 if (environment.is_edible(env.get_cell(mush_pos))) else 0b010
+                signal = (0.5, 0.5, 0.5)
+                if language_type == "External":
+                    signal = (1, 0, 0) if (environment.is_edible(
+                        env.get_cell(mush_pos))) else (0, 1, 0)
+                elif language_type == "Evolved":
+                    _, partner_vocal = partner_entity.behaviour(
+                        angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
+                    signal = bits_to_array(partner_vocal, 3)
 
                 # Get the behaviour of the entity given perceptual inputs
                 action, _ = entity.behaviour(angle, mush, signal)
@@ -125,7 +138,8 @@ class Simulation:  #pylint: disable=R0903
             env.place_entity()
         return entity
 
-    def run_population(self, filename):
+    def run_population(self, filename, language_type="None",
+                       interactive=False):
         """ Run a population of entities without any energies
 
         Loop for num_generations evolutionary steps. At each step,
@@ -149,9 +163,20 @@ class Simulation:  #pylint: disable=R0903
         # Run evolution loop
         for generation in range(self.num_generations):
 
+            # Get a partner for each entity
+            partners = []
+            for i in range(len(entities)):
+                r = list(range(0, i)) + list(range(i + 1, len(entities)))
+                partners.append(entities[random.choice(r)])
+
             # Run a simulation for each entity
             with Pool() as pool:
-                entities = pool.map(self.run_single, entities)
+                entities = pool.starmap(
+                    self.run_single,
+                    zip(entities, [language_type] * len(entities), partners))
+
+            #for i, entity in enumerate(entities):
+            #    self.run_single(entity, language_type, partners[i])
 
             # Sort the entities by final energy value
             entities.sort(key=lambda entity: entity.energy, reverse=True)
@@ -162,7 +187,8 @@ class Simulation:  #pylint: disable=R0903
             plotter.add_point(generation, average_energy)
 
             # Run interactive menu
-            self.interactive_viewer(generation, entities, average_energy)
+            if interactive:
+                self.interactive_viewer(generation, entities, average_energy)
 
             # Save the average energy values
             with open(filename, "a") as out:
