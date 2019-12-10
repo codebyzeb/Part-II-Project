@@ -10,7 +10,6 @@ import math
 import random
 
 from multiprocessing import Pool
-from itertools import product
 
 from analysis.plotting import Plotter
 from simulating.action import Action
@@ -82,12 +81,15 @@ class Simulation:  #pylint: disable=R0903
                 mush = env.get_cell(mush_pos) if env.adjacent(
                     entity_pos, mush_pos) else 0
 
-                # Get audio signal
+                # Get audio signal according to language type
                 signal = (0.5, 0.5, 0.5)
                 if language_type == "External":
+                    # Externally imposed language
                     signal = (1, 0, 0) if (environment.is_edible(
                         env.get_cell(mush_pos))) else (0, 1, 0)
                 elif language_type == "Evolved":
+                    # A partner entity (which can see the mushroom properties)
+                    # communicates to this entity
                     _, partner_vocal = partner_entity.behaviour(
                         angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
                     signal = bits_to_array(partner_vocal, 3)
@@ -184,7 +186,7 @@ class Simulation:  #pylint: disable=R0903
             # Get average energy and add to the live graph
             average_energy = sum([entity.energy
                                   for entity in entities]) / len(entities)
-            plotter.add_point(generation, average_energy)
+            plotter.add_point_and_update(generation, average_energy)
 
             # Run interactive menu
             if interactive:
