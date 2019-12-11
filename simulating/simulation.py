@@ -155,7 +155,7 @@ class Simulation:  #pylint: disable=R0903
         """
 
         # Plotter and file to plot and save energy values
-        plotter = Plotter()
+        plotter = Plotter() if interactive else None
         out = open(filename, "w")
         out.close()
 
