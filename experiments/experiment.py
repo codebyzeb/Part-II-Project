@@ -4,6 +4,8 @@ Module for running simulation experiments.
 
 import cProfile
 
+from multiprocessing import Process
+
 import simulating.simulation as simulation
 import simulating.entity as entity
 
@@ -66,5 +68,16 @@ def neural_population_simulation_1000(filename, language_type):
 
 
 if __name__ == "__main__":
-    neural_population_debug_simulation_1000("External")
+    p1 = Process(target=neural_population_simulation_1000,
+                 args=("output/external.txt", "External"))
+    p2 = Process(target=neural_population_simulation_1000,
+                 args=("output/evolved.txt", "Evolved"))
+    p3 = Process(target=neural_population_simulation_1000,
+                 args=("output/none.txt", "None"))
+    p1.start()
+    p2.start()
+    p3.start()
+    p1.join()
+    p2.join()
+    p3.join()
     #cProfile.run("neural_population_debug_simulation_1()")

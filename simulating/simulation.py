@@ -183,18 +183,18 @@ class Simulation:  #pylint: disable=R0903
             # Sort the entities by final energy value
             entities.sort(key=lambda entity: entity.energy, reverse=True)
 
-            # Get average energy and add to the live graph
+            # Get average energy
             average_energy = sum([entity.energy
                                   for entity in entities]) / len(entities)
-            plotter.add_point_and_update(generation, average_energy)
-
-            # Run interactive menu
-            if interactive:
-                self.interactive_viewer(generation, entities, average_energy)
 
             # Save the average energy values
             with open(filename, "a") as out:
                 out.write(str(average_energy) + "\n")
+
+            # Run interactive menu and plot the average energy over time
+            if interactive:
+                plotter.add_point_and_update(generation, average_energy)
+                self.interactive_viewer(generation, entities, average_energy)
 
             # Select the best 20% to reproduce for the next generation
             best_entities = entities[:math.ceil(self.num_entities / 5)]
