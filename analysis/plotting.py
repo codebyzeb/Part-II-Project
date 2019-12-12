@@ -5,8 +5,6 @@ Analysis module used for plotting graphs of the simulation
 import matplotlib.pyplot as plt
 from matplotlib import style
 
-style.use('fivethirtyeight')
-
 
 class Plotter:
     """ Represents a simulation environment for a population of entities.
@@ -48,3 +46,22 @@ class Plotter:
         self.ax.plot(self.generations, self.average_energies)
         plt.draw()
         plt.pause(0.01)
+
+
+if __name__ == "__main__":
+    style.use('fivethirtyeight')
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 1, 1)
+    for language_type in ["none", "evolved", "external"]:
+        energies_file = open("output/" + language_type + ".txt", "r")
+        average_energies = []
+        lines = energies_file.readlines()
+        energies_file.close()
+        for line in lines:
+            average_energies.append(float(line))
+        ax1.plot(list(range(len(average_energies))),
+                 average_energies,
+                 label=language_type,
+                 linewidth=1.0)
+    leg = plt.legend()
+    plt.show()

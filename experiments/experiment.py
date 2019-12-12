@@ -3,6 +3,7 @@ Module for running simulation experiments.
 """
 
 import cProfile
+import sys
 
 from multiprocessing import Process
 
@@ -63,21 +64,25 @@ def neural_population_simulation_1000(filename, language_type):
     """ Run a full simulation for 1000 generations
     """
 
-    sim = simulation.Simulation(15, 75, 100, 1000)
+    sim = simulation.Simulation(15, 75, 100, 2)
     sim.run_population(filename, language_type, interactive=False)
 
 
-if __name__ == "__main__":
+def run_full_simulations(filenumber):
     p1 = Process(target=neural_population_simulation_1000,
-                 args=("output/external.txt", "External"))
+                 args=("output/external" + filenumber + ".txt", "External"))
     p2 = Process(target=neural_population_simulation_1000,
-                 args=("output/evolved.txt", "Evolved"))
+                 args=("output/evolved" + filenumber + ".txt", "Evolved"))
     p3 = Process(target=neural_population_simulation_1000,
-                 args=("output/none.txt", "None"))
+                 args=("output/none" + filenumber + ".txt", "None"))
     p1.start()
     p2.start()
     p3.start()
     p1.join()
     p2.join()
     p3.join()
+
+
+if __name__ == "__main__":
+    run_full_simulations(str(sys.argv[1]))
     #cProfile.run("neural_population_debug_simulation_1()")

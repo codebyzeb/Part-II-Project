@@ -93,6 +93,8 @@ class Simulation:  #pylint: disable=R0903
                     _, partner_vocal = partner_entity.behaviour(
                         angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
                     signal = bits_to_array(partner_vocal, 3)
+                    if (interactive):
+                        print("Partner vocal:", partner_vocal)
 
                 # Get the behaviour of the entity given perceptual inputs
                 action, _ = entity.behaviour(angle, mush, signal)
@@ -117,6 +119,7 @@ class Simulation:  #pylint: disable=R0903
                     print("Direction: ", env.entity_direction)
                     print("Angle: ", angle)
                     print("Mushroom input: ", mush)
+                    print("Signal input: ", signal)
                     print("Action chosen: ", action)
                     ##time.sleep(0.1)
                     usr_input = input()
@@ -194,7 +197,8 @@ class Simulation:  #pylint: disable=R0903
             # Run interactive menu and plot the average energy over time
             if interactive:
                 plotter.add_point_and_update(generation, average_energy)
-                self.interactive_viewer(generation, entities, average_energy)
+                self.interactive_viewer(language_type, generation, entities,
+                                        partners, average_energy)
 
             # Select the best 20% to reproduce for the next generation
             best_entities = entities[:math.ceil(self.num_entities / 5)]
@@ -205,7 +209,8 @@ class Simulation:  #pylint: disable=R0903
 
     skip_interactive_count = 0
 
-    def interactive_viewer(self, generation, entities, average_energy):
+    def interactive_viewer(self, language_type, generation, entities, partners,
+                           average_energy):
         """ At each generation, display information about the simulation
 
         Loops to allow for viewing individual entities' behaviour, 
@@ -244,7 +249,10 @@ class Simulation:  #pylint: disable=R0903
                 if if_yes == "yes":
                     energy = entities[i].energy
                     entities[i].energy = 0
-                    self.run_single(entities[i], interactive=True)
+                    self.run_single(entities[i],
+                                    language_type,
+                                    partners[i],
+                                    interactive=True)
                     entities[i].energy = energy
             elif len(usr_input) == 0:
                 loop_interactive = False
