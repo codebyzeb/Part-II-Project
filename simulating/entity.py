@@ -153,9 +153,9 @@ class NeuralEntity(Entity):
         """
 
         for layer in range(1, len(layers_units)):
-            # Choose random weights from rectangular distribution [-1, 1]
-            self.parameters['W' + str(layer)] = (2 * np.random.random_sample(
-                (layers_units[layer], layers_units[layer - 1])) - 1)
+            # Set all weights to 0
+            self.parameters['W' + str(layer)] = np.zeros(
+                (layers_units[layer], layers_units[layer - 1]))
             # Set all biases to 0
             self.parameters['b' + str(layer)] = np.zeros(
                 (layers_units[layer], 1))
@@ -183,7 +183,7 @@ class NeuralEntity(Entity):
                   str(layer)] = (np.dot(self.parameters['W' + str(layer)],
                                         cache['A' + str(layer - 1)]) +
                                  self.parameters['b' + str(layer)])
-            cache['A' + str(layer)] = relu(cache['Z' + str(layer)])
+            cache['A' + str(layer)] = sigmoid(cache['Z' + str(layer)])
 
         # Calculate the final layer using the sigmoid function (or not)
         cache['Z' + str(final_layer)] = (

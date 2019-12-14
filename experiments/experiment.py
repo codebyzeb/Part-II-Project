@@ -34,7 +34,10 @@ def neural_population_debug_simulation_1000(language_type):
     """
 
     sim = simulation.Simulation(15, 75, 100, 1000)
-    sim.run_population("out.txt", language_type, interactive=True)
+    sim.run_population("testing",
+                       language_type,
+                       interactive=False,
+                       record_language=True)
 
 
 def neural_population_debug_simulation_1():
@@ -64,17 +67,20 @@ def neural_population_simulation_1000(filename, language_type):
     """ Run a full simulation for 1000 generations
     """
 
-    sim = simulation.Simulation(15, 75, 100, 1000)
-    sim.run_population(filename, language_type, interactive=False)
+    sim = simulation.Simulation(15, 75, 100, 5)
+    sim.run_population(filename,
+                       language_type,
+                       interactive=False,
+                       record_language=True)
 
 
 def run_full_simulations(filenumber):
     p1 = Process(target=neural_population_simulation_1000,
-                 args=("output/external" + filenumber + ".txt", "External"))
+                 args=("output/external" + filenumber, "External"))
     p2 = Process(target=neural_population_simulation_1000,
-                 args=("output/evolved" + filenumber + ".txt", "Evolved"))
+                 args=("output/evolved" + filenumber, "Evolved"))
     p3 = Process(target=neural_population_simulation_1000,
-                 args=("output/none" + filenumber + ".txt", "None"))
+                 args=("output/none" + filenumber, "None"))
     p1.start()
     p2.start()
     p3.start()
@@ -85,4 +91,5 @@ def run_full_simulations(filenumber):
 
 if __name__ == "__main__":
     run_full_simulations(str(sys.argv[1]))
+    #neural_population_debug_simulation_1000("Evolved")
     #cProfile.run("neural_population_debug_simulation_1()")

@@ -48,8 +48,7 @@ class Plotter:
         plt.pause(0.01)
 
 
-if __name__ == "__main__":
-    style.use('fivethirtyeight')
+def plotOne():
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
     for language_type in ["none", "evolved", "external"]:
@@ -63,5 +62,70 @@ if __name__ == "__main__":
                  average_energies,
                  label=language_type,
                  linewidth=1.0)
-    leg = plt.legend()
+    plt.legend()
     plt.show()
+
+
+def plotTen():
+    fig = plt.figure()
+    for i in range(10):
+        ax = fig.add_subplot(5, 2, i + 1)
+        for language_type in ["none", "evolved", "external"]:
+            energies_file = open("output/" + language_type + str(i) + ".txt",
+                                 "r")
+            average_energies = []
+            lines = energies_file.readlines()
+            energies_file.close()
+            for line in lines:
+                average_energies.append(float(line))
+            ax.plot(list(range(len(average_energies))),
+                    average_energies,
+                    label=language_type,
+                    linewidth=1.0)
+    plt.legend()
+    plt.show()
+
+
+def plotAverage():
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 1, 1)
+    for language_type in ["none", "evolved", "external"]:
+        average_energies = [0 for i in range(1001)]
+        totalNum = 1001
+        for i in range(10):
+            energies_file = open("output/" + language_type + str(i) + ".txt",
+                                 "r")
+            lines = energies_file.readlines()
+            if len(lines) < totalNum:
+                totalNum = len(lines)
+                average_energies = average_energies[:totalNum]
+            energies_file.close()
+            for j, line in enumerate(lines):
+                if (j >= totalNum):
+                    break
+                average_energies[j] += (float(line) / 10)
+        ax1.plot(list(range(len(average_energies))),
+                 average_energies,
+                 label=language_type,
+                 linewidth=1.0)
+    plt.legend()
+    plt.show()
+
+
+def plotLanguageDistributions(foldername, generations):
+    fig = plt.figure()
+    for j, gen in enumerate(generations):
+        for i, language in enumerate(["edible", "poisonous"]):
+            languages = [0, 0, 0, 0, 0, 0, 0, 0]
+            with open(foldername + "/" + language + str(gen) + ".txt",
+                      "r") as language_file:
+                for sample in language_file.readlines():
+                    languages[int(sample[0])] += 1
+            ax = fig.add_subplot(len(generations), 2, i + 1 + j * 2)
+            ax.plot([str(bin(i))[2:] for i in range(8)], languages)
+    plt.show()
+
+
+if __name__ == "__main__":
+    style.use('fivethirtyeight')
+    plotLanguageDistributions("testing", [i * 100 for i in range(10)])

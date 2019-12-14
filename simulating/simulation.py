@@ -7,6 +7,7 @@ return the final energy of the initial entities given.
 """
 
 import math
+import os
 import random
 
 from multiprocessing import Pool
@@ -143,8 +144,11 @@ class Simulation:  #pylint: disable=R0903
             env.place_entity()
         return entity
 
-    def run_population(self, filename, language_type="None",
-                       interactive=False):
+    def run_population(self,
+                       foldername,
+                       language_type="None",
+                       interactive=False,
+                       record_language=False):
         """ Run a population of entities without any energies
 
         Loop for num_generations evolutionary steps. At each step,
@@ -153,14 +157,21 @@ class Simulation:  #pylint: disable=R0903
         next generation.
 
         Args:
-            debug (bool): If true, prints debugging information and pauses
+            filename: Filename to save average energies to
+            language_type: Which type of language the entities should use
+            interactive (bool): If true, prints debugging information and pauses
             at each step.
+            record_language (bool): Whether or not to record the language used every
+            100 generations
+
         """
 
         # Plotter and file to plot and save energy values
         plotter = Plotter() if interactive else None
-        out = open(filename, "w")
-        out.close()
+        if not os.path.exists(foldername):
+            os.makedirs(foldername)
+        energy_file = foldername + "/energies.txt"
+        open(energy_file, "w").close()
 
         # First, generate the initial population of neural entities
         entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
@@ -180,9 +191,6 @@ class Simulation:  #pylint: disable=R0903
                     self.run_single,
                     zip(entities, [language_type] * len(entities), partners))
 
-            #for i, entity in enumerate(entities):
-            #    self.run_single(entity, language_type, partners[i])
-
             # Sort the entities by final energy value
             entities.sort(key=lambda entity: entity.energy, reverse=True)
 
@@ -191,8 +199,23 @@ class Simulation:  #pylint: disable=R0903
                                   for entity in entities]) / len(entities)
 
             # Save the average energy values
-            with open(filename, "a") as out:
+            with open(energy_file, "a") as out:
                 out.write(str(average_energy) + "\n")
+
+            # If generation is a multiple of 100, do a naming task
+            if record_language and generation % 100 == 0 and language_type == "Evolved":
+                edible_samples = []
+                poisonous_samples = []
+                for entity in entities:
+                    edible, poisonous = self.naming_task(entity)
+                    edible_samples.extend(edible)
+                    poisonous_samples.extend(poisonous)
+                with open(foldername + "/edible" + str(generation) + ".txt",
+                          "w") as out:
+                    out.write("\n".join([str(s) for s in edible_samples]))
+                with open(foldername + "/poisonous" + str(generation) + ".txt",
+                          "w") as out:
+                    out.write("\n".join([str(s) for s in poisonous_samples]))
 
             # Run interactive menu and plot the average energy over time
             if interactive:
@@ -257,7 +280,34 @@ class Simulation:  #pylint: disable=R0903
             elif len(usr_input) == 0:
                 loop_interactive = False
             elif usr_input.isdecimal():
-                self.skip_interactive_count = int(usr_input)
+                self.skip_interactive_count = int(usr_input) - 1
                 loop_interactive = False
             else:
                 print("INVALID INPUT\n")
+
+    def naming_task(self, entity):
+        """
+        Return 80 samples of the language produced by this entity
+        for poisonous and edible mushrooms
+        """
+
+        edible_samples = []
+        poisonous_samples = []
+
+        # Get all possible mushrooms
+        edible_mushrooms = [environment.make_edible(i) for i in range(10)]
+        poisonous_mushrooms = [
+            environment.make_poisonous(i) for i in range(10)
+        ]
+
+        # Get a sample of the language for each mushroom for each of four directions
+        for angle in [0, 0.25, 0.5, 0.75]:
+            for mushroom in edible_mushrooms:
+                edible_samples.append(
+                    entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))[1])
+            for mushroom in poisonous_mushrooms:
+                poisonous_samples.append(
+                    entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))[1])
+
+        # Return samples
+        return edible_samples, poisonous_samples
