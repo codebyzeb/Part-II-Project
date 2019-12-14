@@ -67,7 +67,7 @@ def neural_population_simulation_1000(filename, language_type):
     """ Run a full simulation for 1000 generations
     """
 
-    sim = simulation.Simulation(15, 75, 100, 5)
+    sim = simulation.Simulation(15, 75, 100, 1000)
     sim.run_population(filename,
                        language_type,
                        interactive=False,
