@@ -209,7 +209,7 @@ class Simulation:  #pylint: disable=R0903
                 out.write(str(average_energy) + "\n")
 
             # If generation is a multiple of 100, do a naming task
-            if record_language and generation % 10 == 0 and language_type == "Evolved":
+            if record_language and generation % 100 == 0:
                 edible_samples = []
                 poisonous_samples = []
                 for entity in entities:

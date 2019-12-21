@@ -128,6 +128,6 @@ def plotLanguageDistributions(foldername, generations):
 
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    plotLanguageDistributions("testing", [i * 20 for i in range(10)])
-    #plotAverage()
+    #plotLanguageDistributions("testing", [i * 20 for i in range(10)])
+    plotAverage()
     #plotTen()
