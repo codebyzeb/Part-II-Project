@@ -184,11 +184,11 @@ class Simulation:  #pylint: disable=R0903
         for generation in range(self.num_generations):
 
             # For each entity, create a list of the other entities for the Evolved language
-            populations = []
+            populations = [[] for i in range(len(entities))]
             if language_type == "Evolved":
                 for i in range(len(entities)):
-                    populations.append(entities[0:i] +
-                                       entities[i + 1:len(entities)])
+                    populations[i] = (entities[0:i] +
+                                      entities[i + 1:len(entities)])
 
             # Run a simulation for each entity
             with Pool() as pool:
