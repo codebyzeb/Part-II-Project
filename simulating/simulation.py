@@ -43,7 +43,7 @@ class Simulation:  #pylint: disable=R0903
     def run_single(self,
                    entity,
                    language_type="None",
-                   partner_entity=None,
+                   population=[],
                    interactive=False):
         """ Runs a single simulation for one entity
 
@@ -54,8 +54,10 @@ class Simulation:  #pylint: disable=R0903
 
         Args:
             entity: The entity whose behaviour is tested        
-            debug (bool): If true, prints debugging information and pauses
             at each step.
+            language_type: The type of language that the entities use within the simulation (None, Evolved or External)
+            population: The remaining entities in the population
+            interactive (bool): If true, prints debugging information and pauses
         """
 
         env = Environment()
@@ -91,7 +93,7 @@ class Simulation:  #pylint: disable=R0903
                 elif language_type == "Evolved":
                     # A partner entity (which can see the mushroom properties)
                     # communicates to this entity
-                    _, partner_vocal = partner_entity.behaviour(
+                    _, partner_vocal = random.choice(population).behaviour(
                         angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
                     signal = bits_to_array(partner_vocal, 3)
                     if (interactive):
@@ -176,20 +178,22 @@ class Simulation:  #pylint: disable=R0903
         # First, generate the initial population of neural entities
         entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
 
+        # For each entity, create a list of the other entities for the Evolved language
+        populations = []
+        if language_type == "Evolved":
+            for i in range(len(entities)):
+                populations.append(entities[0:i] +
+                                   entities[i + 1:len(entities)])
+
         # Run evolution loop
         for generation in range(self.num_generations):
-
-            # Get a partner for each entity
-            partners = []
-            for i in range(len(entities)):
-                r = list(range(0, i)) + list(range(i + 1, len(entities)))
-                partners.append(entities[random.choice(r)])
 
             # Run a simulation for each entity
             with Pool() as pool:
                 entities = pool.starmap(
                     self.run_single,
-                    zip(entities, [language_type] * len(entities), partners))
+                    zip(entities, [language_type] * len(entities),
+                        populations))
 
             # Sort the entities by final energy value
             entities.sort(key=lambda entity: entity.energy, reverse=True)
@@ -203,7 +207,7 @@ class Simulation:  #pylint: disable=R0903
                 out.write(str(average_energy) + "\n")
 
             # If generation is a multiple of 100, do a naming task
-            if record_language and generation % 100 == 0 and language_type == "Evolved":
+            if record_language and generation % 10 == 0 and language_type == "Evolved":
                 edible_samples = []
                 poisonous_samples = []
                 for entity in entities:
@@ -221,7 +225,7 @@ class Simulation:  #pylint: disable=R0903
             if interactive:
                 plotter.add_point_and_update(generation, average_energy)
                 self.interactive_viewer(language_type, generation, entities,
-                                        partners, average_energy)
+                                        populations, average_energy)
 
             # Select the best 20% to reproduce for the next generation
             best_entities = entities[:math.ceil(self.num_entities / 5)]
@@ -232,8 +236,8 @@ class Simulation:  #pylint: disable=R0903
 
     skip_interactive_count = 0
 
-    def interactive_viewer(self, language_type, generation, entities, partners,
-                           average_energy):
+    def interactive_viewer(self, language_type, generation, entities,
+                           populations, average_energy):
         """ At each generation, display information about the simulation
 
         Loops to allow for viewing individual entities' behaviour, 
@@ -274,7 +278,7 @@ class Simulation:  #pylint: disable=R0903
                     entities[i].energy = 0
                     self.run_single(entities[i],
                                     language_type,
-                                    partners[i],
+                                    populations[i],
                                     interactive=True)
                     entities[i].energy = energy
             elif len(usr_input) == 0:

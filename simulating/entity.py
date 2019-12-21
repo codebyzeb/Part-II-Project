@@ -146,7 +146,7 @@ class NeuralEntity(Entity):
     def initialise_parameters(self, layers_units):
         """ Initialises weights and biases of the neural network.
 
-        Weights are chosen randomly from a rectangular distribution [-1, 1]
+        Weights are initially set to 0
 
         Args:
             layer_units: The number of units in each layer
@@ -224,7 +224,6 @@ class NeuralEntity(Entity):
                     x + random.random() * 2 -
                     1 if random.random() < percentage_mutate else x for x in xs
                 ] for xs in weights])
-                # weights.clip(-2, 2)
                 child.parameters['W' + str(layer)] = weights
 
             for layer in range(1, num_layers):

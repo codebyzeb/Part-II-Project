@@ -55,7 +55,6 @@ def test_initialise_parameters_size():
     """
 
     ent = entity.NeuralEntity(0, [5])
-    print(ent.parameters["W1"].shape)
     assert len(ent.parameters) == 4
     assert ent.parameters["W1"].shape == (5, 14)
     assert ent.parameters["b1"].shape == (5, 1)

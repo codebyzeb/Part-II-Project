@@ -71,8 +71,8 @@ def plotTen():
     for i in range(10):
         ax = fig.add_subplot(5, 2, i + 1)
         for language_type in ["none", "evolved", "external"]:
-            energies_file = open("output/" + language_type + str(i) + ".txt",
-                                 "r")
+            energies_file = open(
+                "output/" + language_type + str(i) + "/energies.txt", "r")
             average_energies = []
             lines = energies_file.readlines()
             energies_file.close()
@@ -93,8 +93,8 @@ def plotAverage():
         average_energies = [0 for i in range(1001)]
         totalNum = 1001
         for i in range(10):
-            energies_file = open("output/" + language_type + str(i) + ".txt",
-                                 "r")
+            energies_file = open(
+                "output/" + language_type + str(i) + "/energies.txt", "r")
             lines = energies_file.readlines()
             if len(lines) < totalNum:
                 totalNum = len(lines)
@@ -128,4 +128,6 @@ def plotLanguageDistributions(foldername, generations):
 
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    plotLanguageDistributions("testing", [i * 100 for i in range(10)])
+    plotLanguageDistributions("testing", [i * 20 for i in range(10)])
+    #plotAverage()
+    #plotTen()

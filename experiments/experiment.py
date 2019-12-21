@@ -36,7 +36,7 @@ def neural_population_debug_simulation_1000(language_type):
     sim = simulation.Simulation(15, 75, 100, 1000)
     sim.run_population("testing",
                        language_type,
-                       interactive=False,
+                       interactive=True,
                        record_language=True)
 
 
@@ -75,6 +75,8 @@ def neural_population_simulation_1000(filename, language_type):
 
 
 def run_full_simulations(filenumber):
+    """ Run a three full simulations in parallel for each language type
+    """
     p1 = Process(target=neural_population_simulation_1000,
                  args=("output/external" + filenumber, "External"))
     p2 = Process(target=neural_population_simulation_1000,
@@ -90,6 +92,8 @@ def run_full_simulations(filenumber):
 
 
 if __name__ == "__main__":
-    run_full_simulations(str(sys.argv[1]))
+    #run_full_simulations(str(sys.argv[1]))
     #neural_population_debug_simulation_1000("Evolved")
     #cProfile.run("neural_population_debug_simulation_1()")
+    neural_population_simulation_1000("output/evolved" + str(sys.argv[1]),
+                                      "Evolved")
