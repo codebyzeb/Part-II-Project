@@ -93,11 +93,13 @@ class Simulation:  #pylint: disable=R0903
                 elif language_type == "Evolved":
                     # A partner entity (which can see the mushroom properties)
                     # communicates to this entity
-                    _, partner_vocal = random.choice(population).behaviour(
+                    partner_entity = random.choice(population)
+                    _, partner_vocal = partner_entity.behaviour(
                         angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
                     signal = bits_to_array(partner_vocal, 3)
                     if (interactive):
                         print("Partner vocal:", partner_vocal)
+                        print("Partner weights:", partner_entity.parameters)
 
                 # Get the behaviour of the entity given perceptual inputs
                 action, _ = entity.behaviour(angle, mush, signal)
@@ -178,15 +180,15 @@ class Simulation:  #pylint: disable=R0903
         # First, generate the initial population of neural entities
         entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
 
-        # For each entity, create a list of the other entities for the Evolved language
-        populations = []
-        if language_type == "Evolved":
-            for i in range(len(entities)):
-                populations.append(entities[0:i] +
-                                   entities[i + 1:len(entities)])
-
         # Run evolution loop
         for generation in range(self.num_generations):
+
+            # For each entity, create a list of the other entities for the Evolved language
+            populations = []
+            if language_type == "Evolved":
+                for i in range(len(entities)):
+                    populations.append(entities[0:i] +
+                                       entities[i + 1:len(entities)])
 
             # Run a simulation for each entity
             with Pool() as pool:
@@ -307,11 +309,11 @@ class Simulation:  #pylint: disable=R0903
         # Get a sample of the language for each mushroom for each of four directions
         for angle in [0, 0.25, 0.5, 0.75]:
             for mushroom in edible_mushrooms:
-                edible_samples.append(
-                    entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))[1])
+                _, signal = entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))
+                edible_samples.append(signal)
             for mushroom in poisonous_mushrooms:
-                poisonous_samples.append(
-                    entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))[1])
+                _, signal = entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))
+                poisonous_samples.append(signal)
 
         # Return samples
         return edible_samples, poisonous_samples
