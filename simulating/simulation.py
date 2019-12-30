@@ -210,7 +210,7 @@ class Simulation:  #pylint: disable=R0903
 
             # If generation is a multiple of 100, record the language
             if record_language and generation % 100 == 0:
-                record_language(entities, foldername, generation)
+                self.save_language(entities, foldername, generation)
 
             # Run interactive menu and plot the average energy over time
             if interactive:
@@ -280,7 +280,7 @@ class Simulation:  #pylint: disable=R0903
             else:
                 print("INVALID INPUT\n")
 
-    def record_language(self, entities, foldername, generation):
+    def save_language(self, entities, foldername, generation):
         """
         Given a group of entities at a certain generation, performs a naming task
         for each entity to get a sample of the language used by the entities
