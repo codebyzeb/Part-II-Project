@@ -208,20 +208,9 @@ class Simulation:  #pylint: disable=R0903
             with open(energy_file, "a") as out:
                 out.write(str(average_energy) + "\n")
 
-            # If generation is a multiple of 100, do a naming task
+            # If generation is a multiple of 100, record the language
             if record_language and generation % 100 == 0:
-                edible_samples = []
-                poisonous_samples = []
-                for entity in entities:
-                    edible, poisonous = self.naming_task(entity)
-                    edible_samples.extend(edible)
-                    poisonous_samples.extend(poisonous)
-                with open(foldername + "/edible" + str(generation) + ".txt",
-                          "w") as out:
-                    out.write("\n".join([str(s) for s in edible_samples]))
-                with open(foldername + "/poisonous" + str(generation) + ".txt",
-                          "w") as out:
-                    out.write("\n".join([str(s) for s in poisonous_samples]))
+                record_language(entities, foldername, generation)
 
             # Run interactive menu and plot the average energy over time
             if interactive:
@@ -290,6 +279,26 @@ class Simulation:  #pylint: disable=R0903
                 loop_interactive = False
             else:
                 print("INVALID INPUT\n")
+
+    def record_language(self, entities, foldername, generation):
+        """
+        Given a group of entities at a certain generation, performs a naming task
+        for each entity to get a sample of the language used by the entities
+        for edible and poisonous mushrooms
+        """
+
+        edible_samples = []
+        poisonous_samples = []
+        for entity in entities:
+            edible, poisonous = self.naming_task(entity)
+            edible_samples.extend(edible)
+            poisonous_samples.extend(poisonous)
+        with open(foldername + "/edible" + str(generation) + ".txt",
+                  "w") as out:
+            out.write("\n".join([str(s) for s in edible_samples]))
+        with open(foldername + "/poisonous" + str(generation) + ".txt",
+                  "w") as out:
+            out.write("\n".join([str(s) for s in poisonous_samples]))
 
     def naming_task(self, entity):
         """

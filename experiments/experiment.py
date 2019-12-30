@@ -33,19 +33,22 @@ def neural_population_debug_simulation_1000(language_type):
     """ Run a neural simulation for debugging
     """
 
-    sim = simulation.Simulation(15, 75, 100, 1000)
+    sim = simulation.Simulation(15, 50, 100, 1000)
     sim.run_population("testing",
                        language_type,
                        interactive=True,
                        record_language=True)
 
 
-def neural_population_debug_simulation_1():
+def neural_population_debug_simulation_5(language_type):
     """ Run a neural simulation for debugging
     """
 
-    sim = simulation.Simulation(15, 75, 100, 1)
-    sim.run_population(True)
+    sim = simulation.Simulation(15, 50, 5, 1000)
+    sim.run_population("testing",
+                       language_type,
+                       interactive=True,
+                       record_language=True)
 
 
 def print_some_weights():
@@ -67,7 +70,7 @@ def neural_population_simulation_1000(filename, language_type):
     """ Run a full simulation for 1000 generations
     """
 
-    sim = simulation.Simulation(15, 75, 100, 1000)
+    sim = simulation.Simulation(15, 50, 100, 1000)
     sim.run_population(filename,
                        language_type,
                        interactive=False,
@@ -94,6 +97,7 @@ def run_full_simulations(filenumber):
 if __name__ == "__main__":
     #run_full_simulations(str(sys.argv[1]))
     #neural_population_debug_simulation_1000("Evolved")
+    #neural_population_debug_simulation_5("External")
     #cProfile.run("neural_population_debug_simulation_1()")
     neural_population_simulation_1000("output/evolved" + str(sys.argv[1]),
                                       "Evolved")

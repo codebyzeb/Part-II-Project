@@ -193,7 +193,6 @@ class NeuralEntity(Entity):
         cache['A' +
               str(final_layer)] = (cache['Z' + str(final_layer)] if linear else
                                    sigmoid(cache['Z' + str(final_layer)]))
-
         return cache
 
     def reproduce(self, num_offspring, percentage_mutate):

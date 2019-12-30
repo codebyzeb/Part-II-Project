@@ -52,7 +52,7 @@ def plotOne():
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
     for language_type in ["none", "evolved", "external"]:
-        energies_file = open("output/" + language_type + ".txt", "r")
+        energies_file = open("output-1/" + language_type + ".txt", "r")
         average_energies = []
         lines = energies_file.readlines()
         energies_file.close()
@@ -128,6 +128,7 @@ def plotLanguageDistributions(foldername, generations):
 
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    #plotLanguageDistributions("testing", [i * 20 for i in range(10)])
     plotAverage()
-    #plotTen()
+    plotTen()
+    #for j in range(10):
+    #    plotLanguageDistributions("output/evolved"+str(j), [i * 100 for i in range(10)])
