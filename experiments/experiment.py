@@ -99,5 +99,5 @@ if __name__ == "__main__":
     #neural_population_debug_simulation_1000("Evolved")
     #neural_population_debug_simulation_5("External")
     #cProfile.run("neural_population_debug_simulation_1()")
-    neural_population_simulation_1000("output/evolved" + str(sys.argv[1]),
-                                      "Evolved")
+    neural_population_simulation_1000(
+        "output-50/" + str(sys.argv[2]) + str(sys.argv[1]), str(sys.argv[2]))
