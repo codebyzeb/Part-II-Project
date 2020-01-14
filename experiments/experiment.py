@@ -9,46 +9,49 @@ from multiprocessing import Process
 
 import simulating.simulation as simulation
 import simulating.entity as entity
+from simulating.options import Options, Language
 
 
 def basic_single_debug_simulation():
     """ Run a basic simulation for debugging.
     """
 
+    options = Options(Language.NONE, True, True, "testing")
+
     sim = simulation.Simulation(5, 50, 100, 1000)
-    sim.run_single(entity.ManualEntity())
+    sim.run_single(entity.ManualEntity(), options, viewer=True)
 
 
 def neural_single_debug_simulation():
     """ Run a neural simulation for debugging
     """
 
+    options = Options(Language.NONE, True, True, "testing")
+
     ent = entity.NeuralEntity()
     print(ent.parameters)
     sim = simulation.Simulation(5, 50, 100, 1000)
-    sim.run_single(ent, interactive=True)
+    sim.run_single(ent, options, viewer=True)
 
 
 def neural_population_debug_simulation_1000(language_type):
     """ Run a neural simulation for debugging
     """
 
+    options = Options(language_type, True, True, "testing")
+
     sim = simulation.Simulation(15, 50, 100, 1000)
-    sim.run_population("testing",
-                       language_type,
-                       interactive=True,
-                       record_language=True)
+    sim.run_population(options)
 
 
 def neural_population_debug_simulation_5(language_type):
     """ Run a neural simulation for debugging
     """
 
+    options = Options(language_type, True, True, "testing")
+
     sim = simulation.Simulation(15, 50, 5, 1000)
-    sim.run_population("testing",
-                       language_type,
-                       interactive=True,
-                       record_language=True)
+    sim.run_population(options)
 
 
 def print_some_weights():
@@ -66,15 +69,14 @@ def print_some_weights():
         print()
 
 
-def neural_population_simulation_1000(filename, language_type):
+def neural_population_simulation_1000(foldername, language_type):
     """ Run a full simulation for 1000 generations
     """
 
+    options = Options(language_type, False, True, foldername)
+
     sim = simulation.Simulation(15, 50, 100, 1000)
-    sim.run_population(filename,
-                       language_type,
-                       interactive=False,
-                       record_language=True)
+    sim.run_population(options)
 
 
 def run_full_simulations(filenumber):
@@ -97,7 +99,7 @@ def run_full_simulations(filenumber):
 if __name__ == "__main__":
     #run_full_simulations(str(sys.argv[1]))
     #neural_population_debug_simulation_1000("Evolved")
-    #neural_population_debug_simulation_5("External")
+    neural_population_debug_simulation_5("None")
     #cProfile.run("neural_population_debug_simulation_1()")
-    neural_population_simulation_1000(
-        "output-50/" + str(sys.argv[2]) + str(sys.argv[1]), str(sys.argv[2]))
+    #neural_population_simulation_1000(
+    #    "output-50/" + str(sys.argv[2]) + str(sys.argv[1]), str(sys.argv[2]))
