@@ -183,7 +183,7 @@ class NeuralEntity(Entity):
                   str(layer)] = (np.dot(self.parameters['W' + str(layer)],
                                         cache['A' + str(layer - 1)]) +
                                  self.parameters['b' + str(layer)])
-            cache['A' + str(layer)] = (cache['Z' + str(layer)])
+            cache['A' + str(layer)] = cache['Z' + str(layer)]
 
         # Calculate the final layer using the sigmoid function (or not)
         cache['Z' + str(final_layer)] = (
