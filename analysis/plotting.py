@@ -129,8 +129,69 @@ def plotLanguageDistributions(foldername, generations):
     plt.show()
 
 
+def get_QI(foldername, generations, k=1):
+    """ Calculates the quality index for each generation where k is a constant
+    to weigh the effect of the internal dispersion value of poisonous or edible mushrooms.
+    """
+
+    qis = []
+    for gen in generations:
+        production_table = {
+            "edible": [0, 0, 0, 0, 0, 0, 0, 0],
+            "poisonous": [0, 0, 0, 0, 0, 0, 0, 0]
+        }
+        # Create production table, storing the frequencies of each signal
+        for language in production_table:
+            with open(foldername + "/" + language + str(gen) + ".txt",
+                      "r") as sample_file:
+                samples = [int(sample) for sample in sample_file.readlines()]
+                for sample in samples:
+                    production_table[language][sample] += 1
+                for i in range(8):
+                    production_table[language][i] /= len(samples)
+
+        print(production_table)
+
+        # Calculate the dispersion values
+        d_edible = sum([
+            abs(frequency - 0.125) for frequency in production_table["edible"]
+        ])
+        d_poisonous = sum([
+            abs(frequency - 0.125)
+            for frequency in production_table["poisonous"]
+        ])
+
+        # Calculate quality index
+        qi = sum([
+            abs(production_table["edible"][i] -
+                production_table["poisonous"][i]) for i in range(8)
+        ]) - k * min(d_edible, d_poisonous)
+        qis.append(qi * 100)
+    return qis
+
+
+def frequency_and_qi(foldername, generations):
+    qis = get_QI(foldername, generations)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 1, 1)
+    energies_file = open(foldername + "/energies.txt", "r")
+    average_energies = []
+    lines = energies_file.readlines()
+    energies_file.close()
+    for line in lines:
+        average_energies.append(float(line))
+    ax1.plot(list(range(len(average_energies))),
+             average_energies,
+             label="average energy",
+             linewidth=1.0)
+    ax1.plot(generations, qis, label="Quality Index", linewidth=1.0)
+    plt.legend()
+    plt.show()
+
+
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    plotAverage(str(sys.argv[1]))
+    #plotAverage(str(sys.argv[1]))
     #for j in range(10):
-    #    plotLanguageDistributions(str(sys.argv[1]) + "/evolved"+str(j), [i * 100 for i in range(10)])
+    #    plotLanguageDistributions(str(sys.argv[1]) + "/evolved"+str(j), [i * 100 for i in range(11)])
+    frequency_and_qi(str(sys.argv[1]), [i * 100 for i in range(10)])
