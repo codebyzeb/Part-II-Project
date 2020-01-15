@@ -58,10 +58,10 @@ class Simulation:  #pylint: disable=R0903
     threading = True
 
     record_language = True
-    record_language_period = 100
+    record_language_period = 1
 
     record_entities = True
-    record_entities_period = 10
+    record_entities_period = 1
 
     foldername = "folder"
 
@@ -81,6 +81,7 @@ class Simulation:  #pylint: disable=R0903
                        record_entities_period=10,
                        foldername="folder"):
         """ Set options that determine I/O """
+
         self.interactive = interactive
         self.record_language = record_language
         self.record_language_period = record_language_period
