@@ -76,9 +76,9 @@ class Simulation:  #pylint: disable=R0903
     def set_io_options(self,
                        interactive=False,
                        record_language=True,
-                       record_language_period=100,
+                       record_language_period=1,
                        record_entities=True,
-                       record_entities_period=10,
+                       record_entities_period=1,
                        foldername="folder"):
         """ Set options that determine I/O """
 
@@ -279,10 +279,10 @@ class Simulation:  #pylint: disable=R0903
             info_file = open(self.foldername + "/info.txt", "w")
             info_file.writelines("\n".join([
                 "Num Epochs: " + str(self.num_epochs),
-                "Num Cycles:" + str(self.num_cycles),
-                "Num Entities:" + str(self.num_entities),
+                "Num Cycles: " + str(self.num_cycles),
+                "Num Entities: " + str(self.num_entities),
                 "Num Generations:" + str(self.num_generations),
-                "Language Type:" + self.language_type
+                "Language Type: " + self.language_type
             ]))
             info_file.close()
 
