@@ -4,6 +4,7 @@ Analysis module used for plotting graphs of the simulation
 
 import matplotlib.pyplot as plt
 from matplotlib import style
+import sys
 
 
 class Plotter:
@@ -52,7 +53,7 @@ def plotOne():
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
     for language_type in ["none", "evolved", "external"]:
-        energies_file = open("output-1/" + language_type + ".txt", "r")
+        energies_file = open("output-50/" + language_type + ".txt", "r")
         average_energies = []
         lines = energies_file.readlines()
         energies_file.close()
@@ -66,13 +67,14 @@ def plotOne():
     plt.show()
 
 
-def plotTen():
+def plotTen(foldername):
     fig = plt.figure()
     for i in range(10):
         ax = fig.add_subplot(5, 2, i + 1)
         for language_type in ["none", "evolved", "external"]:
             energies_file = open(
-                "output/" + language_type + str(i) + "/energies.txt", "r")
+                foldername + "/" + language_type + str(i) + "/energies.txt",
+                "r")
             average_energies = []
             lines = energies_file.readlines()
             energies_file.close()
@@ -86,7 +88,7 @@ def plotTen():
     plt.show()
 
 
-def plotAverage():
+def plotAverage(foldername):
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
     for language_type in ["none", "evolved", "external"]:
@@ -94,7 +96,8 @@ def plotAverage():
         totalNum = 1001
         for i in range(10):
             energies_file = open(
-                "output/" + language_type + str(i) + "/energies.txt", "r")
+                foldername + "/" + language_type + str(i) + "/energies.txt",
+                "r")
             lines = energies_file.readlines()
             if len(lines) < totalNum:
                 totalNum = len(lines)
@@ -128,7 +131,6 @@ def plotLanguageDistributions(foldername, generations):
 
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    plotAverage()
-    plotTen()
+    plotAverage(str(sys.argv[1]))
     #for j in range(10):
-    #    plotLanguageDistributions("output/evolved"+str(j), [i * 100 for i in range(10)])
+    #    plotLanguageDistributions(str(sys.argv[1]) + "/evolved"+str(j), [i * 100 for i in range(10)])

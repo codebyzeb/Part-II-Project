@@ -9,6 +9,9 @@ return the final energy of the initial entities given.
 import math
 import os
 import random
+import pickle
+
+from enum import Enum
 
 from multiprocessing import Pool
 
@@ -18,7 +21,15 @@ from simulating.entity import NeuralEntity
 from simulating.environment import Environment
 from simulating import environment
 from simulating.entity import bits_to_array
-from simulating.options import Options
+#from simulating.options import Options
+
+
+class Language(Enum):
+    """ Represent possible types of languages """
+
+    NONE = "None"
+    EXTERNAL = "External"
+    EVOLVED = "Evolved"
 
 
 class Simulation:  #pylint: disable=R0903
@@ -28,20 +39,56 @@ class Simulation:  #pylint: disable=R0903
         num_epochs: The number of epochs to run
         num_cycles: The number of time steps in each cycle
         num_entities: The number of entities in the population
+        num_generations: The number of generations to run the simulation for
     """
 
+    # Simulation loop parameters
     num_epochs = 0
     num_cycles = 0
     num_entities = 0
     num_generations = 0
+    language_type = Language.NONE
 
-    def __init__(self, epochs, cycles, population_size, generations):
+    # Genetic algorithm parameters
+    mutate_percentage = 0.1
+    percentage_keep = 0.2
+
+    # I/O parameters
+    interactive = False
+    threading = True
+
+    record_language = True
+    record_language_period = 100
+
+    record_entities = True
+    record_entities_period = 10
+
+    foldername = "folder"
+
+    def __init__(self, epochs, cycles, population_size, generations,
+                 language_type):
         self.num_epochs = epochs
         self.num_cycles = cycles
         self.num_entities = population_size
         self.num_generations = generations
+        self.language_type = language_type
 
-    def run_single(self, entity, options, population=[], viewer=False):
+    def set_io_options(self,
+                       interactive=False,
+                       record_language=True,
+                       record_language_period=100,
+                       record_entities=True,
+                       record_entities_period=10,
+                       foldername="folder"):
+        """ Set options that determine I/O """
+        self.interactive = interactive
+        self.record_language = record_language
+        self.record_language_period = record_language_period
+        self.record_entities = record_entities
+        self.record_entities_period = record_entities_period
+        self.foldername = foldername
+
+    def run_single(self, entity, population=[], viewer=False):
         """ Runs a single simulation for one entity
 
         Runs num_epochs epochs, each of which contains num_cycles time steps.
@@ -83,18 +130,18 @@ class Simulation:  #pylint: disable=R0903
 
                 # Get audio signal according to language type
                 signal = (0.5, 0.5, 0.5)
-                if options.isExternal():
+                if self.language_type == Language.EXTERNAL:
                     # Externally imposed language
                     signal = (1, 0, 0) if (environment.is_edible(
                         env.get_cell(mush_pos))) else (0, 1, 0)
-                elif options.isEvolved():
+                elif self.language_type == Language.EVOLVED:
                     # A partner entity (which can see the mushroom properties)
                     # communicates to this entity
                     partner_entity = random.choice(population)
                     _, partner_vocal = partner_entity.behaviour(
                         angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
                     signal = bits_to_array(partner_vocal, 3)
-                    if options.interactive:
+                    if self.interactive:
                         print("Partner vocal:", partner_vocal)
                         print("Partner weights:", partner_entity.parameters)
 
@@ -145,85 +192,130 @@ class Simulation:  #pylint: disable=R0903
             env.place_entity()
         return entity
 
-    def run_population(self, options):
+    def start(self):
+        """ Run a population of neural entities from generation 0
+        """
+
+        # Generate an initial population of neural entities
+        entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
+        self.run_population(entities)
+
+    def start_from_generation(self, generation):
+        """ Run a previously-saved population of neural entities
+
+        Args:
+            generation: The generation to load from
+        """
+
+        filename = self.foldername + "/populations/generation" + str(
+            generation) + ".p"
+
+        entities = pickle.load(open(filename, "rb"))
+        self.run_population(entities, generation)
+
+    def run_population(self, entities, start_generation=0):
         """ Run a population of entities without any energies
 
         Loop for num_generations evolutionary steps. At each step,
         run a single simulation for each entity, choose the best 20
         in terms of fitness and let them asexually reproduce for the
         next generation.
-
-        Args:
-            filename: Filename to save average energies to
-            language_type: Which type of language the entities should use
-            interactive (bool): If true, prints debugging information and pauses
-            at each step.
-            record_language (bool): Whether or not to record the language used every
-            100 generations
-
         """
 
-        # Plotter and file to plot and save energy values
-        plotter = Plotter() if options.interactive else None
-        if not os.path.exists(options.foldername):
-            os.makedirs(options.foldername)
-        energy_file = options.foldername + "/energies.txt"
-        open(energy_file, "w").close()
-
-        # First, generate the initial population of neural entities
-        entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
+        # Initialise files and plotter for simulation I/O
+        plotter = self.initialise_io()
 
         # Run evolution loop
-        for generation in range(self.num_generations):
+        for generation in range(start_generation, self.num_generations + 1):
 
             # For each entity, create a list of the other entities for the Evolved language
             populations = [[] for i in range(len(entities))]
-            if options.isEvolved():
+            if self.language_type == Language.EVOLVED:
                 for i in range(len(entities)):
                     populations[i] = (entities[0:i] +
                                       entities[i + 1:len(entities)])
 
             # Run a simulation for each entity
-            if (options.threading):
+            if (self.threading):
                 with Pool() as pool:
-                    entities = pool.starmap(
-                        self.run_single,
-                        zip(entities, [options] * len(entities), populations))
+                    entities = pool.starmap(self.run_single,
+                                            zip(entities, populations))
             else:
                 for i, entity in enumerate(entities):
-                    self.run_single(entity, options, populations[i])
+                    self.run_single(entity, populations[i])
 
             # Sort the entities by final energy value
             entities.sort(key=lambda entity: entity.energy, reverse=True)
 
-            # Get average energy
-            average_energy = sum([entity.energy
-                                  for entity in entities]) / len(entities)
+            # Do I/O including writing to files and displaying interactive information
+            self.io(entities, generation, populations, plotter)
 
-            # Save the average energy values
-            with open(energy_file, "a") as out:
-                out.write(str(average_energy) + "\n")
-
-            # If generation is a multiple of 100, record the language
-            if options.record_language and generation % 100 == 0:
-                self.save_language(entities, options.foldername, generation)
-
-            # Run interactive menu and plot the average energy over time
-            if options.interactive:
-                plotter.add_point_and_update(generation, average_energy)
-                self.interactive_viewer(options, generation, entities,
-                                        populations, average_energy)
-
-            # Select the best 20% to reproduce for the next generation
-            best_entities = entities[:math.ceil(self.num_entities / 5)]
+            # Finally, select the best 20% to reproduce for the next generation
+            best_entities = entities[:math.ceil(self.num_entities *
+                                                self.percentage_keep)]
             entities = [
-                child for entity in best_entities
-                for child in entity.reproduce(5, 0.1)
+                child
+                for entity in best_entities for child in entity.reproduce(
+                    int(1 / self.percentage_keep), self.mutate_percentage)
             ]
 
     skip_interactive_count = 0
 
-    def interactive_viewer(self, options, generation, entities, populations,
+    def initialise_io(self):
+        """ Create the neccessary plotter and folders for I/O
+        """
+        plotter = Plotter() if self.interactive else None
+        if not os.path.exists(self.foldername):
+            os.makedirs(self.foldername)
+        if not os.path.exists(self.foldername + "/populations"):
+            os.makedirs(self.foldername + "/populations")
+        if not os.path.exists(self.foldername + "/language"):
+            os.makedirs(self.foldername + "/language")
+        energy_file = self.foldername + "/energies.txt"
+        open(energy_file, "w").close()
+
+        if self.record_language:
+            info_file = open(self.foldername + "/info.txt", "w")
+            info_file.writelines("\n".join([
+                "Num Epochs: " + str(self.num_epochs),
+                "Num Cycles:" + str(self.num_cycles),
+                "Num Entities:" + str(self.num_entities),
+                "Num Generations:" + str(self.num_generations),
+                "Language Type:" + self.language_type
+            ]))
+            info_file.close()
+
+        return plotter
+
+    def io(self, entities, generation, populations, plotter):
+        """ Write to files and display the plotter and interactive information
+        for the simulation
+        """
+        # Get average energy
+        average_energy = sum([entity.energy
+                              for entity in entities]) / len(entities)
+
+        # Save the average energy values
+        with open(self.foldername + "/energies.txt", "a") as out:
+            out.write(str(average_energy) + "\n")
+
+        # If generation is a multiple of the record_language_period
+        # option, record the language
+        if self.record_language and generation % self.record_language_period == 0:
+            self.save_language(entities, generation)
+
+        # If generation is a multiple of the save_entities_period
+        # option, save the population
+        if self.record_entities and generation % self.record_entities_period == 0:
+            self.save_entities(entities, generation)
+
+        # Run interactive menu and plot the average energy over time
+        if self.interactive:
+            plotter.add_point_and_update(generation, average_energy)
+            self.interactive_viewer(generation, entities, populations,
+                                    average_energy)
+
+    def interactive_viewer(self, generation, entities, populations,
                            average_energy):
         """ At each generation, display information about the simulation
 
@@ -263,10 +355,7 @@ class Simulation:  #pylint: disable=R0903
                 if if_yes == "yes":
                     energy = entities[i].energy
                     entities[i].energy = 0
-                    self.run_single(entities[i],
-                                    options,
-                                    populations[i],
-                                    viewer=True)
+                    self.run_single(entities[i], populations[i], viewer=True)
                     entities[i].energy = energy
             elif len(usr_input) == 0:
                 loop_interactive = False
@@ -276,7 +365,7 @@ class Simulation:  #pylint: disable=R0903
             else:
                 print("INVALID INPUT\n")
 
-    def save_language(self, entities, foldername, generation):
+    def save_language(self, entities, generation):
         """
         Given a group of entities at a certain generation, performs a naming task
         for each entity to get a sample of the language used by the entities
@@ -289,12 +378,22 @@ class Simulation:  #pylint: disable=R0903
             edible, poisonous = self.naming_task(entity)
             edible_samples.extend(edible)
             poisonous_samples.extend(poisonous)
-        with open(foldername + "/edible" + str(generation) + ".txt",
-                  "w") as out:
+        with open(
+                self.foldername + "/language/edible" + str(generation) +
+                ".txt", "w") as out:
             out.write("\n".join([str(s) for s in edible_samples]))
-        with open(foldername + "/poisonous" + str(generation) + ".txt",
-                  "w") as out:
+        with open(
+                self.foldername + "/language/poisonous" + str(generation) +
+                ".txt", "w") as out:
             out.write("\n".join([str(s) for s in poisonous_samples]))
+
+    def save_entities(self, entities, generation):
+        """
+        Saves the current group of entities to a binary file
+        """
+        filename = self.foldername + "/populations/generation" + str(
+            generation) + ".p"
+        pickle.dump(entities, open(filename, 'wb'))
 
     def naming_task(self, entity):
         """
