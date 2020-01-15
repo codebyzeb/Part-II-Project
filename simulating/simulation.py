@@ -31,6 +31,15 @@ class Language(Enum):
     EXTERNAL = "External"
     EVOLVED = "Evolved"
 
+    def fromString(self, language_type):
+        """ Returns language from a string """
+        if language_type == "Evolved":
+            return self.EVOLVED
+        elif language_type == "External":
+            return self.EXTERNAL
+        else:
+            return self.NONE
+
 
 class Simulation:  #pylint: disable=R0903
     """ Represents a simulation environment for a population of entities.
@@ -71,7 +80,7 @@ class Simulation:  #pylint: disable=R0903
         self.num_cycles = cycles
         self.num_entities = population_size
         self.num_generations = generations
-        self.language_type = language_type
+        self.language_type = self.language_type.fromString(language_type)
 
     def set_io_options(self,
                        interactive=False,
@@ -282,7 +291,7 @@ class Simulation:  #pylint: disable=R0903
                 "Num Cycles: " + str(self.num_cycles),
                 "Num Entities: " + str(self.num_entities),
                 "Num Generations:" + str(self.num_generations),
-                "Language Type: " + self.language_type
+                "Language Type: " + str(self.language_type)
             ]))
             info_file.close()
 
