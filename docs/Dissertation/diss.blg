@@ -1,49 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2019)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: diss.aux
-The style file: plain.bst
+The style file: apalike.bst
 Database file #1: refs.bib
-Warning--entry type for "Moore95" isn't style-file defined
---line 8 of file refs.bib
-You've used 2 entries,
-            2118 wiz_defined-function locations,
-            508 strings with 4178 characters,
-and the built_in function-call counts, 432 in all, are:
-= -- 36
-> -- 14
-< -- 0
-+ -- 6
+You've used 1 entry,
+            1935 wiz_defined-function locations,
+            480 strings with 3857 characters,
+and the built_in function-call counts, 403 in all, are:
+= -- 40
+> -- 13
+< -- 1
++ -- 4
 - -- 4
-* -- 16
-:= -- 79
-add.period$ -- 5
-call.type$ -- 2
+* -- 35
+:= -- 73
+add.period$ -- 3
+call.type$ -- 1
 change.case$ -- 7
-chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 19
-empty$ -- 45
-format.name$ -- 4
-if$ -- 90
-int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 2
-newline$ -- 12
-num.names$ -- 4
-pop$ -- 17
+chr.to.int$ -- 1
+cite$ -- 1
+duplicate$ -- 14
+empty$ -- 29
+format.name$ -- 7
+if$ -- 76
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 3
+pop$ -- 4
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 7
 quote$ -- 0
-skip$ -- 14
+skip$ -- 12
 stack$ -- 0
-substring$ -- 10
-swap$ -- 2
+substring$ -- 31
+swap$ -- 1
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 6
 warning$ -- 0
 while$ -- 4
-width$ -- 3
-write$ -- 20
-(There was 1 warning)
+width$ -- 0
+write$ -- 15
