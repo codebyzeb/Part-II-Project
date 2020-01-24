@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+\usepackage{a4wide}
+\usepackage[vmargin=15mm, hmargin=15mm]{geometry} 
+\usepackage{datetime}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[svgnames]{xcolor}
+\hypersetup{
+  colorlinks,
+  urlcolor=Blue}
+
+\newcommand{\al}{$<$}
+\newcommand{\ar}{$>$}
+\newcommand{\sups}{\textsuperscript}
+\newcommand{\belgianspacing}{\frenchspacing}
+
+\parindent 0pt
+\parskip 6pt
+
+\begin{document}
+
+\belgianspacing
+
+\thispagestyle{empty}
+
+%\rightline{\large\emph{Z\'ebulon Goriely}}
+%\medskip
+%\rightline{\large\emph{Queens'}}
+%\medskip
+%\rightline{\large\emph{zg258}}
+
+%\vfil
+
+\centerline{\large Computer Science Part II Project Progress Report}
+\vspace{0.1in}
+\centerline{\Large\bf Simulating Language Learning and Evolution}
+\vspace{0.1in}
+\centerline{\large {\bf{Z\'ebulon Goriely ---  zg258@cam.ac.uk}}}
+\vspace{0.1in}
+\newdate{proposaldate}{24}{01}{2020}
+\centerline{\large {\displaydate{proposaldate}}}
+ 
+ \vspace{0.3in}
+ 
+%\vfil
+
+{\bf Project Supervisor:} {Prof. Paula Buttery and Dr. Andrew Caines}
+
+{\bf Director of Studies:}  {Prof. Alastair Beresford}
+
+{\bf Overseers:} {Prof. Pietro Lio’} and {Dr. Robert Mullins}
+
+\section*{Review of Schedule}
+
+As of writing this report I am currently on schedule. So far I have accomplished almost all of the tasks I intended to complete by this stage (as planned in my timetable). The only tasks I have not completed are those related to the actual writing of my dissertation; by now I had planned to have a draft of the first two sections but at the moment I only have a bullet-point list for those sections.
+
+\section*{Unexpected Difficulties}
+
+One of the difficulties I faced was in trying to replicate the findings of the paper I am referencing. The paper was written 20 years ago and there are some details missing; they do not describe the exact structure of the neural network they use and there is little justification for the constants they have chosen. I have decided to talk about this in my dissertation and present different alternatives to show that they may have been selective in their findings.
+
+\section*{Accomplishments}
+
+I have completed all of the tasks concerning the implementation of the simulation. The simulation environment is populated by mushrooms (edible and poisonous). Entities navigate this environment and are controlled by feed-forward neural networks. A genetic algorithm operates on a population of entities; selecting the fittest to reproduce to create the next generation of entities. I have implemented three different populations to compare; one with no language, one with an externally provided language and one with a language that evolves through the genetic algorithm.
+
+I have also produced analysis tools to evaluate this simulation; allowing me to plot fitness of the populations over time, investigate the behaviour of individual entities, examine the signals used when communicating and calculate the Quality Index of the language produced.
+
+Having completed my core objectives and having satisfied my success criteria, I now plan to begin writing my dissertation and will start to explore extensions to my project.
+
+ \end{document}
+
+
