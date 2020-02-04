@@ -35,10 +35,9 @@ class Language(Enum):
         """ Returns language from a string """
         if language_type == "Evolved":
             return self.EVOLVED
-        elif language_type == "External":
+        if language_type == "External":
             return self.EXTERNAL
-        else:
-            return self.NONE
+        return self.NONE
 
 
 class Simulation:  #pylint: disable=R0903
@@ -151,7 +150,7 @@ class Simulation:  #pylint: disable=R0903
                     _, partner_vocal = partner_entity.behaviour(
                         angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
                     signal = bits_to_array(partner_vocal, 3)
-                    if self.interactive:
+                    if viewer:
                         print("Partner vocal:", partner_vocal)
                         print("Partner weights:", partner_entity.parameters)
 
@@ -246,7 +245,7 @@ class Simulation:  #pylint: disable=R0903
                                       entities[i + 1:len(entities)])
 
             # Run a simulation for each entity
-            if (self.threading):
+            if self.threading:
                 with Pool() as pool:
                     entities = pool.starmap(self.run_single,
                                             zip(entities, populations))

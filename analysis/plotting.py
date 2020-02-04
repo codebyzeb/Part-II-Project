@@ -4,6 +4,7 @@ Analysis module used for plotting graphs of the simulation
 
 import matplotlib.pyplot as plt
 from matplotlib import style
+from scipy.stats import pearsonr
 import sys
 
 
@@ -142,7 +143,7 @@ def get_QI(foldername, generations, k=1):
         }
         # Create production table, storing the frequencies of each signal
         for language in production_table:
-            with open(foldername + "/" + language + str(gen) + ".txt",
+            with open(foldername + "/language/" + language + str(gen) + ".txt",
                       "r") as sample_file:
                 samples = [int(sample) for sample in sample_file.readlines()]
                 for sample in samples:
@@ -150,7 +151,7 @@ def get_QI(foldername, generations, k=1):
                 for i in range(8):
                     production_table[language][i] /= len(samples)
 
-        print(production_table)
+        #print(production_table)
 
         # Calculate the dispersion values
         d_edible = sum([
@@ -166,20 +167,30 @@ def get_QI(foldername, generations, k=1):
             abs(production_table["edible"][i] -
                 production_table["poisonous"][i]) for i in range(8)
         ]) - k * min(d_edible, d_poisonous)
-        qis.append(qi * 100)
+        qis.append(qi * 100 / 3.75)
+
     return qis
 
 
 def frequency_and_qi(foldername, generations):
+
+    # Get QI scores for each generation
     qis = get_QI(foldername, generations)
-    fig = plt.figure()
-    ax1 = fig.add_subplot(1, 1, 1)
+
+    # Get fitness scores
     energies_file = open(foldername + "/energies.txt", "r")
     average_energies = []
     lines = energies_file.readlines()
     energies_file.close()
     for line in lines:
         average_energies.append(float(line))
+
+    # Calculate correlation
+    print("Correlation:", pearsonr(average_energies, qis))
+
+    # Create figure
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 1, 1)
     ax1.plot(list(range(len(average_energies))),
              average_energies,
              label="average energy",
@@ -191,7 +202,7 @@ def frequency_and_qi(foldername, generations):
 
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    #plotAverage(str(sys.argv[1]))
+    #plotTen(str(sys.argv[1]))
     #for j in range(10):
-    #    plotLanguageDistributions(str(sys.argv[1]) + "/evolved"+str(j), [i * 100 for i in range(11)])
-    frequency_and_qi(str(sys.argv[1]), [i * 100 for i in range(10)])
+    #    plotLanguageDistributions(str(sys.argv[1]) + "/Evolved" + str(j) + "/language/", [i * 100 for i in range(11)])
+    frequency_and_qi(str(sys.argv[1]), [i for i in range(1001)])
