@@ -2,4 +2,4 @@
 
 [![Build Status](https://travis-ci.org/ZGoriely/Part-II-Project.svg?branch=master)](https://travis-ci.org/ZGoriely/Part-II-Project)
 
-My third-year project for my dissertation at the University of Cambridge.
+My project and dissertation for my third-year project at the University of Cambridge.
