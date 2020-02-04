@@ -6,6 +6,10 @@
 \usepackage{verbatim}
 \usepackage{docmute}   % only needed to allow inclusion of proposal.tex
 \usepackage{natbib}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{textcomp}
 
 \raggedbottom                           % try to avoid widows and orphans
 \sloppy
@@ -13,6 +17,7 @@
 \clubpenalty1000%
 \widowpenalty1000%
 \parindent 0pt
+\parskip 6pt
 
 \renewcommand{\baselinestretch}{1.1}    % adjust line spacing to make
                                         % more readable
@@ -62,27 +67,9 @@ by \texttt{detex diss.tex | tr -cd '0-9A-Za-z $\tt\backslash$n' | wc -w}
 
 \section*{Original Aims of the Project}
 
-- max 100 words
-
-- Investigate evolutionary advantage of language
-
-- Do this by implementing a simulation of a population of neural nets in a toy mushroom world
-
-- Compare the fitness of three species; one without language, one with an evolved language and one with an externally imposed language 
-
-
 Language has evolved and therefore probably gave an evolutionary advantage to the individuals that exhibited it. According to \citet{Cangelosi1998}, it is difficult to investigate the evolutionary origin of language and the selective pressures that may have originated language due to the limited evidence available. They propose using computer simulations of evolutionary scenarios to investigate this. In the paper referenced, they describe a simulated toy world where agents controlled by neural networks interact with an environment of mushrooms that are edible and poisonous. Exploring this simulation is the basis of my project.
 
 \section*{Work Completed}
-
-- max 100 words
-
-- Implemented the simulation capable of hosting the three population types
-
-- Genetic algorithm, feed-forward neural networks
-
-- Graphing etc.
-
 
 I implemented the mushroom-world simulation and explored three populations of feed-forward neural networks; one without language, one with an externally imposed language and one with an evolved language. To simulate evolution, I implemented a genetic algorithm to allow the fittest members of each generation to reproduce. The state of the simulation was saved at each generation in order plot the fitness of the three populations, plot the quality of the language produced and investigate behavioural tests. To conclude the project, I compared these findings with \citet{Cangelosi1998}.
 
@@ -152,123 +139,278 @@ Paula et al.
 
 \section{Project Overview}
 
-%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preparation
 
 \chapter{Preparation}
 
-\section{Mushroom World}
+\emph{This chapter covers the background to my project in Sections \ref{section:world} to \ref{section:analysis}, then evaluates the requirements for the project in Section \ref{section:requirements}. I discuss the starting point of my project in Section \ref{section:starting} and the software engineering techniques used in Section \ref{section:software}.}
 
-\subsection{Mushrooms}
+\section{Mushroom World}\label{section:world}
 
-- Talk about how mushrooms are represented
+To explore how the introduction of language may affect a population's fitness, we need a simulated environment in which to test these changes. This ``mushroom world'' was described by \cite{Cangelosi1998}, inspired by the use of signals to communicate information about food location and quality present in may species.
 
-- Differences between edible and poisonous mushrooms
+The organisms will live in an environment populated by two different types of mushroom; edible and poisonous. The organisms will reproduce based on their ability to eat edible mushrooms and avoid the poisonous ones. They will need to learn to categorise the two mushrooms and respond accordingly by moving towards and eating the edible mushrooms and moving away from the poisonous mushrooms.
 
-\subsection{Environment}
+To ensure this categorisation isn't trivial for the organisms, the mushrooms will have different properties. Edible mushrooms will resemble each other but won't be identical and likewise for poisonous mushrooms.
 
-- Talk about size of the world, number of mushrooms in the world
+Each organism will live in an environment of $20 \times 20$ cells containing 20 randomly distributed mushrooms; 10 of which are poisonous and 10 of which are poisonous. They will be able to explore this world in 15 epochs of 50 simulation cycles each; in each new epoch the world is 'reset', the position of the entity reset in a new environment with 20 new randomly distributed mushrooms. An example of this world can be seen in Figure \ref{fig:environment}.
 
-- Number of epochs, cycles
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\draw[step=0.5cm,color=gray] (0,0) grid (10,10);
+\node at (6.75,8.25){P};
+\node at (5.75,2.25){P};
+\node at (4.75,5.75){P};
+\node at (6.75,4.25){P};
+\node at (8.75,9.75){P};
+\node at (4.75,7.25){P};
+\node at (2.75,9.75){P};
+\node at (0.25,8.25){P};
+\node at (0.75,5.25){P};
+\node at (7.75,5.75){P};
+\node at (9.75,8.25){E};
+\node at (2.75,9.25){E};
+\node at (9.25,1.25){E};
+\node at (8.75,1.75){E};
+\node at (3.25,4.25){E};
+\node at (2.75,6.25){E};
+\node at (4.25,8.75){E};
+\node at (6.75,7.25){E};
+\node at (7.75,0.75){E};
+\node at (6.25,0.75){E};
+\node at (2.25,5.75){$\blacktriangle$};
+\end{tikzpicture}
+\caption{An organism ($\blacktriangle$) in the simulation environment with edible (E) and poisonous (P) mushrooms.}
+\label{fig:environment}
+\end{figure}
 
-\section{Entities}
+These constants are fairly arbitrarily chosen by Cangelosi and in later sections I will explore the effects of changing them, but for now I can intuitively explain some of these choices. The 15 epochs are used to average out the randomly generated positions of mushrooms so that it is really the behaviour of the organism that is being tested, not the random choice of environment. The 50 simulation cycles along with the specific dimensions of the environment ensures that the organism will likely be able to reach at least one edible mushroom but will unlikely be able to eat all edible mushrooms in time. This encourages productive strategies to search for edible mushrooms within the limited time available. Intuitively, this reflects the limited time that living organisms have to search for food in their lifetimes. A full list of constants can be seen in Table \ref{table:constants}.
 
-- Entities represent animals that eat edible mushrooms
+\section{Entities}\label{section:entities}
 
-\subsection{Feed-Forward Neural Networks}
+In the simulation, organisms are represented by \emph{entities}. Entities can \emph{perceive} their surroundings and \emph{act} accordingly.
 
-- Description of what a neural network is
+The perception is composed of three senses; the entity can sense the \emph{direction} of the nearest mushroom (a sort of `smelling' sense), can see the \emph{properties} of mushrooms it is adjacent to (a `visual' sense) and can receive \emph{signals} from other entities (a 'auditory' sense). The adjacency restriction to the visual sense means that entities without any other signals must approach mushrooms in order to be able to categorise them.
 
-- Description of feeding forward
+The action is composed of two responses; the \emph{movement} of the entity and the \emph{signal} it produces. The movement is restricted to four options; moving one cell forwards, turning 90\textdegree~left, turning 90\textdegree~right and doing nothing. Instead of incorporating some `eat' action, a mushroom will be considered eaten when the entity moves into the cell that the mushroom occupies. The signal is used to communicate information to other entities when we explore adding language to the simulation.
 
-- Description of structure used for these entities
+The simulation should also incorporate evolution; some process by which the fittest entities of a species reproduce to pass on their behaviour to a new generation, with some degree of mutation. This will allow a population's average fitness to improve over many generations. From this abstract description of entities, I can consider how this system may be designed.
 
-\subsection{Genetic Algorithm}
+\subsection{Feed-Forward Neural Networks}\label{section:neural}
 
-- Description of algorithm
+Inspired by the biological neural networks that constitute animal brains, \emph{artificial neural networks} are an appropriate choice for modelling the behaviour of these entities. Neural networks are composed of nodes (artificial neurons) which loosely model the neurons in a biological brain. Each node processes a signal by computing a non-linear function of the sum of the inputs. By organising these nodes into layers, signals can travel through from the input layer to the output layer. This is a \emph{feed-forward} neural network as there are no loops present to allow a signal to traverse a layer multiple times. A \emph{fully-connected} neural network feeds the output of every node in a layer into the input of every node in the next layer. 
 
-- Specific values used for this simulation
+Each node computes an input using a \emph{propagation function} as a weighted sum of the outputs of predecessor nodes, incorporating a \emph{bias} added to the result of the propagation. An \emph{activation function} can then be applied to produce the output of the node. As Cangelosi does not describe which activation function was used in his paper, I will explore the use of three common functions:
 
-- Represents evolution, natural selection, etc.
+\begin{itemize}
+	\item Identity: $f(x) = x$
+	\item Sigmoid: $f(x) = \frac{1}{1+e^{-x}}$
+	\item ReLU\footnote{ReLU stands for Rectified Linear Unit}:	$ f(x) = 
+    \left\{
+        \begin{array}{ll}
+          0~\mathrm{for}~x \leq 0 \\
+          x~\mathrm{for}~x > 0
+        \end{array}
+      \right.
+      $
+\end{itemize}
 
-\subsection{Population types}
+The entities can be represented by a fully-connected feed-forward neural network. The  \emph{perception} of the entity acts as the input of the neural network with the output treated as the \emph{action} chosen by the entity. To increase the computational abilities of the entity, I also include a layer of hidden nodes to allow for more complex decision making (INCLUDE REASON WHY HERE). This structure can be seen in Figure \ref{fig:neuralnet}. By altering the weights and biases used by the network, the entity will respond differently to the perceptual inputs, producing different behaviours. 
 
-- No language
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.6\linewidth]{figs/NeuralNets}
+  \caption{Structure of a fully-connected ANN to control entity behaviour}
+  \label{fig:neuralnet}
+\end{figure}
 
-- External language
+\subsection{Alternative Structures}
 
-- Evolved language
+- talk about linear regression
 
-\section{Evaluation Metrics}
+- talk about svms
+
+- talk about more complex neural networks
+
+\subsection{Genetic Algorithm}\label{section:genetic}
+
+Similarly to how an artificial neural network is a natural implementation for simulating the behaviour of an entity, the \emph{genetic algorithm} is a natural implementation for simulating the population dynamics of a population of such entities. Just as artificial neural networks are inspired by animal brains, the genetic algorithm is inspired by the process of natural selection which is the very process that we want to simulate. 
+
+Generally, a genetic algorithm takes a \emph{population} of candidate solutions to an optimisation problem and evolves the population towards a better solution. Each candidate has a set of properties, a \emph{genetic representation} which can be mutated an altered. The evolution starts from a population of randomly generated individuals and proceeds iteratively. For each \emph{generation}, the \emph{fitness} of each individual is calculated. The more fit individuals are selected and their genomes modified to form a new generation, used in the next iteration.
+
+This maps neatly to our problem. The \emph{population} used by the algorithm is simply a group of entities. The \emph{genetic representation} of the entities is the set of weights and biases used by each neural network. The \emph{fitness} score, $F$ will be calculated according to the number of edible and poisonous mushrooms eaten by the entity during the simulation, $E$ and $P$ respectively:
+
+\[ \mathrm{F} = 10 E- 11 P\]
+
+This rewards entities that eat edible mushrooms and punishes those that eat poisonous mushrooms. The difference in weight between these two scores gives a greater reward to the entities that eat more edible mushrooms than poisonous mushrooms as it punishes the greedy strategy of simply eating as many mushrooms as possible.
+
+Finally, the reproduction occurs by selecting a percentage of the population with the highest fitness score and producing a small set of offspring for each of these individuals by randomly altering a percentage of the weights and biases in the neural network. In \cite{Cangelosi1998}, the top $20\%$ of entities are selected from a population of 100. Each of these entities produces five entities by randomly mutating $10\%$ of their weights and biases, producing a new generation of 100 entities. These introduce two new constants, as described in Table \ref{table:constants}.
+
+\subsection{Population types}\label{section:populations}
+
+To carry out the investigation of whether introducing language to a population increases its fitness, I will implement three different populations in the simulation. As described by \cite{Cangelosi1998}, these three populations differ in how the communication signals are used in the simulation environment. The three population types are:
+
+\begin{itemize}
+	\item No Language
+	\item External Language
+	\item Evolved Language
+\end{itemize}
+
+The population with no language acts as a baseline. The audio input to the neural network controlling the entity is set to a constant and the audio output is ignored. These entities cannot perceive the properties of the mushrooms unless they are adjacent; unlike the other populations they are not assisted by some linguistic signal.
+
+The population with an externally provided language is slightly different. Here, I imagine that at the closest mushroom to the entity, another entity is present and can see the properties of the mushroom, generating an appropriate audio signal for the primary entity. The language is ``externally provided" because I will enforce that one signal is used for edible mushrooms and another is used for poisonous mushrooms without actually involving another entity in the simulation. 
+
+The population with an evolved language is similar to the External Language population, but I will not enforce the use of particular signals. Instead, I will allow the population to derive its own signals. This will be done by pairing the primary entity with another randomly chosen entity at each simulation cycle. This second entity will be given same inputs as the primary entity as well as the properties of the closest mushroom, no matter the distance. This entity labels the mushroom for the primary entity. The audio output of this second entity will be used as the audio input to the primary entity; simulating a one-word utterance.
+
+The differences between these populations can be seen in Figure \ref{fig:populations}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.9\linewidth]{figs/populations}
+  \caption{Differences in simulation structure for the three population types}
+  \label{fig:populations}
+\end{figure}
+
+\begin{table*}[t]
+\centering
+ \begin{tabular}{ r | l | c}
+ \bf{Constant} & \bf{Description} & \bf{Default Value} \\ [0.5ex] 
+ \hline
+dim\_x & The width of the simulation environment & 20 \\
+dim\_y & The height of the simulation environment & 20 \\
+num\_mushroom & The number of mushrooms placed in the environment & 20 \\
+num\_epochs &  Number of epochs for each simulation & 15 \\ 
+num\_cycles & Number of simulation cycles per epoch & 50 \\
+num\_entities & Number of organisms in a population & 100 \\
+num\_generations & Number of times a population will reproduce & 1000 \\
+mutate\_percentage & The percentage of weights to mutate in reproduction & 10 \\
+percentage\_keep & The percentage of organisms chosen to reproduce & 20 \\
+\end{tabular}
+\caption{A description of the constants and default values used for the simulation.}
+\label{table:constants}
+\end{table*}
+
+\section{Simulation Analysis}\label{section:analysis}
 
 \subsection{Generational Fitness}
 
-- 'Fitness' described as average score of all entities for each generation where score is calculated using total number of edible and poisonous mushrooms eaten by the entity
-
-- Plot fitness across 1000 generations for each of the three population types
+As discussed in section \ref{section:genetic}, the fitness score for each entity describes its success in distinguishing between edible and poisonous mushrooms and correctly eating the former and avoiding the later. \cite{Cangelosi1998} plot the average fitness across 1000 generations to compare the three population types discussed in section \ref{section:populations}. This will be the primary way that I compare different runs of the simulation.
 
 \subsection{Efficiency of Language}
 
-- 'Naming experiment' to graph the language used for edible and poisonous mushrooms
+\cite{Cangelosi1998} were also interested in the \emph{efficiency} of the language produced by these organisms. They gave three requirements for a population having an efficient language:
 
-- Describe how QI encapsulates the 'efficiency' of a language
+\begin{enumerate}
+	\item Functionally distinct categories (e.g. mushroom type) are labelled with distinct signals
+	\item A single signal tends to be used to label all instances within a category
+	\item All the individuals in the population tend to use the same signal to label the same category
+\end{enumerate}
 
-- Talk about how we can investigate how language production is linked to cognitive ability to differentiate between mushrooms by looking at language produced by non-speaking populations
+These requirements were based on principles that \cite{Clark1995} argues govern a child's acquisition of a lexicon. To investigate the language produced by different populations, Cangelosi used a ``naming task''. In this controlled experiment, each entity in a population is exposed to the entire set of mushrooms (10 edible and 10 poisonous) in four locations (forward, left, backwards and right). This produces 80 signals per entity. The frequency distribution for the signals produced for edible and poisonous mushrooms by all entities can be plotted and this will be the second way I analyse the simulations.
 
-- Should measure correlation between QI and fitness
+\citet{Cangelosi1998} also described the calculation of a ``Quality Index'' (QI) to describe the efficiency of a language. The QI is calculated as follows:
 
-\section{Requirements Analysis}
+$$d_{\mathrm{poisonous}} = \sum^{8}_{i = 1}{|x_i - x_e|}$$
+$$d_{\mathrm{edible}} = \sum^{8}_{i = 1}{|y_i - y_e|}$$
+$$\mathrm{QI} = \sum^{8}_{i = 1} |x_i - y_i| - k \times \min (d_{\mathrm{poisonous}}, d_{\mathrm{edible}})$$
 
-My project reimplements \citet{Cangelosi1998} soooo
-As such, the requirements of this project are:
+$x_i$ and $y_i$ are the frequencies of signals used for poisonous and edible mushrooms respectively, as calculated from the ``naming task'' and $x_e$ and $y_e$ are the expected percentages in the case of a flat distribution. $k$ is a constant to weight the effect of the internal dispersion values $d_{\mathrm{poisonous}}$ and $d_{\mathrm{edible}}$ and is typically 1.
 
-- Implement simulation environment (mushrooms, cycles,)
+These dispersion values measure the variance of the distribution of signals used for the same category (edible or poisonous). This captures the use of synonyms, as these values are highest when only one signal is used for the category. 
 
-- Implement neural-network entities with genetic algorithm, three populations
+The first part of the QI equation captures the principle of contrast (use of one word for each class of mushrooms) as it is highest when different signals are used for each category. By adding(?) this to the smaller of the two dispersion values, we get a score that captures the idea of an `efficient' language.
 
-- Plot fitness over time
+This will be the third way that I analyse the simulations; in particular I will examine the correlation between language efficiency and population fitness. In particular, it will be interesting to see if a correlation exists in the No Language population, despite not using any form of communication, as this would imply the parallel development of cognitive ability with linguistic ability.
 
-- Plot distributions of signals used for edible and poisonous mushrooms
+LOOK INTO THIS EQUATION - A PLUS MAKES A LOT MORE SENSE
 
-- Calculate QI over time and investigate correlation with fitness 
+\section{Requirements Analysis}\label{section:requirements}
 
-\section{Starting Point}
+My project involves reimplementing the simulation described in sections \ref{section:world} - \ref{section:entities} and analysing this simulation in regards to the three metrics described in section \ref{section:analysis}. The requirements for this project can then be divided into two sections; implementing the simulation and constructing the means of analysis my implementation against the findings in \citet{Cangelosi1998}.
 
-- coded from scratch
+\subsection*{Implementing the Simulation}
 
-- familiar with neural networks from AI course, language theory from Formal Models of Language
+\begin{enumerate}
 
-- familiarised self with genetic algorithm
+\item Have a simulation environment with a world grid populated by poisonous and edible mushrooms. The simulation loop should be divided into regular `epochs'.
 
-\section{Software Engineering}
+\item Have entities capable of navigating the environment, taking actions in each simulation cycle controlled by feedforward neural networks; with the structure described in section \ref{section:neural}.
+
+\item Have a genetic algorithm that runs after all agents complete the simulation, as described in section \ref{section:genetic}.
+
+\item Have three populations, one without language, one with an externally imposed language and one with an evolved language involving speaker-listening pairs, as described in section \ref{section:populations}.
+
+\end{enumerate}
+
+\subsection*{Analysis of the Simulation}
+
+\begin{enumerate}
+
+\item Have plots of the average fitness over the number of generations to compare between the three populations.
+
+\item Have behavioural tests to investigate the behaviour of random individual organisms at specific generations.
+
+\item Have plots the frequency distribution of the different signals produced by the individuals with the evolved language using a `naming task'.
+
+\item Calculate the Quality Index (QI) of the language produced by the population without language and the population with an evolved language to investigate the genetic advantage of producing productive signals. 
+
+\item Investigate the correlation between QI of the language and the fitness of the species to determine if change in the language or in the categorisation skill of the entities affects the linguistic ability.
+
+\end{enumerate}
+
+\section{Starting Point}\label{section:starting}
+
+The implementation of the project is based on \citet{Cangelosi1998} which I familiarised myself with before beginning the project and in the early preporatory phases.
+
+This project builds on concepts of simulations; I had a small amount of experience in programming simulations from an A-Level project in 2016. Before the project, I also read Simulating the Evolution of Language \citep{Cangelosi2002} to give me an overview of the techniques used in this field. 
+
+This project builds on some of the content covered in the Artificial Intelligence course and the Formal Models of Language course form Part 1b. In particular, I had no experience with neural networks before beginning this project and all the code for the project was written from scratch and within the dates of the project.
+
+\section{Software Engineering}\label{section:software}
 
 \subsection{Languages and Libraries}
 
-python, numpy, pytest
+I chose Python for my project due to the ease of programming, my experience with it and the availability of good libraries for numerical analysis and plotting. To avoid code duplication, I made use of a few libraries:
+
+\begin{enumerate}
+ 	\item To perform some scientific computing, I used SciPy\footnote{https://www.scipy.org/}.
+	\item For the plotting of the analysis of the simulation, I used Matplotlib\footnote{https://matplotlib.org/}. 
+	\item For producing unit tests, I used pytest\footnote{https://docs.pytest.org/}.
+\end{enumerate}
 
 \subsection{Project Management}
 
-- Agile
+During implementation, I followed an agile development process. An initial project plan was formulated at the beginning of the project with a list of tasks to complete. These tasks were compiled into a Kanban board, with sections for Todo, In Progress, Testing/Documenting and Completed. My project plan divided the timeline of my project into a series of 2-3 week sprints, each with associated deadlines and milestones. At the beginning of each sprint I selected the tasks to complete in order to meet these deadlines and successfully pass each milestone, often completing additional tasks when work was completed early.
 
-- How I stuck to project plan
+This agile process allowed me to ensure I was on track with my project. In fact, the success criteria proposed at the start of the project was met very early on in the timeline, allowing me to focus on refining the project and work on my extensions. 
 
 \subsection{Version Control}
 
-- github, hardware backups
+For version control, I used Git to track change with a remote repository on GitHub\footnote{https://github.com/}. This served as a backup, allowed me to revert to previous iterations of my code and allowed me to work on multiple computers. In particular, it allowed me to deploy my project to the University's High Performance Computing service for running the simulations, as discussed below. In addition, I also performed hardware backup to a hard drive twice a week.
 
 \subsection{Development tools}
 
-travis, pylint, yapf
+I made use of a number of tools to streamline my development process:
+
+\begin{enumerate}
+	\item I used Travis\footnote{https://travis-ci.org/} for continuous integration. With each commit, a script would automatically run all my unit tests and check my code for correct formatting.
+	\item I used pylint\footnote{https://www.pylint.org/} to lint my code. This allowed me to ensure my code was readable and that I was complying with Google's python style guide\footnote{http://google.github.io/styleguide/pyguide.html}.
+	\item I used yapf\footnote{https://github.com/google/yapf} to format my code consistently. I implemented a git hook to automatically format my code with each commit; the formatting was further checked by my Travis script.
+\end{enumerate}
 
 \subsection{Development environment}
 
-VSCode, Slurm w/ HPC 
+I used Visual Studio Code\footnote{https://code.visualstudio.com/} as a development environment, due to the friendly interface and useful set of plugins that integrated nicely with git, pylint and pytest. 
+
+To run my simulations, I used the University's High Performance Computing service. I created a set of Slurm scripts with a bash script that would allow me to schedule 30 simulations to run at once and independently. The results of these simulations were saved to files that I could copy to my local filesystem over SSH.
 
 \subsection{Code License}
 
-MIT?
+My source code is publicly available on GitHub with a README to explain how to use it. The project is licensed under the MIT license, for free modification and reuse while limiting my liability. It also preserves the copyright notice.
 
-\section{Summary}
+\section{Summary}\label{section:summary}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Implementation
