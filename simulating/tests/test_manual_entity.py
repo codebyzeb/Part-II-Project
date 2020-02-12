@@ -56,4 +56,4 @@ def test_behaviour_output_vocal():
 
     ent = entity.ManualEntity()
     _, vocal = ent.behaviour(0.5, 0b1111100000, (0, 1, 1))
-    assert vocal == (0, 0, 0)
+    assert vocal == [0, 0, 0]

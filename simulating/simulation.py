@@ -20,7 +20,7 @@ from simulating.action import Action
 from simulating.entity import NeuralEntity
 from simulating.environment import Environment
 from simulating import environment
-from simulating.entity import bits_to_array
+from simulating.entity import array_to_bits
 #from simulating.options import Options
 
 
@@ -123,7 +123,11 @@ class Simulation:  #pylint: disable=R0903
             for step in range(self.num_cycles):
                 # Get entity position and closest mushroom
                 entity_pos = env.get_entity_position()
-                _, mush_pos = env.closest_mushroom(entity_pos)
+                try:
+                    mush_pos = env.closest_mushroom(entity_pos)
+                except (environment.MushroomNotFound):
+                    #TODO: COME UP WITH BETTER BEHAVIOUR HERE?
+                    break
 
                 # Eat a mushroom if currently on one
                 if env.entity_position == mush_pos:
@@ -133,25 +137,24 @@ class Simulation:  #pylint: disable=R0903
                         print("EATING MUSHROOM")
 
                 # Calculate the angle and get mushroom properties if close enough
-                angle = env.get_angle(entity_pos, mush_pos)
+                angle = env.get_entity_angle_to_position(mush_pos)
                 mush = env.get_cell(mush_pos) if env.adjacent(
                     entity_pos, mush_pos) else 0
 
                 # Get audio signal according to language type
-                signal = (0.5, 0.5, 0.5)
+                signal = [0.5, 0.5, 0.5]
                 if self.language_type == Language.EXTERNAL:
                     # Externally imposed language
-                    signal = (1, 0, 0) if (environment.is_edible(
-                        env.get_cell(mush_pos))) else (0, 1, 0)
+                    signal = [1, 0, 0] if (environment.is_edible(
+                        env.get_cell(mush_pos))) else [0, 1, 0]
                 elif self.language_type == Language.EVOLVED:
                     # A partner entity (which can see the mushroom properties)
                     # communicates to this entity
                     partner_entity = random.choice(population)
-                    _, partner_vocal = partner_entity.behaviour(
-                        angle, env.get_cell(mush_pos), (0.5, 0.5, 0.5))
-                    signal = bits_to_array(partner_vocal, 3)
+                    _, signal = partner_entity.behaviour(
+                        angle, env.get_cell(mush_pos), [0.5, 0.5, 0.5])
                     if viewer:
-                        print("Partner vocal:", partner_vocal)
+                        print("Partner vocal:", signal)
                         print("Partner weights:", partner_entity.parameters)
 
                 # Get the behaviour of the entity given perceptual inputs
@@ -423,10 +426,10 @@ class Simulation:  #pylint: disable=R0903
         for angle in [0, 0.25, 0.5, 0.75]:
             for mushroom in edible_mushrooms:
                 _, signal = entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))
-                edible_samples.append(signal)
+                edible_samples.append(array_to_bits(signal))
             for mushroom in poisonous_mushrooms:
                 _, signal = entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))
-                poisonous_samples.append(signal)
+                poisonous_samples.append(array_to_bits(signal))
 
         # Return samples
         return edible_samples, poisonous_samples

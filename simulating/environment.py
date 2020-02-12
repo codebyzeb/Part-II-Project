@@ -11,6 +11,10 @@ import random
 
 from simulating.action import Action
 
+# Used for indexing positions
+X = 0
+Y = 1
+
 
 class Direction(Enum):
     """ Abstracts the concept of Direction within the world """
@@ -73,7 +77,7 @@ class Environment:
     mushroom to a cell and printing the world.
 
     Attributes:
-        world: A hashmap reprsentation of the world according to positions of mushroom
+        world: A dictionary representation of the world according to positions of mushroom
         dim_x: The width of the 2D world
         dim_y: The height of the 2D world
         num_poisonous: The number of poisonous mushrooms
@@ -141,7 +145,7 @@ class Environment:
         self.world[pos] = mushroom
 
     def closest_mushroom(self, pos):
-        """ Returns the distance to and distance from the closest mushroom in the world.
+        """ Returns the position to the closest mushroom in the world.
         
         Args:
             pos (int, int): Position searching from.
@@ -156,12 +160,12 @@ class Environment:
         mush_pos = (-1, -1)
         for (i, j) in self.world:
             # Use manhattan distance
-            dist_to_mushroom = abs(pos[0] - i) + abs(pos[1] - j)
+            dist_to_mushroom = abs(pos[X] - i) + abs(pos[Y] - j)
             if dist_to_mushroom < dist:
                 dist = dist_to_mushroom
                 mush_pos = (i, j)
 
-        return dist, mush_pos
+        return mush_pos
 
     def is_mushroom(self, pos):
         """ Returns whether or not there is a mushroom in a given position """
@@ -192,8 +196,8 @@ class Environment:
         """
 
         if action == Action.FORWARDS:
-            x = self.entity_position[0] + self.entity_direction.value[0]
-            y = self.entity_position[1] + self.entity_direction.value[1]
+            x = self.entity_position[X] + self.entity_direction.value[X]
+            y = self.entity_position[Y] + self.entity_direction.value[Y]
             if self.within_bounds((x, y)):
                 self.entity_position = (x, y)
         elif action == Action.LEFT:
@@ -204,6 +208,37 @@ class Environment:
     def get_entity_position(self):
         """ Returns the position of the entity """
         return self.entity_position
+
+    def entity_facing_out(self):
+        """ Returns true if the entity is at the edge of the world and facing out
+        """
+        if self.entity_direction == Direction.NORTH and self.entity_position[
+                Y] == 0:
+            return True
+        if self.entity_direction == Direction.EAST and self.entity_position[
+                X] == self.dim_x - 1:
+            return True
+        if self.entity_direction == Direction.SOUTH and self.entity_position[
+                Y] == self.dim_y - 1:
+            return True
+        if self.entity_direction == Direction.WEST and self.entity_position[
+                X] == 0:
+            return True
+        return False
+
+    def get_entity_angle_to_position(self, pos_to):
+        """ Returns the angle from the entity to a position, from 0 to 1.
+
+        The angle is measured clockwise where 0 is directly forwards.
+
+        Args:
+            pos_to: The goal posision
+        Returns:
+            angle (float): The angle from 0 to 1.
+        """
+
+        return self.get_angle(self.entity_position, pos_to,
+                              self.entity_direction)
 
     # ----- Utility methods ----- #
 
@@ -216,7 +251,7 @@ class Environment:
         """ Return a random available position within the world dimensions
         
         Raises:
-            WorldFull: No space for the entity.
+            WorldFull: No space available
         """
 
         if len(self.world) == self.dim_x * self.dim_y:
@@ -243,30 +278,12 @@ class Environment:
         x2, y2 = pos_b
         return abs(x1 - x2) <= 1 and abs(y1 - y2) <= 1
 
-    def entity_facing_out(self):
-        """ Returns true if the entity is at the edge of the world and facing out
-        """
-        if self.entity_direction == Direction.NORTH and self.entity_position[
-                1] == 0:
-            return True
-        if self.entity_direction == Direction.EAST and self.entity_position[
-                0] == self.dim_x - 1:
-            return True
-        if self.entity_direction == Direction.SOUTH and self.entity_position[
-                1] == self.dim_y - 1:
-            return True
-        if self.entity_direction == Direction.WEST and self.entity_position[
-                0] == 0:
-            return True
-        return False
-
-    def get_angle(self, pos_from, pos_to):
-        """ Returns the angle from one position to another, from 0 to 1.
+    def get_angle(self, pos_from, pos_to, direction):
+        """ Returns the angle from the entity to a position, from 0 to 1.
 
         The angle is measured clockwise where 0 is directly forwards.
 
         Args:
-            pos_from: The starting position
             pos_to: The goal posision
         Returns:
             angle (float): The angle from 0 to 1.
@@ -277,11 +294,11 @@ class Environment:
         if x1 == x2 and y1 == y2:
             return 0
         angle = -math.degrees(math.atan2(y1 - y2, x2 - x1))
-        if self.entity_direction == Direction.NORTH:
+        if direction == Direction.NORTH:
             angle += 90
-        if self.entity_direction == Direction.WEST:
+        if direction == Direction.WEST:
             angle += 180
-        if self.entity_direction == Direction.SOUTH:
+        if direction == Direction.SOUTH:
             angle -= 90
         return (angle % 360) / 360
 
@@ -297,7 +314,7 @@ class Environment:
 
     # ----- String conversion ----- #
 
-    def __str__(self, distances=False):
+    def __str__(self):
         """ Converts the world to a 2D array string representation """
 
         out = []
@@ -305,8 +322,6 @@ class Environment:
             row = []
             for i in range(self.dim_x):
                 c = cell_to_string(self.world.get((i, j), 0))
-                if distances and not self.is_mushroom((i, j)):
-                    c = str(self.closest_mushroom((i, j))[0])
                 if (i, j) == self.entity_position:
                     c = self.entity_direction.to_string()
                 row.append(c)

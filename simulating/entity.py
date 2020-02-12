@@ -96,7 +96,7 @@ class ManualEntity(Entity):
             else:
                 action = Action.RIGHT
 
-        return action, (0, 0, 0)
+        return action, [0, 0, 0]
 
 
 def sigmoid(z):
@@ -177,12 +177,13 @@ class NeuralEntity(Entity):
         final_layer = len(self.parameters) // 2
         cache["A0"] = inputs
 
-        # For each layer, calculate the weight sum (Z) and the activation (A)
+        # For each layer, calculate the weighted sum (Z) and the activation (A)
         for layer in range(1, final_layer):
             cache['Z' +
                   str(layer)] = (np.dot(self.parameters['W' + str(layer)],
                                         cache['A' + str(layer - 1)]) +
                                  self.parameters['b' + str(layer)])
+            # Perform activation function
             cache['A' + str(layer)] = cache['Z' + str(layer)]
 
         # Calculate the final layer using the sigmoid function (or not)
@@ -193,7 +194,13 @@ class NeuralEntity(Entity):
         cache['A' +
               str(final_layer)] = (cache['Z' + str(final_layer)] if linear else
                                    sigmoid(cache['Z' + str(final_layer)]))
-        return cache
+
+        # Return final layer, rounded to 0 or 1
+        outputs = list(
+            map(int, map(round,
+                         list(np.squeeze(cache['A' + str(final_layer)])))))
+
+        return outputs
 
     def reproduce(self, num_offspring, percentage_mutate):
         """ Produce children through asexual reproduction with random mutation
@@ -244,7 +251,7 @@ class NeuralEntity(Entity):
         Args:
             location (float): Location of the nearest mushroom in angle from 0 to 1.
             perception: 10-bit properties of the adjacent mushroom
-            listening: Audio inputs
+            listening (float[]): Audio inputs
         Returns:
             (Action, vocal): An Action to be taken and the vocal response
         """
@@ -257,12 +264,7 @@ class NeuralEntity(Entity):
         inputs = np.array([[inp] for inp in inputs])
 
         # Feed forward through the neural network
-        cache = self.forward_propagation(inputs, linear=False)
-
-        # Get outputs
-        final_layer = len(self.parameters) // 2
-        outputs = list(
-            map(round, list(np.squeeze(cache['A' + str(final_layer)]))))
+        outputs = self.forward_propagation(inputs, linear=False)
 
         # Debug info
         # print("Inputs to neural net: ", inputs)
@@ -279,6 +281,6 @@ class NeuralEntity(Entity):
             action = Action.NOTHING
 
         # Get vocal from outputs
-        vocal = array_to_bits(outputs[2:5])
+        vocal = outputs[2:5]
 
         return action, vocal

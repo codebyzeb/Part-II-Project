@@ -89,8 +89,7 @@ def test_closest_mushroom_returns_in_bounds():
     """
 
     env = Environment(10, 10, 1, 1)
-    dist, pos = env.closest_mushroom((5, 5))
-    assert dist < env.dim_x + env.dim_y
+    pos = env.closest_mushroom((5, 5))
     assert env.within_bounds(pos)
 
 
@@ -272,22 +271,23 @@ def test_entity_facing_out_false():
     assert not env.entity_facing_out()
 
 
-def test_get_angle():
+def test_get_entity_angle_to_position():
     """
     Tests the angle function.
     """
 
     env = Environment(3, 3, 0, 0)
     env.entity_direction = Direction.NORTH
-    assert env.get_angle((1, 1), (1, 1)) == 0
-    assert env.get_angle((1, 1), (1, 0)) == 0
-    assert env.get_angle((1, 1), (2, 0)) == 0.125
-    assert env.get_angle((1, 1), (2, 1)) == 0.25
-    assert env.get_angle((1, 1), (2, 2)) == 0.375
-    assert env.get_angle((1, 1), (1, 2)) == 0.5
-    assert env.get_angle((1, 1), (0, 2)) == 0.625
-    assert env.get_angle((1, 1), (0, 1)) == 0.75
-    assert env.get_angle((1, 1), (0, 0)) == 0.875
+    env.entity_position = (1, 1)
+    assert env.get_entity_angle_to_position((1, 1)) == 0
+    assert env.get_entity_angle_to_position((2, 0)) == 0.125
+    assert env.get_entity_angle_to_position((1, 0)) == 0
+    assert env.get_entity_angle_to_position((2, 1)) == 0.25
+    assert env.get_entity_angle_to_position((2, 2)) == 0.375
+    assert env.get_entity_angle_to_position((1, 2)) == 0.5
+    assert env.get_entity_angle_to_position((0, 2)) == 0.625
+    assert env.get_entity_angle_to_position((0, 1)) == 0.75
+    assert env.get_entity_angle_to_position((0, 0)) == 0.875
 
 
 def test_get_cell_empty():

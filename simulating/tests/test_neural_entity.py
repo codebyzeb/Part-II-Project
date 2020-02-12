@@ -62,7 +62,7 @@ def test_initialise_parameters_size():
     assert ent.parameters["b2"].shape == (5, 1)
 
 
-def test_forward_propogation_cache_size():
+def test_forward_propogation_output_size():
     """
     Test that forward propogation through the entity's
     neural network returns a cache with appropriate weights
@@ -71,11 +71,8 @@ def test_forward_propogation_cache_size():
     ent = entity.NeuralEntity(0, [5])
     inputs = np.array([0.5, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1])
     inputs = np.expand_dims(inputs, 1)
-    cache = ent.forward_propagation(inputs, linear=False)
-    assert len(cache) == 5
-    assert np.array_equal(cache['A0'], inputs)
-    #assert (cache['A1'] >= 0).all()
-    #assert (cache['A2'] >= 0).all() and (cache['A2'] < 1).all()
+    outputs = ent.forward_propagation(inputs, linear=False)
+    assert len(outputs) == 5
 
 
 def test_behaviour_output_correct():
@@ -84,11 +81,13 @@ def test_behaviour_output_correct():
     """
 
     ent = entity.NeuralEntity(0, [5])
-    action, vocal = ent.behaviour(0.4, 0b1111100000, (0, 1, 1))
+    action, vocal = ent.behaviour(0.4, 0b1111100000, [0, 1, 1])
     assert action in [
         Action.FORWARDS, Action.LEFT, Action.RIGHT, Action.NOTHING
     ]
-    assert 0 <= vocal < 8
+    assert len(vocal) == 3
+    for x in vocal:
+        assert x in (0, 1)
 
 
 def test_reproduce():

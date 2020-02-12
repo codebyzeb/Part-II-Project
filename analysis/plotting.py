@@ -151,8 +151,6 @@ def get_QI(foldername, generations, k=1):
                 for i in range(8):
                     production_table[language][i] /= len(samples)
 
-        #print(production_table)
-
         # Calculate the dispersion values
         d_edible = sum([
             abs(frequency - 0.125) for frequency in production_table["edible"]
@@ -166,7 +164,7 @@ def get_QI(foldername, generations, k=1):
         qi = sum([
             abs(production_table["edible"][i] -
                 production_table["poisonous"][i]) for i in range(8)
-        ]) - k * min(d_edible, d_poisonous)
+        ]) + k * min(d_edible, d_poisonous)
         qis.append(qi * 100 / 3.75)
 
     return qis
