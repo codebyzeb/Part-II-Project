@@ -23,7 +23,30 @@
 \BOOKMARK [2][-]{subsection.2.6.6}{Code License}{section.2.6}% 23
 \BOOKMARK [1][-]{section.2.7}{Summary}{chapter.2}% 24
 \BOOKMARK [0][-]{chapter.3}{Implementation}{}% 25
-\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 26
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 27
-\BOOKMARK [0][-]{chapter.5}{Bibliography}{}% 28
-\BOOKMARK [0][-]{appendix.A}{Project Proposal}{}% 29
+\BOOKMARK [1][-]{section.3.1}{High-level Overview}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.2}{Environment}{chapter.3}% 27
+\BOOKMARK [2][-]{subsection.3.2.1}{Mushrooms}{section.3.2}% 28
+\BOOKMARK [2][-]{subsection.3.2.2}{Representation of the World}{section.3.2}% 29
+\BOOKMARK [2][-]{subsection.3.2.3}{Entity Position}{section.3.2}% 30
+\BOOKMARK [2][-]{subsection.3.2.4}{World Initialisation}{section.3.2}% 31
+\BOOKMARK [2][-]{subsection.3.2.5}{Testing}{section.3.2}% 32
+\BOOKMARK [1][-]{section.3.3}{Entities}{chapter.3}% 33
+\BOOKMARK [2][-]{subsection.3.3.1}{Action}{section.3.3}% 34
+\BOOKMARK [2][-]{subsection.3.3.2}{Abstract Specification}{section.3.3}% 35
+\BOOKMARK [2][-]{subsection.3.3.3}{Rule-based Entity}{section.3.3}% 36
+\BOOKMARK [2][-]{subsection.3.3.4}{Neural Network Entity}{section.3.3}% 37
+\BOOKMARK [2][-]{subsection.3.3.5}{Reproduction}{section.3.3}% 38
+\BOOKMARK [1][-]{section.3.4}{Simulation}{chapter.3}% 39
+\BOOKMARK [2][-]{subsection.3.4.1}{Single-Entity Simulation Run}{section.3.4}% 40
+\BOOKMARK [2][-]{subsection.3.4.2}{Genetic Algorithm}{section.3.4}% 41
+\BOOKMARK [2][-]{subsection.3.4.3}{Optimisations}{section.3.4}% 42
+\BOOKMARK [2][-]{subsection.3.4.4}{Interactivity}{section.3.4}% 43
+\BOOKMARK [2][-]{subsection.3.4.5}{Data Recording}{section.3.4}% 44
+\BOOKMARK [1][-]{section.3.5}{Simulation Analysis}{chapter.3}% 45
+\BOOKMARK [2][-]{subsection.3.5.1}{Fitness Graphs}{section.3.5}% 46
+\BOOKMARK [2][-]{subsection.3.5.2}{Language Frequency Distributions}{section.3.5}% 47
+\BOOKMARK [2][-]{subsection.3.5.3}{QI Score}{section.3.5}% 48
+\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 49
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 50
+\BOOKMARK [0][-]{chapter.5}{Bibliography}{}% 51
+\BOOKMARK [0][-]{appendix.A}{Project Proposal}{}% 52

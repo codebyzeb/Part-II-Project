@@ -142,7 +142,7 @@ Paula et al.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preparation
 
-\chapter{Preparation}
+\chapter{Preparation}\label{chapter:preparation}
 
 \emph{This chapter covers the background to my project in Sections \ref{section:world} to \ref{section:analysis}, then evaluates the requirements for the project in Section \ref{section:requirements}. I discuss the starting point of my project in Section \ref{section:starting} and the software engineering techniques used in Section \ref{section:software}.}
 
@@ -238,11 +238,14 @@ The entities can be represented by a fully-connected feed-forward neural network
 
 Similarly to how an artificial neural network is a natural implementation for simulating the behaviour of an entity, the \emph{genetic algorithm} is a natural implementation for simulating the population dynamics of a population of such entities. Just as artificial neural networks are inspired by animal brains, the genetic algorithm is inspired by the process of natural selection which is the very process that we want to simulate. 
 
-Generally, a genetic algorithm takes a \emph{population} of candidate solutions to an optimisation problem and evolves the population towards a better solution. Each candidate has a set of properties, a \emph{genetic representation} which can be mutated an altered. The evolution starts from a population of randomly generated individuals and proceeds iteratively. For each \emph{generation}, the \emph{fitness} of each individual is calculated. The more fit individuals are selected and their genomes modified to form a new generation, used in the next iteration.
+Generally, a genetic algorithm takes a \emph{population} of candidate solutions to an optimisation problem and evolves the population towards a better solution. Each candidate has a set of properties, a \emph{genetic representation} which can be mutated and altered. The evolution starts from a population of randomly generated individuals and proceeds iteratively. For each \emph{generation}, the \emph{fitness} of each individual is calculated. The more fit individuals are selected and their genomes modified to form a new generation, used in the next iteration.
 
 This maps neatly to our problem. The \emph{population} used by the algorithm is simply a group of entities. The \emph{genetic representation} of the entities is the set of weights and biases used by each neural network. The \emph{fitness} score, $F$ will be calculated according to the number of edible and poisonous mushrooms eaten by the entity during the simulation, $E$ and $P$ respectively:
 
-\[ \mathrm{F} = 10 E- 11 P\]
+\begin{equation}
+\label{equation:fitness}
+\mathrm{F} = 10 E- 11 P
+\end{equation}
 
 This rewards entities that eat edible mushrooms and punishes those that eat poisonous mushrooms. The difference in weight between these two scores gives a greater reward to the entities that eat more edible mushrooms than poisonous mushrooms as it punishes the greedy strategy of simply eating as many mushrooms as possible.
 
@@ -334,7 +337,7 @@ My project involves reimplementing the simulation described in sections \ref{sec
 
 \begin{enumerate}
 
-\item Have a simulation environment with a world grid populated by poisonous and edible mushrooms. The simulation loop should be divided into regular `epochs'.
+\item Have a simulation environment with a world grid populated by poisonous and edible mushrooms as described in section \ref{section:world}. The simulation loop should be divided into regular `epochs'.
 
 \item Have entities capable of navigating the environment, taking actions in each simulation cycle controlled by feedforward neural networks; with the structure described in section \ref{section:neural}.
 
@@ -412,14 +415,216 @@ My source code is publicly available on GitHub with a README to explain how to u
 
 \section{Summary}\label{section:summary}
 
+The evolution of language is an interesting problem that can be explored using simulations. In this project I will implement the ``mushroom world'' environment populated by entities controlled by neural networks with a genetic algorithm to model evolution. Three populations will be implemented; one without language, one with an external language and one with an evolved language. By comparing these populations in terms of fitness and language, I will be able to investigate the parallel development of the ability of the entities to categorise mushrooms and their ability to name them.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Implementation
 
 \chapter{Implementation}
 
-\emph{Start with UML, high level overview}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.9\linewidth]{figs/modules}
+  \caption{Core modules for my project}
+  \label{fig:modules}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.9\linewidth]{figs/uml}
+  \caption{UML Diagram for the Simulating Module}
+  \label{fig:uml}
+\end{figure}
 
 \emph{Talk about problems with trying to replicate, not knowing what you set.}
+
+\section{High-level Overview}
+
+The implementation of my project is split into three modules as seen in Figure \ref{fig:modules}. The Simulating module contains all the code relevant to creating the simulation. This covers the ``Implementing the Simulation'' requirements for the project described in section \ref{section:requirements}. The Analysis module contains functions for plotting different graphs and carrying out the ``Analysis of the Simulation'' requirements for the project. Finally, the Experiments module contains a series of functions used for quickly running different variants of the simulation. 
+
+Within the Simulating module, the classes correspond to the core concepts detailed in Chapter 2. A full UML diagram of this module (excluding tests) can be seen in Figure \ref{fig:uml}. The Entity class and subclasses correspond to the entities described in \ref{section:entities}. The Environment class corresponds to the ``mushroom world'' simulation environment described in Section \ref{section:world}. The Simulation class corresponds to the actual simulation, including the genetic algorithm (\ref{section:genetic}) and the different populations (\ref{section:populations}).
+
+The Analysis module contains the code to analyse the simulation. This includes the plotting of generational fitness, language frequency and quality index as described in \ref{section:analysis}.
+
+\section{Environment}
+
+The Environment modules contains the Direction enumeration and the Environment class. These are used to represent the state of the mushroom world including the position of the mushrooms and the entity and the direction that the entity is facing. It contains methods for populating the world with mushrooms, managing the state of the world and querying the world.
+
+\subsection{Mushrooms}\label{section:mushrooms}
+
+Mushrooms are represented as 10-bit integers. Conceptually, each bit corresponds to a binary property of the mushroom. Poisonous mushrooms are represented as the bit-string 0b1111100000 with one randomly-chosen bit flipped. Similarly, edible mushrooms are represented by the bit-string 0b0000011111, again with one bit flipped. This means that edible and poisonous mushrooms may share two or zero bits in the same position.
+
+To quickly generate mushrooms and test if mushrooms are edible or poisonous, I implemented functions \texttt{make\_edible()}, \texttt{make\_poisonous()}, \texttt{is\_edible()} and \texttt{is\_poisonous()}. For efficiency, these are implemented using bit-wise arithmetic.
+
+\subsection{Representation of the World}
+
+The 20x20 mushroom world is stored as a dictionary, mapping from (x,y) coordinates to mushroom values. Since there are at most 20 mushrooms at any point in the simulation, this dictionary holds at most 20 values at once. This data structure is chosen over an array representation as the world is sparse. Since the \texttt{closest\_mushroom()} function is called every simulation frame, we want this to be efficient and it is faster to iterate through 20 keys in a dictionary than through 400 cells in an array. 
+
+Two runtime exceptions are implemented, \texttt{WorldFull} and \texttt{MushroomNotFound}. The methods that throw them are described below. Positions in the world are passed between methods as integer pairs (x, y). For the sake of clarity, the type \texttt{pos} will be used when such a pair is used.
+
+The environment object has the following utility methods for manipulating and querying the status of the world:
+
+\begin{itemize}
+	\item \texttt{random\_position(): pos} --- Returns a random position within the dimensions of the world
+	\item \texttt{random\_available\_position(): pos} --- Calls \texttt{random\_position()} iteratively until an unoccupied position is found. Throws a \texttt{WorldFull} exception if no cell is available
+	\item \texttt{within\_bounds(pos): bool} --- Returns true if the position is within the world
+	\item \texttt{adjacent(pos, pos): bool} --- Returns true if the two passed positions are adjacent
+	\item \texttt{get\_angle(pos, pos, Direction): float} --- Returns the angle from one position to another, measured from 0 to 1 clockwise from the direction given
+	\item \texttt{get\_cell(pos): int} --- Given a position, returns the mushroom at that position or 0 if the cell is empty
+	\item \texttt{clear\_cell(pos): void} --- Removes a mushroom at the position specified and has no effect if the cell is empty
+\end{itemize}
+
+I then implemented the following methods for manipulating mushrooms in the world:
+
+\begin{itemize}
+	\item \texttt{place\_mushroom(int): void} --- Given a mushroom, places it in the world by calling \texttt{random\_available\_position()} and throws WorldFull if there is no space left
+	\item \texttt{closest\_mushroom(int): pos} --- Returns the position of the closest mushroom in the world from a given position, using the manhattan distance
+	\item \texttt{is\_mushroom(pos): bool} --- Returns true if there is a mushroom at the position specified
+\end{itemize}
+
+The \texttt{closest\_mushroom()} method loops through the position keys in the dictionary and for each of these calculates the Manhattan distance. The Manhattan distance is used because it is faster to calculate, it is always an overestimate (or equal to) the Euclidean distance and because the Entity can only move rectilinearly. 
+
+{\renewcommand{\baselinestretch}{0.8}\small
+\begin{verbatim}
+def closest_mushroom(self, pos):
+    """ Returns the position to the closest mushroom in the world.
+    
+    Args:
+        pos (int, int): Position searching from.
+    Raises:
+        MushroomNotFound: No mushrooms found.
+
+    """
+
+    if len(self.world) == 0:
+        raise MushroomNotFound("No Mushrooms in World")
+        
+    dist = self.dim_x + self.dim_y + 1
+    mush_pos = (-1, -1)
+    for (i, j) in self.world:
+        # Use manhattan distance
+        dist_to_mushroom = abs(pos[X] - i) + abs(pos[Y] - j)
+        if dist_to_mushroom < dist:
+            dist = dist_to_mushroom
+            mush_pos = (i, j)
+
+    return mush_pos
+	
+\end{verbatim}
+}
+
+\subsection{Entity Position}
+
+The world also keeps track of the position and direction of the entity within it. This introduces a layer of abstraction between the Entity class and the Environment class; the Entity class is only concerned with the behaviour of the entity independently of the actual representation of its position and movement within the virtual world. The Simulation class acts as an interface between instances of these objects, discussed in section \ref{section:simulation}.
+
+To represent the direction that the entity is facing, I implemented the enumeration \texttt{Direction} that stores the four values \texttt{NORTH, EAST, SOUTH, WEST} along with helper functions \texttt{right()} and \texttt{left()} to return the direction faced when turning right or turning left respectively.
+
+I implemented the following methods for representing the entity in the world:
+
+\begin{itemize}
+	\item \texttt{place\_entity(): void} --- Gives the entity a random position in the world and throws \texttt{WorldFull} if there is no space for the entity
+	\item \texttt{move\_entity(Action): void} --- Given an action, moves or rotates the entity accordingly
+	\item \texttt{get\_entity\_position(): pos} --- Returns the position of the entity in the world
+	\item \texttt{entity\_facing\_out(): bool} --- Returns true if the entity is at the edge of the world and facing out
+	\item \texttt{get\_entity\_angle\_to\_position(pos): float} --- Returns the angle from the entity's position and uses the direction it is facing to return the angle to a given position by calling \texttt{get\_angle}.
+\end{itemize}
+
+When moving the entity, the \texttt{within\_bounds()} method is used to ensure that the entity doesn't move out of the world. The \texttt{entity\_facing\_out()} method is used for an optimisation discussed in section \ref{section:optimisations}.
+
+\subsection{World Initialisation}
+
+An Environment object is created by specifying the dimensions of the world and the number of edible and poisonous mushrooms expected. The initialisation method will then call the \texttt{reset()} method which places mushrooms in the world. This is separated from the initialisation because the world is reset at the start of each of the epochs that an entity experiences and the position and direction of the entity is retained between each epoch.
+
+\subsection{Testing}
+
+Using pytest, I produced a series of unit tests to assert the behaviour of the Environment class. This was done early to ensure that any subsequent refactoring of the code would retain the correct behaviour of the program. This was ensured using Continuous Integration; after every Git commit a Travis Build would runt he test suite and report if any errors occurred.
+
+\section{Entities}
+
+The Entities module contains the Entity class and its two subclasses; ManualEntity and NeuralEntity. Separately, the Action module contains the Action enumeration to describe the possible actions taken by the entity. The full UML diagram can be seen in Figure \ref{fig:uml}.
+
+\subsection{Action}
+
+The entity can take four possible actions at each simulation step which are encapsulated in an enumeration; \texttt{FORWARDS} to move once cell forwards, \texttt{LEFT} to turn 90º left, \texttt{RIGHT} to turn 90º right and \texttt{NONE} to do nothing.
+
+\subsection{Abstract Specification}
+
+The Entity class acts as an empty parent class. As state, it has an \texttt{energy} value which is used to determine the fitness of the entity. The \texttt{eat(int)} method increases this value by 10 if passed an edible mushroom and decreases this value by 11 if passes a poisonous mushroom, according to equation \ref{equation:fitness}. 
+
+The Entity class also defines the method \texttt{behaviour(float, int, float[]): Action, int[]}. This method describes the expected input-output behaviour of entities discussed in section \ref{section:entities}. When passed an angle, a mushroom and an input signal, this method returns an action and an output signal. The angle is passed as a float ranging from 0 to 1. The mushroom's properties are passed as a single integer, as described in section \ref{section:mushrooms}. The input and output communication signals are represented by three bits. The outputted action is an instance of the Action enumeration described above. These inputs and outputs are detailed in Table \ref{table:behaviour}. 
+
+In the Entities class, the \texttt{behaviour} method always returns \texttt{Action.NOTHING} and the vocal signal \texttt{[0,0,0]}.
+
+Note that the inputted and outputted audio signals have different datatypes. All audio signals are three-bit strings (encoding 8 possible signals) so outputted signals are always mapped to three bits. However, for the population without language, we input a constant audio signal \texttt{[0.5, 0.5, 0.5]}, requiring three floats. In the other two populations, the inputted audio signals are always comprised of three bits.
+
+\begin{table*}[t]
+\centering
+ \begin{tabular}{ r | c | c | c}
+ \bf{Signal} & \bf{Datatype} & \bf{Description} & \bf{Input / Output} \\ [0.5ex] 
+ \hline
+location & \texttt{float} & Angle to the nearest mushroom & Input \\
+perception & \texttt{int} & Properties of the adjacent mushroom & Input \\
+listening & \texttt{float[]} & A 3-bit audio signal (heard) & Input \\
+vocal & \texttt{int[]} & A 3-bit audio signal (spoken) & Output \\
+action & \texttt{Action} & The action taken by the Entity & Output \\
+\end{tabular}
+\caption{Inputs and Outputs of the \texttt{behaviour()} method}
+\label{table:behaviour}
+\end{table*}
+
+\subsection{Rule-based Entity}
+
+Before implementing the feed-forward neural networks to control the entities, I created a rule-based entity in the \texttt{ManualEntity} class which extends \texttt{Entity}. It overrides the \texttt{behaviour()} method and implements a simple algorithm to always rotate and move towards the nearest mushroom. On average, this strategy will produce a negative fitness score due to the poisonous mushroom penalty being higher than the edible mushroom reward. This behaviour is not analysed but was useful for the purpose of testing the simulation in the early stages of development due to the deterministic choices made.
+
+\subsection{Neural Network Entity}
+
+Once I had a functional simulation using rule-based entities, I implemented the feed-forward neural network used to control entities and allow their behaviour to evolve over many generations. In section \ref{section:neural} I gave the general structure for the fully-connected neural network I wanted to use to control the behaviour of the entities. Now that I have defined the datatypes for these inputs and outputs, I can produce a more concrete description of this neural network. 
+
+The neural network has fourteen input units. The first unit is the float value \texttt{location} which describes the angle to the closest mushroom. The next ten units describe the bit-string representation of the mushroom the adjacent to the entity. Note that all these values are 0 if the entity is not adjacent to a mushroom (this is controlled by the simulation). The final three units are used for the inputted audio signal. Five hidden units are used, as in \citet{Cangelosi1998}. As discussed in Chapter 2, the paper does not specify the activation functions used in the neural network so I implemented three possible candidates:
+
+\begin{itemize}
+	\item Identity: $f(x) = x$
+	\item Sigmoid: $f(x) = \frac{1}{1+e^{-x}}$
+	\item ReLU: $ f(x) = 
+    \left\{
+        \begin{array}{ll}
+          0~\mathrm{for}~x \leq 0 \\
+          x~\mathrm{for}~x > 0
+        \end{array}
+      \right.
+      $
+\end{itemize}
+
+There are five output units; two of which encode the action taken by the entity (as described above) and the remaining three encode the outputted communication signal (one of eight). The paper states that ``for all output units, continuous values are thresholded to either 0 or 1'' but isn't clear how this thresholding takes place. I have decided to perform a sigmoid activation on the final layer (giving a float between 0 and 1) then rounding the result. The full neural network structure can be seen in Figure \ref{fig:fullneural}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.9\linewidth]{figs/fullneural}
+  \caption{Fully-connected ANN to control entity behaviour}
+  \label{fig:fullneural}
+\end{figure}
+
+\subsection{Reproduction}
+
+\section{Simulation}\label{section:simulation}
+
+\subsection{Single-Entity Simulation Run}
+
+\subsection{Genetic Algorithm}
+
+\subsection{Optimisations}\label{section:optimisations}
+
+\subsection{Interactivity}
+
+\subsection{Data Recording}
+
+\section{Simulation Analysis}
+
+\subsection{Fitness Graphs}
+
+\subsection{Language Frequency Distributions}
+
+\subsection{QI Score}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Evaluation

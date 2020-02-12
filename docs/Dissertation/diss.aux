@@ -28,6 +28,7 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Preparation}{13}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:preparation}{{2}{13}{Preparation}{chapter.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Mushroom World}{13}{section.2.1}\protected@file@percent }
 \newlabel{section:world}{{2.1}{13}{Mushroom World}{section.2.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces An organism ($\blacktriangle $) in the simulation environment with edible (E) and poisonous (P) mushrooms.}}{14}{figure.2.1}\protected@file@percent }
@@ -42,6 +43,7 @@
 \newlabel{fig:neuralnet}{{2.2}{16}{Structure of a fully-connected ANN to control entity behaviour}{figure.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Genetic Algorithm}{16}{subsection.2.2.3}\protected@file@percent }
 \newlabel{section:genetic}{{2.2.3}{16}{Genetic Algorithm}{subsection.2.2.3}{}}
+\newlabel{equation:fitness}{{2.1}{16}{Genetic Algorithm}{equation.2.2.1}{}}
 \citation{Cangelosi1998}
 \citation{Cangelosi1998}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Population types}{17}{subsection.2.2.4}\protected@file@percent }
@@ -77,17 +79,53 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Implementation}{25}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Evaluation}{27}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}High-level Overview}{25}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Environment}{25}{section.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Core modules for my project}}{26}{figure.3.1}\protected@file@percent }
+\newlabel{fig:modules}{{3.1}{26}{Core modules for my project}{figure.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Diagram for the Simulating Module}}{26}{figure.3.2}\protected@file@percent }
+\newlabel{fig:uml}{{3.2}{26}{UML Diagram for the Simulating Module}{figure.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Mushrooms}{26}{subsection.3.2.1}\protected@file@percent }
+\newlabel{section:mushrooms}{{3.2.1}{26}{Mushrooms}{subsection.3.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Representation of the World}{27}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Entity Position}{28}{subsection.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}World Initialisation}{29}{subsection.3.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Testing}{29}{subsection.3.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Entities}{29}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Action}{29}{subsection.3.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Inputs and Outputs of the \texttt  {behaviour()} method}}{30}{table.3.1}\protected@file@percent }
+\newlabel{table:behaviour}{{3.1}{30}{Inputs and Outputs of the \texttt {behaviour()} method}{table.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Abstract Specification}{30}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Rule-based Entity}{30}{subsection.3.3.3}\protected@file@percent }
+\citation{Cangelosi1998}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Neural Network Entity}{31}{subsection.3.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Fully-connected ANN to control entity behaviour}}{32}{figure.3.3}\protected@file@percent }
+\newlabel{fig:fullneural}{{3.3}{32}{Fully-connected ANN to control entity behaviour}{figure.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Reproduction}{32}{subsection.3.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Simulation}{32}{section.3.4}\protected@file@percent }
+\newlabel{section:simulation}{{3.4}{32}{Simulation}{section.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Single-Entity Simulation Run}{32}{subsection.3.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Genetic Algorithm}{32}{subsection.3.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Optimisations}{32}{subsection.3.4.3}\protected@file@percent }
+\newlabel{section:optimisations}{{3.4.3}{32}{Optimisations}{subsection.3.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Interactivity}{32}{subsection.3.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.5}Data Recording}{32}{subsection.3.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Simulation Analysis}{32}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Fitness Graphs}{32}{subsection.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Language Frequency Distributions}{32}{subsection.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}QI Score}{32}{subsection.3.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Evaluation}{33}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibdata{refs}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{29}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{35}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{29}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{35}{chapter.5}\protected@file@percent }
 \bibcite{Cangelosi1998}{{1}{1998}{{Cangelosi and Parisi}}{{}}}
-\bibcite{Clark1995}{{2}{1995}{{Clark}}{{}}}
+\bibcite{Cangelosi2002}{{2}{2002}{{Cangelosi and Parisi}}{{}}}
+\bibcite{Clark1995}{{3}{1995}{{Clark}}{{}}}
 \bibstyle{apalike}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Project Proposal}{33}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Project Proposal}{39}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
