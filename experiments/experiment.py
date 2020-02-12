@@ -85,8 +85,8 @@ def watch_old_simulation(foldername, language_type):
 
 if __name__ == "__main__":
     #run_full_simulations(str(sys.argv[1]))
-    neural_population_debug_simulation_1000("Evolved")
+    #neural_population_debug_simulation_1000("Evolved")
     #neural_population_debug_simulation_5("None")
     #cProfile.run("neural_population_debug_simulation_1()")
-    #neural_population_simulation_1000(
-    #    "output/" + str(sys.argv[2]) + str(sys.argv[1]), str(sys.argv[2]))
+    neural_population_simulation_1000(
+        "output/" + str(sys.argv[2]) + str(sys.argv[1]), str(sys.argv[2]))
