@@ -10,6 +10,7 @@ import math
 import os
 import random
 import pickle
+import copy
 
 from enum import Enum
 
@@ -71,6 +72,8 @@ class Simulation:  #pylint: disable=R0903
     record_entities = True
     record_entities_period = 1
 
+    record_energies = True
+
     foldername = "folder"
 
     def __init__(self, epochs, cycles, population_size, generations,
@@ -87,6 +90,7 @@ class Simulation:  #pylint: disable=R0903
                        record_language_period=1,
                        record_entities=True,
                        record_entities_period=1,
+                       record_energies=True,
                        foldername="folder"):
         """ Set options that determine I/O """
 
@@ -95,6 +99,7 @@ class Simulation:  #pylint: disable=R0903
         self.record_language_period = record_language_period
         self.record_entities = record_entities
         self.record_entities_period = record_entities_period
+        self.record_energies = record_energies
         self.foldername = foldername
 
     def run_single(self, entity, population=[], viewer=False):
@@ -158,30 +163,25 @@ class Simulation:  #pylint: disable=R0903
                         print("Partner weights:", partner_entity.parameters)
 
                 # Get the behaviour of the entity given perceptual inputs
-                action, _ = entity.behaviour(angle, mush, signal)
+                action, out_signal = entity.behaviour(angle, mush, signal)
 
                 # Print debug information
                 if viewer:
-                    print("Epoch:", epoch, "   Cycle:", step)
-                    print(env)
-                    print("Entity energy:", entity.energy)
-                    print("Entity position: (",
-                          entity_pos[0],
-                          ",",
-                          entity_pos[1],
-                          ")",
-                          sep="")
-                    print("Closest mushroom position: (",
-                          mush_pos[0],
-                          ",",
-                          mush_pos[1],
-                          ")",
-                          sep="")
-                    print("Direction: ", env.entity_direction)
-                    print("Angle: ", angle)
-                    print("Mushroom input: ", mush)
-                    print("Signal input: ", signal)
-                    print("Action chosen: ", action)
+                    to_print = "\n".join([
+                        "Epoch: {0}    Cycle: {1}".format(epoch, step),
+                        str(env), "Entity energy: {0}".format(entity.energy),
+                        "Entity position: ({0},{1})".format(
+                            entity_pos[0], entity_pos[1]),
+                        "Closest mushroom position: ({0},{1})".format(
+                            mush_pos[0], mush_pos[1]),
+                        "Direction: {0}".format(env.entity_direction),
+                        "Angle: {0}".format(angle),
+                        "Mushroom input: {0}".format(mush),
+                        "Signal input: {0}".format(signal),
+                        "Action chosen: {0}".format(action),
+                        "Signal output: {0}".format(out_signal)
+                    ])
+                    print(to_print)
                     ##time.sleep(0.1)
                     usr_input = input()
                     if usr_input == chr(27):
@@ -199,7 +199,7 @@ class Simulation:  #pylint: disable=R0903
                 # Finally, do the action
                 env.move_entity(action)
 
-            # After an epoch, reset the world
+            # After an epoch, reset the world and replace the entity
             env.reset()
             env.place_entity()
         return entity
@@ -209,7 +209,7 @@ class Simulation:  #pylint: disable=R0903
         """
 
         # Generate an initial population of neural entities
-        entities = [NeuralEntity(0, [5]) for _ in range(self.num_entities)]
+        entities = [NeuralEntity() for _ in range(self.num_entities)]
         self.run_population(entities)
 
     def start_from_generation(self, generation):
@@ -219,10 +219,7 @@ class Simulation:  #pylint: disable=R0903
             generation: The generation to load from
         """
 
-        filename = self.foldername + "/populations/generation" + str(
-            generation) + ".p"
-
-        entities = pickle.load(open(filename, "rb"))
+        entities = self.load_entities(generation)
         self.run_population(entities, generation)
 
     def run_population(self, entities, start_generation=0):
@@ -283,8 +280,9 @@ class Simulation:  #pylint: disable=R0903
             os.makedirs(self.foldername + "/populations")
         if not os.path.exists(self.foldername + "/language"):
             os.makedirs(self.foldername + "/language")
-        energy_file = self.foldername + "/energies.txt"
-        open(energy_file, "w").close()
+        if self.record_energies:
+            energy_file = self.foldername + "/energies.txt"
+            open(energy_file, "w").close()
 
         if self.record_language:
             info_file = open(self.foldername + "/info.txt", "w")
@@ -308,8 +306,9 @@ class Simulation:  #pylint: disable=R0903
                               for entity in entities]) / len(entities)
 
         # Save the average energy values
-        with open(self.foldername + "/energies.txt", "a") as out:
-            out.write(str(average_energy) + "\n")
+        if self.record_energies:
+            with open(self.foldername + "/energies.txt", "a") as out:
+                out.write(str(average_energy) + "\n")
 
         # If generation is a multiple of the record_language_period
         # option, record the language
@@ -405,7 +404,23 @@ class Simulation:  #pylint: disable=R0903
         """
         filename = self.foldername + "/populations/generation" + str(
             generation) + ".p"
-        pickle.dump(entities, open(filename, 'wb'))
+
+        pickle.dump([copy.deepcopy(entity.parameters) for entity in entities],
+                    open(filename, 'wb'))
+
+    def load_entities(self, generation):
+        """
+        Load a group of entities from a file
+        """
+
+        filename = self.foldername + "/populations/generation" + str(
+            generation) + ".p"
+
+        params = pickle.load(open(filename, "rb"))
+        entities = [NeuralEntity() for _ in range(self.num_entities)]
+        for i, entity in enumerate(entities):
+            entity.parameters = params[i]
+        return entities
 
     def naming_task(self, entity):
         """

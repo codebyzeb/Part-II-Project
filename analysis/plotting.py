@@ -92,7 +92,7 @@ def plotTen(foldername):
 def plotAverage(foldername):
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
-    for language_type in ["none", "evolved", "external"]:
+    for language_type in ["None", "Evolved", "External"]:
         average_energies = [0 for i in range(1001)]
         totalNum = 1001
         for i in range(10):
@@ -200,7 +200,8 @@ def frequency_and_qi(foldername, generations):
 
 if __name__ == "__main__":
     style.use('fivethirtyeight')
-    #plotTen(str(sys.argv[1]))
+    plotTen(str(sys.argv[1]))
+    #plotAverage(str(sys.argv[1]))
     #for j in range(10):
     #    plotLanguageDistributions(str(sys.argv[1]) + "/Evolved" + str(j) + "/language/", [i * 100 for i in range(11)])
-    frequency_and_qi(str(sys.argv[1]), [i for i in range(1001)])
+    #frequency_and_qi(str(sys.argv[1]), [i for i in range(1001)])

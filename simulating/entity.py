@@ -141,12 +141,13 @@ class NeuralEntity(Entity):
     def __init__(self, energy=0, hidden_units=[5]):  #pylint: disable=W0102
         super().__init__(energy)
         # Add 14 input units and 5 output units
+        self.parameters = {}
         self.initialise_parameters([14] + hidden_units + [5])
 
     def initialise_parameters(self, layers_units):
         """ Initialises weights and biases of the neural network.
 
-        Weights are initially set to 0
+        Weights are initially set to random values
 
         Args:
             layer_units: The number of units in each layer
