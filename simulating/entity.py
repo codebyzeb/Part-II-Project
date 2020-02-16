@@ -153,21 +153,21 @@ class NeuralEntity(Entity):
             layer_units: The number of units in each layer
         """
 
-        # for layer in range(1, len(layers_units)):
-        #     # Choose random weights from rectangular distribution [-1, 1]
-        #     self.parameters['W' + str(layer)] = (2 * np.random.random_sample(
-        #         (layers_units[layer], layers_units[layer - 1])) - 1)
-        #     # Choose random biases from rectangular distribution [-1, 1]
-        #     self.parameters['b' + str(layer)] = (2 * np.random.random_sample(
-        #         (layers_units[layer], 1)) - 1)
-
         for layer in range(1, len(layers_units)):
-            # Set all weights to 0
-            self.parameters['W' + str(layer)] = np.zeros(
-                (layers_units[layer], layers_units[layer - 1]))
-            # Set all biases to 0
-            self.parameters['b' + str(layer)] = np.zeros(
-                (layers_units[layer], 1))
+            # Choose random weights from rectangular distribution [-1, 1]
+            self.parameters['W' + str(layer)] = (2 * np.random.random_sample(
+                (layers_units[layer], layers_units[layer - 1])) - 1)
+            # Choose random biases from rectangular distribution [-1, 1]
+            self.parameters['b' + str(layer)] = (2 * np.random.random_sample(
+                (layers_units[layer], 1)) - 1)
+
+        # for layer in range(1, len(layers_units)):
+        #     # Set all weights to 0
+        #     self.parameters['W' + str(layer)] = np.zeros(
+        #         (layers_units[layer], layers_units[layer - 1]))
+        #     # Set all biases to 0
+        #     self.parameters['b' + str(layer)] = np.zeros(
+        #         (layers_units[layer], 1))
 
     def forward_propagation(self, inputs, linear):
         """ Given an input matrix, feeds it forwards through the neural network.
@@ -208,6 +208,7 @@ class NeuralEntity(Entity):
         outputs = list(
             map(int, map(round,
                          list(np.squeeze(cache['A' + str(final_layer)])))))
+        outputs = [1 if x >= 1 else 0 for x in outputs]
 
         return outputs
 
@@ -273,7 +274,7 @@ class NeuralEntity(Entity):
         inputs = np.array([[inp] for inp in inputs])
 
         # Feed forward through the neural network
-        outputs = self.forward_propagation(inputs, linear=False)
+        outputs = self.forward_propagation(inputs, linear=True)
 
         # Debug info
         # print("Inputs to neural net: ", inputs)
