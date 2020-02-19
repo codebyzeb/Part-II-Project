@@ -440,10 +440,10 @@ class Simulation:  #pylint: disable=R0903
         # Get a sample of the language for each mushroom for each of four directions
         for angle in [0, 0.25, 0.5, 0.75]:
             for mushroom in edible_mushrooms:
-                _, signal = entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))
+                _, signal = entity.behaviour(angle, mushroom, [0.5, 0.5, 0.5])
                 edible_samples.append(array_to_bits(signal))
             for mushroom in poisonous_mushrooms:
-                _, signal = entity.behaviour(angle, mushroom, (0.5, 0.5, 0.5))
+                _, signal = entity.behaviour(angle, mushroom, [0.5, 0.5, 0.5])
                 poisonous_samples.append(array_to_bits(signal))
 
         # Return samples

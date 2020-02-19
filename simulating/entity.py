@@ -153,21 +153,21 @@ class NeuralEntity(Entity):
             layer_units: The number of units in each layer
         """
 
-        for layer in range(1, len(layers_units)):
-            # Choose random weights from rectangular distribution [-1, 1]
-            self.parameters['W' + str(layer)] = (2 * np.random.random_sample(
-                (layers_units[layer], layers_units[layer - 1])) - 1)
-            # Choose random biases from rectangular distribution [-1, 1]
-            self.parameters['b' + str(layer)] = (2 * np.random.random_sample(
-                (layers_units[layer], 1)) - 1)
-
         # for layer in range(1, len(layers_units)):
-        #     # Set all weights to 0
-        #     self.parameters['W' + str(layer)] = np.zeros(
-        #         (layers_units[layer], layers_units[layer - 1]))
-        #     # Set all biases to 0
-        #     self.parameters['b' + str(layer)] = np.zeros(
-        #         (layers_units[layer], 1))
+        #     # Choose random weights from rectangular distribution [-1, 1]
+        #     self.parameters['W' + str(layer)] = (2 * np.random.random_sample(
+        #         (layers_units[layer], layers_units[layer - 1])) - 1)
+        #     # Choose random biases from rectangular distribution [-1, 1]
+        #     self.parameters['b' + str(layer)] = (2 * np.random.random_sample(
+        #         (layers_units[layer], 1)) - 1)
+
+        for layer in range(1, len(layers_units)):
+            # Set all weights to 0
+            self.parameters['W' + str(layer)] = np.zeros(
+                (layers_units[layer], layers_units[layer - 1]))
+            # Set all biases to 0
+            self.parameters['b' + str(layer)] = np.zeros(
+                (layers_units[layer], 1))
 
     def forward_propagation(self, inputs, linear):
         """ Given an input matrix, feeds it forwards through the neural network.
