@@ -36,17 +36,21 @@
 \BOOKMARK [2][-]{subsection.3.3.3}{Rule-based Entity}{section.3.3}% 36
 \BOOKMARK [2][-]{subsection.3.3.4}{Neural Network Entity}{section.3.3}% 37
 \BOOKMARK [2][-]{subsection.3.3.5}{Reproduction}{section.3.3}% 38
-\BOOKMARK [1][-]{section.3.4}{Simulation}{chapter.3}% 39
-\BOOKMARK [2][-]{subsection.3.4.1}{Single-Entity Simulation Run}{section.3.4}% 40
-\BOOKMARK [2][-]{subsection.3.4.2}{Genetic Algorithm}{section.3.4}% 41
-\BOOKMARK [2][-]{subsection.3.4.3}{Optimisations}{section.3.4}% 42
-\BOOKMARK [2][-]{subsection.3.4.4}{Interactivity}{section.3.4}% 43
-\BOOKMARK [2][-]{subsection.3.4.5}{Data Recording}{section.3.4}% 44
-\BOOKMARK [1][-]{section.3.5}{Simulation Analysis}{chapter.3}% 45
-\BOOKMARK [2][-]{subsection.3.5.1}{Fitness Graphs}{section.3.5}% 46
-\BOOKMARK [2][-]{subsection.3.5.2}{Language Frequency Distributions}{section.3.5}% 47
-\BOOKMARK [2][-]{subsection.3.5.3}{QI Score}{section.3.5}% 48
-\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 49
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 50
-\BOOKMARK [0][-]{chapter.5}{Bibliography}{}% 51
-\BOOKMARK [0][-]{appendix.A}{Project Proposal}{}% 52
+\BOOKMARK [2][-]{subsection.3.3.6}{Testing}{section.3.3}% 39
+\BOOKMARK [1][-]{section.3.4}{Simulation}{chapter.3}% 40
+\BOOKMARK [2][-]{subsection.3.4.1}{Language}{section.3.4}% 41
+\BOOKMARK [2][-]{subsection.3.4.2}{Initialising the Simulation}{section.3.4}% 42
+\BOOKMARK [2][-]{subsection.3.4.3}{Single-Entity Simulation Run}{section.3.4}% 43
+\BOOKMARK [2][-]{subsection.3.4.4}{Genetic Algorithm}{section.3.4}% 44
+\BOOKMARK [2][-]{subsection.3.4.5}{Running the simulations using HPC}{section.3.4}% 45
+\BOOKMARK [2][-]{subsection.3.4.6}{Optimisations}{section.3.4}% 46
+\BOOKMARK [2][-]{subsection.3.4.7}{Interactivity}{section.3.4}% 47
+\BOOKMARK [2][-]{subsection.3.4.8}{Data Recording}{section.3.4}% 48
+\BOOKMARK [1][-]{section.3.5}{Simulation Analysis}{chapter.3}% 49
+\BOOKMARK [2][-]{subsection.3.5.1}{Fitness Graphs}{section.3.5}% 50
+\BOOKMARK [2][-]{subsection.3.5.2}{Language Frequency Distributions}{section.3.5}% 51
+\BOOKMARK [2][-]{subsection.3.5.3}{QI Score}{section.3.5}% 52
+\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 53
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 54
+\BOOKMARK [0][-]{chapter.5}{Bibliography}{}% 55
+\BOOKMARK [0][-]{appendix.A}{Project Proposal}{}% 56

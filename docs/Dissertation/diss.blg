@@ -5,45 +5,45 @@ The style file: apalike.bst
 Database file #1: refs.bib
 Warning--empty publisher in Cangelosi2002
 Warning--empty publisher in Clark1995
-You've used 3 entries,
+You've used 5 entries,
             1935 wiz_defined-function locations,
-            491 strings with 4046 characters,
-and the built_in function-call counts, 986 in all, are:
-= -- 90
-> -- 33
-< -- 3
-+ -- 10
-- -- 10
-* -- 81
-:= -- 177
-add.period$ -- 7
-call.type$ -- 3
-change.case$ -- 18
-chr.to.int$ -- 3
-cite$ -- 5
-duplicate$ -- 42
-empty$ -- 75
-format.name$ -- 17
-if$ -- 188
+            500 strings with 4227 characters,
+and the built_in function-call counts, 1577 in all, are:
+= -- 144
+> -- 53
+< -- 5
++ -- 16
+- -- 16
+* -- 121
+:= -- 285
+add.period$ -- 13
+call.type$ -- 5
+change.case$ -- 29
+chr.to.int$ -- 5
+cite$ -- 7
+duplicate$ -- 70
+empty$ -- 121
+format.name$ -- 27
+if$ -- 304
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 5
-newline$ -- 16
-num.names$ -- 9
-pop$ -- 23
+missing$ -- 9
+newline$ -- 26
+num.names$ -- 15
+pop$ -- 40
 preamble$ -- 1
-purify$ -- 20
+purify$ -- 33
 quote$ -- 0
-skip$ -- 32
+skip$ -- 52
 stack$ -- 0
-substring$ -- 55
-swap$ -- 3
+substring$ -- 79
+swap$ -- 5
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 14
+type$ -- 22
 warning$ -- 2
-while$ -- 8
+while$ -- 12
 width$ -- 0
-write$ -- 35
+write$ -- 59
 (There were 2 warnings)

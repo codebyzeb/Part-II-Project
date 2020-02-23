@@ -10,8 +10,18 @@ Cangelosi, A. and Parisi, D. (1998).
 Cangelosi, A. and Parisi, D. (2002).
 \newblock {\em {Simulating the Evolution of Language}}.
 
+\bibitem[Cangelosi and Parisi, 2012]{cangelosi2012simulating}
+Cangelosi, A. and Parisi, D. (2012).
+\newblock {\em Simulating the evolution of language}.
+\newblock Springer Science \& Business Media.
+
 \bibitem[Clark, 1995]{Clark1995}
 Clark, E. (1995).
 \newblock {\em {The lexicon in acquisition}}.
+
+\bibitem[Langton, 1997]{langton1997artificial}
+Langton, C.~G. (1997).
+\newblock {\em Artificial life: An overview}.
+\newblock Mit Press.
 
 \end{thebibliography}
