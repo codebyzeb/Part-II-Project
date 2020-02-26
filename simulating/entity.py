@@ -1,7 +1,7 @@
 """
 Entity module manages the Entity class and the Action Enum.
 
-The Entity class is used to represent individual creatures; specifically their energy
+The Entity class is used to represent individual creatures; specifically their fitness
 value and the behaviour method that decides on an Action given perceptual inputs.
 
 The Action enum represents the entity's response of moving forwards, turning left
@@ -25,32 +25,32 @@ class Entity:
     """ Representation of an Entity
 
     Attributes:
-        energy: The current energy of this entity.
+        fitness: The current fitness of this entity.
     """
 
-    energy = 0
+    fitness = 0
 
-    def __init__(self, startEnergy=0):
+    def __init__(self, startFitness=0):
         """ Instantiation of an Entity
 
         Args:
-            startEnergy: The initial energy of this entity.
+            startFitness: The initial fitness of this entity.
         """
-        self.energy = startEnergy
+        self.fitness = startFitness
 
     def eat(self, mushroom):
         """ Eat a mushroom
         
-        The energy value changes according to whether or not the mushroom is edible.
+        The fitness value changes according to whether or not the mushroom is edible.
 
         Args:
             mushroom: The mushroom to be eaten
         """
 
         if environment.is_edible(mushroom):
-            self.energy += ENERGY_EDIBLE
+            self.fitness += ENERGY_EDIBLE
         elif environment.is_poisonous(mushroom):
-            self.energy += ENERGY_POISON
+            self.fitness += ENERGY_POISON
 
     def behaviour(self, location, perception, listening):  #pylint: disable=W0613
         """ Given perceptual inputs, returns an action.
@@ -135,39 +135,40 @@ def array_to_bits(bit_array):
 class NeuralEntity(Entity):
     """ An entity controlled by a Feed Forward Neural Network
     """
-
-    parameters = {}
-
-    def __init__(self, energy=0, hidden_units=[5]):  #pylint: disable=W0102
-        super().__init__(energy)
+    def __init__(self, fitness=0, hidden_units=[5]):  #pylint: disable=W0102
+        super().__init__(fitness)
         # Add 14 input units and 5 output units
-        self.parameters = {}
+        self.weights = [None]
+        self.biases = [None]
         self.initialise_parameters([14] + hidden_units + [5])
 
-    def initialise_parameters(self, layers_units):
+    def initialise_parameters(self, layers_units, zero=False):
         """ Initialises weights and biases of the neural network.
 
         Weights are initially set to random values
 
         Args:
             layer_units: The number of units in each layer
+            zero: Sets weights and biases to 0
         """
 
-        # for layer in range(1, len(layers_units)):
-        #     # Choose random weights from rectangular distribution [-1, 1]
-        #     self.parameters['W' + str(layer)] = (2 * np.random.random_sample(
-        #         (layers_units[layer], layers_units[layer - 1])) - 1)
-        #     # Choose random biases from rectangular distribution [-1, 1]
-        #     self.parameters['b' + str(layer)] = (2 * np.random.random_sample(
-        #         (layers_units[layer], 1)) - 1)
-
         for layer in range(1, len(layers_units)):
-            # Set all weights to 0
-            self.parameters['W' + str(layer)] = np.zeros(
-                (layers_units[layer], layers_units[layer - 1]))
-            # Set all biases to 0
-            self.parameters['b' + str(layer)] = np.zeros(
-                (layers_units[layer], 1))
+            # Choose random weights and biases from rectangular distribution [-1, 1]
+            layer_weights = (2 * np.random.random_sample(
+                (layers_units[layer], layers_units[layer - 1])) - 1)
+            self.weights.append(layer_weights)
+
+            layer_biases = (2 * np.random.random_sample(
+                (layers_units[layer], 1)) - 1)
+            self.biases.append(layer_biases)
+
+        # Initialise the parameters to zero
+        if zero:
+            for layer in range(1, len(layers_units)):
+                # Set all weights and biases to 0
+                self.weights[layer] = np.zeros(
+                    (layers_units[layer], layers_units[layer - 1]))
+                self.biases[layer] = np.zeros((layers_units[layer], 1))
 
     def forward_propagation(self, inputs, linear):
         """ Given an input matrix, feeds it forwards through the neural network.
@@ -179,35 +180,26 @@ class NeuralEntity(Entity):
             inputs: The input matrix for the network
             linear: Determines whether the output is linear or uses the sigmoid function
         Returns:
-            cache: The activations of each node within the network
+            outputs: The activations of the final layer within the network
         """
 
-        cache = {}
-        final_layer = len(self.parameters) // 2
-        cache["A0"] = inputs
+        num_layers = len(self.weights)
+        activations = [None for _ in range(num_layers)]
+        activations[0] = inputs
 
-        # For each layer, calculate the weighted sum (Z) and the activation (A)
-        for layer in range(1, final_layer):
-            cache['Z' +
-                  str(layer)] = (np.dot(self.parameters['W' + str(layer)],
-                                        cache['A' + str(layer - 1)]) +
-                                 self.parameters['b' + str(layer)])
+        # For each layer, calculate the weighted sum (Z) and the activations
+        for layer in range(1, num_layers - 1):
+            Z = np.dot(self.weights[layer],
+                       activations[layer - 1]) + self.biases[layer]
             # Perform activation function
-            cache['A' + str(layer)] = cache['Z' + str(layer)]
+            activations[layer] = Z
 
         # Calculate the final layer using the sigmoid function (or not)
-        cache['Z' + str(final_layer)] = (
-            np.dot(self.parameters['W' + str(final_layer)],
-                   cache['A' + str(final_layer - 1)]) +
-            self.parameters['b' + str(final_layer)])
-        cache['A' +
-              str(final_layer)] = (cache['Z' + str(final_layer)] if linear else
-                                   sigmoid(cache['Z' + str(final_layer)]))
+        Z = np.dot(self.weights[-1], activations[-2]) + self.biases[-1]
+        activations[-1] = Z if linear else sigmoid(Z)
 
         # Return final layer, rounded to 0 or 1
-        outputs = list(
-            map(int, map(round,
-                         list(np.squeeze(cache['A' + str(final_layer)])))))
+        outputs = list(map(int, map(round, list(np.squeeze(activations[-1])))))
         outputs = [1 if x >= 1 else 0 for x in outputs]
 
         return outputs
@@ -230,25 +222,26 @@ class NeuralEntity(Entity):
         for _ in range(num_offspring):
             # Do a deep copy of self
             child = NeuralEntity(0)
-            child.parameters = copy.deepcopy(self.parameters)
-            num_layers = len(self.parameters) // 2 + 1
+            child.weights = copy.deepcopy(self.weights)
+            child.biases = copy.deepcopy(self.biases)
+            num_layers = len(self.weights)
 
             # Randomly alter a percentage of the weights by adding a value in [-1, 1]
             for layer in range(1, num_layers):
-                weights = child.parameters['W' + str(layer)]
+                weights = child.weights[layer]
                 weights = np.array([[
                     x + random.random() * 2 -
                     1 if random.random() < percentage_mutate else x for x in xs
                 ] for xs in weights])
-                child.parameters['W' + str(layer)] = weights
+                child.weights[layer] = weights
 
             for layer in range(1, num_layers):
-                biases = child.parameters['b' + str(layer)]
+                biases = child.biases[layer]
                 biases = np.array([[
                     x + random.random() * 2 -
                     1 if random.random() < percentage_mutate else x for x in xs
                 ] for xs in biases])
-                child.parameters['b' + str(layer)] = biases
+                child.biases[layer] = biases
 
             # Add child to output
             children.append(child)

@@ -55,14 +55,28 @@ def test_initialise_parameters_size():
     """
 
     ent = entity.NeuralEntity(0, [5])
-    assert len(ent.parameters) == 4
-    assert ent.parameters["W1"].shape == (5, 14)
-    assert ent.parameters["b1"].shape == (5, 1)
-    assert ent.parameters["W2"].shape == (5, 5)
-    assert ent.parameters["b2"].shape == (5, 1)
+    assert len(ent.weights) == 3
+    assert len(ent.biases) == 3
+    assert ent.weights[1].shape == (5, 14)
+    assert ent.biases[1].shape == (5, 1)
+    assert ent.weights[2].shape == (5, 5)
+    assert ent.biases[2].shape == (5, 1)
 
 
 def test_forward_propogation_output_size():
+    """
+    Test that forward propogation through the entity's
+    neural network returns the correct number of activations
+    """
+
+    ent = entity.NeuralEntity(0, [5])
+    inputs = np.array([0.5, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1])
+    inputs = np.expand_dims(inputs, 1)
+    outputs = ent.forward_propagation(inputs, linear=False)
+    assert len(outputs) == 5
+
+
+def test_forward_propogation_binary_values():
     """
     Test that forward propogation through the entity's
     neural network returns a cache with appropriate weights
@@ -72,7 +86,8 @@ def test_forward_propogation_output_size():
     inputs = np.array([0.5, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1])
     inputs = np.expand_dims(inputs, 1)
     outputs = ent.forward_propagation(inputs, linear=False)
-    assert len(outputs) == 5
+    for out in outputs:
+        assert out in (0, 1)
 
 
 def test_behaviour_output_correct():
@@ -99,5 +114,25 @@ def test_reproduce():
     children = ent.reproduce(5, 0.5)
     assert len(children) == 5
     for child in children:
-        assert child.energy == 0
-        assert len(child.parameters) == len(ent.parameters)
+        assert child.fitness == 0
+        assert len(child.weights) == len(ent.weights)
+        assert len(child.biases) == len(ent.biases)
+
+
+def test_reproduce_new_parameters():
+    """
+    Test that reproduction creates unique parameters
+    """
+
+    ent = entity.NeuralEntity(100, [5])
+    children = ent.reproduce(5, 0.5)
+    assert len(children) == 5
+    for layer in range(1, len(ent.weights)):
+        ent.weights[layer] = None
+        ent.biases[layer] = None
+    for child in children:
+        assert not child.weights is ent.weights
+        assert not child.biases is ent.biases
+        for layer in range(1, len(child.weights)):
+            assert not child.weights[layer] is None
+            assert not child.biases[layer] is None
