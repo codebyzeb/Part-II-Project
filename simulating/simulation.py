@@ -137,7 +137,7 @@ class Simulation:  #pylint: disable=R0903
                 mush = env.get_cell(mush_pos) if env.adjacent(entity_pos, mush_pos) else 0
 
                 # Get audio signal according to language type
-                signal = self.get_signal(angle, mush, population, viewer)
+                signal = self.get_signal(angle, env.get_cell(mush_pos), population, viewer)
 
                 # Get the behaviour of the entity given perceptual inputs
                 action, out_signal = entity.behaviour(angle, mush, signal)
@@ -202,6 +202,8 @@ class Simulation:  #pylint: disable=R0903
         elif self.language_type == Language.EXTERNAL:
             # Externally imposed language
             signal = [1, 0, 0] if environment.is_edible(mush) else [0, 1, 0]
+            if viewer:
+                print("getting signal for mushroom ", bin(mush))
 
         elif self.language_type == Language.EVOLVED:
             # A partner entity (which can see the mushroom properties)
