@@ -21,8 +21,8 @@ def test_eat_two_poisonous():
     """
 
     ent = entity.Entity()
-    ent.eat(0b1111100000)
-    ent.eat(0b1111100001)
+    ent.eat(0b0000011111)
+    ent.eat(0b0000011110)
     assert ent.fitness == 2 * entity.ENERGY_POISON
 
 
@@ -33,8 +33,8 @@ def test_eat_two_edible():
     """
 
     ent = entity.Entity()
-    ent.eat(0b0000011111)
-    ent.eat(0b0000111111)
+    ent.eat(0b1111100000)
+    ent.eat(0b0111100000)
     assert ent.fitness == 2 * entity.ENERGY_EDIBLE
 
 

@@ -27,9 +27,6 @@ class Entity:
     Attributes:
         fitness: The current fitness of this entity.
     """
-
-    fitness = 0
-
     def __init__(self, startFitness=0):
         """ Instantiation of an Entity
 
@@ -135,6 +132,10 @@ def array_to_bits(bit_array):
 class NeuralEntity(Entity):
     """ An entity controlled by a Feed Forward Neural Network
     """
+
+    weights = []
+    biases = []
+
     def __init__(self, fitness=0, hidden_units=[5]):  #pylint: disable=W0102
         super().__init__(fitness)
         # Add 14 input units and 5 output units
@@ -158,16 +159,14 @@ class NeuralEntity(Entity):
                 (layers_units[layer], layers_units[layer - 1])) - 1)
             self.weights.append(layer_weights)
 
-            layer_biases = (2 * np.random.random_sample(
-                (layers_units[layer], 1)) - 1)
+            layer_biases = (2 * np.random.random_sample((layers_units[layer], 1)) - 1)
             self.biases.append(layer_biases)
 
         # Initialise the parameters to zero
         if zero:
             for layer in range(1, len(layers_units)):
                 # Set all weights and biases to 0
-                self.weights[layer] = np.zeros(
-                    (layers_units[layer], layers_units[layer - 1]))
+                self.weights[layer] = np.zeros((layers_units[layer], layers_units[layer - 1]))
                 self.biases[layer] = np.zeros((layers_units[layer], 1))
 
     def forward_propagation(self, inputs, linear):
@@ -189,8 +188,7 @@ class NeuralEntity(Entity):
 
         # For each layer, calculate the weighted sum (Z) and the activations
         for layer in range(1, num_layers - 1):
-            Z = np.dot(self.weights[layer],
-                       activations[layer - 1]) + self.biases[layer]
+            Z = np.dot(self.weights[layer], activations[layer - 1]) + self.biases[layer]
             # Perform activation function
             activations[layer] = Z
 
@@ -230,16 +228,16 @@ class NeuralEntity(Entity):
             for layer in range(1, num_layers):
                 weights = child.weights[layer]
                 weights = np.array([[
-                    x + random.random() * 2 -
-                    1 if random.random() < percentage_mutate else x for x in xs
+                    x + random.random() * 2 - 1 if random.random() < percentage_mutate else x
+                    for x in xs
                 ] for xs in weights])
                 child.weights[layer] = weights
 
             for layer in range(1, num_layers):
                 biases = child.biases[layer]
                 biases = np.array([[
-                    x + random.random() * 2 -
-                    1 if random.random() < percentage_mutate else x for x in xs
+                    x + random.random() * 2 - 1 if random.random() < percentage_mutate else x
+                    for x in xs
                 ] for xs in biases])
                 child.biases[layer] = biases
 
@@ -287,3 +285,13 @@ class NeuralEntity(Entity):
         vocal = outputs[2:5]
 
         return action, vocal
+
+    def copy(self):
+        """
+        Returns a copy of this entity with default fitness
+        """
+
+        ent = NeuralEntity()
+        ent.weights = copy.deepcopy(self.weights)
+        ent.biases = copy.deepcopy(self.biases)
+        return ent

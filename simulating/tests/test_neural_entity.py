@@ -97,9 +97,7 @@ def test_behaviour_output_correct():
 
     ent = entity.NeuralEntity(0, [5])
     action, vocal = ent.behaviour(0.4, 0b1111100000, [0, 1, 1])
-    assert action in [
-        Action.FORWARDS, Action.LEFT, Action.RIGHT, Action.NOTHING
-    ]
+    assert action in [Action.FORWARDS, Action.LEFT, Action.RIGHT, Action.NOTHING]
     assert len(vocal) == 3
     for x in vocal:
         assert x in (0, 1)
@@ -136,3 +134,21 @@ def test_reproduce_new_parameters():
         for layer in range(1, len(child.weights)):
             assert not child.weights[layer] is None
             assert not child.biases[layer] is None
+
+
+def test_copy_new_parameters():
+    """
+    Test that reproduction creates unique parameters
+    """
+
+    ent = entity.NeuralEntity(100, [5])
+    copy = ent.copy()
+    for layer in range(1, len(ent.weights)):
+        ent.weights[layer] = None
+        ent.biases[layer] = None
+    assert copy.weights is not ent.weights
+    assert copy.biases is not ent.biases
+    assert copy.fitness == 0
+    for layer in range(1, len(copy.weights)):
+        assert not copy.weights[layer] is None
+        assert not copy.biases[layer] is None

@@ -24,7 +24,8 @@ def neural_single_debug_simulation():
     """
 
     ent = entity.NeuralEntity()
-    print(ent.parameters)
+    print(ent.weights)
+    print(ent.biases)
     sim = simulation.Simulation(15, 50, 100, 1000, "None")
     sim.set_io_options(interactive=True, foldername="testing")
     sim.run_single(ent, viewer=True)
@@ -39,7 +40,7 @@ def start_from_last_population(language_type):
                        foldername="testing",
                        record_language=False,
                        record_entities=False,
-                       record_energies=False)
+                       record_fitness=False)
     sim.start_from_generation(60)
 
 
@@ -68,11 +69,11 @@ def print_some_weights():
     ent = entity.NeuralEntity()
     children = ent.reproduce(5, 0.1)
     print("Entity weights: ")
-    print(ent.parameters["W1"])
+    print(ent.biases[1])
     print()
     print("Children weights: ")
     for child in children:
-        print(child.parameters["W1"])
+        print(child.weights[1])
         print()
 
 
@@ -98,19 +99,19 @@ def watch_old_simulation(foldername, language_type):
 
 if __name__ == "__main__":
     # DEMO 1
-    #neural_single_debug_simulation()
+    # neural_single_debug_simulation()
 
     # DEMO 2
-    #neural_population_debug_simulation_1000("None")
+    neural_population_debug_simulation_1000("None")
 
     # DEMO 3
-    #start_from_last_population("None")
+    # neural_population_debug_simulation_1000("Evolved")
 
     #test_saving()
 
     #neural_population_debug_simulation_1000("None")
     #neural_population_debug_simulation_5("None")
     #cProfile.run("neural_population_debug_simulation_1()")
-    neural_population_simulation_1000(
-        "output-linear-initial-zero/" + str(sys.argv[2]) + str(sys.argv[1]),
-        str(sys.argv[2]))
+    #neural_population_simulation_1000(
+    #    "output-linear-initial-zero/" + str(sys.argv[2]) + str(sys.argv[1]),
+    #    str(sys.argv[2]))

@@ -212,17 +212,13 @@ class Environment:
     def entity_facing_out(self):
         """ Returns true if the entity is at the edge of the world and facing out
         """
-        if self.entity_direction == Direction.NORTH and self.entity_position[
-                Y] == 0:
+        if self.entity_direction == Direction.NORTH and self.entity_position[Y] == 0:
             return True
-        if self.entity_direction == Direction.EAST and self.entity_position[
-                X] == self.dim_x - 1:
+        if self.entity_direction == Direction.EAST and self.entity_position[X] == self.dim_x - 1:
             return True
-        if self.entity_direction == Direction.SOUTH and self.entity_position[
-                Y] == self.dim_y - 1:
+        if self.entity_direction == Direction.SOUTH and self.entity_position[Y] == self.dim_y - 1:
             return True
-        if self.entity_direction == Direction.WEST and self.entity_position[
-                X] == 0:
+        if self.entity_direction == Direction.WEST and self.entity_position[X] == 0:
             return True
         return False
 
@@ -237,15 +233,13 @@ class Environment:
             angle (float): The angle from 0 to 1.
         """
 
-        return self.get_angle(self.entity_position, pos_to,
-                              self.entity_direction)
+        return self.get_angle(self.entity_position, pos_to, self.entity_direction)
 
     # ----- Utility methods ----- #
 
     def random_position(self):
         """ Return a random position within the world dimensions """
-        return (random.randint(0, self.dim_x - 1),
-                random.randint(0, self.dim_y - 1))
+        return (random.randint(0, self.dim_x - 1), random.randint(0, self.dim_y - 1))
 
     def random_available_position(self):
         """ Return a random available position within the world dimensions
@@ -259,8 +253,7 @@ class Environment:
         cell_occupied = True
         pos = (-1, -1)
         while cell_occupied:
-            new_pos = random.randint(0, self.dim_x - 1), random.randint(
-                0, self.dim_y - 1)
+            new_pos = random.randint(0, self.dim_x - 1), random.randint(0, self.dim_y - 1)
             if new_pos not in self.world:
                 pos = new_pos
                 cell_occupied = False
@@ -347,26 +340,26 @@ def cell_to_string(cell):
 def make_poisonous(i=random.randint(0, 9)):
     """ Generates a poisonous mushroom """
 
-    return mutate(0b1111100000, i)
+    return mutate(0b0000011111, i)
 
 
 def make_edible(i=random.randint(0, 9)):
     """ Generates an edible mushroom """
 
-    return mutate(0b0000011111, i)
-
-
-def is_poisonous(cell):
-    """ Checks if a mushroom is poisonous """
-
-    lower_bits = cell & 0b111
-    return not (lower_bits - 1) & lower_bits
+    return mutate(0b1111100000, i)
 
 
 def is_edible(cell):
     """ Checks if a mushroom is edible """
 
-    return not is_poisonous(cell)
+    lower_bits = cell & 0b111
+    return not (lower_bits - 1) & lower_bits
+
+
+def is_poisonous(cell):
+    """ Checks if a mushroom is poisonous """
+
+    return not is_edible(cell)
 
 
 def mutate(mushroom, i):
