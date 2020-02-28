@@ -6,7 +6,7 @@ import numpy as np
 
 from simulating.simulation import Simulation
 from simulating.simulation import Language
-from simulating.entity import Entity
+from simulating.entity import NeuralEntity as Entity
 
 
 def test_new_simulation():
