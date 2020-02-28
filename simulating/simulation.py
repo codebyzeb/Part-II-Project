@@ -23,7 +23,6 @@ from simulating.entity import NeuralEntity
 from simulating.environment import Environment
 from simulating import environment
 from simulating.entity import array_to_bits
-from simulating.entity import NeuralEntity as Entity
 
 
 class Language(Enum):
@@ -211,7 +210,8 @@ class Simulation:  #pylint: disable=R0903
             _, signal = partner_entity.behaviour(angle, mush, [0.5, 0.5, 0.5])
             if viewer:
                 print("Partner vocal:", signal)
-                print("Partner weights:", partner_entity.parameters)
+                print("Partner weights:", partner_entity.weights)
+                print("Partner weights:", partner_entity.baises)
 
         return signal
 
@@ -413,7 +413,7 @@ class Simulation:  #pylint: disable=R0903
         """
         filename = self.foldername + "/populations/generation" + str(generation) + ".p"
 
-        pickle.dump([copy.deepcopy(entity.parameters) for entity in entities], open(filename, 'wb'))
+        pickle.dump([entity.copy() for entity in entities], open(filename, 'wb'))
 
     def load_entities(self, generation):
         """
@@ -422,10 +422,7 @@ class Simulation:  #pylint: disable=R0903
 
         filename = self.foldername + "/populations/generation" + str(generation) + ".p"
 
-        params = pickle.load(open(filename, "rb"))
-        entities = [NeuralEntity() for _ in range(self.num_entities)]
-        for i, entity in enumerate(entities):
-            entity.parameters = params[i]
+        entities = pickle.load(open(filename, "rb"))
         return entities
 
     def naming_task(self, entity):
@@ -466,7 +463,7 @@ def run_single(args):
                        record_entities_period=args.rec_ent_per,
                        record_fitness=args.rec_fit,
                        foldername=args.foldername)
-    ent = Entity()
+    ent = NeuralEntity()
     print(ent.weights)
     print(ent.biases)
     sim.run_single(ent, viewer=True)
@@ -478,11 +475,11 @@ def run_full(args):
 
     sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language)
     sim.set_io_options(interactive=args.interactive,
-                       record_language=args.rec_lang,
+                       record_language=args.no_rec_lang,
                        record_language_period=args.rec_lang_per,
-                       record_entities=args.rec_ent,
+                       record_entities=args.no_rec_ent,
                        record_entities_period=args.rec_ent_per,
-                       record_fitness=args.rec_fit,
+                       record_fitness=args.no_rec_fit,
                        foldername=args.foldername)
     sim.start()
 
@@ -529,19 +526,19 @@ if __name__ == '__main__':
                         type=float,
                         default=0.2,
                         help='percentage of population that reproduces')
-    parser.add_argument('--rec_lang', action='store_true', help='whether to store the language')
+    parser.add_argument('--no_rec_lang', action='store_false', help='don\'t store the language')
     parser.add_argument('--rec_lang_per',
                         action='store',
                         type=float,
                         default=1,
                         help='how frequently to store the language')
-    parser.add_argument('--rec_ent', action='store_true', help='whether to store the population')
+    parser.add_argument('--no_rec_ent', action='store_false', help='don\'t store the population')
     parser.add_argument('--rec_ent_per',
                         action='store',
                         type=float,
                         default=25,
                         help='how frequently to store the population')
-    parser.add_argument('--rec_fit', action='store_true', help='whether to store the fitness')
+    parser.add_argument('--no_rec_fit', action='store_false', help='don\'t store the fitness')
 
     args, unknown = parser.parse_known_args()
 
