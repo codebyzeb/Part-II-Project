@@ -72,7 +72,7 @@ def test_forward_propogation_output_size():
     ent = entity.NeuralEntity(0, [5])
     inputs = np.array([0.5, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1])
     inputs = np.expand_dims(inputs, 1)
-    outputs = ent.forward_propagation(inputs, linear=False)
+    outputs = ent.forward_propagation(inputs)
     assert len(outputs) == 5
 
 
@@ -85,7 +85,7 @@ def test_forward_propogation_binary_values():
     ent = entity.NeuralEntity(0, [5])
     inputs = np.array([0.5, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1])
     inputs = np.expand_dims(inputs, 1)
-    outputs = ent.forward_propagation(inputs, linear=False)
+    outputs = ent.forward_propagation(inputs)
     for out in outputs:
         assert out in (0, 1)
 
