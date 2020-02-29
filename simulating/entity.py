@@ -17,8 +17,13 @@ import numpy as np
 from simulating.action import Action
 from simulating import environment
 
+# Values gained from eating mushrooms
 ENERGY_POISON = -11
 ENERGY_EDIBLE = 10
+
+# Control activation layers
+ACTIVATION = "identity"
+LINEAR = False
 
 
 class Entity:
@@ -108,6 +113,18 @@ def relu(z):
     return np.multiply(z, z > 0)
 
 
+def activation(z):
+    """ Performs the activation function depending on the global parameter ACTIVATION
+    TODO: Make a test for this
+    """
+    if ACTIVATION == "identity":
+        return z
+    elif ACTIVATION == "sigmoid":
+        return sigmoid(z)
+    elif ACTIVATION == "relu":
+        return relu(z)
+
+
 def bits_to_array(num, output_size):
     """ Converts a number from an integer to an array of bits
     """
@@ -169,7 +186,7 @@ class NeuralEntity(Entity):
                 self.weights[layer] = np.zeros((layers_units[layer], layers_units[layer - 1]))
                 self.biases[layer] = np.zeros((layers_units[layer], 1))
 
-    def forward_propagation(self, inputs, linear):
+    def forward_propagation(self, inputs):
         """ Given an input matrix, feeds it forwards through the neural network.
 
         Uses the relu activation function within the
@@ -177,7 +194,6 @@ class NeuralEntity(Entity):
 
         Args:
             inputs: The input matrix for the network
-            linear: Determines whether the output is linear or uses the sigmoid function
         Returns:
             outputs: The activations of the final layer within the network
         """
@@ -190,11 +206,11 @@ class NeuralEntity(Entity):
         for layer in range(1, num_layers - 1):
             Z = np.dot(self.weights[layer], activations[layer - 1]) + self.biases[layer]
             # Perform activation function
-            activations[layer] = Z
+            activations[layer] = activation(Z)
 
         # Calculate the final layer using the sigmoid function (or not)
         Z = np.dot(self.weights[-1], activations[-2]) + self.biases[-1]
-        activations[-1] = Z if linear else sigmoid(Z)
+        activations[-1] = Z if LINEAR else sigmoid(Z)
 
         # Return final layer, rounded to 0 or 1
         outputs = list(map(int, map(round, list(np.squeeze(activations[-1])))))
@@ -265,7 +281,7 @@ class NeuralEntity(Entity):
         inputs = np.array([[inp] for inp in inputs])
 
         # Feed forward through the neural network
-        outputs = self.forward_propagation(inputs, linear=True)
+        outputs = self.forward_propagation(inputs)
 
         # Debug info
         # print("Inputs to neural net: ", inputs)

@@ -19,6 +19,7 @@ from multiprocessing import Pool
 
 from analysis.plotting import Plotter
 from simulating.action import Action
+import simulating.entity
 from simulating.entity import NeuralEntity
 from simulating.environment import Environment
 from simulating import environment
@@ -309,8 +310,10 @@ class Simulation:  #pylint: disable=R0903
             "Num Entities: " + str(self.num_entities),
             "Num Generations:" + str(self.num_generations),
             "Language Type: " + str(self.language_type),
-            "Percentage Mutate" + str(self.percentage_mutate),
-            "Percentage Keep" + str(self.percentage_keep)
+            "Percentage Mutate: " + str(self.percentage_mutate),
+            "Percentage Keep: " + str(self.percentage_keep),
+            "Linear: " + str(simulating.entity.LINEAR),
+            "Activation function: " + str(simulating.entity.ACTIVATION)
         ]))
         info_file.close()
 
@@ -541,8 +544,20 @@ if __name__ == '__main__':
                         default=25,
                         help='how frequently to store the population')
     parser.add_argument('--no_rec_fit', action='store_false', help='don\'t store the fitness')
+    parser.add_argument('--activation',
+                        action='store',
+                        default='identity',
+                        choices=['identity', 'sigmoid', 'relu'],
+                        help='the activation function used in the internal layer')
+    parser.add_argument('--linear',
+                        action='store_true',
+                        help='don\'t use an activation on the final layer')
 
     args, unknown = parser.parse_known_args()
+
+    # Set the activation function
+    simulating.entity.ACTIVATION = args.activation
+    simulating.entity.LINEAR = args.linear
 
     if args.single:
         run_single(args)
