@@ -3,7 +3,6 @@ python: 3.7
 cache: pip
 script:
 - pytest .
-- yapf -rd . 
 - pylint --rcfile=.pylintrc --exit-zero simulating
 notifications:
   slack:
