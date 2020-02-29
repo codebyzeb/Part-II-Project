@@ -3,7 +3,7 @@ python: 3.7
 cache: pip
 script:
 - pytest .
-- yapf -rd --style='{based_on_style: pep8, column_limit: 100}' .
+- yapf -rd . 
 - pylint --rcfile=.pylintrc --exit-zero simulating
 notifications:
   slack:
