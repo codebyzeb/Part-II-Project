@@ -89,6 +89,24 @@ def test_get_signal_external_language_poisonous():
     assert signal == [1, 0, 0]
 
 
+def test_get_signal_evolved():
+    """
+    Test that getting the signal for a population with evolved
+    language gives the signal of the population entity provided
+    """
+
+    sim = Simulation(4, 5, 6, 7, "Evolved")
+    angle = 0
+    mush = 0b1111100000
+    partner = Entity()
+    population = [partner]
+    viewer = False
+    _, partner_signal = partner.behaviour(angle, mush, [0.5, 0.5, 0.5])
+
+    signal = sim.get_signal(angle, mush, population, viewer)
+    assert signal == partner_signal
+
+
 def test_reproduce_population():
     """
     Test that reproducing a population produces a new population

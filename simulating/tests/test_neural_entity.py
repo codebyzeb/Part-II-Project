@@ -18,6 +18,19 @@ def test_sigmoid():
     assert (y > 0).all() and (y <= 1).all()
 
 
+def test_sigmoid_large():
+    """
+    Test sigmoid for large numbers
+    """
+
+    x1 = np.array([-100, -1000, -10000, -100000000])
+    x2 = np.array([100, 1000, 10000, 1000000000])
+    y1 = entity.sigmoid(x1)
+    y2 = entity.sigmoid(x2)
+    assert (y1 < 1e-10).all()
+    assert (y2 > 1 - 1e-10).all()
+
+
 def test_relu():
     """
     Test relu activation function on random array from normal distribution

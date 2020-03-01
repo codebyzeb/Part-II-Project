@@ -104,7 +104,7 @@ class ManualEntity(Entity):
 def sigmoid(z):
     """ Performs the sigmoid function on a vector to squash to [0,1]
     """
-    return 1 / (1 + np.exp(np.maximum(-100, -z)))
+    return 1 / (1 + np.exp(np.clip(-z, -100, 100)))
 
 
 def relu(z):
