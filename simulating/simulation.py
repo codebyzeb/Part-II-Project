@@ -77,12 +77,21 @@ class Simulation:  #pylint: disable=R0903
 
     foldername = "folder"
 
-    def __init__(self, epochs, cycles, population_size, generations, language_type):
+    def __init__(self,
+                 epochs,
+                 cycles,
+                 population_size,
+                 generations,
+                 language_type,
+                 percentage_mutate=0.1,
+                 percentage_keep=0.2):
         self.num_epochs = epochs
         self.num_cycles = cycles
         self.num_entities = population_size
         self.num_generations = generations
         self.language_type = self.language_type.from_string(language_type)
+        self.percentage_mutate = percentage_mutate
+        self.percentage_keep = percentage_keep
 
     def set_io_options(self,
                        interactive=False,
@@ -478,7 +487,8 @@ def run_full(args):
     """ Run a neural simulation for debugging
     """
 
-    sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language)
+    sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language,
+                     args.per_mut, args.per_keep)
     sim.set_io_options(interactive=args.interactive,
                        record_language=args.no_rec_lang,
                        record_language_period=args.rec_lang_per,
