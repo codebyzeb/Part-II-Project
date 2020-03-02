@@ -2,11 +2,13 @@
 This module runs all the tests for the Simulation class
 """
 
-import numpy as np
+import pickle
+import shutil
 
 from simulating.simulation import Simulation
 from simulating.simulation import Language
-from simulating.entity import NeuralEntity as Entity
+from simulating.entity import Entity
+from simulating.entity import NeuralEntity
 
 
 def test_new_simulation():
@@ -98,7 +100,7 @@ def test_get_signal_evolved():
     sim = Simulation(4, 5, 6, 7, "Evolved")
     angle = 0
     mush = 0b1111100000
-    partner = Entity()
+    partner = NeuralEntity()
     population = [partner]
     viewer = False
     _, partner_signal = partner.behaviour(angle, mush, [0.5, 0.5, 0.5])
@@ -113,8 +115,75 @@ def test_reproduce_population():
     """
 
     sim = Simulation(4, 5, 10, 7, "External")
-    entities = [Entity(100) for _ in range(10)]
+    entities = [NeuralEntity(100) for _ in range(10)]
     new_entities = sim.reproduce_population(entities)
     for entity in new_entities:
         assert entity.fitness == 0
     assert len(entities) == len(new_entities)
+
+
+def test_naming_task():
+    """
+    Tests that a naming task produces the correct number of samples in the correct range
+    """
+
+    sim = Simulation(4, 5, 6, 7, "None")
+    entity = NeuralEntity()
+    edible, poisonous = sim.naming_task(entity)
+    assert len(edible) == 40
+    assert len(poisonous) == 40
+    for s in edible:
+        assert s in list(range(0, 8))
+    for s in poisonous:
+        assert s in list(range(0, 8))
+
+
+def test_naming_task_all_zero():
+    """
+    Tests that a naming task on Entities (which always return 0 as a signal) produces correct samples
+    """
+
+    sim = Simulation(4, 5, 6, 7, "None")
+    entity = Entity()
+    edible, poisonous = sim.naming_task(entity)
+    assert len(edible) == 40
+    assert len(poisonous) == 40
+    for s in edible:
+        assert s == 0
+    for s in poisonous:
+        assert s == 0
+
+
+def test_save_language():
+    """
+    Test that saving a language produces a file with a valid language frequency table
+    """
+
+    sim = Simulation(4, 5, 6, 7, "None")
+    sim.set_io_options(foldername="testing")
+    sim.initialise_io()
+    population = [NeuralEntity() for _ in range(100)]
+    sim.save_language(population, 0)
+    language = pickle.load(open("testing/language/language0.p", "rb"))
+    shutil.rmtree('testing')
+    assert len(language) == 2
+    assert len(language["edible"]) == 8
+    assert len(language["poisonous"]) == 8
+    assert abs(sum(language["edible"]) - 1) < 1e-5
+    assert abs(sum(language["poisonous"]) - 1) < 1e-5
+
+
+def test_save_load_entity():
+    """
+    Test that saving and loading a population returns the same population
+    """
+
+    sim = Simulation(4, 5, 6, 7, "None")
+    sim.set_io_options(foldername="testing")
+    sim.initialise_io()
+    population = [NeuralEntity() for _ in range(100)]
+    sim.save_entities(population, 0)
+    new_entities = sim.load_entities(0)
+    shutil.rmtree('testing')
+    for i, e in enumerate(new_entities):
+        assert e.equal_network(population[i])

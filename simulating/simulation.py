@@ -11,7 +11,6 @@ import math
 import os
 import random
 import pickle
-import copy
 
 from enum import Enum
 
@@ -129,6 +128,10 @@ class Simulation:  #pylint: disable=R0903
         env = Environment()
         env.place_entity()
 
+        if viewer:
+            print("Entity weights: \n", entity.weights)
+            print("Entities biases: \n", entity.biases)
+
         # Run num_epochs epochs of num_cycles cycles each
         for epoch in range(self.num_epochs):
 
@@ -138,7 +141,7 @@ class Simulation:  #pylint: disable=R0903
                 entity_pos = env.get_entity_position()
                 try:
                     mush_pos = env.closest_mushroom(entity_pos)
-                except (environment.MushroomNotFound):
+                except environment.MushroomNotFound:
                     # Skip cycle if all mushrooms have been eaten
                     break
 
@@ -416,10 +419,20 @@ class Simulation:  #pylint: disable=R0903
             edible, poisonous = self.naming_task(entity)
             edible_samples.extend(edible)
             poisonous_samples.extend(poisonous)
-        with open(self.foldername + "/language/edible" + str(generation) + ".txt", "w") as out:
-            out.write("\n".join([str(s) for s in edible_samples]))
-        with open(self.foldername + "/language/poisonous" + str(generation) + ".txt", "w") as out:
-            out.write("\n".join([str(s) for s in poisonous_samples]))
+
+        # Calculate language table
+        language = {"edible": [0 for _ in range(8)], "poisonous": [0 for _ in range(8)]}
+        sample_size = len(edible_samples)
+        for s in edible_samples:
+            language["edible"][s] += 1
+        for s in poisonous_samples:
+            language["poisonous"][s] += 1
+        language["edible"] = [s / sample_size for s in language["edible"]]
+        language["poisonous"] = [s / sample_size for s in language["poisonous"]]
+
+        # Save language table in binary file
+        filename = self.foldername + "/language/language" + str(generation) + ".p"
+        pickle.dump(language, open(filename, 'wb'))
 
     def save_entities(self, entities, generation):
         """
@@ -465,7 +478,7 @@ class Simulation:  #pylint: disable=R0903
         return edible_samples, poisonous_samples
 
 
-def run_single(args):
+def run_single():
     """ Run a basic simulation for debugging.
     """
 
@@ -478,12 +491,10 @@ def run_single(args):
                        record_fitness=args.rec_fit,
                        foldername=args.foldername)
     ent = NeuralEntity()
-    print(ent.weights)
-    print(ent.biases)
     sim.run_single(ent, viewer=True)
 
 
-def run_full(args):
+def run_full():
     """ Run a neural simulation for debugging
     """
 
@@ -570,6 +581,6 @@ if __name__ == '__main__':
     simulating.entity.LINEAR = args.linear
 
     if args.single:
-        run_single(args)
+        run_single()
     else:
-        run_full(args)
+        run_full()

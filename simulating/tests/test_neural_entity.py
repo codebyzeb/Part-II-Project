@@ -41,6 +41,24 @@ def test_relu():
     assert (y >= 0).all()
 
 
+def test_activation():
+    """
+    Test the activation function
+    """
+
+    x = np.random.randn(100)
+    entity.ACTIVATION = "identity"
+    y1 = entity.activation(x)
+    entity.ACTIVATION = "relu"
+    y2 = entity.activation(x)
+    entity.ACTIVATION = "sigmoid"
+    y3 = entity.activation(x)
+
+    assert (y1 == x).all()
+    assert (y2 == entity.relu(x)).all()
+    assert (y3 == entity.sigmoid(x)).all()
+
+
 def test_bits_to_array():
     """
     Test conversion from mushroom to array
@@ -165,3 +183,31 @@ def test_copy_new_parameters():
     for layer in range(1, len(copy.weights)):
         assert not copy.weights[layer] is None
         assert not copy.biases[layer] is None
+
+
+def test_copy_equals_network():
+    """
+    Test that a copy of an entity has the same network as the original
+    """
+
+    ent = entity.NeuralEntity()
+    copy = ent.copy()
+    assert ent.equal_network(copy)
+    assert copy.equal_network(ent)
+
+
+def test_different_entities_not_equal():
+    """
+    Test that two different entities are not equal
+    """
+
+    ent = entity.NeuralEntity()
+    copies = [ent.copy() for _ in range(5)]
+    copies[0].weights[1] += 1
+    copies[1].biases[0] = np.array([0])
+    copies[2].weights.append(None)
+    copies[3].biases[1] = None
+    copies[4].biases = copies[4].biases[:-1]
+    for copy in copies:
+        assert not copy.equal_network(ent)
+        assert not ent.equal_network(copy)

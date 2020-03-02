@@ -115,13 +115,12 @@ def relu(z):
 
 def activation(z):
     """ Performs the activation function depending on the global parameter ACTIVATION
-    TODO: Make a test for this
     """
     if ACTIVATION == "identity":
         return z
-    elif ACTIVATION == "sigmoid":
+    if ACTIVATION == "sigmoid":
         return sigmoid(z)
-    elif ACTIVATION == "relu":
+    if ACTIVATION == "relu":
         return relu(z)
 
 
@@ -311,3 +310,32 @@ class NeuralEntity(Entity):
         ent.weights = copy.deepcopy(self.weights)
         ent.biases = copy.deepcopy(self.biases)
         return ent
+
+    def equal_network(self, ent):
+        """
+        Returns whether the weights and biases of these two entities are equal
+        """
+
+        if not (len(self.weights) == len(ent.weights) and len(self.biases) == len(ent.biases)):
+            return False
+
+        for i, w in enumerate(self.weights):
+            if w is None and not ent.weights[i] is None:
+                return False
+            if not w is None and ent.weights[i] is None:
+                return False
+            if w is None and ent.weights[i] is None:
+                continue
+            if not (w == ent.weights[i]).all():
+                return False
+        for i, b in enumerate(self.biases):
+            if b is None and not ent.biases[i] is None:
+                return False
+            if not b is None and ent.biases[i] is None:
+                return False
+            if b is None and ent.biases[i] is None:
+                continue
+            if not (b == ent.biases[i]).all():
+                return False
+
+        return True
