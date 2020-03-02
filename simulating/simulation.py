@@ -575,7 +575,7 @@ if __name__ == '__main__':
                         help='don\'t use an activation on the final layer')
     parser.add_argument('--hidden_units',
                         action='store',
-                        default=[5],
+                        default='5',
                         help='nodes in hidden layers of the neural network')
 
     args, unknown = parser.parse_known_args()
@@ -586,6 +586,8 @@ if __name__ == '__main__':
 
     # Parse hidden units
     args.hidden_units = [int(x) for x in args.hidden_units.split(',')]
+
+    print(args.hidden_units)
 
     if args.single:
         run_single()
