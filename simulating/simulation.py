@@ -230,12 +230,12 @@ class Simulation:  #pylint: disable=R0903
 
         return signal
 
-    def start(self):
+    def start(self, hidden_units=[5]):
         """ Run a population of neural entities from generation 0
         """
 
         # Generate an initial population of neural entities
-        entities = [NeuralEntity() for _ in range(self.num_entities)]
+        entities = [NeuralEntity(0, hidden_units) for _ in range(self.num_entities)]
         self.run_population(entities)
 
     def start_from_generation(self, generation):
@@ -490,7 +490,7 @@ def run_single():
                        record_entities_period=args.rec_ent_per,
                        record_fitness=args.rec_fit,
                        foldername=args.foldername)
-    ent = NeuralEntity()
+    ent = NeuralEntity(hidden_units=args.hidden_units)
     sim.run_single(ent, viewer=True)
 
 
@@ -507,7 +507,7 @@ def run_full():
                        record_entities_period=args.rec_ent_per,
                        record_fitness=args.no_rec_fit,
                        foldername=args.foldername)
-    sim.start()
+    sim.start(args.hidden_units)
 
 
 if __name__ == '__main__':
@@ -573,12 +573,19 @@ if __name__ == '__main__':
     parser.add_argument('--linear',
                         action='store_true',
                         help='don\'t use an activation on the final layer')
+    parser.add_argument('--hidden_units',
+                        action='store',
+                        default=[5],
+                        help='nodes in hidden layers of the neural network')
 
     args, unknown = parser.parse_known_args()
 
     # Set the activation function
     simulating.entity.ACTIVATION = args.activation
     simulating.entity.LINEAR = args.linear
+
+    # Parse hidden units
+    args.hidden_units = [int(x) for x in args.hidden_units.split(',')]
 
     if args.single:
         run_single()

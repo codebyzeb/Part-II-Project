@@ -94,6 +94,26 @@ def test_initialise_parameters_size():
     assert ent.biases[2].shape == (5, 1)
 
 
+def test_deeper_parameters_size():
+    """
+    Test that parameters in the neural network for
+    NeuralEntity are set with the right size when a deeper
+    network is created
+    """
+
+    ent = entity.NeuralEntity(0, [5, 10, 5])
+    assert len(ent.weights) == 5
+    assert len(ent.biases) == 5
+    assert ent.weights[1].shape == (5, 14)
+    assert ent.biases[1].shape == (5, 1)
+    assert ent.weights[2].shape == (10, 5)
+    assert ent.biases[2].shape == (10, 1)
+    assert ent.weights[3].shape == (5, 10)
+    assert ent.biases[3].shape == (5, 1)
+    assert ent.weights[4].shape == (5, 5)
+    assert ent.biases[4].shape == (5, 1)
+
+
 def test_forward_propogation_output_size():
     """
     Test that forward propogation through the entity's
