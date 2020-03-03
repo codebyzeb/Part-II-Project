@@ -8,7 +8,7 @@
 \BOOKMARK [2][-]{subsection.2.2.1}{Feed-Forward Neural Networks}{section.2.2}% 8
 \BOOKMARK [2][-]{subsection.2.2.2}{Alternative Structures}{section.2.2}% 9
 \BOOKMARK [2][-]{subsection.2.2.3}{Genetic Algorithm}{section.2.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.4}{Population types}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.4}{Population Types}{section.2.2}% 11
 \BOOKMARK [1][-]{section.2.3}{Simulation Analysis}{chapter.2}% 12
 \BOOKMARK [2][-]{subsection.2.3.1}{Generational Fitness}{section.2.3}% 13
 \BOOKMARK [2][-]{subsection.2.3.2}{Efficiency of Language}{section.2.3}% 14
@@ -18,8 +18,8 @@
 \BOOKMARK [2][-]{subsection.2.6.1}{Languages and Libraries}{section.2.6}% 18
 \BOOKMARK [2][-]{subsection.2.6.2}{Project Management}{section.2.6}% 19
 \BOOKMARK [2][-]{subsection.2.6.3}{Version Control}{section.2.6}% 20
-\BOOKMARK [2][-]{subsection.2.6.4}{Development tools}{section.2.6}% 21
-\BOOKMARK [2][-]{subsection.2.6.5}{Development environment}{section.2.6}% 22
+\BOOKMARK [2][-]{subsection.2.6.4}{Development Tools}{section.2.6}% 21
+\BOOKMARK [2][-]{subsection.2.6.5}{Development Environment}{section.2.6}% 22
 \BOOKMARK [2][-]{subsection.2.6.6}{Code License}{section.2.6}% 23
 \BOOKMARK [1][-]{section.2.7}{Summary}{chapter.2}% 24
 \BOOKMARK [0][-]{chapter.3}{Implementation}{}% 25
@@ -42,7 +42,7 @@
 \BOOKMARK [2][-]{subsection.3.4.2}{Initialising the Simulation}{section.3.4}% 42
 \BOOKMARK [2][-]{subsection.3.4.3}{Single-Entity Simulation Run}{section.3.4}% 43
 \BOOKMARK [2][-]{subsection.3.4.4}{Genetic Algorithm}{section.3.4}% 44
-\BOOKMARK [2][-]{subsection.3.4.5}{Running the simulations using HPC}{section.3.4}% 45
+\BOOKMARK [2][-]{subsection.3.4.5}{Running the Simulations Using HPC}{section.3.4}% 45
 \BOOKMARK [2][-]{subsection.3.4.6}{Optimisations}{section.3.4}% 46
 \BOOKMARK [2][-]{subsection.3.4.7}{Interactivity}{section.3.4}% 47
 \BOOKMARK [2][-]{subsection.3.4.8}{Data Recording}{section.3.4}% 48
@@ -51,6 +51,10 @@
 \BOOKMARK [2][-]{subsection.3.5.2}{Language Frequency Distributions}{section.3.5}% 51
 \BOOKMARK [2][-]{subsection.3.5.3}{QI Score}{section.3.5}% 52
 \BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 53
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 54
-\BOOKMARK [0][-]{chapter.5}{Bibliography}{}% 55
-\BOOKMARK [0][-]{appendix.A}{Project Proposal}{}% 56
+\BOOKMARK [1][-]{section.4.1}{Fitness}{chapter.4}% 54
+\BOOKMARK [1][-]{section.4.2}{Language Analysis}{chapter.4}% 55
+\BOOKMARK [1][-]{section.4.3}{QI Score}{chapter.4}% 56
+\BOOKMARK [1][-]{section.4.4}{Heatmap Analysis}{chapter.4}% 57
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 58
+\BOOKMARK [0][-]{chapter.5}{Bibliography}{}% 59
+\BOOKMARK [0][-]{appendix.A}{Project Proposal}{}% 60

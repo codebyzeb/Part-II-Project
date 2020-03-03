@@ -263,7 +263,7 @@ This rewards entities that eat edible mushrooms and punishes those that eat pois
 
 Finally, the reproduction occurs by selecting a percentage of the population with the highest fitness score and producing a small set of offspring for each of these individuals by randomly altering a percentage of the weights and biases in the neural network. In \cite{Cangelosi1998}, the top $20\%$ of entities are selected from a population of 100. Each of these entities produces five entities by randomly mutating $10\%$ of their weights and biases, producing a new generation of 100 entities. These introduce two new constants, as described in Table \ref{table:constants}.
 
-\subsection{Population types}\label{section:populations}
+\subsection{Population Types}\label{section:populations}
 
 To carry out the investigation of whether introducing language to a population increases its fitness, I will implement three different populations in the simulation. As described by \cite{Cangelosi1998}, these three populations differ in how the communication signals are used in the simulation environment. The three population types are:
 
@@ -414,7 +414,7 @@ This agile process allowed me to ensure I was on track with my project. In fact,
 
 For version control, I used Git to track change with a remote repository on GitHub\footnote{https://github.com/}. This served as a backup, allowed me to revert to previous iterations of my code and allowed me to work on multiple computers. In particular, it allowed me to deploy my project to the University's High Performance Computing service for running the simulations, as discussed below. In addition, I also performed hardware backup to a hard drive twice a week.
 
-\subsection{Development tools}
+\subsection{Development Tools}
 
 I made use of a number of tools to streamline my development process:
 
@@ -424,7 +424,7 @@ I made use of a number of tools to streamline my development process:
 	\item I used yapf\footnote{https://github.com/google/yapf} to format my code consistently. I implemented a git hook to automatically format my code with each commit; the formatting was further checked by my Travis script.
 \end{enumerate}
 
-\subsection{Development environment}
+\subsection{Development Environment}
 
 I used Visual Studio Code\footnote{https://code.visualstudio.com/} as a development environment, due to the friendly interface and useful set of plugins that integrated nicely with git, pylint and pytest. 
 
@@ -760,7 +760,7 @@ Lines 10-14 create the next population by calling the \texttt{reproduce()} metho
 
 Two key constants in this algorithm are \texttt{mutate\_percentage} and \texttt{percentage\_keep} which set the percentage of weights to mutate and the percentage of the population chosen for reproduction respectively. The setting of these constants was discussed in section \ref{section:simulation-initialise} above.
 
-\subsection{Running the simulations using HPC}\label{section:running}
+\subsection{Running the Simulations Using HPC}\label{section:running}
 
 To run experiments, I acquired access to the University of Cambridge's High Performance Computing (HPC) facility. This gave me access to an environment where I could set up experiments and schedule runs of my program using SLURM. I created a series of bash scripts that would allow me to schedule a batch of jobs at once (for example 10 independent runs of the genetic algorithm for each language type).
 
@@ -881,6 +881,38 @@ This gave far better correlations, as discussed in the next chapter.
 
 \emph{Variance in each run, consequences of initialisation/activation, bigger questions about how reliable neural networks are, whether they are a good model for language evolution. }
 
+\section{Population Fitness}
+
+\subsection{Initial Analysis}
+
+ - Introduce examination of simulation, give first graph of a single run of the simulation with identity. Then give average over 10 for 2000 generations, mention that the original paper did average of 5 for 1000 generations stating that performance did not improve after this. State that using the exact same constants everywhere specified.
+ 
+ \subsection{Activation Functions}
+ 
+ - Discuss different activation functions; sigmoid and relu and if we use linear output instead of sigmoid output. Give default parameters assumed for the rest of the analysis unless otherwise specified.
+ 
+ \subsection{Between-Run Variations}
+ 
+ - Move on to talk about variation in neural networks. Show ten runs. Give stats about variance within the network.
+ 
+ \subsection{Parameter Choices}
+ 
+ - Discuss differences in neural network size, genetic parameters, population size, num epochs / num cycles
+
+\section{Language Analysis}
+
+\subsection{Language Frequency Distribution}
+
+Give language distribution graphs for some runs from the normal output and discuss how the idea language only appears sometimes despite most of the evolved populations performing better.
+
+\subsection{Language Quality Index}
+
+- Show QI graphs, mention using QI score with +, talk about how only seem to get good correlation sometimes
+
+\section{Heatmap Analysis}
+
+- maybe do this?
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -892,6 +924,8 @@ This gave far better correlations, as discussed in the next chapter.
 % Conclusion
 
 \chapter{Conclusion}
+
+\emph{c o n c l u d e}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
