@@ -159,18 +159,19 @@ def test_save_language():
     Test that saving a language produces a file with a valid language frequency table
     """
 
-    sim = Simulation(4, 5, 6, 7, "None")
+    sim = Simulation(4, 5, 6, 5, "None")
     sim.set_io_options(foldername="testing")
     sim.initialise_io()
-    population = [NeuralEntity() for _ in range(100)]
-    sim.save_language(population, 0)
-    language = pickle.load(open("testing/language/language0.p", "rb"))
+    sim.start()
+    languages = pickle.load(open("testing/language.p", "rb"))
     shutil.rmtree('testing')
-    assert len(language) == 2
-    assert len(language["edible"]) == 8
-    assert len(language["poisonous"]) == 8
-    assert abs(sum(language["edible"]) - 1) < 1e-5
-    assert abs(sum(language["poisonous"]) - 1) < 1e-5
+    assert len(languages) == 6
+    for i in range(6):
+        assert len(languages[i]) == 2
+        assert len(languages[i]["edible"]) == 8
+        assert len(languages[i]["poisonous"]) == 8
+        assert abs(sum(languages[i]["edible"]) - 1) < 1e-5
+        assert abs(sum(languages[i]["poisonous"]) - 1) < 1e-5
 
 
 def test_save_load_entity():

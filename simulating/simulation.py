@@ -76,6 +76,9 @@ class Simulation:  #pylint: disable=R0903
 
     foldername = "folder"
 
+    # Data structure for saving language
+    languages = []
+
     def __init__(self,
                  epochs,
                  cycles,
@@ -91,6 +94,7 @@ class Simulation:  #pylint: disable=R0903
         self.language_type = self.language_type.from_string(language_type)
         self.percentage_mutate = percentage_mutate
         self.percentage_keep = percentage_keep
+        self.languages = []
 
     def set_io_options(self,
                        interactive=False,
@@ -430,9 +434,12 @@ class Simulation:  #pylint: disable=R0903
         language["edible"] = [s / sample_size for s in language["edible"]]
         language["poisonous"] = [s / sample_size for s in language["poisonous"]]
 
+        self.languages.append(language)
+
         # Save language table in binary file
-        filename = self.foldername + "/language/language" + str(generation) + ".p"
-        pickle.dump(language, open(filename, 'wb'))
+        if generation >= self.num_generations - 1:
+            filename = self.foldername + "/language.p"
+            pickle.dump(self.languages, open(filename, 'wb'))
 
     def save_entities(self, entities, generation):
         """
