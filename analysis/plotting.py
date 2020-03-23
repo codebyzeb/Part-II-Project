@@ -200,6 +200,9 @@ def plot_language_distributions_bar(foldername, increment, num):
     axmain.tick_params(labelcolor='w', top=False, bottom=False, left=False, right=False)
     axmain.set_title('Language Frequency Distribution')
 
+    # Get data
+    language = pickle.load(open(foldername + "/language.p", 'rb'))
+
     # Plot a frequency distribution for each generation in the list
     for j, gen in enumerate(generations):
 
@@ -228,14 +231,13 @@ def plot_language_distributions_bar(foldername, increment, num):
         ax.set_ylim([0, 1])
 
         # Plot data
-        language = pickle.load(open(foldername + "/language/language" + str(gen) + ".p", 'rb'))
         rects = ax.bar(x + pow(-1, 1) * width / 2,
-                       language["edible"],
+                       language[gen]["edible"],
                        width,
                        label="edible",
                        color='red')
         rects = ax.bar(x + pow(-1, 2) * width / 2,
-                       language["poisonous"],
+                       language[gen]["poisonous"],
                        width,
                        label="poisonous",
                        color='blue')
