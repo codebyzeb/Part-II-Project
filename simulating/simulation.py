@@ -314,8 +314,6 @@ class Simulation:  #pylint: disable=R0903
             os.makedirs(self.foldername)
         if not os.path.exists(self.foldername + "/populations"):
             os.makedirs(self.foldername + "/populations")
-        if not os.path.exists(self.foldername + "/language"):
-            os.makedirs(self.foldername + "/language")
         if self.record_fitness:
             fitness_file = self.foldername + "/fitness.txt"
             open(fitness_file, "w").close()
@@ -457,6 +455,9 @@ class Simulation:  #pylint: disable=R0903
         filename = self.foldername + "/populations/generation" + str(generation) + ".p"
 
         entities = pickle.load(open(filename, "rb"))
+        for entity in entities:
+            print(entity.weights)
+        entities = [entity.copy() for entity in entities]
         return entities
 
     def naming_task(self, entity):
@@ -486,7 +487,7 @@ class Simulation:  #pylint: disable=R0903
 
 
 def run_single():
-    """ Run a basic simulation for debugging.
+    """ Run a simulation for one entity
     """
 
     sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language)
@@ -502,7 +503,7 @@ def run_single():
 
 
 def run_full():
-    """ Run a neural simulation for debugging
+    """ Run a full run of the genetic algorithm
     """
 
     sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language,
@@ -515,6 +516,24 @@ def run_full():
                        record_fitness=args.no_rec_fit,
                        foldername=args.foldername)
     sim.start(args.hidden_units)
+
+
+def run_from_generation():
+    """
+    Run a previous simulation from a selected generation
+    and ensures that no data is saved
+    """
+
+    sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language,
+                     args.per_mut, args.per_keep)
+    sim.set_io_options(interactive=args.interactive,
+                       record_language=False,
+                       record_language_period=0,
+                       record_entities=False,
+                       record_entities_period=0,
+                       record_fitness=False,
+                       foldername=args.foldername)
+    sim.start_from_generation(args.start_from)
 
 
 if __name__ == '__main__':
@@ -584,6 +603,11 @@ if __name__ == '__main__':
                         action='store',
                         default='5',
                         help='nodes in hidden layers of the neural network')
+    parser.add_argument('--start_from',
+                        action='store',
+                        type=int,
+                        default=0,
+                        help='generation to start the simulation from')
 
     args, unknown = parser.parse_known_args()
 
@@ -598,5 +622,7 @@ if __name__ == '__main__':
 
     if args.single:
         run_single()
+    elif not args.start_from == 0:
+        run_from_generation()
     else:
         run_full()
