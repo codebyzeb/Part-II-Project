@@ -353,3 +353,20 @@ def test_edible_false():
 
     for i in range(10):
         assert not environment.is_edible(environment.make_poisonous(i))
+
+
+def test_repeated_mushroom_generations_different():
+    """
+    This is a regression test to fix a core bug
+
+    Bug: Calling make_edible or make_poisonous several times resulted
+    in the same random value being used for all calls
+    """
+
+    mush = environment.make_edible()
+    at_least_one_different = False
+    for i in range(100):
+        new_mush = environment.make_edible()
+        if new_mush != mush:
+            at_least_one_different = True
+    assert at_least_one_different

@@ -97,7 +97,7 @@ class Environment:
 
     # ----- World Creation ----- #
 
-    def __init__(self, width=20, height=20, poisonous=10, edible=10):
+    def __init__(self, width=20, height=20, poisonous=10, edible=10, debug=False):
         """ Instantiate a new Environment object
 
         Args:
@@ -115,6 +115,7 @@ class Environment:
         self.dim_y = height
         self.num_poisonous = poisonous
         self.num_edible = edible
+        self.debug = debug
         self.reset()
 
     def reset(self):
@@ -125,10 +126,24 @@ class Environment:
         """
 
         self.world = {}
-        for _ in range(self.num_edible):
-            self.place_mushroom(make_edible())
-        for _ in range(self.num_poisonous):
-            self.place_mushroom(make_poisonous())
+        if self.debug:
+            self.generate_fixed_world()
+        else:
+            for _ in range(self.num_edible):
+                self.place_mushroom(make_edible())
+            for _ in range(self.num_poisonous):
+                self.place_mushroom(make_poisonous())
+
+    def generate_fixed_world(self):
+        """ Generates a fixed world deterministically
+        for debugging purposes
+        """
+
+        for i, (x, y) in enumerate([(0, 0), (0, 2), (1, 1), (2, 0), (2, 2)]):
+            self.world[(x + 5, y + 5)] = make_edible(i)
+            self.world[(x + 15, y + 5)] = make_poisonous(i)
+            self.world[(x + 5, y + 15)] = make_edible(i + 5)
+            self.world[(x + 15, y + 15)] = make_poisonous(i + 5)
 
     # ----- Mushroom manipulation methods ----- #
 
@@ -179,14 +194,13 @@ class Environment:
         Raises:
             WorldFull: No space for the entity.
         """
-
-        self.entity_direction = get_random_direction()
-        cell_occupied = True
-        while cell_occupied:
+        if self.debug:
+            self.entity_direction = Direction.NORTH
+            self.entity_position = (10, 10)
+        else:
+            self.entity_direction = get_random_direction()
             pos = self.random_available_position()
-            if not pos in self.world:
-                cell_occupied = False
-                self.entity_position = pos
+            self.entity_position = pos
 
     def move_entity(self, action):
         """ Moves the entity in the world according to the Action taken.
@@ -337,16 +351,16 @@ def cell_to_string(cell):
     return '@'
 
 
-def make_poisonous(i=random.randint(0, 9)):
+def make_poisonous(i=-1):
     """ Generates a poisonous mushroom """
 
-    return mutate(0b0000011111, i)
+    return mutate(0b0000011111, i if i >= 0 else random.randint(0, 9))
 
 
-def make_edible(i=random.randint(0, 9)):
+def make_edible(i=-1):
     """ Generates an edible mushroom """
 
-    return mutate(0b1111100000, i)
+    return mutate(0b1111100000, i if i >= 0 else random.randint(0, 9))
 
 
 def is_edible(cell):

@@ -230,7 +230,7 @@ class Simulation:  #pylint: disable=R0903
             if viewer:
                 print("Partner vocal:", signal)
                 print("Partner weights:", partner_entity.weights)
-                print("Partner weights:", partner_entity.baises)
+                print("Partner weights:", partner_entity.biases)
 
         return signal
 
@@ -455,8 +455,6 @@ class Simulation:  #pylint: disable=R0903
         filename = self.foldername + "/populations/generation" + str(generation) + ".p"
 
         entities = pickle.load(open(filename, "rb"))
-        for entity in entities:
-            print(entity.weights)
         entities = [entity.copy() for entity in entities]
         return entities
 
@@ -617,8 +615,6 @@ if __name__ == '__main__':
 
     # Parse hidden units
     args.hidden_units = [int(x) for x in args.hidden_units.split(',')]
-
-    print(args.hidden_units)
 
     if args.single:
         run_single()
