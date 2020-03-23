@@ -2,10 +2,12 @@
 Analysis module used for plotting graphs of the simulation
 """
 
+import argparse
 import matplotlib.pyplot as plt
 from matplotlib import style
 from scipy.stats import pearsonr
 import sys
+import pickle
 import numpy as np
 
 
@@ -19,7 +21,7 @@ class Plotter:
     """
 
     generations = []
-    average_energies = []
+    average_fitness = []
 
     ax = None
 
@@ -44,160 +46,204 @@ class Plotter:
         """
 
         self.generations.append(generation)
-        self.average_energies.append(average_energy)
+        self.average_fitness.append(average_energy)
         self.ax.clear()
-        self.ax.plot(self.generations, self.average_energies)
+        self.ax.plot(self.generations, self.average_fitness)
         plt.draw()
         plt.pause(0.01)
 
 
-def plot_one(foldername):
+def plot_one(foldername, num=1000):
+    # Set up plot
     fig = plt.figure()
-    ax1 = fig.add_subplot(1, 1, 1)
-    energies_file = open(foldername + "/energies.txt", "r")
-    average_energies = []
-    lines = energies_file.readlines()
-    energies_file.close()
-    for line in lines:
-        average_energies.append(float(line))
-    ax1.plot(list(range(len(average_energies))),
-             average_energies,
-             label="Average Fitness",
-             linewidth=1.0)
-    plt.legend()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_title("Average Fitness")
+    ax.grid(linestyle='-')
+
+    # Get data
+    fitness_file = open(foldername + "/fitness.txt", "r")
+    average_fitness = []
+    lines = fitness_file.readlines()
+    fitness_file.close()
+    for j, line in enumerate(lines):
+        if j >= num:
+            break
+        average_fitness.append(float(line))
+
+    # Show plot
+    ax.plot(list(range(len(average_fitness))),
+            average_fitness,
+            label="Average Fitness",
+            linewidth=1.0)
     plt.show()
 
 
-def plot_ten(foldername):
+def plot_ten(foldername, num=1000):
     fig = plt.figure()
+    ax = fig.add_subplot(1111)
+    ax.set_title("Average fitness for ten replicas")
+
+    # Plot ten subgraphs
     for i in range(10):
+        # Set up axis
         ax = fig.add_subplot(5, 2, i + 1)
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.grid(linestyle='-')
+
+        # Get data
         for language_type in ["none", "evolved", "external"]:
-            energies_file = open(foldername + "/" + language_type + str(i) + "/energies.txt", "r")
-            average_energies = []
-            lines = energies_file.readlines()
-            energies_file.close()
-            for line in lines:
-                average_energies.append(float(line))
-            ax.plot(list(range(len(average_energies))),
-                    average_energies,
+            fitness_file = open(foldername + "/" + language_type + str(i) + "/fitness.txt", "r")
+            average_fitness = []
+            lines = fitness_file.readlines()
+            fitness_file.close()
+            for j, line in enumerate(lines):
+                if (j >= num):
+                    break
+                average_fitness.append(float(line))
+
+            # Plot data
+            ax.plot(list(range(len(average_fitness))),
+                    average_fitness,
                     label=language_type,
                     linewidth=1.0)
+
+    # Show graph
     plt.legend()
     plt.show()
 
 
-def plot_ten_evolved(foldername, language):
+def plot_ten_language(foldername, language, num):
+    # Set up figure
     fig = plt.figure()
-    ax1 = fig.add_subplot(1, 1, 1)
+    ax = fig.add_subplot(1, 1, 1)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_title("Average fitness for ten replicas of {0} language".format(language))
+    ax.grid(linestyle='-')
+    # ax.set_ylim([0, 450])
+
+    # Get data
     for i in range(10):
-        energies_file = open(foldername + "/" + language + str(i) + "/energies.txt", "r")
-        lines = energies_file.readlines()
-        average_energies = [0 for i in range(1001)]
-        totalNum = 1001
-        if len(lines) < totalNum:
+        fitness_file = open(foldername + "/" + language + str(i) + "/fitness.txt", "r")
+        lines = fitness_file.readlines()
+        average_fitness = [0 for i in range(num)]
+        totalNum = num
+        if len(lines) <= totalNum:
             totalNum = len(lines)
-            average_energies = average_energies[:totalNum]
-        energies_file.close()
+            average_fitness = average_fitness[:totalNum]
+        fitness_file.close()
         for j, line in enumerate(lines):
             if (j >= totalNum):
                 break
-            average_energies[j] += float(line)
-        ax1.plot(list(range(len(average_energies))), average_energies, linewidth=0.6)
+            average_fitness[j] += float(line)
+
+        # Plot graph
+        ax.plot(list(range(len(average_fitness))), average_fitness, linewidth=0.6, label=i)
     plt.legend()
     plt.show()
 
 
-def plot_average(foldername):
+def plot_average(foldername, num=1000):
+    # Set up plot
     fig = plt.figure()
-    ax1 = fig.add_subplot(1, 1, 1)
+    ax = fig.add_subplot(1, 1, 1)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_title("Average fitness")
+    ax.grid(linestyle='-')
+    # ax.set_ylim([0, 450])
+
+    # Get data
     for language_type in ["None", "Evolved", "External"]:
-        average_energies = [0 for i in range(1001)]
-        totalNum = 1001
+        average_fitness = [0 for i in range(num)]
+        totalNum = num
         for i in range(10):
-            energies_file = open(foldername + "/" + language_type + str(i) + "/energies.txt", "r")
-            lines = energies_file.readlines()
+            fitness_file = open(foldername + "/" + language_type + str(i) + "/fitness.txt", "r")
+            lines = fitness_file.readlines()
             if len(lines) < totalNum:
                 totalNum = len(lines)
-                average_energies = average_energies[:totalNum]
-            energies_file.close()
+                average_fitness = average_fitness[:totalNum]
+            fitness_file.close()
             for j, line in enumerate(lines):
                 if (j >= totalNum):
                     break
-                average_energies[j] += (float(line) / 10)
-        ax1.plot(list(range(len(average_energies))),
-                 average_energies,
-                 label=language_type,
-                 linewidth=1.0)
+                average_fitness[j] += (float(line) / 10)
+
+        # Plot line
+        ax.plot(list(range(len(average_fitness))),
+                average_fitness,
+                label=language_type,
+                linewidth=1.0)
     plt.legend()
     plt.show()
 
 
-def plot_language_distributions(foldername, generations):
-    fig = plt.figure()
-    for j, gen in enumerate(generations):
-        for i, language in enumerate(["edible", "poisonous"]):
-            languages = [0, 0, 0, 0, 0, 0, 0, 0]
-            with open(foldername + "/" + language + str(gen) + ".txt", "r") as language_file:
-                num_samples = 0
-                for sample in language_file.readlines():
-                    languages[int(sample[0])] += 1
-                    num_samples += 1
-                for t in range(len(languages)):
-                    languages[t] /= num_samples
-            ax = fig.add_subplot(len(generations), 2, i + 1 + j * 2)
-            plt.setp(ax.get_yticklabels(), visible=False)
-            if i == 0:
-                ax.set_ylabel(str(gen),
-                              rotation="horizontal",
-                              verticalalignment="center",
-                              horizontalalignment="right",
-                              size="small")
-            if j < len(generations) - 1:
-                plt.setp(ax.get_xticklabels(), visible=False)
-            ax.plot([str(bin(i))[2:] for i in range(8)], languages)
-            ax.tick_params(axis='x', labelsize="small")
-    plt.gcf().subplots_adjust(left=0.15)
-    plt.show()
+def plot_language_distributions_bar(foldername, increment, num):
 
-
-def plot_language_distributions_bar(foldername, generations):
+    generations = [i * increment for i in range(int(num / increment) + 1)]
 
     width = 0.35
-    labels = [str(bin(i))[2:] for i in range(8)]
+    labels = [str(bin(i))[2:].zfill(3) for i in range(8)]
     x = np.arange(len(labels))
 
     fig = plt.figure()
+
+    # Set up main axis for title and labels
+    axmain = fig.add_subplot(111)
+    axmain.spines['top'].set_color('none')
+    axmain.spines['bottom'].set_color('none')
+    axmain.spines['left'].set_color('none')
+    axmain.spines['right'].set_color('none')
+    axmain.tick_params(labelcolor='w', top=False, bottom=False, left=False, right=False)
+    axmain.set_title('Language Frequency Distribution')
+
+    # Plot a frequency distribution for each generation in the list
     for j, gen in enumerate(generations):
 
+        # Create subplot and remove ticks
         ax = fig.add_subplot(len(generations), 1, j + 1)
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        axmain.set_ylabel('generation')
+        axmain.set_xlabel('signal')
 
-        for i, language in enumerate(["edible", "poisonous"]):
-            languages = [0, 0, 0, 0, 0, 0, 0, 0]
-            with open(foldername + "/" + language + str(gen) + ".txt", "r") as language_file:
-                num_samples = 0
-                for sample in language_file.readlines():
-                    languages[int(sample[0])] += 1
-                    num_samples += 1
-                for t in range(len(languages)):
-                    languages[t] /= num_samples
-
-                rects = ax.bar(x + pow(-1, i) * width / 2, languages, width, label=language)
-
+        # Set label and ticks
         ax.set_ylabel(str(gen),
                       rotation="horizontal",
                       verticalalignment="center",
                       horizontalalignment="right",
                       size="small")
-        if j == 0:
-            ax.set_title('Language Frequency Distribution')
         ax.set_xticks(x)
         ax.set_xticklabels(labels, size="small")
         plt.setp(ax.get_yticklabels(), visible=False)
+        ax.get_yaxis().set_ticks([])
         if j < len(generations) - 1:
             plt.setp(ax.get_xticklabels(), visible=False)
 
-    plt.legend()
+        # Set axis height
+        ax.set_ylim([0, 1])
+
+        # Plot data
+        language = pickle.load(open(foldername + "/language/language" + str(gen) + ".p", 'rb'))
+        rects = ax.bar(x + pow(-1, 1) * width / 2,
+                       language["edible"],
+                       width,
+                       label="edible",
+                       color='red')
+        rects = ax.bar(x + pow(-1, 2) * width / 2,
+                       language["poisonous"],
+                       width,
+                       label="poisonous",
+                       color='blue')
+
+        # Plot legend half way up
+        if gen == generations[len(generations) // 2]:
+            ax.legend()
+
     plt.gcf().subplots_adjust(left=0.15)
     plt.show()
 
@@ -209,18 +255,9 @@ def get_QI(foldername, generations, k=1):
 
     qis = []
     for gen in generations:
-        production_table = {
-            "edible": [0, 0, 0, 0, 0, 0, 0, 0],
-            "poisonous": [0, 0, 0, 0, 0, 0, 0, 0]
-        }
-        # Create production table, storing the frequencies of each signal
-        for language in production_table:
-            with open(foldername + "/language/" + language + str(gen) + ".txt", "r") as sample_file:
-                samples = [int(sample) for sample in sample_file.readlines()]
-                for sample in samples:
-                    production_table[language][sample] += 1
-                for i in range(8):
-                    production_table[language][i] /= len(samples)
+
+        production_table = pickle.load(
+            open(foldername + "/language/language" + str(gen) + ".p", "rb"))
 
         # Calculate the dispersion values
         d_edible = sum([abs(frequency - 0.125) for frequency in production_table["edible"]])
@@ -229,7 +266,7 @@ def get_QI(foldername, generations, k=1):
         # Calculate quality index
         qi = sum([
             abs(production_table["edible"][i] - production_table["poisonous"][i]) for i in range(8)
-        ]) - k * min(d_edible, d_poisonous)
+        ]) + k * min(d_edible, d_poisonous)
         qis.append(qi * 100 / 3.75)
 
     return qis
@@ -241,21 +278,21 @@ def frequency_and_qi(foldername, generations):
     qis = get_QI(foldername, generations)
 
     # Get fitness scores
-    energies_file = open(foldername + "/energies.txt", "r")
-    average_energies = []
-    lines = energies_file.readlines()
-    energies_file.close()
+    fitness_file = open(foldername + "/fitness.txt", "r")
+    average_fitness = []
+    lines = fitness_file.readlines()
+    fitness_file.close()
     for line in lines:
-        average_energies.append(float(line))
+        average_fitness.append(float(line))
 
     # Calculate correlation
-    print("Correlation:", pearsonr(average_energies, qis))
+    print("Correlation:", pearsonr(average_fitness, qis))
 
     # Create figure
     fig = plt.figure()
     ax1 = fig.add_subplot(1, 1, 1)
-    ax1.plot(list(range(len(average_energies))),
-             average_energies,
+    ax1.plot(list(range(len(average_fitness))),
+             average_fitness,
              label="average energy",
              linewidth=1.0)
     ax1.plot(generations, qis, label="Quality Index", linewidth=1.0)
@@ -264,11 +301,47 @@ def frequency_and_qi(foldername, generations):
 
 
 if __name__ == "__main__":
-    style.use('fivethirtyeight')
-    #plotTen(str(sys.argv[1]))
-    #plotOne(str(sys.argv[1]))
-    plot_average(str(sys.argv[1]))
-    #plotTenEvolved(str(sys.argv[1]), sys.argv[2])
+    parser = argparse.ArgumentParser(description='Conduct Analysis of Simulation')
+    parser.add_argument('type',
+                        type=str,
+                        choices=['average', 'ten', 'ten-language', 'single', 'language', 'qi'],
+                        help='type of graph to display')
+    parser.add_argument('foldername', type=str, help="where data is stored")
+    parser.add_argument('-n',
+                        '--num_gen',
+                        action='store',
+                        type=int,
+                        default=2000,
+                        help='number of generations to display')
+    parser.add_argument('-l',
+                        '--language',
+                        action='store',
+                        type=str,
+                        default="Evolved",
+                        help='language type to display')
+    parser.add_argument('-i',
+                        '--increment',
+                        action='store',
+                        type=int,
+                        default=100,
+                        help='language increment')
+
+    args, unknown = parser.parse_known_args()
+
+    #style.use('fivethirtyeight')
+    style.use('seaborn-bright')
+
+    if args.type == "average":
+        plot_average(args.foldername, args.num_gen)
+    elif args.type == "ten":
+        plot_ten(args.foldername, args.num_gen)
+    elif args.type == "single":
+        plot_one(args.foldername, args.num_gen)
+    elif args.type == "ten-language":
+        plot_ten_language(args.foldername, args.language, args.num_gen)
+    elif args.type == "language":
+        plot_language_distributions_bar(args.foldername, args.increment, args.num_gen)
+
     #for j in range(10):
-    #    plotLanguageDistributionsBar(str(sys.argv[1]) + "/Evolved" + str(j) + "/language/", [i * 100 for i in range(11)])
-    #frequency_and_qi(str(sys.argv[1]), [i for i in range(1001)])
+    #    plot_language_distributions_bar(str(sys.argv[1]) + "/Evolved" + str(j) + "/language", [i * 100 for i in range(21)])
+    #frequency_and_qi(str(sys.argv[1]), [i for i in range(2001)])
