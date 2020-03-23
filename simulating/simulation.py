@@ -541,11 +541,11 @@ if __name__ == '__main__':
                         choices=['None', 'Evolved', 'External'],
                         help='language type used in the simulation')
     parser.add_argument('foldername', type=str, help='where results are stored')
-    parser.add_argument('-s',
-                        '--single',
+    parser.add_argument('--single',
+                        '-s',
                         action='store_true',
                         help='run a single simulation for one entity')
-    parser.add_argument('-i', '--interactive', action='store_true', help='run with interactivity')
+    parser.add_argument('--interactive', '-i', action='store_true', help='run with interactivity')
     parser.add_argument('--num_epo',
                         action='store',
                         type=int,
