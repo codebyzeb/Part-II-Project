@@ -59,7 +59,7 @@ def plot_one(foldername, num=1000):
     ax = fig.add_subplot(1, 1, 1)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_title("Average Fitness")
+    # ax.set_title("Average Fitness")
     ax.grid(linestyle='-')
 
     # Get data
@@ -83,7 +83,9 @@ def plot_one(foldername, num=1000):
 def plot_ten(foldername, num=1000):
     fig = plt.figure()
     ax = fig.add_subplot(1111)
-    ax.set_title("Average fitness for ten replicas")
+    # ax.set_title("Average fitness for ten replicas")
+    ax.set_xlabel("Generations")
+    ax.set_ylabel("Fitness")
 
     # Plot ten subgraphs
     for i in range(10):
@@ -121,7 +123,7 @@ def plot_ten_language(foldername, language, num):
     ax = fig.add_subplot(1, 1, 1)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_title("Average fitness for ten replicas of {0} language".format(language))
+    # ax.set_title("Average fitness for ten replicas of {0} language".format(language))
     ax.grid(linestyle='-')
     # ax.set_ylim([0, 450])
 
@@ -152,7 +154,9 @@ def plot_average(foldername, num=1000):
     ax = fig.add_subplot(1, 1, 1)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_title("Average fitness")
+    # ax.set_title("Average fitness")
+    ax.set_xlabel("Generations")
+    ax.set_ylabel("Fitness")
     ax.grid(linestyle='-')
     # ax.set_ylim([0, 450])
 
@@ -198,7 +202,7 @@ def plot_language_distributions_bar(foldername, increment, num):
     axmain.spines['left'].set_color('none')
     axmain.spines['right'].set_color('none')
     axmain.tick_params(labelcolor='w', top=False, bottom=False, left=False, right=False)
-    axmain.set_title('Language Frequency Distribution')
+    # axmain.set_title('Language Frequency Distribution')
 
     # Get data
     language = pickle.load(open(foldername + "/language.p", 'rb'))

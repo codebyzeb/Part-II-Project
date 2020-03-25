@@ -56,7 +56,7 @@ def ten_replicas_flattened(foldername, generation):
     # Get data
     flatten = 'F'
     data = [[], []]
-    labels = [8, 6, 5, 4, 3, 2, 1, 0, 7, 9]
+    labels = [0, 3, 4, 5, 6, 7, 1, 2, 8, 9]
     #labels = [0, 7, 9]
 
     for i in labels:
@@ -80,9 +80,9 @@ def ten_replicas_flattened(foldername, generation):
 
 
 def many_generations(foldername, generation):
-    flatten = 'C'
+    flatten = 'F'
     data = [[], [], [], []]
-    labels = [i * 25 for i in range(generation // 25 + 1)]
+    labels = [i * 50 for i in range(generation // 50 + 1)]
     labels.reverse()
 
     for generation in labels:
@@ -105,8 +105,10 @@ def display_heatmap_flattened(data, labels, ylabel):
     # Set up plot
     pc_kwargs = {
         'rasterized': True,
-        'cmap': 'RdBu'
-    }  #, 'vmin':-2, 'vmax':2}#, 'edgecolors':'grey', 'linewidths':[.5, 4]}
+        'cmap': 'RdBu',
+        'vmin': -2,
+        'vmax': 2
+    }  #, 'edgecolors':'grey', 'linewidths':[.5, 4]}
 
     skip = 1
 
@@ -118,7 +120,7 @@ def display_heatmap_flattened(data, labels, ylabel):
     ax1.get_yaxis().set_ticks(list(range(0, len(labels), skip)))
     ax1.get_yaxis().set_ticklabels(['%d' % val for val in labels[::skip]])
     ax1.yaxis.set_label_position('left')
-    ax1.set_xlabel("B1")
+    ax1.set_xlabel("B'")
     ax1.set_ylabel(ylabel)
     im1 = ax1.pcolor(data[0], **pc_kwargs)
 
@@ -126,7 +128,7 @@ def display_heatmap_flattened(data, labels, ylabel):
     ax2.get_xaxis().set_ticklabels([])
     ax2.get_yaxis().set_ticklabels([])
     ax2.yaxis.set_label_position('left')
-    ax2.set_xlabel("W1")
+    ax2.set_xlabel("W'")
     im2 = ax2.pcolor(data[1], **pc_kwargs)
 
     fig.colorbar(im2, ax=ax2, shrink=1)
@@ -195,10 +197,6 @@ if __name__ == "__main__":
                         type=int,
                         default=0,
                         help='entity in the list whose network you want to display')
-    parser.add_argument('-f',
-                        '--flatten',
-                        action='store_true',
-                        help='whether to flatten the network')
     args, unknown = parser.parse_known_args()
 
     if args.type == "one_flat":
