@@ -37,6 +37,17 @@ De~Boer, B. (1997).
 \newblock In {\em Fourth European Conference on Arficial Life, Brighton}.
   Citeseer.
 
+\bibitem[De~Villiers and Barnard, 1993]{de1993backpropagation}
+De~Villiers, J. and Barnard, E. (1993).
+\newblock Backpropagation neural nets with one and two hidden layers.
+\newblock {\em IEEE transactions on neural networks}, 4(1):136--141.
+
+\bibitem[Fleagle et~al., 2008]{Fleagle2008}
+Fleagle, J.~G., Assefa, Z., Brown, F.~H., and Shea, J.~J. (2008).
+\newblock {Paleoanthropology of the Kibish Formation, southern Ethiopia:
+  Introduction}.
+\newblock {\em Journal of Human Evolution}, 55(3):360--365.
+
 \bibitem[Kirby and Hurford, 2002]{kirby2002emergence}
 Kirby, S. and Hurford, J.~R. (2002).
 \newblock The emergence of linguistic structure: An overview of the iterated
@@ -48,6 +59,12 @@ Kirby, S. and Hurford, J.~R. (2002).
 Langton, C.~G. (1997).
 \newblock {\em Artificial life: An overview}.
 \newblock Mit Press.
+
+\bibitem[Nair and Hinton, 2010]{nair2010rectified}
+Nair, V. and Hinton, G.~E. (2010).
+\newblock Rectified linear units improve restricted boltzmann machines.
+\newblock In {\em Proceedings of the 27th international conference on machine
+  learning (ICML-10)}, pages 807--814.
 
 \bibitem[Parisi and Cangelosi, 2002]{parisi2002unified}
 Parisi, D. and Cangelosi, A. (2002).

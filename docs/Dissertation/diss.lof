@@ -1,12 +1,22 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An organism ($\blacktriangle $) in the simulation environment with edible (E) and poisonous (P) mushrooms.}}{16}{figure.2.1}% 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Structure of a fully-connected ANN to control entity behaviour}}{18}{figure.2.2}% 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Differences in simulation structure for the three population types}}{20}{figure.2.3}% 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces An organism ($\blacktriangle $) in the simulation environment with edible (E) and poisonous (P) mushrooms.\relax }}{16}{figure.caption.9}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Structure of a fully-connected ANN to control entity behaviour\relax }}{18}{figure.caption.10}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Differences in simulation structure for the three population types\relax }}{19}{figure.caption.11}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Core modules for my project}}{28}{figure.3.1}% 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Diagram for the Simulating Module}}{28}{figure.3.2}% 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Fully-connected ANN to control entity behaviour}}{34}{figure.3.3}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Core modules for my project\relax }}{26}{figure.caption.15}% 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Diagram for the Simulating Module\relax }}{27}{figure.caption.16}% 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Fully-connected ANN to control entity behaviour\relax }}{32}{figure.caption.18}% 
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Average fitness of each population, averaged over 10 replications, with a {\bf relu} hidden layer activation.\relax }}{42}{figure.caption.21}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Average fitness of each population, averaged over 5 replications. Source: \citet {Cangelosi1998}.\relax }}{42}{figure.caption.21}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Average fitness of each population, averaged over 10 replications, with an {\bf identity} hidden layer activation.\relax }}{42}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Average fitness of each population, averaged over 10 replications, with a {\bf sigmoid} hidden layer activation.\relax }}{42}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Average fitness of 10 replications of the {\bf no language} population, with an {\bf identity} hidden layer activation.\relax }}{44}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Average fitness of 10 replications of the {\bf no language} population, with a {\bf relu} hidden layer activation.\relax }}{44}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Heatmap of the weights and biases of 100 entities taken from generation 2000.\relax }}{44}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Heatmap of a randomly chosen entity taken from increasing generations.\relax }}{44}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Heatmaps of the flattened neural networks of a randomly chosen entity from generation 2000 of ten replicas.\relax }}{45}{figure.caption.25}% 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces The behaviour of two entities approaching a poisonous mushroom (P). The entities are randomly chosen from generation 2000 of two {\bf no language} populations with an average fitness of 140 (left) and 250 (right).\relax }}{46}{figure.caption.26}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
