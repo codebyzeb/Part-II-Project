@@ -139,11 +139,13 @@ class Environment:
         for debugging purposes
         """
 
-        for i, (x, y) in enumerate([(0, 0), (0, 2), (1, 1), (2, 0), (2, 2)]):
-            self.world[(x + 5, y + 5)] = make_edible(i)
-            self.world[(x + 15, y + 5)] = make_poisonous(i)
-            self.world[(x + 5, y + 15)] = make_edible(i + 5)
-            self.world[(x + 15, y + 15)] = make_poisonous(i + 5)
+        # for i, (x, y) in enumerate([(0, 0), (0, 2), (1, 1), (2, 0), (2, 2)]):
+        #     self.world[(x + 5, y + 5)] = make_edible(i)
+        #     self.world[(x + 15, y + 5)] = make_poisonous(i)
+        #     self.world[(x + 5, y + 15)] = make_edible(i + 5)
+        #     self.world[(x + 15, y + 15)] = make_poisonous(i + 5)
+
+        self.world[(10, 5)] = make_poisonous(1)
 
     # ----- Mushroom manipulation methods ----- #
 

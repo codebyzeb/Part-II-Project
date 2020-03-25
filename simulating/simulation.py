@@ -318,18 +318,18 @@ class Simulation:  #pylint: disable=R0903
             fitness_file = self.foldername + "/fitness.txt"
             open(fitness_file, "w").close()
 
-        info_file = open(self.foldername + "/info.txt", "w")
-        info_file.writelines("\n".join([
-            "Num Epochs: " + str(self.num_epochs), "Num Cycles: " + str(self.num_cycles),
-            "Num Entities: " + str(self.num_entities),
-            "Num Generations:" + str(self.num_generations),
-            "Language Type: " + str(self.language_type),
-            "Percentage Mutate: " + str(self.percentage_mutate),
-            "Percentage Keep: " + str(self.percentage_keep),
-            "Linear: " + str(simulating.entity.LINEAR),
-            "Activation function: " + str(simulating.entity.ACTIVATION)
-        ]))
-        info_file.close()
+            info_file = open(self.foldername + "/info.txt", "w")
+            info_file.writelines("\n".join([
+                "Num Epochs: " + str(self.num_epochs), "Num Cycles: " + str(self.num_cycles),
+                "Num Entities: " + str(self.num_entities),
+                "Num Generations:" + str(self.num_generations),
+                "Language Type: " + str(self.language_type),
+                "Percentage Mutate: " + str(self.percentage_mutate),
+                "Percentage Keep: " + str(self.percentage_keep),
+                "Linear: " + str(simulating.entity.LINEAR),
+                "Activation function: " + str(simulating.entity.ACTIVATION)
+            ]))
+            info_file.close()
 
         return plotter
 
