@@ -1,22 +1,33 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An organism ($\blacktriangle $) in the simulation environment with edible (E) and poisonous (P) mushrooms.\relax }}{16}{figure.caption.9}% 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Structure of a fully-connected ANN to control entity behaviour\relax }}{18}{figure.caption.10}% 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Differences in simulation structure for the three population types\relax }}{19}{figure.caption.11}% 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces An organism ($\blacktriangle $) in the simulation environment with edible (E) and poisonous (P) mushrooms.\relax }}{18}{figure.caption.9}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Structure of a fully-connected ANN to control entity behaviour\relax }}{20}{figure.caption.10}% 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Differences in simulation structure for the three population types\relax }}{21}{figure.caption.11}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Core modules for my project\relax }}{26}{figure.caption.15}% 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Diagram for the Simulating Module\relax }}{27}{figure.caption.16}% 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Fully-connected ANN to control entity behaviour\relax }}{32}{figure.caption.18}% 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Core modules for my project\relax }}{28}{figure.caption.15}% 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces UML Diagram for the Simulating Module\relax }}{29}{figure.caption.16}% 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Fully-connected ANN to control entity behaviour\relax }}{34}{figure.caption.18}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Average fitness of each population, averaged over 10 replications, with a {\bf relu} hidden layer activation.\relax }}{42}{figure.caption.21}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Average fitness of each population, averaged over 5 replications. Source: \citet {Cangelosi1998}.\relax }}{42}{figure.caption.21}% 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Average fitness of each population, averaged over 10 replications, with an {\bf identity} hidden layer activation.\relax }}{42}{figure.caption.22}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Average fitness of each population, averaged over 10 replications, with a {\bf sigmoid} hidden layer activation.\relax }}{42}{figure.caption.22}% 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Average fitness of 10 replications of the {\bf no language} population, with an {\bf identity} hidden layer activation.\relax }}{44}{figure.caption.23}% 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Average fitness of 10 replications of the {\bf no language} population, with a {\bf relu} hidden layer activation.\relax }}{44}{figure.caption.23}% 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Heatmap of the weights and biases of 100 entities taken from generation 2000.\relax }}{44}{figure.caption.24}% 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Heatmap of a randomly chosen entity taken from increasing generations.\relax }}{44}{figure.caption.24}% 
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Heatmaps of the flattened neural networks of a randomly chosen entity from generation 2000 of ten replicas.\relax }}{45}{figure.caption.25}% 
-\contentsline {figure}{\numberline {4.10}{\ignorespaces The behaviour of two entities approaching a poisonous mushroom (P). The entities are randomly chosen from generation 2000 of two {\bf no language} populations with an average fitness of 140 (left) and 250 (right).\relax }}{46}{figure.caption.26}% 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Average fitness of each population, averaged over 10 replications, with a {\bf relu} hidden layer activation.\relax }}{44}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Average fitness of each population, averaged over 5 replications. Source: \citet {Cangelosi1998}.\relax }}{44}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Average fitness of each population, averaged over 10 replications, with an {\bf identity} hidden layer activation.\relax }}{44}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Average fitness of each population, averaged over 10 replications, with a {\bf sigmoid} hidden layer activation.\relax }}{44}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Frequency distribution of the possible signals produced by all individuals in 10 generations in one replica of a simulation with an \bf {evolved language}.\relax }}{46}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Average fitness for one replica of a population with an {\bf evolved language}. Also shown is the Quality Index score of the language produced by this population.\relax }}{46}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Average fitness of 10 replications of the {\bf no language} population, with an {\bf identity} hidden layer activation.\relax }}{47}{figure.caption.25}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Average fitness of 10 replications of the {\bf no language} population, with a {\bf relu} hidden layer activation.\relax }}{47}{figure.caption.25}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Heatmap of the weights and biases of 100 entities taken from generation 2000.\relax }}{47}{figure.caption.26}% 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Heatmap of a randomly chosen entity taken from increasing generations.\relax }}{47}{figure.caption.26}% 
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Heatmaps of the flattened neural networks of a randomly chosen entity from generation 2000 of ten replicas.\relax }}{48}{figure.caption.27}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces The behaviour of two entities approaching a poisonous mushroom (P). The entities are randomly chosen from generation 2000 of two {\bf no language} populations with an average fitness of 140 (left) and 250 (right).\relax }}{49}{figure.caption.28}% 
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Average fitness of each population, averaged over 10 replications, with two hidden layers of five units each.\relax }}{50}{figure.caption.29}% 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Average fitness of each population, averaged over 10 replications, with three hidden layers of ten units, five units and ten units.\relax }}{50}{figure.caption.29}% 
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Average fitness of each population, averaged over 10 replications, with simulations consisting of 30 epochs of length 15.\relax }}{51}{figure.caption.30}% 
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Average fitness of each population, averaged over 10 replications, with simulations consisting of 10 epochs of length 75.\relax }}{51}{figure.caption.30}% 
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Average fitness of each population, averaged over 10 replications, with the mutation percentage set to 20\%.\relax }}{52}{figure.caption.31}% 
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Average fitness of each population, averaged over 10 replications, with the mutation percentage set to 50\%.\relax }}{52}{figure.caption.31}% 
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Average fitness of each population, averaged over 10 replications, with the percentage of entities selected to reproduce set to 10\%.\relax }}{52}{figure.caption.32}% 
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Average fitness of each population, averaged over 10 replications, with the percentage of entities selected to reproduce set to 5\%.\relax }}{52}{figure.caption.32}% 
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
