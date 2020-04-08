@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.11)  28 MAR 2020 15:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.11)  8 APR 2020 13:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -675,32 +675,37 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks31
+\inpenc@posthook=\toks32
 ) (./diss.aux)
 \openout1 = `diss.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 27.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    ... okay on input line 27.
 \AtBeginShipoutBox=\box38
-Package hyperref Info: Link coloring OFF on input line 25.
+Package hyperref Info: Link coloring OFF on input line 27.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -710,9 +715,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count126
 )
-LaTeX Info: Redefining \ref on input line 25.
-LaTeX Info: Redefining \pageref on input line 25.
-LaTeX Info: Redefining \nameref on input line 25.
+LaTeX Info: Redefining \ref on input line 27.
+LaTeX Info: Redefining \pageref on input line 27.
+LaTeX Info: Redefining \nameref on input line 27.
 
 (./diss.out) (./diss.out)
 \@outlinefile=\write4
@@ -760,12 +765,12 @@ LaTeX Info: Redefining \nameref on input line 25.
 \scratchbox=\box39
 \nofMPsegments=\count128
 \nofMParguments=\count129
-\everyMPshowfont=\toks31
+\everyMPshowfont=\toks33
 \MPscratchCnt=\count130
 \MPscratchDim=\dimen171
 \MPnumerator=\count131
 \makeMPintoPDFobject=\count132
-\everyMPtoPDFconversion=\toks32
+\everyMPtoPDFconversion=\toks34
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -788,277 +793,340 @@ Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
 \docmute@nestinglevel=\count133
- [1
+ [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+] [2
 
 ]
-LaTeX Font Info:    Try loading font information for U+wasy on input line 52.
-
+Chapter 1.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 59.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 52.
+LaTeX Font Info:    Try loading font information for U+msa on input line 59.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 52.
+LaTeX Font Info:    Try loading font information for U+msb on input line 59.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3] [4]
-(./diss.toc [5
-
-] [6])
-\tf@toc=\write5
-\openout5 = `diss.toc'.
-
- [7] [8
-
-] (./diss.lof [9])
-\tf@lof=\write6
-\openout6 = `diss.lof'.
-
- [10] [11] [12
-
-]
-Chapter 1.
-[13] [14] [15] [16
-
-]
+) [1] [2]
 Chapter 2.
+[3
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[17] [18]
-<figs/NeuralNets.png, id=558, 355.3275pt x 231.86626pt>
+] [4]
+<figs/NeuralNets.png, id=376, 355.3275pt x 231.86626pt>
 File: figs/NeuralNets.png Graphic file (type png)
 <use figs/NeuralNets.png>
-Package pdftex.def Info: figs/NeuralNets.png  used on input line 244.
+Package pdftex.def Info: figs/NeuralNets.png  used on input line 182.
 (pdftex.def)             Requested size: 290.22107pt x 189.38857pt.
- [19] [20 <./figs/NeuralNets.png>]
-<figs/populations.png, id=586, 1093.08376pt x 680.5425pt>
+
+
+Package natbib Warning: Citation `holland1992adaptation' on page 5 undefined on
+ input line 197.
+
+[5] [6 <./figs/NeuralNets.png>]
+<figs/populations.png, id=406, 1093.08376pt x 680.5425pt>
 File: figs/populations.png Graphic file (type png)
 <use figs/populations.png>
-Package pdftex.def Info: figs/populations.png  used on input line 294.
+Package pdftex.def Info: figs/populations.png  used on input line 232.
 (pdftex.def)             Requested size: 483.69687pt x 301.14264pt.
 
-Overfull \hbox (5.40984pt too wide) in paragraph at lines 301--314
+Overfull \hbox (5.40984pt too wide) in paragraph at lines 239--252
  [][] 
  []
 
-[21 <./figs/populations.png>] [22] [23] [24] [25] [26]
+[7 <./figs/populations.png>] [8] [9] [10] [11] [12]
 Chapter 3.
-<figs/modules.png, id=681, 565.11125pt x 324.21124pt>
+<figs/modules.png, id=504, 565.11125pt x 324.21124pt>
 File: figs/modules.png Graphic file (type png)
 <use figs/modules.png>
-Package pdftex.def Info: figs/modules.png  used on input line 465.
+Package pdftex.def Info: figs/modules.png  used on input line 405.
 (pdftex.def)             Requested size: 386.95897pt x 222.00916pt.
-<figs/uml.png, id=682, 1106.1325pt x 607.26875pt>
+<figs/uml.png, id=505, 1014.79124pt x 686.565pt>
 File: figs/uml.png Graphic file (type png)
 <use figs/uml.png>
-Package pdftex.def Info: figs/uml.png  used on input line 472.
-(pdftex.def)             Requested size: 483.69687pt x 265.5497pt.
-[27
+Package pdftex.def Info: figs/uml.png  used on input line 412.
+(pdftex.def)             Requested size: 483.69687pt x 327.2427pt.
+[13
 
-] [28 <./figs/modules.png>] [29 <./figs/uml.png>] [30]
-Underfull \hbox (badness 1009) in paragraph at lines 600--601
+] [14 <./figs/modules.png>] [15 <./figs/uml.png>] [16] [17]
+Underfull \hbox (badness 1009) in paragraph at lines 540--541
 []\OT1/cmr/m/n/12 The En-tity class also de-fines the method \OT1/cmtt/m/n/12 b
 ehaviour(float, int, float[]): Action,
  []
 
-[31] [32]
-<figs/fullneural.png, id=739, 1399.2275pt x 901.3675pt>
+[18]
+<figs/fullneural.png, id=567, 1399.2275pt x 901.3675pt>
 File: figs/fullneural.png Graphic file (type png)
 <use figs/fullneural.png>
-Package pdftex.def Info: figs/fullneural.png  used on input line 652.
+Package pdftex.def Info: figs/fullneural.png  used on input line 592.
 (pdftex.def)             Requested size: 435.32422pt x 280.42505pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[33] [34 <./figs/fullneural.png>] [35] [36] [37] [38] [39]
-
-LaTeX Warning: Reference `fig:interactive-fitness' on page 40 undefined on inpu
-t line 822.
-
-[40] [41] [42]
+ [19] [20 <./figs/fullneural.png>] [21] [22] [23] [24] [25] [26] [27]
+[28]
 Chapter 4.
-<results/average-relu.png, id=843, 462.528pt x 346.896pt>
+<results/average-relu.png, id=668, 462.528pt x 346.896pt>
 File: results/average-relu.png Graphic file (type png)
 <use results/average-relu.png>
-Package pdftex.def Info: results/average-relu.png  used on input line 951.
+Package pdftex.def Info: results/average-relu.png  used on input line 893.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<figs/fitness.png, id=844, 720.6925pt x 427.5975pt>
+<figs/fitness.png, id=669, 720.6925pt x 427.5975pt>
 File: figs/fitness.png Graphic file (type png)
 <use figs/fitness.png>
-Package pdftex.def Info: figs/fitness.png  used on input line 958.
+Package pdftex.def Info: figs/fitness.png  used on input line 900.
 (pdftex.def)             Requested size: 237.01411pt x 140.61826pt.
-[43
+[29
 
 ]
-<results/average-identity.png, id=858, 462.528pt x 346.896pt>
+<results/average-identity.png, id=683, 462.528pt x 346.896pt>
 File: results/average-identity.png Graphic file (type png)
 <use results/average-identity.png>
-Package pdftex.def Info: results/average-identity.png  used on input line 973.
+Package pdftex.def Info: results/average-identity.png  used on input line 915.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-sigmoid.png, id=859, 462.528pt x 346.896pt>
+<results/average-sigmoid.png, id=684, 462.528pt x 346.896pt>
 File: results/average-sigmoid.png Graphic file (type png)
 <use results/average-sigmoid.png>
-Package pdftex.def Info: results/average-sigmoid.png  used on input line 980.
+Package pdftex.def Info: results/average-sigmoid.png  used on input line 922.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
- [44 <./results/average-relu.png> <./figs/fitness.png> <./results/average-ident
+ [30 <./results/average-relu.png> <./figs/fitness.png> <./results/average-ident
 ity.png> <./results/average-sigmoid.png>]
-<results/language.png, id=878, 462.528pt x 346.896pt>
+<results/language.png, id=707, 462.528pt x 346.896pt>
 File: results/language.png Graphic file (type png)
 <use results/language.png>
-Package pdftex.def Info: results/language.png  used on input line 1011.
+Package pdftex.def Info: results/language.png  used on input line 953.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/correlation.png, id=879, 462.528pt x 346.896pt>
+<results/correlation.png, id=708, 462.528pt x 346.896pt>
 File: results/correlation.png Graphic file (type png)
 <use results/correlation.png>
-Package pdftex.def Info: results/correlation.png  used on input line 1018.
+Package pdftex.def Info: results/correlation.png  used on input line 960.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
- [45]
-<results/ten-none-identity.png, id=893, 462.528pt x 346.896pt>
+ [31]
+<results/ten-none-identity.png, id=724, 462.528pt x 346.896pt>
 File: results/ten-none-identity.png Graphic file (type png)
 <use results/ten-none-identity.png>
-Package pdftex.def Info: results/ten-none-identity.png  used on input line 1047
-.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/ten-none-relu.png, id=894, 462.528pt x 346.896pt>
-File: results/ten-none-relu.png Graphic file (type png)
-<use results/ten-none-relu.png>
-Package pdftex.def Info: results/ten-none-relu.png  used on input line 1054.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
- [46 <./results/language.png> <./results/correlation.png>]
-<results/weights-2000-none2.png, id=905, 462.528pt x 346.896pt>
-File: results/weights-2000-none2.png Graphic file (type png)
-<use results/weights-2000-none2.png>
-Package pdftex.def Info: results/weights-2000-none2.png  used on input line 106
-9.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/convergence.png, id=906, 462.528pt x 346.896pt>
-File: results/convergence.png Graphic file (type png)
-<use results/convergence.png>
-Package pdftex.def Info: results/convergence.png  used on input line 1076.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
- [47 <./results/ten-none-identity.png> <./results/ten-none-relu.png> <./results
-/weights-2000-none2.png> <./results/convergence.png>]
-<results/compare2.png, id=918, 462.528pt x 346.896pt>
-File: results/compare2.png Graphic file (type png)
-<use results/compare2.png>
-Package pdftex.def Info: results/compare2.png  used on input line 1091.
-(pdftex.def)             Requested size: 483.69687pt x 362.79062pt.
- [48 <./results/compare2.png>] [49]
-<results/average-55.png, id=938, 462.528pt x 346.896pt>
-File: results/average-55.png Graphic file (type png)
-<use results/average-55.png>
-Package pdftex.def Info: results/average-55.png  used on input line 1167.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-10510.png, id=939, 462.528pt x 346.896pt>
-File: results/average-10510.png Graphic file (type png)
-<use results/average-10510.png>
-Package pdftex.def Info: results/average-10510.png  used on input line 1174.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
- [50 <./results/average-55.png> <./results/average-10510.png>]
-<results/average-short-epo.png, id=953, 462.528pt x 346.896pt>
-File: results/average-short-epo.png Graphic file (type png)
-<use results/average-short-epo.png>
-Package pdftex.def Info: results/average-short-epo.png  used on input line 1191
-.
-(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-long-epo.png, id=954, 462.528pt x 346.896pt>
-File: results/average-long-epo.png Graphic file (type png)
-<use results/average-long-epo.png>
-Package pdftex.def Info: results/average-long-epo.png  used on input line 1198.
+Package pdftex.def Info: results/ten-none-identity.png  used on input line 989.
 
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-mut20.png, id=958, 462.528pt x 346.896pt>
+<results/ten-none-relu.png, id=725, 462.528pt x 346.896pt>
+File: results/ten-none-relu.png Graphic file (type png)
+<use results/ten-none-relu.png>
+Package pdftex.def Info: results/ten-none-relu.png  used on input line 996.
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+ [32 <./results/language.png> <./results/correlation.png>]
+<results/weights-2000-none2.png, id=737, 462.528pt x 346.896pt>
+File: results/weights-2000-none2.png Graphic file (type png)
+<use results/weights-2000-none2.png>
+Package pdftex.def Info: results/weights-2000-none2.png  used on input line 101
+1.
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+<results/convergence.png, id=738, 462.528pt x 346.896pt>
+File: results/convergence.png Graphic file (type png)
+<use results/convergence.png>
+Package pdftex.def Info: results/convergence.png  used on input line 1018.
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+ [33 <./results/ten-none-identity.png> <./results/ten-none-relu.png> <./results
+/weights-2000-none2.png> <./results/convergence.png>]
+<results/compare2.png, id=751, 462.528pt x 346.896pt>
+File: results/compare2.png Graphic file (type png)
+<use results/compare2.png>
+Package pdftex.def Info: results/compare2.png  used on input line 1033.
+(pdftex.def)             Requested size: 483.69687pt x 362.79062pt.
+ [34 <./results/compare2.png>] [35]
+<results/average-55.png, id=773, 462.528pt x 346.896pt>
+File: results/average-55.png Graphic file (type png)
+<use results/average-55.png>
+Package pdftex.def Info: results/average-55.png  used on input line 1107.
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+<results/average-10510.png, id=774, 462.528pt x 346.896pt>
+File: results/average-10510.png Graphic file (type png)
+<use results/average-10510.png>
+Package pdftex.def Info: results/average-10510.png  used on input line 1114.
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+ [36 <./results/average-55.png> <./results/average-10510.png>]
+<results/average-short-epo.png, id=790, 462.528pt x 346.896pt>
+File: results/average-short-epo.png Graphic file (type png)
+<use results/average-short-epo.png>
+Package pdftex.def Info: results/average-short-epo.png  used on input line 1131
+.
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+<results/average-long-epo.png, id=791, 462.528pt x 346.896pt>
+File: results/average-long-epo.png Graphic file (type png)
+<use results/average-long-epo.png>
+Package pdftex.def Info: results/average-long-epo.png  used on input line 1138.
+
+(pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
+<results/average-mut20.png, id=795, 462.528pt x 346.896pt>
 File: results/average-mut20.png Graphic file (type png)
 <use results/average-mut20.png>
-Package pdftex.def Info: results/average-mut20.png  used on input line 1215.
+Package pdftex.def Info: results/average-mut20.png  used on input line 1155.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-mut50.png, id=959, 462.528pt x 346.896pt>
+<results/average-mut50.png, id=796, 462.528pt x 346.896pt>
 File: results/average-mut50.png Graphic file (type png)
 <use results/average-mut50.png>
-Package pdftex.def Info: results/average-mut50.png  used on input line 1222.
+Package pdftex.def Info: results/average-mut50.png  used on input line 1162.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-keep10.png, id=960, 462.528pt x 346.896pt>
+<results/average-keep10.png, id=797, 462.528pt x 346.896pt>
 File: results/average-keep10.png Graphic file (type png)
 <use results/average-keep10.png>
-Package pdftex.def Info: results/average-keep10.png  used on input line 1233.
+Package pdftex.def Info: results/average-keep10.png  used on input line 1173.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
-<results/average-keep05.png, id=961, 462.528pt x 346.896pt>
+<results/average-keep05.png, id=798, 462.528pt x 346.896pt>
 File: results/average-keep05.png Graphic file (type png)
 <use results/average-keep05.png>
-Package pdftex.def Info: results/average-keep05.png  used on input line 1240.
+Package pdftex.def Info: results/average-keep05.png  used on input line 1180.
 (pdftex.def)             Requested size: 237.01411pt x 177.76152pt.
- [51 <./results/average-short-epo.png> <./results/average-long-epo.png>] [52 <.
+ [37 <./results/average-short-epo.png> <./results/average-long-epo.png>] [38 <.
 /results/average-mut20.png> <./results/average-mut50.png> <./results/average-ke
-ep10.png> <./results/average-keep05.png>] [53] [54
+ep10.png> <./results/average-keep05.png>] [39] [40
 
 ]
 Chapter 5.
-(./diss.bbl [55] [56
+[41]
 
-]) [57] [58
+Package natbib Warning: There were undefined citations.
 
-]
-Appendix A.
-[59] [60
-
-]
-Appendix B.
-(./proposal.tex [61] [62] [63] [64] [65] [66]) [67] [68]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1306.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1306.
+[42]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1231.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1231.
  (./diss.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1306.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1306.
-
-Package rerunfilecheck Info: File `diss.out' has not changed.
-(rerunfilecheck)             Checksum: 9C9D6E4D1BD244B9B36302E4EFC78AE3;4330.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1231.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1231.
 
 
-LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1306.
+Package rerunfilecheck Warning: File `diss.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `diss.out':
+(rerunfilecheck)             Before: 07A24EFBED1D60E446FAD77DD1872A1B;4511
+(rerunfilecheck)             After:  A3CA20FEF84FB5A5372C503C5E4D9F1C;4347.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1231.
  ) 
 Here is how much of TeX's memory you used:
- 18620 strings out of 492616
- 345802 string characters out of 6129480
- 412125 words of memory out of 5000000
- 21953 multiletter control sequences out of 15000+600000
- 18446 words of font info for 74 fonts, out of 8000000 for 9000
+ 18534 strings out of 492616
+ 344826 string characters out of 6129480
+ 411606 words of memory out of 5000000
+ 21932 multiletter control sequences out of 15000+600000
+ 15669 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,11n,48p,1835b,769s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
-}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
-</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
-/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/t
-exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
-/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/
-2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
-019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/201
-9/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2019/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2019/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on diss.pdf (68 pages, 2424466 bytes).
+ 55i,10n,48p,1699b,769s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.caption.32} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.31} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.30} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.29} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.28} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.27} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.26} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.25} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.21} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.19} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.20} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.17} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.Cangelosi2002} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.Clark1995} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.11} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.nair2010rectified} has been referenced but doe
+s not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.de1993backpropagation} has been referenced but
+ does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.9} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.cangelosi2001evolution} has been referenced bu
+t does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.Cangelosi1998} has been referenced but does no
+t exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.parisi2002unified} has been referenced but doe
+s not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.de1997generating} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.kirby2002emergence} has been referenced but do
+es not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.langton1997artificial} has been referenced but
+ does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.cavalli1997genes} has been referenced but does
+ not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.cangelosi2012simulating} has been referenced b
+ut does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.Fleagle2008} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.B} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{appendix.A} has been referenced but does not exist,
+ replaced by a fixed one
+
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<
+/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
+r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
+local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/lo
+cal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
+l/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
+texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/te
+xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
+ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2
+019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+19/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2019
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2019/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2019/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2019/
+texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on diss.pdf (44 pages, 2385364 bytes).
 PDF statistics:
- 1218 PDF objects out of 1440 (max. 8388607)
- 1065 compressed objects within 11 object streams
- 256 named destinations out of 1000 (max. 500000)
- 661 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 955 PDF objects out of 1000 (max. 8388607)
+ 829 compressed objects within 9 object streams
+ 202 named destinations out of 1000 (max. 500000)
+ 685 words of extra memory for PDF output out of 10000 (max. 10000000)
 
