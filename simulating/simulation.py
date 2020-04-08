@@ -287,7 +287,7 @@ class Simulation:  #pylint: disable=R0903
             entities.sort(key=lambda entity: entity.fitness, reverse=True)
 
             # Do I/O including writing to files and displaying interactive information
-            self.io(entities, generation, populations, plotter)
+            self.io(generation, entities, populations, plotter)
 
             # Finally, select the best entities to reproduce for the next generation
             entities = self.reproduce_population(entities)
@@ -333,7 +333,7 @@ class Simulation:  #pylint: disable=R0903
 
         return plotter
 
-    def io(self, entities, generation, populations, plotter):
+    def io(self, generation, entities, populations, plotter):
         """ Write to files and display the plotter and interactive information
         for the simulation
         """

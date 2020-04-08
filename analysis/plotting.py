@@ -123,6 +123,8 @@ def plot_ten_language(foldername, language, num):
     ax = fig.add_subplot(1, 1, 1)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    ax.set_xlabel("Generations")
+    ax.set_ylabel("Fitness")
     # ax.set_title("Average fitness for ten replicas of {0} language".format(language))
     ax.grid(linestyle='-')
     # ax.set_ylim([0, 450])
@@ -260,25 +262,28 @@ def get_QI(foldername, generations, k=1):
     """
 
     qis = []
+
+    # Get data
+    language = pickle.load(open(foldername + "/language.p", 'rb'))
+
     for gen in generations:
 
-        production_table = pickle.load(
-            open(foldername + "/language/language" + str(gen) + ".p", "rb"))
-
         # Calculate the dispersion values
-        d_edible = sum([abs(frequency - 0.125) for frequency in production_table["edible"]])
-        d_poisonous = sum([abs(frequency - 0.125) for frequency in production_table["poisonous"]])
+        d_edible = sum([abs(frequency - 0.125) for frequency in language[gen]["edible"]])
+        d_poisonous = sum([abs(frequency - 0.125) for frequency in language[gen]["poisonous"]])
 
         # Calculate quality index
-        qi = sum([
-            abs(production_table["edible"][i] - production_table["poisonous"][i]) for i in range(8)
-        ]) + k * min(d_edible, d_poisonous)
+        qi = sum(
+            [abs(language[gen]["edible"][i] - language[gen]["poisonous"][i])
+             for i in range(8)]) + k * min(d_edible, d_poisonous)
         qis.append(qi * 100 / 3.75)
 
     return qis
 
 
-def frequency_and_qi(foldername, generations):
+def frequency_and_qi(foldername, increment, num):
+
+    generations = [i * increment for i in range(int(num / increment) + 1)]
 
     # Get QI scores for each generation
     qis = get_QI(foldername, generations)
@@ -288,30 +293,61 @@ def frequency_and_qi(foldername, generations):
     average_fitness = []
     lines = fitness_file.readlines()
     fitness_file.close()
-    for line in lines:
-        average_fitness.append(float(line))
+    for i, line in enumerate(lines):
+        if i in generations:
+            average_fitness.append(float(line))
 
     # Calculate correlation
     print("Correlation:", pearsonr(average_fitness, qis))
 
-    # Create figure
-    fig = plt.figure()
-    ax1 = fig.add_subplot(1, 1, 1)
-    ax1.plot(list(range(len(average_fitness))),
-             average_fitness,
-             label="average energy",
-             linewidth=1.0)
-    ax1.plot(generations, qis, label="Quality Index", linewidth=1.0)
-    plt.legend()
+    # Plot average fitness
+    fig, ax1 = plt.subplots()
+    l1, = ax1.plot(generations, average_fitness, label="Average fitness", linewidth=1.0, color='r')
+    ax1.set_ylabel("Fitness")
+
+    # Plot QI score
+    ax2 = ax1.twinx()
+    ax2.set_ylim([0, 100])
+    l2, = ax2.plot(generations, qis, label="Quality Index", linewidth=1.0, color='b')
+    ax2.set_ylabel("Quality")
+    plt.legend([l1, l2], ["Average fitness", "Quality Index"])
     plt.show()
+
+
+def qi_all(foldername, increment, num):
+
+    generations = [i * increment for i in range(int(num / increment) + 1)]
+
+    # Get QI scores for each generation for each repeat
+    qis_all = []
+    fitness_all = []
+    for i in range(10):
+        qis = get_QI(foldername + str(i), generations)
+        qis_all.extend(qis)
+
+        # Get fitness scores
+        fitness_file = open(foldername + str(i) + "/fitness.txt", "r")
+        average_fitness = []
+        lines = fitness_file.readlines()
+        fitness_file.close()
+        for i, line in enumerate(lines):
+            if i in generations:
+                average_fitness.append(float(line))
+        fitness_all.extend(average_fitness)
+
+        # Calculate correlation
+        print("Correlation:", pearsonr(average_fitness, qis))
+    # Calculate correlation
+    print("Full Correlation:", pearsonr(fitness_all, qis_all))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Conduct Analysis of Simulation')
-    parser.add_argument('type',
-                        type=str,
-                        choices=['average', 'ten', 'ten-language', 'single', 'language', 'qi'],
-                        help='type of graph to display')
+    parser.add_argument(
+        'type',
+        type=str,
+        choices=['average', 'ten', 'ten-language', 'single', 'language', 'qi', 'qi-all'],
+        help='type of graph to display')
     parser.add_argument('foldername', type=str, help="where data is stored")
     parser.add_argument('-n',
                         '--num_gen',
@@ -347,7 +383,7 @@ if __name__ == "__main__":
         plot_ten_language(args.foldername, args.language, args.num_gen)
     elif args.type == "language":
         plot_language_distributions_bar(args.foldername, args.increment, args.num_gen)
-
-    #for j in range(10):
-    #    plot_language_distributions_bar(str(sys.argv[1]) + "/Evolved" + str(j) + "/language", [i * 100 for i in range(21)])
-    #frequency_and_qi(str(sys.argv[1]), [i for i in range(2001)])
+    elif args.type == "qi":
+        frequency_and_qi(args.foldername, args.increment, args.num_gen)
+    elif args.type == "qi-all":
+        qi_all(args.foldername, args.increment, args.num_gen)
