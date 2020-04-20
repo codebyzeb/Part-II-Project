@@ -42,10 +42,10 @@
 \contentsline {subsection}{\numberline {3.4.4}Genetic Algorithm}{23}{subsection.3.4.4}% 
 \contentsline {subsection}{\numberline {3.4.5}Running the Simulations Using HPC}{24}{subsection.3.4.5}% 
 \contentsline {subsection}{\numberline {3.4.6}Optimisations}{24}{subsection.3.4.6}% 
-\contentsline {subsection}{\numberline {3.4.7}Interactivity}{26}{subsection.3.4.7}% 
+\contentsline {subsection}{\numberline {3.4.7}Interactivity}{25}{subsection.3.4.7}% 
 \contentsline {subsection}{\numberline {3.4.8}Data Recording}{26}{subsection.3.4.8}% 
-\contentsline {section}{\numberline {3.5}Simulation Analysis}{27}{section.3.5}% 
-\contentsline {subsection}{\numberline {3.5.1}Fitness Graphs}{27}{subsection.3.5.1}% 
+\contentsline {section}{\numberline {3.5}Simulation Analysis}{26}{section.3.5}% 
+\contentsline {subsection}{\numberline {3.5.1}Fitness Graphs}{26}{subsection.3.5.1}% 
 \contentsline {subsection}{\numberline {3.5.2}Language Frequency Distributions}{27}{subsection.3.5.2}% 
 \contentsline {subsection}{\numberline {3.5.3}QI Score}{27}{subsection.3.5.3}% 
 \contentsline {section}{\numberline {3.6}Summary}{28}{section.3.6}% 
@@ -57,13 +57,13 @@
 \contentsline {section}{\numberline {4.3}Behavioural Analysis}{32}{section.4.3}% 
 \contentsline {section}{\numberline {4.4}Exploring Simulation Parameters}{35}{section.4.4}% 
 \contentsline {subsection}{\numberline {4.4.1}Neural Network Depth}{36}{subsection.4.4.1}% 
-\contentsline {subsection}{\numberline {4.4.2}Epoch Length}{37}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.2}Epoch Length}{36}{subsection.4.4.2}% 
 \contentsline {subsection}{\numberline {4.4.3}Genetic Parameters}{37}{subsection.4.4.3}% 
 \contentsline {section}{\numberline {4.5}Summary}{39}{section.4.5}% 
-\contentsline {chapter}{\numberline {5}Conclusion}{41}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Achievements}{41}{section.5.1}% 
+\contentsline {chapter}{\numberline {5}Conclusion}{40}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Achievements}{40}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}Lessons Learnt}{41}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Further Work}{42}{section.5.3}% 
-\contentsline {chapter}{Bibliography}{42}{section.5.3}% 
-\contentsline {chapter}{\numberline {A}Simulation Interactivity}{45}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Project Proposal}{49}{appendix.B}% 
+\contentsline {section}{\numberline {5.3}Further Work}{41}{section.5.3}% 
+\contentsline {chapter}{Bibliography}{41}{section.5.3}% 
+\contentsline {chapter}{\numberline {A}Simulation Interactivity}{43}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Project Proposal}{46}{appendix.B}% 

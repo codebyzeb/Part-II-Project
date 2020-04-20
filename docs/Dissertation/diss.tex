@@ -1,5 +1,5 @@
 % Using template for a Computer Science Tripos Part II project dissertation
-\documentclass[12pt,a4paper,twoside,openright]{report}
+\documentclass[12pt,a4paper,twoside]{report}
 \usepackage[pdfborder={0 0 0}]{hyperref}    % turns references into hyperlinks
 \usepackage[margin=20mm]{geometry}  % adjusts page layout
 \usepackage{graphicx, caption}  % allows inclusion of PDF, PNG and JPG images
@@ -11,6 +11,7 @@
 \usepackage{amssymb}
 \usepackage{textcomp}
 \usepackage[utf8]{inputenc}
+\usepackage{changepage}
 
 \raggedbottom                           % try to avoid widows and orphans
 \sloppy
@@ -34,54 +35,26 @@
 
 \rightline{\LARGE \textbf{Z\'ebulon Goriely}}
 \vspace*{2mm}
-\rightline{\Large \today}
 
 \vspace*{60mm}
+\begin{adjustwidth}{40pt}{40pt}
 \begin{center}
 \Huge
-\textbf{Simulating Language Learning and Evolution} \\[5mm]
-Computer Science Tripos -- Part II \\[5mm]
-Queens' College \\[5mm]
+\textbf{Simulating Natural Language Learning and Evolution} \\[15mm]
+\Large
+Computer Science Tripos -- Part II \\[3mm]
+Queens' College \\[3mm]
+May 2020 \\[3mm]
 \end{center}
+\end{adjustwidth}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Proforma, table of contents and list of figures
 
 \pagestyle{plain}
 
-\chapter*{Proforma}
-
-{\large
-\begin{tabular}{ll}
-Name:               & \bf Z\'ebulon Goriely                       \\
-College:            & \bf Queens' College                     \\
-Project Title:      & \bf Simulating Language Learning and Evolution \\
-Examination:        & \bf Computer Science Tripos -- Part II, May 2020  \\
-Word Count:         & \bf NULL\footnotemark[1]  \\
-Project Originator: & Z\'ebulon Goriely                    \\
-Supervisor:         & Prof. Paula Buttery and Dr. Andrew Caines                  \\ 
-\end{tabular}
-}
-\footnotetext[1]{This word count was computed
-by \texttt{detex diss.tex | tr -cd '0-9A-Za-z $\tt\backslash$n' | wc -w}
-}
-\stepcounter{footnote}
-
-
-\section*{Original Aims of the Project}
-
-Language has evolved and therefore probably gave an evolutionary advantage to the individuals that exhibited it. According to \citet{Cangelosi1998}, it is difficult to investigate the evolutionary origin of language and the selective pressures that may have originated language due to the limited evidence available. They propose using computer simulations of evolutionary scenarios to investigate this. In the paper referenced, they describe a simulated toy world where agents controlled by neural networks interact with an environment of mushrooms that are edible and poisonous. Exploring this simulation is the basis of my project.
-
-\section*{Work Completed}
-
-I implemented the mushroom-world simulation and explored three populations of feed-forward neural networks; one without language, one with an externally imposed language and one with an evolved language. To simulate evolution, I implemented a genetic algorithm to allow the fittest members of each generation to reproduce. The state of the simulation was saved at each generation in order to: i) plot the fitness of the three populations; ii) plot the quality of the language produced; iii) investigate behavioural tests. To conclude the project, I compared these findings with \citet{Cangelosi1998}.
-
-\section*{Special Difficulties}
-
-None.
- 
 \newpage
-\section*{Declaration}
+\section*{Declaration of Originality}
 
 I, Z\'ebulon Goriely of Queens' College, being a candidate for Part II of the Computer
 Science Tripos, hereby declare
@@ -90,12 +63,50 @@ unaided except as may be specified below, and that the dissertation
 does not contain material that has already been used to any substantial
 extent for a comparable purpose.
 
+I, Z\'ebulon Goriely of Queens' College, am content for my dissertation to be made available to the students and staff of the University.
+
 \bigskip
-\leftline{Signed Z\'ebulon Goriely}
+\leftline{{\bf Signed:} Z\'ebulon Goriely}
 
 \medskip
-\leftline{Date [date]}
+\leftline{{\bf Date:} \today}
 
+\chapter*{Proforma}
+
+{\large
+\begin{tabular}{ll}
+Candidate number:               & \bf 2049E???                       \\
+Project Title:      & \bf Simulating Language Learning and Evolution \\
+Examination:        & \bf Computer Science Tripos -- Part II, May 2020  \\
+Word Count:         & \bf NULL\footnotemark[1]  \\
+Final Line Count:         & \bf NULL\footnotemark[2]  \\
+Project Originator: & Z\'ebulon Goriely                    \\
+Project Supervisors:         & Prof. Paula Buttery and Dr. Andrew Caines                  \\ 
+\end{tabular}
+}
+%\footnotetext[1]{This word count was computed
+%by \texttt{detex diss.tex | tr -cd '0-9A-Za-z $\tt\backslash$n' | wc -w}
+%}
+\footnotetext[1]{This word count was computed using:
+\texttt{texcount -subcount=chapter -merge -brief -sum diss.tex}
+}
+\footnotetext[2]{This line count was computed using: \texttt{cat *.py | wc -l}
+}
+\stepcounter{footnote}
+\stepcounter{footnote}
+
+\section*{Original Aims of the Project}
+
+Language has evolved and therefore probably gave an evolutionary advantage to the individuals that exhibited it. According to \citet{Cangelosi1998}, it is difficult to investigate the evolutionary origin of language and the selective pressures that may have originated language due to the limited evidence available. In the referenced paper, they describe using a simulated world to investigate the effect of introducing language to a population of agents controlled by neural networks. These agents interact with an environment of mushrooms that are edible and poisonous and must correctly categorise them to survive. Exploring this simulation is the basis of my project.
+
+\section*{Work Completed}
+
+I successfully implemented the simulation; comparing three different populations. To simulate evolution, I implemented a genetic algorithm. Through algorithmic analysis, I discovered key optimisations. The state of the simulation was saved at each generation in order to: i) plot the fitness of the populations; ii) plot the quality of the language produced; iii) investigate behavioural tests. I compared these findings with \citet{Cangelosi1998} to confirm the evolutionary advantage of language. I then conducted my own analysis to determine the robustness of the simulation, criticise arbitrary decisions made by \citet{Cangelosi1998} and demonstrate a correlation between population behaviour and fitness.
+
+\section*{Special Difficulties}
+
+None.
+ 
 \tableofcontents
 
 \listoffigures
@@ -124,13 +135,11 @@ This work was performed using resources provided by the Cambridge Service for Da
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-\section{Motivations}
-
-Humans evolved to produce and understand language, and according to theories of natural selection we therefore infer that the ability to use language gave an evolutionary advantage to those individuals who exhibited it. The field of language evolution is diverse and spans many scientific disciplines, from evolutionary biology and neuroscience to psycholinguistics and cultural anthropology. One of the main problems with studying the evolution of language is the relative abundance of theories compared to the limited empirical evidence since anatomically-modern humans emerged in the fossil record 200,000 years ago \citep{Fleagle2008}. It is not known when during or prior to this period language actually emerged. Language evolution is a once-occurring\footnote{(to our knowledge)}, long-term and complex system making it very difficult to study, but computer simulations may provide a means by which to examine the theories surrounding it.
+Humans evolved to understand and produce language, and according to theories of natural selection we therefore infer that the ability to use language gave an evolutionary advantage to those individuals who exhibited it. The field of language evolution is diverse and spans many scientific disciplines, from evolutionary biology and neuroscience to psycholinguistics and cultural anthropology. One of the main problems with studying the evolution of language is the relative abundance of theories compared to the limited empirical evidence since anatomically-modern humans emerged in the fossil record 200,000 years ago \citep{Fleagle2008}. It is not known when during or prior to this period language actually emerged. To our knowledge, language evolution is a once-occurring, long-term and complex system making it very difficult to study, but computer simulations may provide a means by which to examine the theories surrounding it.
 
 Computer simulations are \emph{``theories of the empirical phenomena that are simulated"} \citep{cangelosi2012simulating}. Simulations encompass the hypotheses of the theory and produce empirical predictions that can then be evaluated against known phenomena \citep{cavalli1997genes}. Simulations can act as virtual laboratories where impossible experiments (such as language evolution) can be run, controlling parameters that could never be controlled in real life, such as evolutionary or environmental factors. Simulations can also act as quantitative verifiers for the internal validity of vague and ambiguous theories, requiring explicit definitions of key assumptions. Finally, simulations can be used as a tool for studying complex systems. These are composed of many interacting entities that produce global properties that cannot be predicted even with complete knowledge of the system.
 
-Language itself is a complex system and it has been shown that the bottom-up approach of simulations can generate key insights \citep{langton1997artificial}. In this project, I will use a simulation to explore the genetic advantage of populations of entities who exhibit language over those who do not.
+Language itself is a complex system and it has been shown that the bottom-up approach of simulations can generate key insights \citep{langton1997artificial}. In this project, I will use simulation to explore the genetic advantage of populations of entities who exhibit language over those who do not.
 
 \section{Prior Work}
 
