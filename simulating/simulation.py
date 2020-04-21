@@ -11,6 +11,7 @@ import math
 import os
 import random
 import pickle
+import time
 
 from enum import Enum
 
@@ -62,9 +63,14 @@ class Simulation:  #pylint: disable=R0903
     percentage_mutate = 0.1
     percentage_keep = 0.2
 
+    # Optimisation parameters
+    optimisation = ""
+    threading = True
+    skip_none = True
+    skip_facing_out = True
+
     # I/O parameters
     interactive = False
-    threading = True
 
     record_language = True
     record_language_period = 1
@@ -86,7 +92,8 @@ class Simulation:  #pylint: disable=R0903
                  generations,
                  language_type,
                  percentage_mutate=0.1,
-                 percentage_keep=0.2):
+                 percentage_keep=0.2,
+                 optimisation="all"):
         self.num_epochs = epochs
         self.num_cycles = cycles
         self.num_entities = population_size
@@ -95,6 +102,11 @@ class Simulation:  #pylint: disable=R0903
         self.percentage_mutate = percentage_mutate
         self.percentage_keep = percentage_keep
         self.languages = []
+        self.optimisation = optimisation
+        self.threading = optimisation in ["all", "parallel"]
+        self.skip_none = optimisation in ["all", "skip_none"]
+        self.skip_facing_out = optimisation in ["all", "skip_facing_out"]
+        self.detect_looping = optimisation in ["all", "detect_looping"]
 
     def set_io_options(self,
                        interactive=False,
@@ -139,6 +151,9 @@ class Simulation:  #pylint: disable=R0903
         # Run num_epochs epochs of num_cycles cycles each
         for epoch in range(self.num_epochs):
 
+            # Store previous actions for optimisations
+            previous_actions = []
+
             for step in range(self.num_cycles):
 
                 # Get entity position and closest mushroom
@@ -178,12 +193,25 @@ class Simulation:  #pylint: disable=R0903
 
                 # If the action is NOTHING, it will stay that way,
                 # so we can make some optimisations
-                if action == Action.NOTHING:
+                if self.skip_none and action == Action.NOTHING:
                     break
 
                 # We can also break if the entity tries to move forward but can't
-                if action == Action.FORWARDS and env.entity_facing_out():
+                if self.skip_facing_out and action == Action.FORWARDS and env.entity_facing_out():
                     break
+
+                # Detect if the entity is spinning forever by examining previous three actions
+                if self.detect_looping:
+                    previous_actions.append(action)
+                    if step > 2:
+                        if action in [Action.LEFT, Action.RIGHT]:
+                            looping = True
+                            for prev in previous_actions:
+                                if prev != action:
+                                    looping = False
+                            if looping:
+                                break
+                        previous_actions = previous_actions[1:4]
 
                 # Do the action
                 env.move_entity(action)
@@ -263,6 +291,7 @@ class Simulation:  #pylint: disable=R0903
 
         # Initialise files and plotter for simulation I/O
         plotter = self.initialise_io()
+        start_time = time.time()
 
         # Run evolution loop
         for generation in range(start_generation, self.num_generations + 1):
@@ -292,6 +321,11 @@ class Simulation:  #pylint: disable=R0903
             # Finally, select the best entities to reproduce for the next generation
             entities = self.reproduce_population(entities)
 
+        # Save simulation time
+        with open(self.foldername + "/info.txt", "a") as info_file:
+            info_file.writelines("\nTime taken: {} minutes".format(
+                round((time.time() - start_time) / 60, 5)))
+
     def reproduce_population(self, entities):
         """
         Use percentage_keep and percentage_mutate to create
@@ -317,7 +351,7 @@ class Simulation:  #pylint: disable=R0903
         if self.record_fitness:
             fitness_file = self.foldername + "/fitness.txt"
             open(fitness_file, "w").close()
-
+        if not os.path.exists(self.foldername + "/info.txt"):
             info_file = open(self.foldername + "/info.txt", "w")
             info_file.writelines("\n".join([
                 "Num Epochs: " + str(self.num_epochs), "Num Cycles: " + str(self.num_cycles),
@@ -327,7 +361,8 @@ class Simulation:  #pylint: disable=R0903
                 "Percentage Mutate: " + str(self.percentage_mutate),
                 "Percentage Keep: " + str(self.percentage_keep),
                 "Linear: " + str(simulating.entity.LINEAR),
-                "Activation function: " + str(simulating.entity.ACTIVATION)
+                "Activation function: " + str(simulating.entity.ACTIVATION),
+                "Optimisation: " + self.optimisation
             ]))
             info_file.close()
 
@@ -488,7 +523,8 @@ def run_single():
     """ Run a simulation for one entity
     """
 
-    sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language)
+    sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language,
+                     args.per_mut, args.per_keep, args.O)
     sim.set_io_options(interactive=args.interactive,
                        record_language=args.rec_lang,
                        record_language_period=args.rec_lang_per,
@@ -505,7 +541,7 @@ def run_full():
     """
 
     sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language,
-                     args.per_mut, args.per_keep)
+                     args.per_mut, args.per_keep, args.O)
     sim.set_io_options(interactive=args.interactive,
                        record_language=args.no_rec_lang,
                        record_language_period=args.rec_lang_per,
@@ -523,7 +559,7 @@ def run_from_generation():
     """
 
     sim = Simulation(args.num_epo, args.num_cyc, args.num_ent, args.num_gen, args.language,
-                     args.per_mut, args.per_keep)
+                     args.per_mut, args.per_keep, args.O)
     sim.set_io_options(interactive=args.interactive,
                        record_language=False,
                        record_language_period=0,
@@ -606,6 +642,12 @@ if __name__ == '__main__':
                         type=int,
                         default=0,
                         help='generation to start the simulation from')
+    parser.add_argument(
+        '-O',
+        action='store',
+        default='all',
+        choices=['none', 'parallel', 'skip_none', 'skip_facing_out', 'detect_looping', 'all'],
+        help='optimisations to the simulation')
 
     args, unknown = parser.parse_known_args()
 
