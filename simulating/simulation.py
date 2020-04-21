@@ -79,6 +79,7 @@ class Simulation:  #pylint: disable=R0903
     record_entities_period = 1
 
     record_fitness = True
+    record_time = True
 
     foldername = "folder"
 
@@ -115,6 +116,7 @@ class Simulation:  #pylint: disable=R0903
                        record_entities=True,
                        record_entities_period=1,
                        record_fitness=True,
+                       record_time=True,
                        foldername="folder"):
         """ Set options that determine I/O """
 
@@ -124,6 +126,7 @@ class Simulation:  #pylint: disable=R0903
         self.record_entities = record_entities
         self.record_entities_period = record_entities_period
         self.record_fitness = record_fitness
+        self.record_time = record_time
         self.foldername = foldername
 
     def run_single(self, entity, population=[], viewer=False):
@@ -292,6 +295,7 @@ class Simulation:  #pylint: disable=R0903
         # Initialise files and plotter for simulation I/O
         plotter = self.initialise_io()
         start_time = time.time()
+        gen_time = time.time()
 
         # Run evolution loop
         for generation in range(start_generation, self.num_generations + 1):
@@ -316,7 +320,8 @@ class Simulation:  #pylint: disable=R0903
             entities.sort(key=lambda entity: entity.fitness, reverse=True)
 
             # Do I/O including writing to files and displaying interactive information
-            self.io(generation, entities, populations, plotter)
+            self.io(generation, entities, populations, time.time() - gen_time, plotter)
+            gen_time = time.time()
 
             # Finally, select the best entities to reproduce for the next generation
             entities = self.reproduce_population(entities)
@@ -351,6 +356,9 @@ class Simulation:  #pylint: disable=R0903
         if self.record_fitness:
             fitness_file = self.foldername + "/fitness.txt"
             open(fitness_file, "w").close()
+        if self.record_time:
+            fitness_file = self.foldername + "/time.txt"
+            open(fitness_file, "w").close()
         if not os.path.exists(self.foldername + "/info.txt"):
             info_file = open(self.foldername + "/info.txt", "w")
             info_file.writelines("\n".join([
@@ -368,7 +376,7 @@ class Simulation:  #pylint: disable=R0903
 
         return plotter
 
-    def io(self, generation, entities, populations, plotter):
+    def io(self, generation, entities, populations, gen_time, plotter):
         """ Write to files and display the plotter and interactive information
         for the simulation
         """
@@ -394,6 +402,10 @@ class Simulation:  #pylint: disable=R0903
         if self.interactive:
             plotter.add_point_and_update(generation, average_fitness)
             self.interactive_viewer(generation, entities, populations, average_fitness)
+
+        # Log time
+        with open(self.foldername + "/time.txt", "a") as time_file:
+            time_file.write(str(gen_time) + "\n")
 
     def interactive_viewer(self, generation, entities, populations, average_fitness):
         """ At each generation, display information about the simulation
@@ -531,6 +543,7 @@ def run_single():
                        record_entities=args.rec_ent,
                        record_entities_period=args.rec_ent_per,
                        record_fitness=args.rec_fit,
+                       record_time=args.rec_time,
                        foldername=args.foldername)
     ent = NeuralEntity(hidden_units=args.hidden_units)
     sim.run_single(ent, viewer=True)
@@ -548,6 +561,7 @@ def run_full():
                        record_entities=args.no_rec_ent,
                        record_entities_period=args.rec_ent_per,
                        record_fitness=args.no_rec_fit,
+                       record_time=args.rec_time,
                        foldername=args.foldername)
     sim.start(args.hidden_units)
 
@@ -566,6 +580,7 @@ def run_from_generation():
                        record_entities=False,
                        record_entities_period=0,
                        record_fitness=False,
+                       record_time=False,
                        foldername=args.foldername)
     sim.start_from_generation(args.start_from)
 
@@ -625,6 +640,9 @@ if __name__ == '__main__':
                         default=25,
                         help='how frequently to store the population')
     parser.add_argument('--no_rec_fit', action='store_false', help='don\'t store the fitness')
+    parser.add_argument('--rec_time',
+                        action='store_true',
+                        help='store the time taken for each generation')
     parser.add_argument('--activation',
                         action='store',
                         default='identity',

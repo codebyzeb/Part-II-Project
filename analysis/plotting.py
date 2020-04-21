@@ -117,6 +117,32 @@ def plot_ten(foldername, num=1000):
     plt.show()
 
 
+def time_average(foldername, num=1000):
+    # Set up plot
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_xlabel("Generations")
+    ax.set_ylabel("Time (seconds)")
+    # ax.set_title("Average Fitness")
+    ax.grid(linestyle='-')
+
+    # Get data
+    times = np.zeros(num + 1)
+    for i in range(10):
+        time_file = open(foldername + str(i) + "/fitness.txt", "r")
+        lines = time_file.readlines()
+        lines = [float(line) / 10 for line in lines]
+        lines = np.array(lines)
+        times = times + lines
+        time_file.close()
+
+    # Show plot
+    ax.plot(list(range(len(times))), times, linewidth=1.0)
+    plt.show()
+
+
 def plot_ten_language(foldername, language, num):
     # Set up figure
     fig = plt.figure()
@@ -387,3 +413,5 @@ if __name__ == "__main__":
         frequency_and_qi(args.foldername, args.increment, args.num_gen)
     elif args.type == "qi-all":
         qi_all(args.foldername, args.increment, args.num_gen)
+    elif args.type == "time-average":
+        qi_all(args.foldername, args.num_gen)
