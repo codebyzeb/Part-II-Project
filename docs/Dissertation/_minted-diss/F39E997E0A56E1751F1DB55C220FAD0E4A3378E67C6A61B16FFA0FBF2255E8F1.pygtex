@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{run\PYGZus{}population}\PYG{p}{(}\PYG{n}{entities}\PYG{p}{):}
+
+	\PYG{k}{for} \PYG{n}{generation} \PYG{o+ow}{in} \PYG{n}{num\PYGZus{}generations}\PYG{p}{:}
+
+    	\PYG{c+c1}{\PYGZsh{} Step 1: Run the simulation for each entity}
+    	\PYG{c+c1}{\PYGZsh{} Pass the remaining population for the evolved language}
+    	\PYG{k}{for} \PYG{n}{entity} \PYG{o+ow}{in} \PYG{n}{entities}\PYG{p}{:}
+    		\PYG{n}{population} \PYG{o}{:=} \PYG{n}{entities} \PYG{o}{\PYGZhy{}} \PYG{p}{\PYGZob{}}\PYG{n}{entity}\PYG{p}{\PYGZcb{}}
+    		\PYG{n}{run\PYGZus{}single}\PYG{p}{(}\PYG{n}{entity}\PYG{p}{,} \PYG{n}{population}\PYG{p}{)}
+
+    	\PYG{c+c1}{\PYGZsh{} Step 2: Sort the entities by their fitness and select the best}
+    	\PYG{n}{sort}\PYG{p}{(}\PYG{n}{entities}\PYG{p}{,} \PYG{n}{entity}\PYG{o}{.}\PYG{n}{fitness}\PYG{p}{)}
+    	\PYG{n}{best\PYGZus{}entities} \PYG{o}{:=} \PYG{n}{top} \PYG{n}{percentage\PYGZus{}keep} \PYG{n}{of} \PYG{n}{entities}
+
+    	\PYG{c+c1}{\PYGZsh{} Step 3: Create a new population from the fittest entities}
+    	\PYG{n}{children} \PYG{o}{:=} \PYG{p}{[]}
+    	\PYG{k}{for} \PYG{n}{entity} \PYG{o+ow}{in} \PYG{n}{best\PYGZus{}entities}\PYG{p}{:}
+    		\PYG{n}{children} \PYG{o}{+=} \PYG{n}{entity}\PYG{o}{.}\PYG{n}{reproduce}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{percentage\PYGZus{}keep}\PYG{p}{,} \PYG{n}{mutate\PYGZus{}percentage}\PYG{p}{)}
+    	\PYG{n}{population} \PYG{o}{:=} \PYG{n}{children}
+\end{Verbatim}

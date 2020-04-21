@@ -1,0 +1,21 @@
+
+def run_population(entities):
+
+	for generation in num_generations:
+
+    	# Step 1: Run the simulation for each entity
+    	# Pass the remaining population for the evolved language
+    	for entity in entities:
+    		population := entities - {entity}
+    		run_single(entity, population)
+
+    	# Step 2: Sort the entities by their fitness and select the best
+    	sort(entities, entity.fitness)
+    	best_entities := top percentage_keep of entities
+
+    	# Step 3: Create a new population from the fittest entities
+    	children := []
+    	for entity in best_entities:
+    		children += entity.reproduce(1/percentage_keep, mutate_percentage)
+    	population := children
+

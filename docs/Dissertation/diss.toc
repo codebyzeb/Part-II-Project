@@ -1,69 +1,61 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Motivations}{1}{section.1.1}% 
-\contentsline {section}{\numberline {1.2}Prior Work}{2}{section.1.2}% 
-\contentsline {section}{\numberline {1.3}Project Overview}{2}{section.1.3}% 
+\contentsline {section}{\numberline {1.1}Prior Work}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Project Overview}{2}{section.1.2}% 
 \contentsline {chapter}{\numberline {2}Preparation}{3}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}Mushroom World}{3}{section.2.1}% 
 \contentsline {section}{\numberline {2.2}Entities}{4}{section.2.2}% 
 \contentsline {subsection}{\numberline {2.2.1}Feed-Forward Neural Networks}{5}{subsection.2.2.1}% 
 \contentsline {subsection}{\numberline {2.2.2}Genetic Algorithm}{5}{subsection.2.2.2}% 
 \contentsline {subsection}{\numberline {2.2.3}Population Types}{6}{subsection.2.2.3}% 
-\contentsline {section}{\numberline {2.3}Simulation Analysis}{8}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}Generational Fitness}{8}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}Efficiency of Language}{8}{subsection.2.3.2}% 
-\contentsline {section}{\numberline {2.4}Requirements Analysis}{9}{section.2.4}% 
-\contentsline {section}{\numberline {2.5}Starting Point}{10}{section.2.5}% 
-\contentsline {section}{\numberline {2.6}Software Engineering}{10}{section.2.6}% 
-\contentsline {subsection}{\numberline {2.6.1}Languages and Libraries}{10}{subsection.2.6.1}% 
-\contentsline {subsection}{\numberline {2.6.2}Project Management}{11}{subsection.2.6.2}% 
-\contentsline {subsection}{\numberline {2.6.3}Version Control}{11}{subsection.2.6.3}% 
-\contentsline {subsection}{\numberline {2.6.4}Development Tools}{11}{subsection.2.6.4}% 
-\contentsline {subsection}{\numberline {2.6.5}Development Environment}{12}{subsection.2.6.5}% 
-\contentsline {subsection}{\numberline {2.6.6}Code License}{12}{subsection.2.6.6}% 
-\contentsline {section}{\numberline {2.7}Summary}{12}{section.2.7}% 
-\contentsline {chapter}{\numberline {3}Implementation}{13}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}High-level Overview}{13}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Environment}{13}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}Mushrooms}{14}{subsection.3.2.1}% 
-\contentsline {subsection}{\numberline {3.2.2}Representation of the World}{14}{subsection.3.2.2}% 
-\contentsline {subsection}{\numberline {3.2.3}Entity Position}{16}{subsection.3.2.3}% 
-\contentsline {subsection}{\numberline {3.2.4}World Initialisation}{17}{subsection.3.2.4}% 
-\contentsline {subsection}{\numberline {3.2.5}Testing}{17}{subsection.3.2.5}% 
-\contentsline {section}{\numberline {3.3}Entities}{17}{section.3.3}% 
-\contentsline {subsection}{\numberline {3.3.1}Action}{17}{subsection.3.3.1}% 
-\contentsline {subsection}{\numberline {3.3.2}Abstract Specification}{17}{subsection.3.3.2}% 
-\contentsline {subsection}{\numberline {3.3.3}Rule-based Entity}{18}{subsection.3.3.3}% 
-\contentsline {subsection}{\numberline {3.3.4}Neural Network Entity}{18}{subsection.3.3.4}% 
-\contentsline {subsection}{\numberline {3.3.5}Reproduction}{21}{subsection.3.3.5}% 
-\contentsline {section}{\numberline {3.4}Simulation}{21}{section.3.4}% 
-\contentsline {subsection}{\numberline {3.4.1}Language}{21}{subsection.3.4.1}% 
-\contentsline {subsection}{\numberline {3.4.2}Initialising the Simulation}{21}{subsection.3.4.2}% 
-\contentsline {subsection}{\numberline {3.4.3}Single-Entity Simulation Run}{22}{subsection.3.4.3}% 
-\contentsline {subsection}{\numberline {3.4.4}Genetic Algorithm}{23}{subsection.3.4.4}% 
-\contentsline {subsection}{\numberline {3.4.5}Running the Simulations Using HPC}{24}{subsection.3.4.5}% 
-\contentsline {subsection}{\numberline {3.4.6}Optimisations}{24}{subsection.3.4.6}% 
-\contentsline {subsection}{\numberline {3.4.7}Interactivity}{25}{subsection.3.4.7}% 
-\contentsline {subsection}{\numberline {3.4.8}Data Recording}{26}{subsection.3.4.8}% 
-\contentsline {section}{\numberline {3.5}Simulation Analysis}{26}{section.3.5}% 
-\contentsline {subsection}{\numberline {3.5.1}Fitness Graphs}{26}{subsection.3.5.1}% 
-\contentsline {subsection}{\numberline {3.5.2}Language Frequency Distributions}{27}{subsection.3.5.2}% 
-\contentsline {subsection}{\numberline {3.5.3}QI Score}{27}{subsection.3.5.3}% 
-\contentsline {section}{\numberline {3.6}Summary}{28}{section.3.6}% 
-\contentsline {chapter}{\numberline {4}Evaluation}{29}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Overview}{29}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}Initial Analysis}{29}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Population Fitness}{29}{subsection.4.2.1}% 
-\contentsline {subsection}{\numberline {4.2.2}Language Analysis}{31}{subsection.4.2.2}% 
-\contentsline {section}{\numberline {4.3}Behavioural Analysis}{32}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Exploring Simulation Parameters}{35}{section.4.4}% 
-\contentsline {subsection}{\numberline {4.4.1}Neural Network Depth}{36}{subsection.4.4.1}% 
-\contentsline {subsection}{\numberline {4.4.2}Epoch Length}{36}{subsection.4.4.2}% 
-\contentsline {subsection}{\numberline {4.4.3}Genetic Parameters}{37}{subsection.4.4.3}% 
-\contentsline {section}{\numberline {4.5}Summary}{39}{section.4.5}% 
-\contentsline {chapter}{\numberline {5}Conclusion}{40}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Achievements}{40}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Lessons Learnt}{41}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Further Work}{41}{section.5.3}% 
-\contentsline {chapter}{Bibliography}{41}{section.5.3}% 
-\contentsline {chapter}{\numberline {A}Simulation Interactivity}{43}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Project Proposal}{46}{appendix.B}% 
+\contentsline {section}{\numberline {2.3}Simulation Analysis}{7}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Generational Fitness}{7}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Efficiency of Language}{7}{subsection.2.3.2}% 
+\contentsline {section}{\numberline {2.4}Requirements Analysis}{8}{section.2.4}% 
+\contentsline {section}{\numberline {2.5}Starting Point}{9}{section.2.5}% 
+\contentsline {section}{\numberline {2.6}Software Engineering}{9}{section.2.6}% 
+\contentsline {subsection}{\numberline {2.6.1}Languages and Libraries}{9}{subsection.2.6.1}% 
+\contentsline {subsection}{\numberline {2.6.2}Project Management}{10}{subsection.2.6.2}% 
+\contentsline {subsection}{\numberline {2.6.3}Version Control}{10}{subsection.2.6.3}% 
+\contentsline {subsection}{\numberline {2.6.4}Development Tools}{10}{subsection.2.6.4}% 
+\contentsline {subsection}{\numberline {2.6.5}Code License}{11}{subsection.2.6.5}% 
+\contentsline {section}{\numberline {2.7}Summary}{11}{section.2.7}% 
+\contentsline {chapter}{\numberline {3}Implementation}{12}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}High-level Overview}{12}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Environment}{12}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Mushrooms}{13}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.2}Representation of the World}{13}{subsection.3.2.2}% 
+\contentsline {subsection}{\numberline {3.2.3}Environment Functionality}{14}{subsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.2.4}Testing}{15}{subsection.3.2.4}% 
+\contentsline {section}{\numberline {3.3}Entities}{15}{section.3.3}% 
+\contentsline {subsection}{\numberline {3.3.1}Abstract Specification}{15}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.2}Neural Network Entity}{16}{subsection.3.3.2}% 
+\contentsline {subsection}{\numberline {3.3.3}Reproduction}{18}{subsection.3.3.3}% 
+\contentsline {section}{\numberline {3.4}Simulation}{18}{section.3.4}% 
+\contentsline {subsection}{\numberline {3.4.1}Initialising the Simulation}{18}{subsection.3.4.1}% 
+\contentsline {subsection}{\numberline {3.4.2}Single-Entity Simulation Run}{19}{subsection.3.4.2}% 
+\contentsline {subsection}{\numberline {3.4.3}Genetic Algorithm}{20}{subsection.3.4.3}% 
+\contentsline {subsection}{\numberline {3.4.4}Running the Simulations Using HPC}{21}{subsection.3.4.4}% 
+\contentsline {subsection}{\numberline {3.4.5}Optimisations}{21}{subsection.3.4.5}% 
+\contentsline {subsection}{\numberline {3.4.6}Interactivity}{22}{subsection.3.4.6}% 
+\contentsline {subsection}{\numberline {3.4.7}Data Recording}{22}{subsection.3.4.7}% 
+\contentsline {section}{\numberline {3.5}Simulation Analysis}{23}{section.3.5}% 
+\contentsline {subsection}{\numberline {3.5.1}QI Score}{23}{subsection.3.5.1}% 
+\contentsline {section}{\numberline {3.6}Summary}{24}{section.3.6}% 
+\contentsline {chapter}{\numberline {4}Evaluation}{25}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Initial Analysis}{25}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Population Fitness}{25}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Language Analysis}{27}{subsection.4.1.2}% 
+\contentsline {section}{\numberline {4.2}Behavioural Analysis}{28}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Exploring Simulation Parameters}{32}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Neural Network Depth}{32}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Epoch Length}{33}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.3}Genetic Parameters}{33}{subsection.4.3.3}% 
+\contentsline {section}{\numberline {4.4}Summary}{34}{section.4.4}% 
+\contentsline {chapter}{\numberline {5}Conclusion}{36}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Lessons Learnt}{36}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Further Work}{37}{section.5.2}% 
+\contentsline {chapter}{Bibliography}{37}{section.5.2}% 
+\contentsline {chapter}{\numberline {A}World Representation Benchmark}{39}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}world\_benchmark.py}{39}{section.A.1}% 
+\contentsline {chapter}{\numberline {B}Simulation Interactivity}{41}{appendix.B}% 
+\contentsline {chapter}{\numberline {C}Project Proposal}{44}{appendix.C}% 

@@ -1,14 +1,8 @@
 \begin{thebibliography}{}
 
-\bibitem[Cangelosi, 2001]{cangelosi2001evolution}
-Cangelosi, A. (2001).
-\newblock Evolution of communication and language using signals, symbols, and
-  words.
-\newblock {\em IEEE Transactions on Evolutionary Computation}, 5(2):93--101.
-
 \bibitem[Cangelosi and Parisi, 1998]{Cangelosi1998}
 Cangelosi, A. and Parisi, D. (1998).
-\newblock {The emergence of a 'language' in an evolving population of neural
+\newblock {The emergence of a `language' in an evolving population of neural
   networks}.
 \newblock {\em Connection Science}, 10(2):83--97.
 
@@ -28,8 +22,9 @@ Cavalli-Sforza, L.~L. (1997).
   94(15):7719--7724.
 
 \bibitem[Clark, 1995]{Clark1995}
-Clark, E. (1995).
-\newblock {\em {The lexicon in acquisition}}.
+Clark, E.~V. (1995).
+\newblock {\em The lexicon in acquisition}, volume~65.
+\newblock Cambridge University Press.
 
 \bibitem[De~Boer, 1997]{de1997generating}
 De~Boer, B. (1997).
@@ -47,6 +42,12 @@ Fleagle, J.~G., Assefa, Z., Brown, F.~H., and Shea, J.~J. (2008).
 \newblock {Paleoanthropology of the Kibish Formation, southern Ethiopia:
   Introduction}.
 \newblock {\em Journal of Human Evolution}, 55(3):360--365.
+
+\bibitem[Holland et~al., 1992]{holland1992adaptation}
+Holland, J.~H. et~al. (1992).
+\newblock {\em Adaptation in natural and artificial systems: an introductory
+  analysis with applications to biology, control, and artificial intelligence}.
+\newblock MIT press.
 
 \bibitem[Kirby and Hurford, 2002]{kirby2002emergence}
 Kirby, S. and Hurford, J.~R. (2002).
@@ -72,5 +73,10 @@ Parisi, D. and Cangelosi, A. (2002).
   historical change.
 \newblock In {\em Simulating the evolution of language}, pages 255--275.
   Springer.
+
+\bibitem[Rendell, 2002]{rendell2002turing}
+Rendell, P. (2002).
+\newblock Turing universality of the game of life.
+\newblock In {\em Collision-based computing}, pages 513--539. Springer.
 
 \end{thebibliography}

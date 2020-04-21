@@ -4,46 +4,45 @@ The top-level auxiliary file: diss.aux
 The style file: apalike.bst
 Database file #1: refs.bib
 Warning--empty publisher in Cangelosi2002
-Warning--empty publisher in Clark1995
-You've used 13 entries,
+You've used 14 entries,
             1935 wiz_defined-function locations,
-            551 strings with 5585 characters,
-and the built_in function-call counts, 5092 in all, are:
-= -- 513
-> -- 149
-< -- 15
-+ -- 50
-- -- 46
-* -- 392
-:= -- 844
-add.period$ -- 40
-call.type$ -- 13
-change.case$ -- 84
-chr.to.int$ -- 13
+            556 strings with 5748 characters,
+and the built_in function-call counts, 5564 in all, are:
+= -- 563
+> -- 162
+< -- 18
++ -- 56
+- -- 50
+* -- 413
+:= -- 915
+add.period$ -- 45
+call.type$ -- 14
+change.case$ -- 89
+chr.to.int$ -- 14
 cite$ -- 15
-duplicate$ -- 225
-empty$ -- 401
-format.name$ -- 73
-if$ -- 1040
+duplicate$ -- 252
+empty$ -- 439
+format.name$ -- 79
+if$ -- 1151
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 17
-newline$ -- 66
-num.names$ -- 39
-pop$ -- 94
+missing$ -- 19
+newline$ -- 72
+num.names$ -- 42
+pop$ -- 105
 preamble$ -- 1
-purify$ -- 88
+purify$ -- 94
 quote$ -- 0
-skip$ -- 170
+skip$ -- 193
 stack$ -- 0
-substring$ -- 378
-swap$ -- 40
-text.length$ -- 3
+substring$ -- 402
+swap$ -- 51
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 70
-warning$ -- 2
-while$ -- 45
+type$ -- 74
+warning$ -- 1
+while$ -- 48
 width$ -- 0
-write$ -- 165
-(There were 2 warnings)
+write$ -- 181
+(There was 1 warning)
