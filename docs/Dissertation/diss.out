@@ -17,45 +17,44 @@
 \BOOKMARK [2][-]{subsection.2.6.2}{Project Management}{section.2.6}% 17
 \BOOKMARK [2][-]{subsection.2.6.3}{Version Control}{section.2.6}% 18
 \BOOKMARK [2][-]{subsection.2.6.4}{Development Tools}{section.2.6}% 19
-\BOOKMARK [2][-]{subsection.2.6.5}{Code License}{section.2.6}% 20
-\BOOKMARK [1][-]{section.2.7}{Summary}{chapter.2}% 21
-\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 22
-\BOOKMARK [1][-]{section.3.1}{High-level Overview}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.2}{Environment}{chapter.3}% 24
-\BOOKMARK [2][-]{subsection.3.2.1}{Mushrooms}{section.3.2}% 25
-\BOOKMARK [2][-]{subsection.3.2.2}{Representation of the World}{section.3.2}% 26
-\BOOKMARK [2][-]{subsection.3.2.3}{Environment Functionality}{section.3.2}% 27
-\BOOKMARK [2][-]{subsection.3.2.4}{Testing}{section.3.2}% 28
-\BOOKMARK [1][-]{section.3.3}{Entities}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.3.1}{Abstract Specification}{section.3.3}% 30
-\BOOKMARK [2][-]{subsection.3.3.2}{Neural Network Entity}{section.3.3}% 31
-\BOOKMARK [2][-]{subsection.3.3.3}{Reproduction}{section.3.3}% 32
-\BOOKMARK [1][-]{section.3.4}{Simulation}{chapter.3}% 33
-\BOOKMARK [2][-]{subsection.3.4.1}{Initialising the Simulation}{section.3.4}% 34
-\BOOKMARK [2][-]{subsection.3.4.2}{Single-Entity Simulation Run}{section.3.4}% 35
-\BOOKMARK [2][-]{subsection.3.4.3}{Genetic Algorithm}{section.3.4}% 36
-\BOOKMARK [2][-]{subsection.3.4.4}{Running the Simulations Using HPC}{section.3.4}% 37
-\BOOKMARK [2][-]{subsection.3.4.5}{Optimisations}{section.3.4}% 38
-\BOOKMARK [2][-]{subsection.3.4.6}{Interactivity}{section.3.4}% 39
-\BOOKMARK [2][-]{subsection.3.4.7}{Data Recording}{section.3.4}% 40
-\BOOKMARK [1][-]{section.3.5}{Simulation Analysis}{chapter.3}% 41
-\BOOKMARK [2][-]{subsection.3.5.1}{QI Score}{section.3.5}% 42
-\BOOKMARK [1][-]{section.3.6}{Summary}{chapter.3}% 43
-\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 44
-\BOOKMARK [1][-]{section.4.1}{Initial Analysis}{chapter.4}% 45
-\BOOKMARK [2][-]{subsection.4.1.1}{Population Fitness}{section.4.1}% 46
-\BOOKMARK [2][-]{subsection.4.1.2}{Language Analysis}{section.4.1}% 47
-\BOOKMARK [1][-]{section.4.2}{Behavioural Analysis}{chapter.4}% 48
-\BOOKMARK [1][-]{section.4.3}{Exploring Simulation Parameters}{chapter.4}% 49
-\BOOKMARK [2][-]{subsection.4.3.1}{Neural Network Depth}{section.4.3}% 50
-\BOOKMARK [2][-]{subsection.4.3.2}{Epoch Length}{section.4.3}% 51
-\BOOKMARK [2][-]{subsection.4.3.3}{Genetic Parameters}{section.4.3}% 52
-\BOOKMARK [1][-]{section.4.4}{Summary}{chapter.4}% 53
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 54
-\BOOKMARK [1][-]{section.5.1}{Lessons Learnt}{chapter.5}% 55
-\BOOKMARK [1][-]{section.5.2}{Further Work}{chapter.5}% 56
-\BOOKMARK [0][-]{section.5.2}{Bibliography}{}% 57
-\BOOKMARK [0][-]{appendix.A}{World Representation Benchmark}{}% 58
-\BOOKMARK [1][-]{section.A.1}{world\137benchmark.py}{appendix.A}% 59
-\BOOKMARK [0][-]{appendix.B}{Simulation Interactivity}{}% 60
-\BOOKMARK [0][-]{appendix.C}{Project Proposal}{}% 61
+\BOOKMARK [1][-]{section.2.7}{Summary}{chapter.2}% 20
+\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 21
+\BOOKMARK [1][-]{section.3.1}{High-level Overview}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.2}{Environment}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.2.1}{Mushrooms}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.2}{Representation of the World}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.3}{Environment Functionality}{section.3.2}% 26
+\BOOKMARK [2][-]{subsection.3.2.4}{Testing}{section.3.2}% 27
+\BOOKMARK [1][-]{section.3.3}{Entities}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.3.1}{Abstract Specification}{section.3.3}% 29
+\BOOKMARK [2][-]{subsection.3.3.2}{Neural Network Entity}{section.3.3}% 30
+\BOOKMARK [2][-]{subsection.3.3.3}{Reproduction}{section.3.3}% 31
+\BOOKMARK [1][-]{section.3.4}{Simulation}{chapter.3}% 32
+\BOOKMARK [2][-]{subsection.3.4.1}{Initialising the Simulation}{section.3.4}% 33
+\BOOKMARK [2][-]{subsection.3.4.2}{Single-Entity Simulation Run}{section.3.4}% 34
+\BOOKMARK [2][-]{subsection.3.4.3}{Genetic Algorithm}{section.3.4}% 35
+\BOOKMARK [2][-]{subsection.3.4.4}{Running the Simulations Using HPC}{section.3.4}% 36
+\BOOKMARK [2][-]{subsection.3.4.5}{Optimisations}{section.3.4}% 37
+\BOOKMARK [2][-]{subsection.3.4.6}{Interactivity}{section.3.4}% 38
+\BOOKMARK [2][-]{subsection.3.4.7}{Data Recording}{section.3.4}% 39
+\BOOKMARK [1][-]{section.3.5}{Simulation Analysis}{chapter.3}% 40
+\BOOKMARK [2][-]{subsection.3.5.1}{QI Score}{section.3.5}% 41
+\BOOKMARK [1][-]{section.3.6}{Summary}{chapter.3}% 42
+\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 43
+\BOOKMARK [1][-]{section.4.1}{Initial Analysis}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.1.1}{Population Fitness}{section.4.1}% 45
+\BOOKMARK [2][-]{subsection.4.1.2}{Language Analysis}{section.4.1}% 46
+\BOOKMARK [1][-]{section.4.2}{Behavioural Analysis}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.3}{Exploring Simulation Parameters}{chapter.4}% 48
+\BOOKMARK [2][-]{subsection.4.3.1}{Neural Network Depth}{section.4.3}% 49
+\BOOKMARK [2][-]{subsection.4.3.2}{Epoch Length}{section.4.3}% 50
+\BOOKMARK [2][-]{subsection.4.3.3}{Genetic Parameters}{section.4.3}% 51
+\BOOKMARK [1][-]{section.4.4}{Summary}{chapter.4}% 52
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 53
+\BOOKMARK [1][-]{section.5.1}{Lessons Learnt}{chapter.5}% 54
+\BOOKMARK [1][-]{section.5.2}{Further Work}{chapter.5}% 55
+\BOOKMARK [0][-]{section.5.2}{Bibliography}{}% 56
+\BOOKMARK [0][-]{appendix.A}{World Representation Benchmark}{}% 57
+\BOOKMARK [1][-]{section.A.1}{world\137benchmark.py}{appendix.A}% 58
+\BOOKMARK [0][-]{appendix.B}{Simulation Interactivity}{}% 59
+\BOOKMARK [0][-]{appendix.C}{Project Proposal}{}% 60

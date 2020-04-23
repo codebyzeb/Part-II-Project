@@ -8,10 +8,6 @@ Cangelosi, A. and Parisi, D. (1998).
 
 \bibitem[Cangelosi and Parisi, 2002]{Cangelosi2002}
 Cangelosi, A. and Parisi, D. (2002).
-\newblock {\em {Simulating the Evolution of Language}}.
-
-\bibitem[Cangelosi and Parisi, 2012]{cangelosi2012simulating}
-Cangelosi, A. and Parisi, D. (2012).
 \newblock {\em Simulating the evolution of language}.
 \newblock Springer Science \& Business Media.
 
@@ -60,6 +56,10 @@ Kirby, S. and Hurford, J.~R. (2002).
 Langton, C.~G. (1997).
 \newblock {\em Artificial life: An overview}.
 \newblock Mit Press.
+
+\bibitem[Mycroft, 2019]{mycroft2019}
+Mycroft, A. (2019).
+\newblock Concepts in programming languages.
 
 \bibitem[Nair and Hinton, 2010]{nair2010rectified}
 Nair, V. and Hinton, G.~E. (2010).

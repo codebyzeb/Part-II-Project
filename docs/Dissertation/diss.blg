@@ -3,46 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: diss.aux
 The style file: apalike.bst
 Database file #1: refs.bib
-Warning--empty publisher in Cangelosi2002
 You've used 14 entries,
             1935 wiz_defined-function locations,
-            556 strings with 5748 characters,
-and the built_in function-call counts, 5564 in all, are:
-= -- 563
-> -- 162
+            555 strings with 5682 characters,
+and the built_in function-call counts, 5488 in all, are:
+= -- 560
+> -- 156
 < -- 18
-+ -- 56
-- -- 50
-* -- 413
-:= -- 915
++ -- 54
+- -- 48
+* -- 402
+:= -- 907
 add.period$ -- 45
 call.type$ -- 14
 change.case$ -- 89
 chr.to.int$ -- 14
-cite$ -- 15
-duplicate$ -- 252
-empty$ -- 439
-format.name$ -- 79
-if$ -- 1151
+cite$ -- 14
+duplicate$ -- 248
+empty$ -- 431
+format.name$ -- 75
+if$ -- 1134
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 19
+missing$ -- 17
 newline$ -- 72
 num.names$ -- 42
-pop$ -- 105
+pop$ -- 99
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 93
 quote$ -- 0
-skip$ -- 193
+skip$ -- 192
 stack$ -- 0
 substring$ -- 402
-swap$ -- 51
+swap$ -- 50
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 74
-warning$ -- 1
+type$ -- 76
+warning$ -- 0
 while$ -- 48
 width$ -- 0
 write$ -- 181
-(There was 1 warning)
