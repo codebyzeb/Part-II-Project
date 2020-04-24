@@ -128,18 +128,24 @@ def time_average(foldername, num=1000):
     # ax.set_title("Average Fitness")
     ax.grid(linestyle='-')
 
-    # Get data
-    times = np.zeros(num + 1)
-    for i in range(10):
-        time_file = open(foldername + str(i) + "/fitness.txt", "r")
-        lines = time_file.readlines()
-        lines = [float(line) / 10 for line in lines]
-        lines = np.array(lines)
-        times = times + lines
-        time_file.close()
+    for optimisation in [
+            "No Optimisations", "Detect Looping", "Skip None", "Skip Edge", "All Optimisations"
+    ]:
+        # Get data
+        times = np.zeros(num + 1)
+        for i in range(10):
+            filename = "{}/{}/None{}/time.txt".format(foldername, optimisation.lower(), i)
+            time_file = open(filename, "r")
+            lines = time_file.readlines()
+            lines = [float(line) / 10 for line in lines][:num + 1]
+            lines = np.array(lines)
+            times = times + lines
+            time_file.close()
 
-    # Show plot
-    ax.plot(list(range(len(times))), times, linewidth=1.0)
+        # Plot time line
+        ax.plot(list(range(len(times))), times, linewidth=1.0, label=optimisation)
+
+    plt.legend()
     plt.show()
 
 
@@ -243,8 +249,8 @@ def plot_language_distributions_bar(foldername, increment, num):
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_visible(False)
-        axmain.set_ylabel('generation')
-        axmain.set_xlabel('signal')
+        axmain.set_ylabel('Generation')
+        axmain.set_xlabel('Signal')
 
         # Set label and ticks
         ax.set_ylabel(str(gen),
@@ -266,12 +272,12 @@ def plot_language_distributions_bar(foldername, increment, num):
         rects = ax.bar(x + pow(-1, 1) * width / 2,
                        language[gen]["edible"],
                        width,
-                       label="edible",
+                       label="Edible",
                        color='red')
         rects = ax.bar(x + pow(-1, 2) * width / 2,
                        language[gen]["poisonous"],
                        width,
-                       label="poisonous",
+                       label="Poisonous",
                        color='blue')
 
         # Plot legend half way up
@@ -330,6 +336,7 @@ def frequency_and_qi(foldername, increment, num):
     fig, ax1 = plt.subplots()
     l1, = ax1.plot(generations, average_fitness, label="Average fitness", linewidth=1.0, color='r')
     ax1.set_ylabel("Fitness")
+    ax1.set_xlabel('Generation')
 
     # Plot QI score
     ax2 = ax1.twinx()
@@ -369,11 +376,13 @@ def qi_all(foldername, increment, num):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Conduct Analysis of Simulation')
-    parser.add_argument(
-        'type',
-        type=str,
-        choices=['average', 'ten', 'ten-language', 'single', 'language', 'qi', 'qi-all'],
-        help='type of graph to display')
+    parser.add_argument('type',
+                        type=str,
+                        choices=[
+                            'average', 'ten', 'ten-language', 'single', 'language', 'qi', 'qi-all',
+                            'time-average'
+                        ],
+                        help='type of graph to display')
     parser.add_argument('foldername', type=str, help="where data is stored")
     parser.add_argument('-n',
                         '--num_gen',
@@ -414,4 +423,4 @@ if __name__ == "__main__":
     elif args.type == "qi-all":
         qi_all(args.foldername, args.increment, args.num_gen)
     elif args.type == "time-average":
-        qi_all(args.foldername, args.num_gen)
+        time_average(args.foldername, args.num_gen)
