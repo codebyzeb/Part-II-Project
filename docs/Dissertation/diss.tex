@@ -14,6 +14,7 @@
 \usepackage[capitalise, noabbrev]{cleveref}
 \usepackage{stix} % different font
 \usepackage{minted}
+\usepackage{enumitem}
 
 \usepackage{url}
 
@@ -31,7 +32,10 @@
 \parskip 6pt
 
 \renewcommand{\baselinestretch}{1.1}    % adjust line spacing to make
-                                        % more readable
+                                        % more 
+\def\switchenum#1{%
+  \renewcommand\labelenumi{#1\theenumi.}%
+}                                        
 
 \pagenumbering{roman}
 
@@ -93,21 +97,21 @@ This work was performed using resources provided by the Cambridge Service for Da
 
 {\large
 \begin{tabular}{ll}
-Candidate number:               & \bf 2049E???                       \\
+Candidate number:               & \bf 2400G                       \\
 Project Title:      & \bf Simulating Language Learning and Evolution \\
 Examination:        & \bf Computer Science Tripos -- Part II, May 2020  \\
-Word Count:         & \bf NULL\footnotemark[1]  \\
-Final Line Count:         & \bf 3125 \footnotemark[2]  \\
-Project Originator: & 2049E???                    \\
+Word Count:         & \bf 11150\footnotemark[1]  \\
+Final Line Count:         & \bf 3125\footnotemark[2]  \\
+Project Originator: & The Author                    \\
 Project Supervisors:         & Prof. Paula Buttery and Dr. Andrew Caines                  \\ 
 \end{tabular}
 }
-%\footnotetext[1]{This word count was computed
-%by \texttt{detex diss.tex | tr -cd '0-9A-Za-z $\tt\backslash$n' | wc -w}
-%}
-\footnotetext[1]{This word count was computed using:
-\texttt{texcount -subcount=chapter -merge -brief -sum diss.tex} with \texttt{\%TC:ignore} and \texttt{\%TC:endignore} around the appendices and front matter.
+\footnotetext[1]{This word count was computed
+by \texttt{detex diss.tex | tr -cd '0-9A-Za-z $\tt\backslash$n' | wc -w}, counting just the five main chapters.
 }
+%\footnotetext[1]{This word count was computed using:
+%\texttt{texcount -subcount=chapter -brief -sum diss.tex} with \texttt{\%TC:ignore} and \texttt{\%TC:endignore} around the appendices and front matter.
+%}
 \footnotetext[2]{This line count was computed using: \texttt{cat \`{}find . -name ``*.py'' \`{} | wc -l}
 }
 \stepcounter{footnote}
@@ -151,9 +155,9 @@ Humans evolved to understand and produce language, and according to theories of 
 
 Computer simulations are \emph{``theories of the empirical phenomena that are simulated"} \citep{Cangelosi2002}. Simulations encompass the hypotheses of the theory and produce empirical predictions that can then be evaluated against known phenomena \citep{cavalli1997genes}. Simulations can act as virtual laboratories where impossible experiments (such as language evolution) can be run, controlling parameters that could never be controlled in real life, such as evolutionary or environmental factors. Simulations can also act as quantitative verifiers for the internal validity of vague and ambiguous theories, requiring explicit definitions of key assumptions. Finally, simulations can be used as a tool for studying complex systems. These are composed of many interacting entities that produce global properties that cannot be predicted even with complete knowledge of the system. A noteworthy example is Conway's Game of Life, a cellular automaton with very simple rules in which it is possible to build a universal Turing Machine \citep{rendell2002turing}.
 
-Language itself is a complex system and it has been shown that the bottom-up approach of simulations can generate key insights \citep{langton1997artificial}. In this project, I will use simulation to explore the genetic advantage of populations of entities who exhibit language over those who do not.
+Language itself is a complex system and it has been shown that the bottom-up approach of simulations can generate key insights \citep{langton1997artificial}. In this dissertation, I present how simulation can be used to explore the genetic advantage of populations of entities who exhibit language over those who do not.
 
-\section{Prior Work}
+\section{Contributions}
 
 Computer simulations have been applied to a variety of interesting questions in the field of language evolution. Seeking to investigate the emergence of syntactic universals, \citet{kirby2002emergence} presented the Iterated Learning Model (ILM), a means of simulating cultural transmission of language. They discuss the intersection of learning, cultural evolution and biological evolution as defining the emergence of language and use the ILM to explain the emergence of compositionality, irregularity and frequency properties of language.
 
@@ -174,9 +178,11 @@ In my project I re-implement the ``toy mushroom world'' simulation described by 
 	\item Implementing the genetic algorithm used to evolve the populations (Chapter 3).
 	\item Develop optimisations to reduce the time taken to run the simulation (Chapter 3).
 	\item Creating a suite of data gathering tools, interactivity features and analysis methods (Chapter 3).
-	\item Comparing the fitness of the populations and the languages they produce to the results of Cangelosi and Parisi (Chapter 4).
-	\item Conducting original analysis of population behaviour and exploring the robustness of the simulation to parameter differences (Chapter 4).
-	\item Discussing personal reflections and potential future work (Chapter 5).
+	\item Comparing population fitness and languages production to the results of Cangelosi and Parisi to verify that language is a useful adaptation (Chapter 4).
+	\item Criticising the arbitrary design decisions made by Cangelosi and Parisi by altering simulation parameters (Chapter 4).
+	\item Conducting original analyses of the simulation with respect to convergence to different exploratory behaviours (Chapter 4).
+	\item Reflecting on the importance of tests and the utility of scripting (Chapter 5).
+	\item Discussing future directions that this work could take (Chapter 5).
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -263,13 +269,13 @@ Each node calculates a weighted average of the inputs offset by a bias term. An 
       $
 \end{itemize}
 
-The entities can be represented by a fully-connected feed-forward neural network. The  \emph{perception} of the entity acts as the input of the neural network with the output treated as the \emph{action} chosen by the entity. To increase the computational abilities of the entity, I also include a layer of hidden nodes to allow for more complex decision making \citep{de1993backpropagation}. I initially used five hidden nodes, as in \citet{Cangelosi1998}. By altering the weights and biases used by the network, the entity responds differently to the perceptual inputs and produces different behaviours. Note that when using the identity function, hidden layers are redundant as multiple layers can be linearly combined through matrix multiplication.
+The entities can be represented by a fully-connected feed-forward neural network. The  \emph{perception} of the entity acts as the input of the neural network with the output treated as the \emph{action} chosen by the entity. To increase the computational abilities of the entity, I also include a layer of hidden nodes to allow for more complex decision making \citep{de1993backpropagation}. I initially use five hidden nodes, as in \citet{Cangelosi1998}. By altering the weights and biases used by the network, the entity responds differently to the perceptual inputs and produces different behaviours. Note that when using the identity function, hidden layers are redundant as multiple layers can be linearly combined through matrix multiplication.
 
 \subsection{Genetic Algorithm}\label{section:genetic}
 
 The \emph{genetic algorithm} is a natural implementation for simulating the population dynamics of a group of such entities \citep{holland1992adaptation}. Just as artificial neural networks are inspired by animal brains, the genetic algorithm is inspired by the process of natural selection, the very process that we want to simulate. 
 
-Generally, a genetic algorithm takes a \emph{population} of candidate solutions to an optimisation problem and evolves the population towards a better solution. Each candidate has a set of properties, a \emph{genetic representation} which can be mutated and altered. The evolution starts from a population of randomly generated individuals and proceeds iteratively. For each \emph{generation}, the \emph{fitness} of each individual is calculated. The fitter individuals are selected and their genomes modified to form a new generation, used in the next iteration.
+Generally, a genetic algorithm takes a \emph{population} of candidate solutions to an optimisation problem and evolves the population towards a better solution. Each candidate has a set of properties; the \emph{genetic representation} which can be mutated and altered. The evolution starts from a population of randomly generated individuals and proceeds iteratively. For each \emph{generation}, the \emph{fitness} of each individual is calculated. The fitter individuals are selected and their genomes modified to form a new generation, used in the next iteration.
 
 This maps neatly to our problem. The \emph{population} used by the algorithm is simply a group of entities. The \emph{genetic representation} of the entities is the set of weights and biases used by each neural network. The \emph{fitness} score, $F$ is calculated according to the number of edible and poisonous mushrooms eaten by the entity during the simulation, $E$ and $P$ respectively:
 
@@ -279,24 +285,6 @@ This maps neatly to our problem. The \emph{population} used by the algorithm is 
 \end{equation}
 
 My interpretation of this equation is that it rewards entities that eat edible mushrooms and punishes those that eat poisonous mushrooms. The difference in weight between these two scores gives a greater reward to the entities that eat more edible mushrooms than poisonous mushrooms as it punishes the greedy strategy of simply eating as many mushrooms as possible.
-
-Finally, reproduction occurs by selecting a percentage of the population with the highest fitness score and producing a small set of offspring for each of these individuals. In \cite{Cangelosi1998}, the top $20\%$ of entities are selected from a population of 100. Each of these entities produces five entities by randomly mutating $10\%$ of their weights and biases, producing a new generation of 100 entities. This mutation consists of adding a sample of the uniform distribution from -1 to 1. The experimental constants are listed in \cref{table:constants}.
-
-\subsection{Population Types}\label{section:populations}
-
-To carry out the investigation of whether introducing language to a population increases its fitness, I implement three different populations in the simulation. As described by \cite{Cangelosi1998}, these three populations differ in how the communication signals are used in the simulation environment. The three population types are:
-
-\begin{itemize}
-	\item No Language
-	\item External Language
-	\item Evolved Language
-\end{itemize}
-
-The population with {\bf no language} acts as a baseline. The linguistic input to the neural network controlling the entity is set to a constant and the linguistic output is ignored. These entities cannot perceive the properties of the mushrooms unless they are adjacent; unlike the other populations they are not assisted by a linguistic signal.
-
-Entities in the {\bf external language} population are not given a constant linguistic input signal. Instead, at every step the entity is provided with a linguistic signal corresponding with whether the edible mushroom is edible or poisonous, as if another entity adjacent to that mushroom can see that mushroom's properties and communicates them through this signal. The language is ``externally provided" because I enforce that exactly one signal is used for edible mushrooms and another is used for poisonous mushrooms without actually involving another entity in the simulation. 
-
-The population with an {\bf evolved language} is similar to the External Language population, but I do not enforce the use of particular signals. Instead, I allow the population to derive its own signals. Each entity is paired with a randomly chosen entity from the population at each simulation cycle (a `speaking' entity). This second entity labels the mushrooms for the listening entity. Both entities are given the same inputs but the speaking entity additionally receives the properties of the closest mushroom, no matter the distance. The linguistic output of this second entity is be used as the linguistic input to the primary entity; simulating a one-word utterance.
 
 \begin{table*}[t]
 \centering
@@ -316,15 +304,29 @@ percentage\_keep & The percentage of entities chosen to reproduce & 20 \\
 \label{table:constants}
 \end{table*}
 
+Finally, reproduction occurs by selecting a percentage of the population with the highest fitness score and producing a small set of offspring for each of these individuals. In \cite{Cangelosi1998}, the top $20\%$ of entities are selected from a population of 100 at the end of the generation. Each of these entities produces five entities by randomly mutating $10\%$ of their weights and biases, producing a new generation of 100 entities. This mutation consists of adding a sample of the uniform distribution from -1 to 1. The experimental constants are listed in \cref{table:constants}.
+
+\subsection{Population Types}\label{section:populations}
+
+To carry out the investigation of whether introducing language to a population increases its fitness, I implement three different populations in the simulation. As described by \cite{Cangelosi1998}, these three populations differ in how the communication signals are used in the simulation environment. The three population types are:
+
+\begin{itemize}
+	\item No Language.
+	\item External Language.
+	\item Evolved Language.
+\end{itemize}
+
+The population with {\bf no language} acts as a baseline. The linguistic input to the neural network controlling the entity is set to a constant and the linguistic output is ignored. These entities cannot perceive the properties of the mushrooms unless they are adjacent, unlike the other populations they are not assisted by a linguistic signal.
+
+Entities in the {\bf external language} population are not given a constant linguistic input signal. Instead, at every step the entity is provided with a linguistic signal corresponding with whether the edible mushroom is edible or poisonous, as if another entity adjacent to that mushroom can see that mushroom's properties and communicates them through this signal. The language is ``externally provided" because exactly one signal is used for edible mushrooms and another is used for poisonous mushrooms without actually involving another entity in the simulation. 
+
+The population with an {\bf evolved language} is similar to the {\bf external language} population, but without enforced signals. Instead, the population derives its own signals. Each entity is paired with a randomly chosen entity from the population at each simulation cycle (a `speaking' entity). This second entity labels the mushrooms for the listening entity. Both entities are provided with the same \emph{direction} input but the speaking entity additionally receives the properties of the closest mushroom, no matter the distance. The linguistic output of this second entity is used as the linguistic input to the primary entity; simulating a one-word utterance.
+
 \section{Simulation Analysis}\label{section:analysis}
 
-\subsection{Generational Fitness}
+To analyse their simulation, \cite{Cangelosi1998} first compared the three populations with respect to the average fitness achieved across 1000 generations. As discussed in \cref{section:genetic}, the fitness score for each entity describes its success in distinguishing between edible and poisonous mushrooms, correctly eating the former and avoiding the later.
 
-As discussed in \cref{section:genetic}, the fitness score for each entity describes its success in distinguishing between edible and poisonous mushrooms, correctly eating the former and avoiding the later. \cite{Cangelosi1998} plot the average fitness across 1000 generations to compare the three population types discussed in \cref{section:populations}. This will be the primary way that I compare different runs of the simulation.
-
-\subsection{Efficiency of Language}\label{section:efficiency}
-
-\cite{Cangelosi1998} described the \emph{efficiency} of the language produced by these entities. They gave three requirements for a population having an efficient language, based on principles that \cite{Clark1995} argues govern a child's acquisition of a lexicon:
+\cite{Cangelosi1998} also described the \emph{efficiency} of the language produced by these entities. They gave three requirements for a population having an efficient language, based on principles that \cite{Clark1995} argues govern a child's acquisition of a lexicon:
 
 \begin{enumerate}
 	\item Functionally distinct categories (e.g. mushroom type) are labelled with distinct signals.
@@ -334,9 +336,9 @@ As discussed in \cref{section:genetic}, the fitness score for each entity descri
 
 Note that the {\bf external language} satisfies all three requirements and is thus an upper bound for language efficiency.
 
-To investigate the language produced by different populations, Cangelosi \& Parisi used a \emph{naming task}. In this controlled experiment, each entity in a population is exposed to the entire set of mushrooms (10 edible and 10 poisonous) in four locations (forward, left, backwards and right). This produces 80 signals per entity. The frequency distribution for the signals produced for edible and poisonous mushrooms by all entities can be plotted and this will be the second way I analyse the simulations.
+To investigate the language produced by different populations, Cangelosi \& Parisi used a \emph{naming task}. In this controlled experiment, each entity in a population is exposed to the entire set of mushrooms (10 edible and 10 poisonous) in four locations (forward, left, backwards and right). When summed over the whole population, the output signals associated with these 80 conditions describe a frequency distribution over the language's possible signals, allowing the evolution of the population's language to be visualised. Cangelosi and Parisi use 3 bits for their signal language; giving 8 possible signals for the entities to choose from when communicating.
 
-\citet{Cangelosi1998} also introduce a Quality Index (QI) score to describe the efficiency of a language. The QI is calculated as follows:
+To quantify the efficiency of a population's language, \citet{Cangelosi1998} introduced a Quality Index (QI) score, calculated as follows:
 
 \begin{equation}
 \label{equation:dpoisonous}
@@ -351,19 +353,19 @@ d_{\mathrm{edible}} = \sum^{8}_{i = 1}{|y_i - y_e|}
 \mathrm{QI} = \sum^{8}_{i = 1} |x_i - y_i| - k \times \min (d_{\mathrm{poisonous}}, d_{\mathrm{edible}})
 \end{equation}
 
-$x_i$ and $y_i$ are the frequencies of signals used for poisonous and edible mushrooms respectively, as calculated from the naming task and $x_e$ and $y_e$ are the expected percentages in the case of a flat distribution. $k$ is a constant to weight the effect of the internal dispersion values $d_{\mathrm{poisonous}}$ and $d_{\mathrm{edible}}$ and is typically 1.
+$x_i$ is the percentage of signal $i$ for poisonous mushrooms and $y_i$ is the percentage of signal $i$ for edible mushrooms, as calculated from the naming task. $x_e$ and $y_e$ are the expected percentages in the case of a flat distribution, in this case $\frac{1}{8}$. $k$ is a constant to weight the effect of the internal dispersion values $d_{\mathrm{poisonous}}$ and $d_{\mathrm{edible}}$ and is typically 1.
 
-These dispersion values measure the variance of the distribution of signals used for the same category (edible or poisonous). This captures the use of synonyms, as these values are highest when only one signal is used for the category. 
+These dispersion values measure the variance of the distribution of signals used for the same category (edible or poisonous). This captures the use of synonyms, as these values are highest (equal to 1.75) when only one signal is used for the category and are lowest (equal to 0) when all eight signals are used with equal frequency.
 
 The first part of the QI equation captures the principle of contrast (use of one word for each class of mushrooms) as it is highest when different signals are used for each category. By combining this with the smaller of the two dispersion values, we get a score that captures the idea of an efficient language.
 
-I examine the correlation between language efficiency and population fitness in \cref{section:languageanalysis}.
+In \cref{section:initialanalysis}, I conduct this same analysis to compare the generational fitness, language distribution and correlation between language efficiency and population fitness to the results achieved by \citet{Cangelosi1998}.
 
 % CUT OUT: It will be interesting to see if a correlation may even exist in the No Language population, despite the lack of communication, as this would imply the development of perceptual skills which do not depend on linguistic interaction.
 
 \section{Requirements Analysis}\label{section:requirements}
 
-My project involves re-implementing the simulation described in Sections \ref{section:world} - \ref{section:entities} and analysing this simulation with regards to the three metrics described in \cref{section:analysis}. The requirements for this project can then be divided into two parts; implementing the simulation and constructing the means of comparing my implementation against the findings in \citet{Cangelosi1998}.
+My project involves re-implementing the simulation described in Sections \ref{section:world} - \ref{section:entities} and analysing this simulation with regards to the metrics described in \cref{section:analysis}. The requirements for this project can then be divided into two parts: implementing the simulation; and constructing the means of comparing my implementation against the findings in \citet{Cangelosi1998}.
 
 \subsection*{Simulation Construction}
 
@@ -376,6 +378,8 @@ My project involves re-implementing the simulation described in Sections \ref{se
 \item Introduce a genetic algorithm that executes after all entities complete the simulation, as described in \cref{section:genetic}.
 
 \item Develop three populations, one without language, one with an externally imposed language and one with an evolved language involving speaker-listening pairs, as described in \cref{section:populations}.
+\switchenum{*}
+\item (Extension) Develop optimisations to reduce the runtime of the simulation.
 
 \end{enumerate}
 
@@ -390,8 +394,10 @@ My project involves re-implementing the simulation described in Sections \ref{se
 \item Calculate the Quality Index (QI) of the language produced by the population without language and the population with an evolved language to investigate the genetic advantage of producing productive signals. 
 
 \item Investigate the correlation between QI of the language and the fitness of the species to determine if change in the language or in the categorisation skill of the entities affects the linguistic ability.
-
-\item Investigate the behaviour of entities at specific generations and whether convergence of behavioural patterns corresponds to generational fitness.
+\switchenum{*}
+\item (Extension) Investigate the behaviour of entities at specific generations and whether convergence of behavioural patterns corresponds to generational fitness.
+\switchenum{*}
+\item (Extension) Explore the robustness of Cangelosi and Parisi's simulation by altering their arbitrary design choices.
 
 \end{enumerate}
 
@@ -419,20 +425,20 @@ I chose Python for my project due to the ease of programming, my experience with
 
 During implementation, I followed an agile development process. An initial project plan was formulated at the beginning of the project with a list of tasks to complete. These tasks were compiled into a Kanban board, with sections for To-do, In Progress, Testing/Documenting and Completed. My project plan divided the timeline of my project into a series of 2-3 week sprints, each with associated deadlines and milestones. At the beginning of each sprint I selected the tasks to complete in order to meet these deadlines and successfully pass each milestone, often completing additional tasks when work was finished early.
 
-This agile process allowed me to ensure I was on track with my project. In fact, the success criteria proposed at the start of the project were met very early on in the timeline, allowing me to focus on refining the project and evaluate my simulation in detail.% and work on my extension. [EXTENSION]
+This agile process allowed me to ensure I was on track with my project. In fact, the success criteria proposed at the start of the project were met very early on in the timeline, allowing me to focus on refining the project and complete my proposed extensions.
 
 \subsection{Version Control}
 
-\begin{figure}[ht]
+\begin{figure}[t]
   \centering
   \includegraphics[width=.9\linewidth]{figs/commits.jpg}
   \caption{Commits to the Github repository over the duration of the project.}
   \label{fig:commits}
 \end{figure}
 
-For version control, I used Git to track change with a remote repository on GitHub\footnote{https://github.com/}. In total, 104 commits were made over the course of the project as seen in \cref{fig:commits}. My source code is publicly available on GitHub with a README to explain how to use it. The project is licensed under the MIT license, for free modification and reuse while limiting my liability.
+For version control, I used Git to track change with a remote repository on GitHub\footnote{https://github.com/}. In total, 104 commits were made over the course of the project as seen in \cref{fig:commits}. My source code is publicly available on GitHub with a README to explain how to run it. The project is licensed under the MIT license, for free modification and reuse while limiting my liability.
 
-The repository served as a backup, allowed me to revert to previous iterations of my code and allowed me to work on multiple computers. In particular, it allowed me to deploy my project to the University's High Performance Computing (HPC) service for running the simulations, as discussed below. In addition, I also performed a hardware backup to an external hard drive twice a week.
+The repository served as a backup, allowed me to revert to previous iterations of my code and allowed me to work on multiple computers. In particular, it allowed me to deploy my project to the University's High Performance Computing (HPC) service for running the simulations.
 
 \subsection{Development Tools}
 
@@ -488,57 +494,53 @@ The evolution of language is a challenging problem that can be explored using si
 
 The implementation of my project is split into three modules as seen in \cref{fig:modules}. The Simulating module contains all the code relevant to creating the simulation. This covers the ``Implementing the Simulation'' requirements for the project described in \cref{section:requirements}. The Analysis module contains functions for plotting different graphs and carrying out the ``Analysis of the Simulation'' requirements for the project.
 
-Within the Simulating module, the classes correspond to the core concepts detailed in Chapter 2. A full UML diagram of this module (excluding tests) can be seen in \cref{fig:uml}. The Entity class and sub-classes correspond to the entities described in \cref{section:entities}. The Environment class corresponds to the ``mushroom world'' simulation environment described in \cref{section:world}. The Simulation class corresponds to the actual simulation, including the genetic algorithm (\S\ref{section:genetic}) and the different populations (\S\ref{section:populations}).
+Within the Simulating module, the classes correspond to the core concepts detailed in Chapter 2. A full UML diagram of this module (excluding tests) can be seen in \cref{fig:uml}. The \texttt{Entity} class and sub-classes correspond to the entities described in \cref{section:entities}. The \texttt{Environment} class corresponds to the ``mushroom world'' simulation environment described in \cref{section:world}. The \texttt{Simulation} class corresponds to the actual simulation, including the genetic algorithm (\S\ref{section:genetic}) and the different populations (\S\ref{section:populations}).
 
 The Analysis module contains the code to analyse the simulation. This includes the plotting of generational fitness, language frequency and quality index as described in \cref{section:analysis}. It also contains another file to produces heatmap plots from the neural networks of a population.
 
 \section{Environment}\label{section:impl-env}
 
-The Environment module contains the Direction enumeration and the Environment class. These are used to represent the state of the mushroom world including the position of the mushrooms and the entity and the direction that the entity is facing. It contains methods for populating the world with mushrooms, managing the state of the world and querying the world, totalling 385 lines of code.
+The Environment module contains the \texttt{Direction} enumeration and the \texttt{Environment} class. These are used to represent the state of the mushroom world including the position of the mushrooms and the entity and the direction that the entity is facing. It contains methods for populating the world with mushrooms, managing the state of the world and querying the world, totalling 385 lines of code.
 
 \subsection{Mushrooms}\label{section:mushrooms}
 
-Mushrooms are represented as 10-bit integers. Conceptually, each bit corresponds to a binary property of the mushroom. Poisonous mushrooms are represented as the bit-string \verb!0b1111100000! with one randomly-chosen bit flipped. Similarly, edible mushrooms are represented by the bit-string \verb~0b0000011111~, again with one bit flipped. This means that all mushrooms within a class share the same prototype with some variations to simulate visual inconsistencies. %Using bit-wise arithmetic, I implemented functions to quickly generate mushrooms and test if given mushrooms were edible or poisonous.
+Mushrooms are represented as 10-bit integers. Conceptually, each bit corresponds to a binary property of the mushroom. Poisonous mushrooms are represented as the bit-string \verb!0b1111100000! with one randomly-chosen bit flipped. Similarly, edible mushrooms are represented by the bit-string \verb~0b0000011111~, again with one bit flipped. This means that all mushrooms within a class share the same prototype but have some variations to simulate visual inconsistencies. %Using bit-wise arithmetic, I implemented functions to quickly generate mushrooms and test if given mushrooms were edible or poisonous.
 
 \subsection{Representation of the World}\label{section:representation-of-world}
 
 The 20x20 mushroom world is stored as a dictionary, mapping from (x,y) coordinates to mushroom values. Since there are at most 20 mushrooms at any point in the simulation, this dictionary holds a maximum of 20 values at once.
 
-This data structure is chosen over an array representation as the world is sparse. Since the \texttt{closest\_mushroom()} function is called every simulation frame and involves iterating over every mushroom, we want this to be efficient. To compare the two data structures, I ran a benchmark. This benchmark created worlds of both types, populated each with 20 mushrooms and timing how long it took to iterate through all 20 mushrooms. By taking an average of 10000 worlds, I found that the dictionary representation was 14.1 times faster, with an average time of 3.3\textmu s (with a variance of $5.61\times10^-13$) compared to 46.3\textmu s (with a variance of $8.32\times10^-11$) for the array representation. The benchmark script can be found in Appendix~\ref{chapter:benchmark}.
+This data structure is chosen over an array representation as the world is sparse. Since the \texttt{closest\_mushroom()} function is called every simulation frame and involves iterating over every mushroom, we want this to be efficient. To compare the two data structures, I ran a benchmark. This benchmark created worlds of both types, populated each with 20 mushrooms and timed how long it took to iterate through all 20 mushrooms. By taking an average of 10000 worlds, I found that the dictionary representation was 14.1 times faster, with an average time of 3.3\textmu s (with a standard deviation of 0.7\textmu s) compared to 46.3\textmu s (with a standard deviation of 9.1\textmu s) for the array representation. The benchmark script can be found in Appendix~\ref{chapter:benchmark}.
 
-Two run-time exceptions are implemented, \texttt{WorldFull} and \texttt{MushroomNotFound}, thrown when the world is full and empty respectively. Positions in the world are passed between methods as integer pairs (x, y). For clarity, the type \texttt{pos} will be used when such a pair is used.
+Two run-time exceptions are implemented, \texttt{WorldFull} and \texttt{MushroomNotFound}, thrown when the world is full and empty respectively. Positions in the world are passed between methods as integer pairs (x, y), represented as the type \texttt{pos} in the UML diagram.
 
 \subsection{Environment Functionality}
 
 The methods in the Environment module can be split into four groups; world initialisation, utilities, mushroom manipulation and entity manipulation.
 
-{\bf World Initialisation:} An Environment object is created by specifying the dimensions of the world and the number of edible and poisonous mushrooms expected. These are three of the `arbitrary' parameters described in \cref{table:constants}; by default the world is 20x20 and 10 of each mushroom type is placed randomly at the start of each epoch. After creating a new object, the initialisation method calls the \texttt{reset()} method to place the mushrooms, a method separated from the initialisation because the world needs to be reset at the start of each of the epochs.
+{\bf World Initialisation:} An \texttt{Environment} object is created by specifying the dimensions of the world and the number of edible and poisonous mushrooms expected. These are three of the `arbitrary' parameters described in \cref{table:constants}; by default the world is 20x20 and 10 of each mushroom type is placed randomly at the start of each epoch. The \texttt{reset()} method is called to place the mushrooms initially and at the start of each epoch.
 
-{\bf Utility Methods:} Seven methods were implemented for managing the state of the world. These included calculating adjacency information, angles between positions, querying individual cells and finding available cells.
+{\bf Utility Methods:} Utilities were implemented to calculate adjacency information, find angles between positions, query individual cells and find available cells.
 
-{\bf Mushroom Manipulation:} Three methods were implemented for manipulating mushrooms in the world. In particular, the \texttt{closest\_mushroom} method loops through the position keys in the dictionary and for each of these calculate the Manhattan distance. The Manhattan distance is used because it is faster to calculate, it is always an overestimate (or equal to) the Euclidian distance and because the Entity can only move rectilinearly.
+{\bf Mushroom Manipulation:} Along with methods to place and test for mushrooms, the \texttt{closest\_mushroom()} method loops through the position keys in the dictionary and for each of these calculate the Manhattan distance. The Manhattan distance is used because it is faster to calculate, it is always an overestimate (or equal to) the Euclidian distance and because the entity can only move rectilinearly.
 
-{\bf Entity Manipulation:} The world keeps track of the position and direction of the entity within it. This introduces a layer of abstraction between the Entity class and the Environment class; the Entity class is only concerned with the behaviour of the entity independently of the actual representation of its position and movement within the virtual world. The Simulation class acts as an interface between instances of these objects, discussed in \cref{section:simulation}. Five methods in the Environment class are used to move and query the position and direction of the entity, where the direction is stored using the Direction enumeration. In particular, the \texttt{entity\_facing\_out()} method is used for an optimisation discussed in \cref{section:optimisations}.
+{\bf Entity Manipulation:} The world keeps track of the position and direction of the entity within it. This introduces a layer of abstraction between the \texttt{Entity} class and the \texttt{Environment} class; the \texttt{Entity} class is only concerned with the behaviour of the entity independently of the actual representation of its position and movement within the virtual world. The \texttt{Simulation} class acts as an interface between instances of these objects, discussed in \cref{section:simulation}. Relevant methods in the \texttt{Environment} class are used to move and query the position and direction of the entity, where the direction is stored using the Direction enumeration. In particular, the \texttt{entity\_facing\_out()} method is used for an optimisation discussed in \cref{section:optimisations}.
 
 \subsection{Testing}
 
-Using the \texttt{pytest} library\footnote{\url{https://docs.pytest.org/en/latest}}, I produced a total of 68 unit tests to assert the behaviour of the Environment class. This was done early to ensure that any subsequent refactoring of the code would retain the correct behaviour of the program. Upon discovering bugs during the development process, I produced regression tests to prevent the reemergence of bugs later in development. 
+I produced a total of 68 unit tests using \texttt{pytest} to assert the behaviour of the Environment module. This was done early to ensure that any subsequent refactoring of the code would retain the correct behaviour of the program. Upon discovering bugs during the development process, I produced regression tests to prevent the reemergence of bugs later in development. 
 
 Unit tests were also produced for the Entities and Simulation module, totalling 914 lines of code.
 
 \section{Entities}
 
-The Entities module, totalling 342 lines of code, contains the Entity class and its two subclasses; ManualEntity and NeuralEntity. Separately, the Action module contains the Action enumeration to describe the possible actions taken by the entity; \texttt{FORWARDS} to move once cell forwards, \texttt{LEFT} to turn 90º left, \texttt{RIGHT} to turn 90º right and \texttt{NONE} to do nothing. The full UML diagram can be seen in \cref{fig:uml}.
+The Entities module, totalling 342 lines of code, contains the \texttt{Entity} class and its two subclasses; \texttt{ManualEntity} and \texttt{NeuralEntity}. Separately, the Action module contains the Action enumeration to describe the possible actions taken by the entity; \texttt{FORWARDS} to move once cell forwards, \texttt{LEFT} to turn 90º left, \texttt{RIGHT} to turn 90º right and \texttt{NONE} to do nothing. The full UML diagram can be seen in \cref{fig:uml}.
 
 \subsection{Abstract Specification}
 
-The Entity class acts as an empty parent class. As state, it has an \texttt{fitness} value which is used to determine the fitness of the entity. The \texttt{eat(int)} method changes this value according to equation \ref{equation:fitness}. 
+The \texttt{Entity} class acts as an empty parent class. As state, it has an \texttt{fitness} value which is used to determine the fitness of the entity according to equation \ref{equation:fitness}. The \texttt{behaviour()} method describes the expected input-output behaviour of entities discussed in \cref{section:entities}. When passed an angle, a mushroom and an input signal, this method returns an action and an output signal. The angle is passed as a float ranging from 0 to 1. The mushroom's properties are passed as a single integer, as described in \cref{section:mushrooms}. The input and output communication signals are represented by three bits. The outputted action is an instance of the \texttt{Action} enumeration described above. These inputs and outputs are detailed in \cref{table:behaviour}. In the \texttt{Entities} class, this method always returns \texttt{Action.NOTHING} and the vocal signal \texttt{[0,0,0]}.
 
-The Entity class also defines the method \texttt{behaviour(float, int, float[]): Action, int[]}. This method describes the expected input-output behaviour of entities discussed in \cref{section:entities}. When passed an angle, a mushroom and an input signal, this method returns an action and an output signal. The angle is passed as a float ranging from 0 to 1. The mushroom's properties are passed as a single integer, as described in \cref{section:mushrooms}. The input and output communication signals are represented by three bits. The outputted action is an instance of the Action enumeration described above. These inputs and outputs are detailed in \cref{table:behaviour}. 
-
-In the Entities class, the \texttt{behaviour} method always returns \texttt{Action.NOTHING} and the vocal signal \texttt{[0,0,0]}.
-
-Note that the inputted and outputted utterances have different data types. All utterances are three-bit strings (encoding 8 possible signals) so outputted signals are always mapped to three bits. However, for the population without language, we input a constant signal \texttt{[0.5, 0.5, 0.5]}, requiring three floats. In the other two populations, the inputted  signals are always comprised of three integer bits.
+%Note that the inputted and outputted utterances have different data types. All utterances are three-bit strings (encoding 8 possible signals) so outputted signals are always mapped to three bits. However, for the population without language, we input a constant signal \texttt{[0.5, 0.5, 0.5]}, requiring three floats. In the other two populations, the inputted  signals are always comprised of three integer bits.
 
 Before implementing the feed-forward neural networks to control the entities, I created a rule-based entity in the \texttt{ManualEntity} class which extends \texttt{Entity}. It overrides the \texttt{behaviour()} method and implements a simple algorithm to always rotate and move towards the nearest mushroom. On average, this strategy will produce a negative fitness score due to the poisonous mushroom penalty being higher than the edible mushroom reward. This behaviour is not analysed but was useful for the purpose of testing the simulation in the early stages of development due to the deterministic choices made.
 
@@ -559,7 +561,7 @@ action & \texttt{Action} & The action taken by the Entity & Output \\
 
 \subsection{Neural Network Entity}
 
-In \cref{section:neural} I gave the general structure for the fully-connected neural network I wanted to use to control the behaviour of the entities. Now that I have defined the datatypes for these inputs and outputs, I can produce a more concrete description of this neural network. 
+In \cref{section:neural} I gave the general structure for the fully-connected neural network I wanted to use to control the behaviour of the entities. Now that I have defined the datatypes for these inputs and outputs, I can produce a more concrete description of this neural network.
 
 The neural network has fourteen input units. The first unit is the float value \texttt{location} which describes the angle to the closest mushroom. The next ten units describe the bit-string representation of the mushroom. Note that these values are 0 if the entity is not adjacent to a mushroom (this is controlled by the simulation). The final three units are used for the linguistic input signal. Five hidden units are used, as in \citet{Cangelosi1998}. As discussed in Chapter~2, I implemented the \emph{identity}, \emph{sigmoid} and \emph{ReLU} activation functions.
 
@@ -571,7 +573,7 @@ The \texttt{forward\_propagation()} method carries out the forward propagation a
 
 $$ Z_n = f(W_nZ_{n-1} + B_n) $$  
 
-\citet{Cangelosi1998} states that ``for all output units, continuous values are thresholded to either 0 or 1'' but is not clear how this thresholding takes place. I have decided to perform a sigmoid activation on the final layer and rounding the result to return integer values of 0 or 1.
+\citet{Cangelosi1998} states that ``for all output units, continuous values are thresholded to either 0 or 1'' but is not clear how this thresholding takes place. I have decided to perform a sigmoid activation on the final layer and round the result to return integer values of 0 or 1.
 
 \begin{figure}[t]
   \centering
@@ -614,27 +616,23 @@ $$ Z_n = f(W_nZ_{n-1} + B_n) $$
 
 % \end{minted}
 
-\texttt{NeuralEntity} overrides \texttt{behaviour()} in order to apply the neural network to the inputs. Given the inputs, it constructs a 14-element float vector as specified in \cref{fig:fullneural}, in particular converting the integer mushroom to an array of bits. It then feeds this input vector to the \texttt{forward\_propagation()} method to get the output vector. The first two bits of this output vector are parsed as an instance of Action and the last three bits are returned as the output signal.
+\texttt{NeuralEntity} overrides \texttt{behaviour()} in order to apply the neural network to the inputs. Given the inputs, it constructs a 14-element float vector as specified in \cref{fig:fullneural}, in particular converting the integer mushroom to an array of bits. It then feeds this input vector to the \texttt{forward\_propagation()} method to get the output vector. The first two bits of this output vector are parsed as an instance of \texttt{Action} and the last three bits are returned as the output signal.
 
-\subsection{Reproduction}
-
-An important aspect of these neural entities is their ability to asexually reproduce, a vital part of the genetic algorithm.
-
-The two parameters specify the number of children, $n$, to produce and the percentage of weights, $p$, in the neural network to mutate. When called, the entity starts by producing $n$ deep copies of itself. For each of these children, it iterates through the weights and biases of their neural networks and uses $p$ to decide whether to mutate it. Mutation occurs by adding a random value in the rectangular distribution specified by [-1, 1] to the current value.
+The weights and biases also constitute the \emph{genetic representation} of the entity and are used to produce children between each generation in the genetic algorithm, as described in \cref{section:genetic}.  Two parameters specify the number of children, $n$, to produce and the percentage of weights, $p$, in the neural network to mutate. When called, the entity produces $n$ deep copies of itself and for each child, adds a sample from the uniform distribution [-1, 1] to $p\%$ of the weights and biases. A deep copy was required to prevent aliasing of the dictionaries.
 
 \section{Simulation}\label{section:simulation}
 
-The Simulation module, seen in \cref{fig:uml}, contains the Simulation class and the Language enumeration for implementing the simulation. The Simulation class is responsible for implementing the per-entity simulation (750 cycles in the Environment described above) and the population behaviour, including the genetic algorithm. The Language enumeration describes the differences in language between the populations as described in \cref{section:populations}; \texttt{NONE} is for no language, \texttt{EXTERNAL} for the external language and \texttt{EVOLVED} for the evolved language. Together, these total 685 lines of code.
+The Simulation module, seen in \cref{fig:uml}, contains the \texttt{Simulation} class and the \texttt{Language} enumeration for implementing the simulation. The \texttt{Simulation} class is responsible for implementing the per-entity simulation (750 cycles in the Environment described above) and the population behaviour, including the genetic algorithm. The \texttt{Language} enumeration describes the differences in language between the populations as described in \cref{section:populations}; \texttt{NONE} is for no language, \texttt{EXTERNAL} for the external language and \texttt{EVOLVED} for the evolved language. Together, these total 685 lines of code.
 
 \subsection{Initialising the Simulation}\label{section:simulation-initialise}
 
-An instance of a Simulation object stores the parameters of the simulation and provides methods that run single-entity simulations and the genetic algorithm. The initialisation method sets the number of epochs, cycles per epoch, population size and the number of generations to run the simulation for as outlined in \cref{section:world}.
+An instance of a \texttt{Simulation} object stores the parameters of the simulation and provides methods that run single-entity simulations and the genetic algorithm. The initialisation method sets the number of epochs, cycles per epoch, population size and the number of generations to run the simulation for as outlined in \cref{section:world}.
 
 Further specified are two parameters used by the genetic algorithm; the percentage of the population chosen to reproduce (20\% by default) and the percentage of weights to mutate (10\% by default). These were discussed in \cref{section:genetic} and are listed with the other simulation parameters in \cref{table:constants}.
 
 \subsection{Single-Entity Simulation Run}\label{section:single-implementation}
 
-The \texttt{run\_single()} method performs the main simulation for each entity. The pseudocode for this function is shown below. Taking a single entity as a parameter, it performs the relevant operations required to allow the entity to `live' in an instance of the Environment class for \texttt{num\_epochs} of \texttt{num\_cycles} time steps each. During this time, the entity's \texttt{behaviour()} method is passed the appropriate inputs according to its current position in the environment (lines 14 to 19). The outputs of the \texttt{behaviour()} method are interpreted accordingly, moving the entity in the environment (line 20). When the entity shares a cell with a mushroom, it eats it, changing its fitness score accordingly and the mushroom is removed from the environment (lines 23 to 25).
+The \texttt{run\_single()} method performs the main simulation for each entity. The pseudocode for this function is shown below. Taking a single entity as a parameter, it performs the relevant operations required to allow the entity to `live' in an instance of the \texttt{Environment} class for \texttt{num\_epochs} of \texttt{num\_cycles} time steps each. During this time, the entity's \texttt{behaviour()} method is passed the appropriate inputs according to its current position in the environment (lines 14 to 19). The outputs of the \texttt{behaviour()} method are interpreted accordingly, moving the entity in the environment (line 20). When the entity shares a cell with a mushroom, it eats it, changing its fitness score accordingly and the mushroom is removed from the environment (lines 23 to 25).
 
 \begin{minted}
 [
@@ -643,9 +641,8 @@ framesep=2mm,
 baselinestretch=1.2,
 fontsize=\footnotesize,
 linenos
-]
-{python}
-def run_single(entity):
+]{pseudolex.py:PseudoLexer -x}
+function run_single(entity):
 
 	# Create a random environment
 	env := new Environment
@@ -659,7 +656,7 @@ def run_single(entity):
     	for cycle in num_cycles:
     		# Gather inputs for the entity
     		location := angle from entity to closest mushroom
-    		perception := bit string of mushroom if entity adjacent to it
+    		perception := closest mushroom if adjacent else 0
     		listening := input signal according to language type
         
     		# Get behaviour of the entity and move accordingly
@@ -687,6 +684,8 @@ Lines 12-13 perform the second step by simply sorting the list of entities accor
 
 Lines 16-19 create the next population by calling the \texttt{reproduce()} method on each of the fittest parent entities identified. This method is passed the number of children to produce (the reciprocal of the percentage of parents selected) and the percentage of weights to adjust in the mutation process.
 
+Two key constants in this algorithm are \texttt{mutate\_percentage} and \texttt{percentage\_keep} which set the percentage of weights to mutate and the percentage of the population chosen for reproduction respectively. The setting of these constants was discussed in \cref{section:simulation-initialise}.
+
 \begin{minted}
 [
 frame=lines,
@@ -697,7 +696,7 @@ linenos
 ]
 {python}
 
-def run_population(entities):
+function run_population(entities):
 
 	for generation in num_generations:
 
@@ -719,17 +718,15 @@ def run_population(entities):
 
 \end{minted}
 
-Two key constants in this algorithm are \texttt{mutate\_percentage} and \texttt{percentage\_keep} which set the percentage of weights to mutate and the percentage of the population chosen for reproduction respectively. The setting of these constants was discussed in \cref{section:simulation-initialise}.
-
 \subsection{Running the Simulations Using HPC}\label{section:running}
 
 To run experiments, I acquired access to the University of Cambridge's High Performance Computing (HPC) facility. This gave me access to an environment where I could set up experiments and schedule runs of my program using the SLURM workload manager\footnote{\url{https://slurm.schedmd.com/}}. I created a series of bash scripts that would allow me to schedule a batch of jobs at once (for example 10 independent runs of the genetic algorithm for each language type). I used the \texttt{rsync} command to copy computed data to my local file system. This work cycle allowed me to work quickly and effectively, all while avoiding having to use my own laptop for computationally demanding jobs. 
 
-To further speed up running experiments, I used the \texttt{argparse} library to create a command-line interface for my system. This allowed me to run the genetic algorithm, a single-entity simulation or load a previously run simulation from the command line and set any of the simulation and I/O parameters specified in Tables \ref{table:constants} and \ref{table:io-params}. Examples of running my system from the command line can be seen in Appendix~\ref{chapter:simulation-interactivity}.
+To further speed up running experiments, I used the \texttt{argparse} library to create a command-line interface for my system. This allowed me to run the genetic algorithm, a single-entity simulation or load a previously run simulation from the command line and set any of the simulation and I/O parameters. Examples of running my system from the command line can be seen in Appendix~\ref{chapter:simulation-interactivity}.
 
 \subsection{Optimisations}\label{section:optimisations}
 
-Having finished the core implementation of the project early, I implemented optimisations to increase the rate at which I could run experiments. Throughout implementation I made decisions that would favour a faster runtime, such as using \verb|numpy| arrays for matrix operations or using the dictionary-world representation, as discussed in \cref{section:representation-of-world}.
+Having finished the core implementation of the project early, I implemented optimisations to increase the rate at which I could run experiments. Throughout implementation I made decisions that would favour a faster runtime, such as using \verb|numpy| arrays for matrix operations or using the dictionary world representation, as discussed in \cref{section:representation-of-world}.
 
 Considering a run of the genetic algorithm informs us that the \texttt{run\_single()} method is called 200000 times when operating on a population of 100 entities for 2000 generations. Each call to this method involves 15 epochs of 50 cycles, or 750 iterations of the perception-action loop described in \cref{section:single-implementation}. Giving us a total of 150 million total iterations, this is a good site for optimisation.
 
@@ -737,23 +734,25 @@ The most expensive operation in this loop is the call to \texttt{behaviour()} wh
 
 {\bf Parallelisation:} The first optimisation was made by taking advantage of the fact that the 100 calls to \texttt{run\_single()} are large (750 simulation cycles each) and do not interact (each entity exists in its own world). These calls are thus \emph{embarrassingly parallel} and so are worthy of parallelisation \citep{mycroft2019}.
 
-Using the \texttt{multiprocessing} library\footnote{\url{https://docs.python.org/3.8/library/multiprocessing.html}}, I replaced the for loop with a \texttt{Pool} object which represents a pool of worker processes. The size of this pool is automatically set according to the number of hardware threads available. Using the \texttt{Pool}, I call the \texttt{starmap} method to dynamically offload the 100 calls to \texttt{run\_single()} to these processes. On my laptop, with 8 hardware threads available, this gave a speedup of $3.96\times$ when running the simulation for 100 generations, averaged over 10 runs. When running my program on the HPC I found that this optimisation was not as effective: although I could allocate 32 hardware threads, a speedup of only $1.06\times$ was achieved, likely due to hidden communication costs between cores not present on my laptop. Allocating this many threads also increased my expenditure so I decided not to use this optimisation when running my experiments.
+Using the \texttt{multiprocessing} library,\footnote{\url{https://docs.python.org/3.8/library/multiprocessing.html}} I replaced the for loop with a \texttt{Pool} object which represents a pool of worker processes. The size of this pool is automatically set according to the number of hardware threads available. Using the \texttt{Pool}, I call the \texttt{starmap} method to dynamically offload the 100 calls to \texttt{run\_single()} to these processes. On my laptop, with 8 hardware threads available, this gave a speedup of $3.96\times$ when running the simulation for 100 generations, averaged over 10 runs. Unfortunately, I could not use this optimisation on the HPC as hyperthreading is disabled on the Skylake nodes I used to run my experiments.
 
-{\bf Epoch skipping:} By noting that (1) the \texttt{behaviour()} method is deterministic and (2) that the environment is static (besides the entity), I was able to reduce the number of simulation loops required in the \texttt{run\_single()} method. If at any stage the call to \texttt{behaviour()} returns the \texttt{NOTHING} action then due to these two properties, it will continue to do so for the rest of the epoch. Thus, we can simply skip the remainder of the current epoch; the ``Skip None'' optimisation. 
+{\bf Epoch skipping:} By noting that (1) the \texttt{behaviour()} method is deterministic and that (2) the environment is static (besides the entity), I was able to reduce the number of simulation loops required in the \texttt{run\_single()} method. If at any stage the call to \texttt{behaviour()} returns the \texttt{NOTHING} action then due to these two properties, it will continue to do so for the rest of the epoch. Thus, we can simply skip the remainder of the current epoch; the ``Skip None'' optimisation. 
 
 A similar optimisation can be made when the entity attempts to move \texttt{FORWARD} through the edge of the world. The response to this behaviour was not defined in \citet{Cangelosi1998} so I had the entity remain in the same position. This is arbitrary, and I explore alternative choices in \cref{section:simulation-parameters}. As the entity remains in the same position, it will return the same response in the next cycle so we can again skip the epoch. This is the ``Skip Edge'' optimisation. Similar epoch-skipping optimisations can also be considered; such as the ``Detect Looping'' optimisation which determines if the entity is stuck spinning on the spot in either direction by examining the last four actions. 
 %Note that in all three of these cases we cannot skip the entire simulation because at the end of each epoch the position of the mushrooms and the entity are reset, which may change the inputs to the function. 
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=.9\linewidth]{figs/speedup}
+  \captionsetup{width=.9\linewidth}
+  \includegraphics[width=.9\linewidth]{figs/speedup2}
   \caption{Time taken to run 1000 generations of the genetic algorithm on a population with no language for each optimisation, averaged over ten runs.}
   \label{fig:speedup}
 \end{figure}
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=.9\linewidth]{figs/generation-time}
+  \captionsetup{width=.9\linewidth}
+  \includegraphics[width=.9\linewidth]{figs/generation-time2}
   \caption{Time taken to run each generation of the genetic algorithm on a population with no language for each optimisation, averaged over ten runs.}
   \label{fig:generation-time}
 \end{figure}
@@ -762,7 +761,7 @@ A similar optimisation can be made when the entity attempts to move \texttt{FORW
 
 %Further epoch-skipping optimisations could be implemented by detecting more complicated multi-cycle looping behaviours but these would give diminishing returns. This can be seen in the difference between the "Detecting Looping" optimisation and the "Skip None" optimisation; more complicated behaviours occur less frequently, cost more to detect and offer less of a speedup as fewer cycles would be skipped. 
 
-It is worth noting that \emph{by the nature of the genetic algorithm, the population will learn to avoid the very behaviours that lend themselves to optimisations}. This can be seen in the time taken to simulate each generation; in \cref{fig:generation-time} we can see that ``Skip None'' optimisation is very effective in early generations but gradually has less effect. The population learns to avoid producing a \texttt{NONE} action, as this wastes previous time that could be spent searching for mushrooms. A similar effect is seen for the ``Detect Looping'' optimisation but the inverse is seen for the ``Skip Edge'' optimisation; the entities do not know where the edge of the world is and so this behaviour occurs more frequently as the entities learn to explore.
+It is worth noting that \emph{by the nature of the genetic algorithm}, the population will learn to avoid the very behaviours that lend themselves to optimisations. This can be seen in the time taken to simulate each generation; in \cref{fig:generation-time} we can see that ``Skip None'' optimisation is very effective in early generations but gradually has less effect. The population learns to avoid producing a \texttt{NONE} action, as this wastes precious time that could be spent searching for mushrooms. A similar effect is seen for the ``Detect Looping'' optimisation but the inverse is seen for the ``Skip Edge'' optimisation; the entities do not know where the edge of the world is and so this behaviour occurs more frequently as the entities learn to explore.
 
 \subsection{Interactivity}\label{section:interactivity}
 
@@ -801,11 +800,11 @@ By default, at each generation this method records the the average fitness, the 
 
 \section{Simulation Analysis}\label{section:impl-analysis}
 
-The Analysis module seen in \cref{fig:modules} contains the Plotting class and a variety of methods to analyse the simulation in the same manner as \citet{Cangelosi1998}. The Plotting class is used for displaying a live fitness graph, discussed above in \cref{section:interactivity}. A command-line interface was also implemented for this module, allowing me to easily generate different fitness graphs and language frequency distribution graphs as seen in Chapter~4.
+The Analysis module seen in \cref{fig:modules} contains the \texttt{Plotting} class and a variety of methods to analyse the simulation in the same manner as \citet{Cangelosi1998}. The \texttt{Plotting} class is used for displaying a live fitness graph, discussed in \cref{section:interactivity}. A command-line interface was also implemented for this module, allowing me to easily generate different fitness graphs and language frequency distribution graphs as seen in Chapter~4.
 
 \subsection{QI Score}
 
-A particular set of methods were used to calculate the QI score of the language produced by the population as given in equation \ref{equation:qi} in \cref{section:efficiency}. \citet{Cangelosi1998} used this equation to correlate language efficiency with fitness and found that even in a population that did not use language, there was a high correlation between fitness and QI score over 1000 generations. Upon initial analysis of my simulation however, I only achieved low and negative correlation scores between fitness and the QI score defined by equation \ref{equation:qi}, as seen in \cref{table:qi-correlation}.
+A particular set of methods were used to calculate the QI score of the language produced by the population as given in equation \ref{equation:qi} in \cref{section:analysis}. \citet{Cangelosi1998} used this equation to correlate language efficiency with fitness and found that even in a population that did not use language, there was a high correlation between fitness and QI score over 1000 generations. Upon initial analysis of my simulation however, I only achieved low and negative correlation scores between fitness and the QI score defined by equation \ref{equation:qi}, as seen in \cref{table:qi-correlation}.
 
 \begin{table*}[t]
 \centering
@@ -817,7 +816,7 @@ A particular set of methods were used to calculate the QI score of the language 
  \hline
 \bf {QI Equation B} & 0.54 & 0.69 & 0.41 & 0.57 & 0.52 \\
 \end{tabular}
-\caption{Correlation of QI Score with Average Fitness for five replications of the simulation. {\bf QI Equation A} is equation \ref{equation:qi} and {\bf QI Equation B} is equation \ref{equation:qibetter}.}
+\caption{Pearson Correlation of QI Score with Average Fitness for five replications of the simulation. {\bf QI Equation A} is equation \ref{equation:qi} and {\bf QI Equation B} is equation \ref{equation:qibetter}.}
 \label{table:qi-correlation}
 \end{table*}
 
@@ -852,7 +851,7 @@ In this chapter I covered my implementation of the ``mushroom world'' simulation
 
 \emph{In \cref{section:behaviouranalysis}, I conduct my own, deeper analysis of the simulation by examining the convergence of the neural networks to different behavioural states. Finally I explore the robustness of the simulation to the choice of simulation parameters in \cref{section:simulation-parameters}, and discuss whether the conclusions of \citet{Cangelosi1998} still hold.}
 
-\section{Initial Analysis}
+\section{Initial Analysis}\label{section:initialanalysis}
 
 \subsection{Population Fitness}\label{section:popfit}
  
@@ -860,7 +859,7 @@ The first analysis that we can conduct is how the average fitness of each popula
 
 \citet{Cangelosi1998} performed this experiment by running the simulation 5 times for each language type for 1000 generations. They chose to stop the simulation at 1000 generations because by this point all three populations were capable of discriminating between the two mushroom types and had further learnt the correct behaviour (avoiding the poisonous and eating the edible ones). The result of their experiment can be seen in \cref{fig:cangelosi-results}.
 
-In my analysis I chose to run each experiment for 2000 generations and average across 10 replications for each population type. The choice of 2000 generations was made to explore potential behaviour that \citet{Cangelosi1998} may have missed and the choice of 10 runs was made to increase the statistical validity of my results due to high variance observed between runs. I was also able to run these experiments due to my access to the HPC facility; computing power that \citet{Cangelosi1998} may not have had. 
+In my analysis I chose to run each experiment for 2000 generations and average across 10 replications for each population type. The choice of 2000 generations was made to explore potential behaviour that \citet{Cangelosi1998} may have missed and the choice of 10 runs was made to increase the statistical validity of my results due to high variance observed between runs. I was also able to run these experiments due to my access to the HPC facility; computing power that Cangelosi and Parisi may not have had. 
 
 \begin{figure*}[t]
    \centering
@@ -882,7 +881,7 @@ In my analysis I chose to run each experiment for 2000 generations and average a
 
 The first result of this experiment can be seen in \cref{fig:average-relu}. The simulation parameters used were the defaults detailed in \cref{table:constants}, with the ReLU activation function used in the hidden layer of the neural networks and a sigmoid activation function used at the final layer. Unless otherwise specified, these parameters will be assumed for the rest of this chapter.
 
-From this experiment we can conclude that language is a useful adaptation for our entities. The population with {\bf no language} achieves an average fitness of 200 by the end of the 2000 generations whereas the two populations with language achieve an average fitness of 250 by generation 2000. A behavioural test shows that entities in these population use the signals provided to move away from poisonous mushrooms regardless of distance and approach edible mushrooms to eat; the population without language must approach each mushroom in order to categorise them and behave accordingly. This takes additional simulation cycles, explaining the lower fitness achieved.
+From this experiment we can conclude that language is a useful adaptation for our entities. The population with {\bf no language} achieves an average fitness of 200 by the end of the 2000 generations whereas the two populations with language achieve an average fitness of 250 by generation 2000. A behavioural test shows that entities in these population use the signals provided to move away from poisonous mushrooms regardless of distance and approach edible mushrooms to eat; the population without language must first approach each mushroom in order to categorise them and behave accordingly. This takes additional simulation cycles, explaining the lower fitness achieved.
 
 \begin{figure*}[t]
    \centering
@@ -906,21 +905,21 @@ As can be seen by \cref{fig:cangelosi-results}, these were the same conclusions 
 
 Despite these differences, the populations with language still perform better than those without. We can therefore still conclude that language is a useful adaptation for these entities. It therefore seems that this experimental setup is robust to this structural change in the neural networks. In \cref{section:simulation-parameters}, I will further explore robustness to other changes that can be made to the simulation.
 
-The way that the {\bf evolved language} populations differ in performance in these two later experiments does however tell us that we cannot assume that the {\bf evolved language} and {\bf external language} populations are equivalent. Instead, the {\bf external language} acts as an upper bound in terms of evolutionary fitness, as previously discussed in \cref{section:efficiency}. % CUT: This makes sense as the speaking entity can provide no additional information to the listening entity besides the category of the nearest mushroom, and the {\bf external language} is a maximally efficient signal for this task, as I discussed 
+The way that the {\bf evolved language} populations differ in performance in these two later experiments does however tell us that we cannot assume that the {\bf evolved language} and {\bf external language} populations are equivalent. Instead, the {\bf external language} acts as an upper bound in terms of evolutionary fitness, as previously discussed in \cref{section:analysis}. % CUT: This makes sense as the speaking entity can provide no additional information to the listening entity besides the category of the nearest mushroom, and the {\bf external language} is a maximally efficient signal for this task, as I discussed 
 
 % Is it possible that the evolved language is like a deeper neural network ???
 
 \subsection{Language Analysis}\label{section:languageanalysis}
 
-In \cref{section:efficiency}, I described the efficiency of the language produced by the entities according to three criteria:
+In \cref{section:analysis}, I described the efficiency of the language produced by the entities according to three criteria:
 
 \begin{enumerate}
-	\item Functionally distinct categories (e.g. mushroom type) are labelled with distinct signals
-	\item A single signal tends to be used to label all instances within a category
-	\item All the individuals in the population tend to use the same signal to label the same category
+	\item Functionally distinct categories (e.g. mushroom type) are labelled with distinct signals.
+	\item A single signal tends to be used to label all instances within a category.
+	\item All the individuals in the population tend to use the same signal to label the same category.
 \end{enumerate}
 
-I also mentioned that the {\bf external language} is maximally efficient with respect to these criteria as only one, distinct signal is used to measure each mushroom type. Given these criteria, we can now explore the efficiency of the language produced by the {\bf evolved language} populations from my first experiment. 
+I also mentioned that the {\bf external language} is maximally efficient with respect to these criteria as only one distinct signal is used to measure each mushroom type. Given these criteria, we can now explore the efficiency of the language produced by the {\bf evolved language} populations from my first experiment. 
 
 %\begin{figure*}[t]
 %   \centering
@@ -940,8 +939,11 @@ I also mentioned that the {\bf external language} is maximally efficient with re
 %   \end{minipage}
 %\end{figure*}
 
+\cref{fig:language-evolved3} shows the frequency distribution of the signals produced by one of the ten populations from the experiment. The frequency distribution is calculated using the naming task described in \cref{section:analysis}. The first observation is that at generation 0, the distribution of signals for edible and poisonous mushrooms is flat. This is to be expected, as this results from random weights chosen for all entities in the population. The language at this point provides no information to the listeners in the simulation. Over time, the population converges to using a single signal to label all mushrooms in the same category (criteria 2) and all individuals of the population use the same signals (criteria 3). By generation 400, the majority of the population uses only signals \verb~100~ and \verb~101~ but still struggles to distinguish between the two mushroom types. By generation 1000, criteria 1 is satisfied with signal \verb~100~ used for poisonous mushrooms and signal \verb~101~ for edible. 
+
 \begin{figure}[t]
   \centering
+  \captionsetup{width=.9\linewidth}
   \includegraphics[width=.8\linewidth]{results/language.png}
     \caption{Frequency distribution of the possible signals produced by all individuals in 10 generations in one replica of a simulation with an \bf{evolved language}.}
    \label{fig:language-evolved3}
@@ -949,14 +951,13 @@ I also mentioned that the {\bf external language} is maximally efficient with re
 
 \begin{figure}[t]
   \centering
+  \captionsetup{width=.9\linewidth}
   \includegraphics[width=.8\linewidth]{results/correlation.png}
  \caption{Average fitness for one replica of a population with an {\bf evolved language}. Also shown is the Quality Index score of the language produced by this population.}
   \label{fig:correlation}
 \end{figure}
 
-\cref{fig:language-evolved3} shows the frequency distribution of the signals produced by one of the replicas from the experiment. The frequency distribution is calculated using the naming task described in \cref{section:efficiency}. The first observation is that at generation 0, the distribution of signals for edible and poisonous mushrooms is flat. This is to be expected, as this results from random weights chosen for all entities in the population. The language at this point provides no information to the listeners in the simulation. Over time, the population converges to using a single signal to label all mushrooms in the same category (criteria 2) and all individuals of the population use the same signals (criteria 3). By generation 400, the majority of the population uses only signals \verb~100~ and \verb~101~ but still struggles to distinguish between the two mushroom types. By generation 1000, criteria 1 is satisfied with signal \verb~100~ used for poisonous mushrooms and signal \verb~101~ for edible. 
-
-In \cref{fig:correlation} we can see how the QI score of the language changes across 2000 generations. Initially the QI score is close to 0, corresponding with the flat distribution seen for generation 0 in \cref{fig:language-evolved3}. This is because this is the least efficient language, providing no information to listeners. The language quality quickly rises as the language converges to a more efficient state, peaking at 80\%. A score of 100\% would correspond to a maximally efficient language, like the {\bf external language}. Note that the Quality Index seems to be correlated to the average fitness of the population, also seen in \cref{fig:correlation}. For this replica, the correlation between fitness and quality was 0.568, calculated using Pearson \emph{r}. This suggests that not only is language a useful addition, but the quality of the language directly affects the resulting evolutionary success of the population.
+In \cref{fig:correlation} we can see how the QI score of the language changes across 2000 generations. Initially the QI score is close to 0, corresponding with the flat distribution seen for generation 0 in \cref{fig:language-evolved3}. This is because this is the least efficient language, providing no information to listeners. The language quality quickly rises as the language converges to a more efficient state, peaking at 80\%. A score of 100\% would correspond to a maximally efficient language, like the {\bf external language}. Note that the Quality Index seems to be correlated to the average fitness of the population, also seen in \cref{fig:correlation}. For this replica, the Pearson correlation between fitness and quality was 0.568. This suggests that not only is language a useful addition, but the quality of the language directly affects the resulting evolutionary success of the population.
 
 % COULD SHOW QI CORRELATIONS FOR THE OTHER 9 RUNS 
 % COULD SHOW QI SCORES FOR 'NONE' POPULATION AS THEY DID IN THE PAPER
@@ -992,7 +993,7 @@ In \cref{section:popfit} I presented the average fitness of each population over
 
 \cref{fig:ten-none-identity} shows these ten replications for the {\bf no language} population for the experiment using an {\bf identity} activation function on the hidden layer. It seems that the ten populations are converging to two distinct states; four converge to an average fitness of 250 and the other six converge to an average fitness of 125. One of the replications (seen in red) even seems to jump from one state to the other. \cref{fig:ten-none-relu} reveals the ten replicas for the experiment using a {\bf ReLU} activation function which seems to produce more of a continuum of states.
 
-Examining the weights of the neural networks in each population helps provide some understanding. \cref{fig:weights-2000} presents a heatmap of the weights and biases of 100 entities taken from generation 2000 of one of these populations, clamped to [-2, 2]. It is clear from the uniformity that by generation 2000 the population has converged to a single state and that by increasing the absolute values of these weights, the state has been protected from the disrupting effects of mutations, thus preventing the population from converging to a different state. \cref{fig:convergence} shows this convergence process for the same population; weights begin initially random but quickly converge to a single state.
+Examining the weights of the neural networks in each population helps provide some understanding. \cref{fig:weights-2000} presents a heatmap of the weights and biases of 100 entities taken from generation 2000 of one of these populations, clamped to [-2, 2]. It is clear from the uniformity that by generation 2000 the population has converged to a single state and that by increasing the absolute values of these weights, the state has been protected from the disrupting effects of mutations, thus preventing the population from converging to a different state. \cref{fig:convergence} shows this convergence process for the same population; weights are initially random but quickly converge to a single state.
 
 \begin{figure*}[t]
    \centering
@@ -1021,12 +1022,13 @@ where $W_1$, $B_1$, $W_0$ and $B_0$ are the weights and biases for the output la
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=1.\linewidth]{results/compare2}
+  \captionsetup{width=.9\linewidth}
+  \includegraphics[width=.9\linewidth]{results/compare2}
   \caption{Heatmaps of the flattened neural networks of a randomly chosen entity from generation 2000 of ten replicas.}
   \label{fig:compare}
 \end{figure}
 
-Instead, it is productive to examine the actual behaviour exhibited by these ten populations. I examined how each population behaved when faced with a poisonous mushroom. Taking a random entity from generation 2000 of each population, I placed a poisonous mushroom two cells in front of them. As expected, since all ten of these populations have no language, all ten entities moved towards the mushroom until adjacent (they otherwise have no means of categorising the mushroom). Once the mushroom is seen, however, two very different sets of behaviours are exhibited. These are seen in \cref{fig:poisonous-behaviour}.
+Instead, it is productive to examine the actual behaviour exhibited by these ten populations. I examined how each population behaved when faced with a poisonous mushroom. I selected a randomly chosen entity from generation 2000 of each population and placed a poisonous mushroom two cells in front of it. As expected, since all ten of these populations have no language, all ten entities moved towards the mushroom until adjacent (they otherwise have no means of categorising the mushroom). Once the mushroom is seen, however, two very different sets of behaviours are exhibited (\cref{fig:poisonous-behaviour}).
 
 
 \begin{figure*}[t]
@@ -1082,19 +1084,19 @@ The other four populations, those that achieve a fitness of 250, exhibit ``explo
 
 Examining these populations at generation 200 reveals the same behaviours except for one population; replica 8 now exhibits the ``stuck'' behaviour. At generation 250 however, replica 8 has switched to the ``exploratory'' behaviour. This seems to correspond with the `jump' to the higher state seen in \cref{fig:ten-none-identity}. From this we can conclude that early in the evolution, some populations converge to more productive behaviours than others and the gradual strengthening of weights prevents the lesser populations from escaping these states.
 
-The same behavioural analysis can also be applied to the ten replicas seen in \cref{fig:ten-none-relu}. Although these form more of a continuum of states, similar behaviours are noticed. The green line corresponding with the 120-fitness population exhibits ``stuck'' behaviour whilst the blue line corresponding with the 280-fitness population exhibits ``exploratory'' behaviour with an even broader search path than seen in \cref{fig:poisonous-behaviour}. It seems that for the populations without language, it is the search strategy that determines genetic success.
+The same behavioural analysis can also be applied to the ten replicas seen in \cref{fig:ten-none-relu}. Although these form more of a continuum of states, similar behaviours are noticed. The green line corresponding with the 120-fitness population exhibits ``stuck'' behaviour whilst the blue line corresponding with the 280-fitness population exhibits ``exploratory'' behaviour with an even broader search path than seen in \cref{fig:poisonous-behaviour}. It seems that for the populations without language, it is the \emph{search strategy} that determines genetic success.
 
 \section{Exploring Simulation Parameters}\label{section:simulation-parameters}
 
-Throughout Chapter 2 and 3, I discussed how the many design elements of the simulation were fairly arbitrary. One example is equation to calculate fitness:
+Throughout Chapter 2 and 3, I discussed how the many design elements of the simulation were fairly arbitrary. One example is the equation to calculate fitness:
 
 $$\mathrm{F} = 10 E - 11 P$$
 
-Although the scaling parameters of the equation seem arbitrary, they do not make a difference. This is because by generation 1000 all populations successfully avoid poisonous mushrooms and so it is the searching ability that determines the differences in fitness. Removing the $P$ term entirely would make a difference however as it would remove the penalty of eating a poisonous mushroom, leading to alternative behaviours.
+Although the scaling parameters of the equation seem arbitrary, they do not make a difference. This is because by generation 1000 all populations successfully avoid poisonous mushrooms and so it is the searching ability that determines the differences in fitness. Removing the $P$ term entirely would however make a difference as it would remove the penalty of eating a poisonous mushroom, leading to alternative behaviours.
 
-Another arbitrary choice is the implementation decision I made about when an entity attempts to walk through the edge of the world. Instead of the entities getting stuck, I could have them `bounce-back' or loop to the other side. When these alternative behaviours were implemented, no difference was found in the results besides an overall scaling of each curve. This is because the entities cannot detect the edge of the world; running into an edge is a random event so allowing them to pass through or bounce back only increases their exploration time.
+Another arbitrary choice is the implementation decision I made for when an entity attempts to walk through the edge of the world. Instead of the entities getting stuck, I could have them `bounce-back' or loop to the other side. When these alternative behaviours were implemented, no difference was found in the results besides an overall scaling of each curve. This is because the entities cannot detect the edge of the world; running into an edge is a random event so allowing them to pass through or bounce back only increases their exploration time.
 
-The majority of arbitrary choices can be found in the simulation parameters, those found in \cref{table:constants}. \cref{section:popfit} demonstrated that the simulation was robust to the activation function was used in the hidden layer of the neural networks. In all cases, the populations with language performed better than those without. In this the remainder of this section, I will explore the effect of changing neural network depth, adjusting the length of each epoch and altering the genetic algorithm parameters.
+The majority of arbitrary choices can be found in the simulation parameters specified by \citet{Cangelosi1998}, listed in \cref{table:constants}. In \cref{section:popfit} we found that the simulation was robust to the choice of activation function; in all cases, the populations with language performed better than those without. Observing the effect of the other parameters on the outcome of the simulation can produce some insight into whether these parameters are in fact arbitrary and the simulation is robust to these changes or whether they were chosen to produce good results. %In the remainder of this section, I will explore the effect of changing neural network depth, adjusting the length of each epoch and altering the genetic algorithm parameters.
 
 \subsection{Neural Network Depth}
 
@@ -1140,7 +1142,7 @@ I first wanted to explore whether increasing the depth of the neural networks wo
    \end{minipage}
 \end{figure*}
 
-I first experimented with changing the duration of each epoch while keeping the total number of cycles constant. In \cref{fig:average-short-epo} we do not observe much change in the comparison between the three populations although the fitness scores achieved are lower for all three populations. With only 15 cycles per epoch, it is likely that this prevents the entities from reaching more than one edible mushroom in each cycle. Increasing the number of cycles per epoch to 75 gives us \cref{fig:average-long-epo}. Here we get very different results; the three populations achieve very similar fitness scores and the population with {\bf no language} performs better than the population with the {\bf evolved language}. This can similarly be explained from the duration of the epochs; with more time to explore, the advantage of having mushrooms labelled before approach is reduced, resulting in similar fitness scores. This does, however, show that the simulation setup is not fully robust to changes in parameters.
+Another alteration involves changing the duration of each epoch while keeping the total number of cycles constant. In \cref{fig:average-short-epo} we do not observe much change in the comparison between the three populations although the fitness scores achieved are lower for all three populations. With only 15 cycles per epoch, it is likely that the entities are prevented from reaching more than one edible mushroom in each epoch. Increasing the number of cycles per epoch to 75 gives us \cref{fig:average-long-epo}. Here we get very different results; the three populations achieve very similar fitness scores and the population with {\bf no language} performs better than the population with the {\bf evolved language}. This can similarly be explained from the duration of the epochs; with more time to explore, the advantage of having mushrooms labelled before approach is reduced, resulting in similar fitness scores. This does, however, show that the simulation setup is not fully robust to changes in parameters.
  
  \subsection{Genetic Parameters}
  
@@ -1182,7 +1184,7 @@ I first experimented with changing the duration of each epoch while keeping the 
  
 Following the behavioural analysis in \cref{section:behaviouranalysis}, it is worth exploring how changing the parameters of the genetic algorithm may affect the observed convergence to two different behaviours in the {\bf no language} populations.
 
-Figures \ref{fig:average-mut20} and \ref{fig:average-mut50} present the effect of increasing the mutation percentage to from 10\% to 20\% and 50\% respectively and Figures \ref{fig:average-keep10} and \ref{fig:average-keep05} present the effect of reducing the percentage of entities chosen for reproduction from 20\% to 10\% and 5\% respectively. It seems as if each population type is affected by these changes differently, for example the reduction in the percentage of entities kept between generations negatively affects the two populations with language but does not seem to have an effect on the population without language; resulting in the {\bf evolved language} population performing worse than the population with {\bf no language}. In my opinion, this is because lowering this parameter prevents the emergence of new behaviours and the two populations with language require the emergence of more complex behaviours to take advantage of the additional information. The main observation is that a slight change in these parameters results in very different outcomes to our initial experiment seen in \cref{fig:average-relu}, suggesting that these parameters may have been tuned to maximise the gap between populations with language and those without.
+Figures \ref{fig:average-mut20} and \ref{fig:average-mut50} present the effect of increasing the mutation percentage to from 10\% to 20\% and 50\% respectively and Figures \ref{fig:average-keep10} and \ref{fig:average-keep05} present the effect of reducing the percentage of entities chosen for reproduction from 20\% to 10\% and 5\% respectively. It seems as if each population type is affected by these changes differently, for example the reduction in the percentage of entities kept between generations negatively affects the two populations with language but does not seem to have an effect on the population without language; resulting in the {\bf evolved language} population performing worse than the population with {\bf no language}. My view is that this is because lowering this parameter prevents the emergence of new behaviours and the two populations with language require the emergence of more complex behaviours to take advantage of the additional information. The main observation is that a slight change in these parameters results in very different outcomes to our initial experiment seen in \cref{fig:average-relu}, suggesting that these parameters may have been tuned to maximise the gap between populations with language and those without.
 
 It is worth pointing out that in all of of these experiments, we always see that the {\bf external language} populations perform better than the {\bf no language} populations. What seems to vary between these parameter changes is the performance of the {\bf evolved language} population with respect to these two. With certain changes to the parameters, such as increasing the neural network depth or increasing the mutation percentage, the {\bf evolved language} populations do not seem to converge to a productive language and do not gain an advantage in the mushroom world. Thus, although the simulation does demonstrate that language is always beneficial, it is not fully robust to changes in simulation parameters.
 
@@ -1206,29 +1208,29 @@ Finally, Cangelosi and Parisi also seemed to have missed the convergence of diff
 
 \chapter{Conclusion}
 
-This project was a success. All points listed in the success criteria and all items in the requirements analysis (\cref{section:requirements}) were completed.
+This project was a success. All points listed in the success criteria and all items in the requirements analysis (\S\ref{section:requirements}), including extensions, were completed.
 
-The purpose of this project was to implement the ``toy mushroom world'' simulation described in \citet{Cangelosi1998} and use it to investigate the evolution of a simple one-utterance language used to distinguish between edible and poisonous mushrooms. Entities controlled by neural networks exhibit either no language, an externally provided language or an evolved language and a genetic algorithm simulates evolution over many generations. These entities, the toy world they exist in and the genetic algorithm were all implemented successfully. Throughout the project, good software engineering practices were adhered to, including:
+The purpose of this project was to implement the ``toy mushroom world'' simulation described in \citet{Cangelosi1998} and use it to investigate the evolution of a simple one-utterance language used to distinguish between edible and poisonous mushrooms. Entities controlled by neural networks exhibit either no language, an externally provided language or an evolved language and a genetic algorithm simulates evolution over many generations. These entities, the toy world they exist in and the genetic algorithm were all implemented successfully, along with key optimisations to reduce runtime. Throughout the project, good software engineering practices were adhered to, including:
 \begin{itemize}
-    \item issue tracking
-    \item schedule management
-    \item a suite of unit tests
-    \item continuous integration to prevent the re-emergence of bugs
+    \item Issue tracking.
+    \item Schedule management.
+    \item A suite of unit tests.
+    \item Continuous integration to prevent the re-emergence of bugs.
 \end{itemize}
 
 I investigated the behaviour of the simulation according to the metrics described by \citet{Cangelosi1998}. I was able to reproduce the conclusion that populations perform better with language and furthermore that there is a correlation between language quality and fitness. I then performed additional analysis beyond this, analysing the weights of the neural networks and conducting behavioural tests to explain why different populations exhibit two seemingly distinct sets of behaviours. Finally, I explored the robustness of the system to changes made to the simulation parameters, seeking to see if these were tuned by Cangelosi and Parisi to exhibit particular results. From this I discovered that the resulting populations are in fact sensitive to these changes but that the main conclusions still hold.
 
 \section{Lessons Learnt}
 
-The main issue I faced was the emergence of strange behaviours at the population level of the simulation due to small underlying bugs in the core implementation of the entities and the environment objects. This was despite having implemented an extensive suite of unit tests; the problem was unforeseen. Once discovered, I was able to create regression tests to prevent their re-emergence.
+Despite having deployed an extensive suite of unit tests, a small underlying bug eluded me for a long time. This bug was in a method to generate mushrooms; the default parameter was set using a random number generator which incorrectly only evaluated once during the program. Once discovered, I created a regression test to prevent this bug's re-emergence. In the future, I will be more wary of randomness and produce more thorough tests. 
 
-Another useful change was the implementation of a command-line interface for my system. Earlier in development, I created hard-coded methods for each experiment that required code changes between each run on the HPC. This slowed the evaluation cycle and resulted in many failed attempts when parameters were not set correctly or were changed before the jobs were scheduled. Introducing the command-line interface allowed me to schedule a dozen experiments at once without touching the code at all.
+Another lesson learnt was the utility of a command-line interface. Earlier in development, I created hard-coded methods for each experiment that required code changes between each run on the HPC. This slowed the evaluation cycle and resulted in many failed attempts when parameters were not set correctly or were changed before the jobs were scheduled. Introducing the command-line interface allowed me to schedule a dozen experiments at once without touching the code at all. I will therefore prioritise creating such interfaces in future projects.
 
 Finally, during the course of the project I found that Python's dynamic typing introduced very subtle bugs that could not be discovered at compilation-time. This led me to conclude that Python would not be suitable if the aim of this project was to produce industry software, however for the scale of this project I believe that Python was a good choice. The powerful libraries lended themselves well and the dynamic typing lended itself to quick early implementation.
 
 \section{Further Work}
 
-Through the implementation and resulting analysis of this simulation I have demonstrated that computer simulations are a useful tool in the field of language evolution and that interesting behaviours can emerge from even the most basic neural networks. With further time I would seek to implement more expansive simulations to attempt to explain the emergence of linguistic phenomena including verb-object structures and compositionality. I would also seek to create a visual interface for the system to allow the simulation to be used as a learning tool for students interested in learning more about agent-based modelling. 
+Through the implementation and resulting analysis of this simulation I have demonstrated that computer simulations are a useful tool in the field of language evolution and that interesting behaviours can emerge from even the most basic neural networks. With further time I would seek to implement more expansive simulations to attempt to explain the emergence of linguistic phenomena including verb-object structures and compositionality, such as in \citet{cangelosi2001evolution}. I would also seek to create a visual interface for the system to allow the simulation to be used as a learning tool for students interested in learning more about agent-based modelling. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1286,7 +1288,7 @@ Figures \ref{fig:commandline} and \ref{fig:commandline2} present the command-lin
 
 \cref{fig:interactive} shows the result of running an interactive simulation. Each generation is run following a press of ENTER by the user, or $n$ generations will run if the user enters a number $n$. With each generation, the live average fitness graph is updated and the exact fitness score for each entity in the population is displayed as a sorted list in the terminal.
 
-If the user enters \texttt{watch $n$} for some index into the array of entities $n$, this will allow the user to watch a run of the simulation for a particular entity, as seen in \cref{fig:interactivesingle}. This displays the current epoch, cycle number, then a grid representing the world that the entity exists within. Mushrooms as displayed as emojis and the entity is displayed as a triangle with the tip of the triangle giving the direction of the entity. Below this grid, some information about the simulation is given along with the inputs passed to the \texttt{behaviour()} method and the outputs received.
+If the user enters \texttt{watch} $n$ for some index $n$ into the array of entities, this will allow the user to watch a run of the simulation for a particular entity, as seen in \cref{fig:interactivesingle}. This displays the current epoch, cycle number, then a grid representing the world that the entity exists within. Mushrooms as displayed as emojis and the entity is displayed as a triangle with the tip of the triangle giving the direction that the entity is facing. Below this grid, some information about the simulation is given along with the inputs passed to the \texttt{behaviour()} method and the outputs received.
 
 \begin{figure}[ht]
   \centering

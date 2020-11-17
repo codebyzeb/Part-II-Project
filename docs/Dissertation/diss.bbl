@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[Cangelosi, 2001]{cangelosi2001evolution}
+Cangelosi, A. (2001).
+\newblock Evolution of communication and language using signals, symbols, and
+  words.
+\newblock {\em IEEE Transactions on Evolutionary Computation}, 5(2):93--101.
+
 \bibitem[Cangelosi and Parisi, 1998]{Cangelosi1998}
 Cangelosi, A. and Parisi, D. (1998).
 \newblock {The emergence of a `language' in an evolving population of neural

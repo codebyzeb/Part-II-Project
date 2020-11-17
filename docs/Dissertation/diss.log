@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.11)  23 APR 2020 11:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.11)  8 MAY 2020 09:51
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -911,15 +911,24 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 runsystem(mkdir -p _minted-diss)...executed.
 
 
+(/usr/local/texlive/2019/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/02/04 v3.8 Customized lists
+\labelindent=\skip51
+\enit@outerparindent=\dimen187
+\enit@toks=\toks34
+\enit@inbox=\box47
+\enit@count@id=\count157
+\enitdp@description=\count158
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks34
-\inpenc@posthook=\toks35
+\inpenc@prehook=\toks35
+\inpenc@posthook=\toks36
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/changepage/changepage.sty
 Package: changepage 2009/10/20 v1.0c check page and change page layout
-\c@cp@cntr=\count157
-\cp@tempcnt=\count158
+\c@cp@cntr=\count159
+\cp@tempcnt=\count160
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/textgreek/textgreek.sty
 Package: textgreek 2011/10/09 v0.7 Greek symbols in text
@@ -1302,56 +1311,56 @@ runsystem(rm diss.aex)...executed.
  (./diss.aux)
 \openout1 = `diss.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 42.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for LS1+stix on input line 38.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for LS1/stix/m/n on input line 42.
+LaTeX Font Info:    Try loading font information for LS1+stix on input line 42.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls1stix.fd
 File: ls1stix.fd 2015/04/17 v1.1.2-latex STIX LS1 font definitions
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for LS2+stix on input line 38.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for LS2/stix/m/n on input line 42.
+LaTeX Font Info:    Try loading font information for LS2+stix on input line 42.
 
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls2stix.fd
 File: ls2stix.fd 2015/04/17 v1.1.2-latex STIX LS2 font definitions
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 38.
-LaTeX Font Info:    Try loading font information for LGR+cmr on input line 38.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 42.
+LaTeX Font Info:    Try loading font information for LGR+cmr on input line 42.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/cbfonts-fd/lgrcmr.fd
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Try loading font information for T1+stix on input line 38.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Try loading font information for T1+stix on input line 42.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/t1stix.fd
 File: t1stix.fd 2015/04/17 v1.1.2-latex STIX T1 font definitions
 )
-\AtBeginShipoutBox=\box47
-Package hyperref Info: Link coloring OFF on input line 38.
+\AtBeginShipoutBox=\box48
+Package hyperref Info: Link coloring OFF on input line 42.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1359,11 +1368,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count159
+\c@section@level=\count161
 )
-LaTeX Info: Redefining \ref on input line 38.
-LaTeX Info: Redefining \pageref on input line 38.
-LaTeX Info: Redefining \nameref on input line 38.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
+LaTeX Info: Redefining \nameref on input line 42.
 
 (./diss.out) (./diss.out)
 \@outlinefile=\write6
@@ -1406,17 +1415,17 @@ LaTeX Info: Redefining \nameref on input line 38.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count160
-\scratchdimen=\dimen187
-\scratchbox=\box48
-\nofMPsegments=\count161
-\nofMParguments=\count162
-\everyMPshowfont=\toks36
-\MPscratchCnt=\count163
-\MPscratchDim=\dimen188
-\MPnumerator=\count164
-\makeMPintoPDFobject=\count165
-\everyMPtoPDFconversion=\toks37
+\scratchcounter=\count162
+\scratchdimen=\dimen188
+\scratchbox=\box49
+\nofMPsegments=\count163
+\nofMParguments=\count164
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count165
+\MPscratchDim=\dimen189
+\MPnumerator=\count166
+\makeMPintoPDFobject=\count167
+\everyMPtoPDFconversion=\toks38
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1439,89 +1448,89 @@ Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
-\docmute@nestinglevel=\count166
+\docmute@nestinglevel=\count168
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/stix/b/n' tried instead on input line 47.
+(Font)              Font shape `T1/stix/b/n' tried instead on input line 51.
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/stix/b/n' tried instead on input line 54.
+(Font)              Font shape `T1/stix/b/n' tried instead on input line 58.
  [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/stix/b/n' tried instead on input line 68.
+(Font)              Font shape `T1/stix/b/n' tried instead on input line 72.
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <12> not available
-(Font)              Font shape `T1/stix/b/n' tried instead on input line 80.
+(Font)              Font shape `T1/stix/b/n' tried instead on input line 84.
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--91
+Underfull \hbox (badness 10000) in paragraph at lines 91--95
 
  []
 
 
-Underfull \hbox (badness 4217) in paragraph at lines 87--91
+Underfull \hbox (badness 4217) in paragraph at lines 91--95
 \T1/stix/m/n/12 Dis-cov-ery (CSD3) op-er-ated by the Uni-ver-sity of Cam-bridge
  Re-search Com-put-ing Ser-vice
  []
 
 [2]
 LaTeX Font Info:    Try loading font information for LS1+stixscr on input line 
-95.
+99.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls1stixscr.fd
 File: ls1stixscr.fd 2015/04/17 v1.1.2-latex STIX script LS1 font definitions
 )
 LaTeX Font Info:    Try loading font information for LS2+stixex on input line 9
-5.
+9.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls2stixex.fd
 File: ls2stixex.fd 2015/04/17 v1.1.2-latex STIX extentions LS2 font definitions
 
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 95.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 99.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
 LaTeX Font Info:    Try loading font information for LS1+stixfrak on input line
- 95.
+ 99.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls1stixfrak.fd
 File: ls1stixfrak.fd 2015/04/17 v1.1.2-latex STIX fraktur LS1 font definitions
 )
 LaTeX Font Info:    Try loading font information for LS1+stixbb on input line 9
-5.
+9.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls1stixbb.fd
 File: ls1stixbb.fd 2015/04/17 v1.1.2-latex STIX blackboard LS1 font definitions
 
 )
 LaTeX Font Info:    Try loading font information for LS2+stixcal on input line 
-95.
+99.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls2stixcal.fd
 File: ls2stixcal.fd 2015/04/17 v1.1.2-latex STIX calligraphic LS2 font definiti
 ons
 )
 LaTeX Font Info:    Try loading font information for LS1+stixsf on input line 9
-5.
+9.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls1stixsf.fd
 File: ls1stixsf.fd 2015/04/17 v1.1.2-latex STIX sans-serif LS1 font definitions
 
 )
 LaTeX Font Info:    Try loading font information for LS2+stixtt on input line 9
-5.
+9.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ls2stixtt.fd
 File: ls2stixtt.fd 2015/04/17 v1.1.2-latex STIX typewriter LS2 font definitions
 
 )
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/stix/b/n' tried instead on input line 96.
+(Font)              Font shape `T1/stix/b/n' tried instead on input line 100.
 
 
 LaTeX Font Warning: Font shape `U/wasy/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 110.
+(Font)              size <7> substituted on input line 111.
 
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 110.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 111.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -1541,582 +1550,200 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 \openout8 = `diss.lof'.
 
 LaTeX Font Info:    Font shape `T1/stix/m/sl' in size <12> not available
-(Font)              Font shape `T1/stix/m/it' tried instead on input line 146.
+(Font)              Font shape `T1/stix/m/it' tried instead on input line 150.
  [9]
 Chapter 1.
 [1
 
 ]
-LaTeX Font Info:    Try loading font information for TS1+stix on input line 171
+LaTeX Font Info:    Try loading font information for TS1+stix on input line 175
 .
  (/usr/local/texlive/2019/texmf-dist/tex/latex/stix/ts1stix.fd
 File: ts1stix.fd 2015/04/17 v1.1.2-latex STIX TS1 font definitions
 ) [2]
 Chapter 2.
-
-LaTeX Warning: Reference `section:requirements' on page 1 undefined on input li
-ne 194.
-
-
-LaTeX Warning: Reference `section:starting' on page 1 undefined on input line 1
-94.
-
-
-LaTeX Warning: Reference `section:software' on page 1 undefined on input line 1
-94.
-
-
-LaTeX Warning: Reference `fig:environment' on page 1 undefined on input line 20
-4.
-
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 23
-5.
-
 [3
 
-] [4]
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 28
-3.
-
-[5]
-
-LaTeX Warning: Reference `section:genetic' on page 1 undefined on input line 32
-3.
-
-
-LaTeX Warning: Reference `section:populations' on page 1 undefined on input lin
-e 323.
-
-[6] [7]
-
-LaTeX Warning: Reference `section:languageanalysis' on page 1 undefined on inpu
-t line 360.
-
-
-LaTeX Warning: Reference `section:analysis' on page 1 undefined on input line 3
-66.
-
-
-LaTeX Warning: Reference `section:world' on page 1 undefined on input line 372.
-
-
-
-LaTeX Warning: Reference `section:neural' on page 1 undefined on input line 374
-.
-
-
-LaTeX Warning: Reference `section:genetic' on page 1 undefined on input line 37
-6.
-
-
-LaTeX Warning: Reference `section:populations' on page 1 undefined on input lin
-e 378.
-
-[8] [9]
-<figs/commits.jpg, id=593, 568.1225pt x 209.78375pt>
+] [4] [5] [6] [7] [8] [9]
+<figs/commits.jpg, id=594, 568.1225pt x 209.78375pt>
 File: figs/commits.jpg Graphic file (type jpg)
 <use figs/commits.jpg>
-Package pdftex.def Info: figs/commits.jpg  used on input line 428.
+Package pdftex.def Info: figs/commits.jpg  used on input line 434.
 (pdftex.def)             Requested size: 435.32422pt x 160.75291pt.
-
-
-LaTeX Warning: Reference `fig:commits' on page 1 undefined on input line 433.
-
-[10 <./figs/commits.jpg>] [11]
+ [10 <./figs/commits.jpg>] [11]
 Chapter 3.
-<figs/modules.png, id=616, 565.11125pt x 324.21124pt>
+<figs/modules.png, id=618, 565.11125pt x 324.21124pt>
 File: figs/modules.png Graphic file (type png)
 <use figs/modules.png>
-Package pdftex.def Info: figs/modules.png  used on input line 471.
+Package pdftex.def Info: figs/modules.png  used on input line 477.
 (pdftex.def)             Requested size: 386.95897pt x 222.00916pt.
-<figs/uml.png, id=618, 1014.79124pt x 686.565pt>
+<figs/uml.png, id=620, 1014.79124pt x 686.565pt>
 File: figs/uml.png Graphic file (type png)
 <use figs/uml.png>
-Package pdftex.def Info: figs/uml.png  used on input line 478.
+Package pdftex.def Info: figs/uml.png  used on input line 484.
 (pdftex.def)             Requested size: 1014.78877pt x 686.56332pt.
-
-LaTeX Warning: Reference `section:impl-high' on page 1 undefined on input line 
-485.
-
-
-LaTeX Warning: Reference `section:impl-analysis' on page 1 undefined on input l
-ine 485.
-
-
-LaTeX Warning: Reference `fig:modules' on page 1 undefined on input line 489.
-
-
-LaTeX Warning: Reference `section:requirements' on page 1 undefined on input li
-ne 489.
-
-
-LaTeX Warning: Reference `fig:uml' on page 1 undefined on input line 491.
-
-
-LaTeX Warning: Reference `section:entities' on page 1 undefined on input line 4
-91.
-
-
-LaTeX Warning: Reference `section:world' on page 1 undefined on input line 491.
-
-
-
-LaTeX Warning: Reference `section:analysis' on page 1 undefined on input line 4
-93.
-
 [12
 
 ]
-Underfull \hbox (badness 1412) in paragraph at lines 507--508
+Underfull \hbox (badness 1412) in paragraph at lines 513--514
 []\T1/stix/m/n/12 This data struc-ture is cho-sen over an ar-ray rep-re-sen-ta-
 tion as the world is sparse. Since the
  []
 
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 51
-5.
-
 [13 <./figs/modules.png>] [14 <./figs/uml.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 525--526
+[]\T1/stix/b/n/12 Mushroom Ma-nip-u-la-tion: \T1/stix/m/n/12 Along with meth-od
+s to place and test for mush-rooms, the
+ []
 
-LaTeX Warning: Reference `section:simulation' on page 1 undefined on input line
- 521.
-
-
-LaTeX Warning: Reference `section:optimisations' on page 1 undefined on input l
-ine 521.
-
-
-LaTeX Warning: Reference `fig:uml' on page 1 undefined on input line 531.
-
-
-LaTeX Warning: Reference `section:entities' on page 1 undefined on input line 5
-37.
-
-
-LaTeX Warning: Reference `section:mushrooms' on page 1 undefined on input line 
-537.
-
-
-LaTeX Warning: Reference `table:behaviour' on page 1 undefined on input line 53
-7.
-
-[15]
-
-LaTeX Warning: Reference `section:neural' on page 1 undefined on input line 562
-.
-
-
-LaTeX Warning: Reference `fig:fullneural' on page 1 undefined on input line 566
-.
-
-[16]
-<figs/fullneural.png, id=658, 1399.2275pt x 901.3675pt>
+[15] [16]
+<figs/fullneural.png, id=674, 1399.2275pt x 901.3675pt>
 File: figs/fullneural.png Graphic file (type png)
 <use figs/fullneural.png>
-Package pdftex.def Info: figs/fullneural.png  used on input line 578.
+Package pdftex.def Info: figs/fullneural.png  used on input line 580.
 (pdftex.def)             Requested size: 435.32422pt x 280.42505pt.
-
-
-LaTeX Warning: Reference `fig:fullneural' on page 1 undefined on input line 617
-.
-
-[17 <./figs/fullneural.png>]
-
-LaTeX Warning: Reference `fig:uml' on page 1 undefined on input line 627.
-
-
-LaTeX Warning: Reference `section:populations' on page 1 undefined on input lin
-e 627.
-
-
-LaTeX Warning: Reference `section:world' on page 1 undefined on input line 631.
-
-
-
-LaTeX Warning: Reference `section:genetic' on page 1 undefined on input line 63
-3.
-
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 63
-3.
-
+ [17 <./figs/fullneural.png>]
 \openout4 = `diss.pyg'.
 
+
 (./_minted-diss/default-pyg-prefix.pygstyle) (./_minted-diss/default.pygstyle)
-(./_minted-diss/D02A2817EC9FF0F2F78F95B0E2CCF2254A3378E67C6A61B16FFA0FBF2255E8F
-1.pygtex
+(./_minted-diss/7689122DEEE578DB6D7B328DD840259CF73245BD8A35F59373B1A825B215483
+3.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
  [18])
-
-LaTeX Warning: Reference `section:single-implementation' on page 1 undefined on
- input line 684.
-
-[19]
 \openout4 = `diss.pyg'.
 
 
-(./_minted-diss/F39E997E0A56E1751F1DB55C220FAD0E4A3378E67C6A61B16FFA0FBF2255E8F
-1.pygtex)
-
-LaTeX Warning: Reference `section:simulation-initialise' on page 1 undefined on
- input line 722.
-
-
-LaTeX Warning: Reference `section:representation-of-world' on page 1 undefined 
-on input line 732.
-
-[20]
-
-LaTeX Warning: Reference `section:single-implementation' on page 1 undefined on
- input line 734.
-
-
-LaTeX Warning: Reference `section:simulation-parameters' on page 1 undefined on
- input line 744.
-
-[21]
-<figs/speedup.png, id=697, 662.7159pt x 346.896pt>
-File: figs/speedup.png Graphic file (type png)
-<use figs/speedup.png>
-Package pdftex.def Info: figs/speedup.png  used on input line 749.
+(./_minted-diss/2C6B4B89A468AA0BC3FBC553DCF30FEF4A3378E67C6A61B16FFA0FBF2255E8F
+1.pygtex [19]) [20]
+<figs/speedup2.png, id=716, 662.7159pt x 346.896pt>
+File: figs/speedup2.png Graphic file (type png)
+<use figs/speedup2.png>
+Package pdftex.def Info: figs/speedup2.png  used on input line 747.
 (pdftex.def)             Requested size: 435.32422pt x 227.87753pt.
-<figs/generation-time.png, id=698, 662.7159pt x 345.4506pt>
-File: figs/generation-time.png Graphic file (type png)
-<use figs/generation-time.png>
-Package pdftex.def Info: figs/generation-time.png  used on input line 756.
-(pdftex.def)             Requested size: 435.32422pt x 226.92805pt.
-
-
-LaTeX Warning: Reference `fig:speedup' on page 1 undefined on input line 761.
-
-
-LaTeX Warning: Reference `fig:generation-time' on page 1 undefined on input lin
-e 765.
-
-[22 <./figs/speedup.png>]
-
-LaTeX Warning: Reference `fig:modules' on page 1 undefined on input line 804.
-
-
-LaTeX Warning: Reference `section:interactivity' on page 1 undefined on input l
-ine 804.
-
-
-LaTeX Warning: Reference `section:efficiency' on page 1 undefined on input line
- 808.
-
-
-LaTeX Warning: Reference `table:qi-correlation' on page 1 undefined on input li
-ne 808.
-
-[23 <./figs/generation-time.png>]
-
-LaTeX Warning: Reference `table:qi-correlation' on page 1 undefined on input li
-ne 833.
-
-[24]
+<figs/generation-time2.png, id=717, 589.7232pt x 332.442pt>
+File: figs/generation-time2.png Graphic file (type png)
+<use figs/generation-time2.png>
+Package pdftex.def Info: figs/generation-time2.png  used on input line 755.
+(pdftex.def)             Requested size: 435.32422pt x 245.39957pt.
+ [21] [22 <./figs/speedup2.png>] [23 <./figs/generation-time2.png>] [24]
 Chapter 4.
-
-LaTeX Warning: Reference `section:popfit' on page 1 undefined on input line 851
-.
-
-
-LaTeX Warning: Reference `section:languageanalysis' on page 1 undefined on inpu
-t line 851.
-
-
-LaTeX Warning: Reference `section:behaviouranalysis' on page 1 undefined on inp
-ut line 853.
-
-
-LaTeX Warning: Reference `section:simulation-parameters' on page 1 undefined on
- input line 853.
-
-
-LaTeX Warning: Reference `fig:cangelosi-results' on page 1 undefined on input l
-ine 861.
-
-<results/average-relu.png, id=737, 401.45985pt x 304.2567pt>
+<results/average-relu.png, id=772, 401.45985pt x 304.2567pt>
 File: results/average-relu.png Graphic file (type png)
 <use results/average-relu.png>
-Package pdftex.def Info: results/average-relu.png  used on input line 870.
+Package pdftex.def Info: results/average-relu.png  used on input line 869.
 (pdftex.def)             Requested size: 237.01411pt x 179.62595pt.
-<figs/fitness.png, id=738, 720.6925pt x 427.5975pt>
+<figs/fitness.png, id=773, 720.6925pt x 427.5975pt>
 File: figs/fitness.png Graphic file (type png)
 <use figs/fitness.png>
-Package pdftex.def Info: figs/fitness.png  used on input line 877.
+Package pdftex.def Info: figs/fitness.png  used on input line 876.
 (pdftex.def)             Requested size: 237.01411pt x 140.61826pt.
-
-LaTeX Warning: Reference `fig:average-relu' on page 1 undefined on input line 8
-83.
-
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 88
-3.
-
 [25
 
 ]
-<results/average-identity.png, id=747, 401.0985pt x 304.61806pt>
+<results/average-identity.png, id=786, 401.0985pt x 304.61806pt>
 File: results/average-identity.png Graphic file (type png)
 <use results/average-identity.png>
-Package pdftex.def Info: results/average-identity.png  used on input line 892.
+Package pdftex.def Info: results/average-identity.png  used on input line 891.
 (pdftex.def)             Requested size: 237.01411pt x 180.00197pt.
-<results/average-sigmoid.png, id=748, 401.0985pt x 308.5929pt>
+<results/average-sigmoid.png, id=787, 401.0985pt x 308.5929pt>
 File: results/average-sigmoid.png Graphic file (type png)
 <use results/average-sigmoid.png>
-Package pdftex.def Info: results/average-sigmoid.png  used on input line 899.
+Package pdftex.def Info: results/average-sigmoid.png  used on input line 898.
 (pdftex.def)             Requested size: 237.01411pt x 182.35074pt.
-
-
-LaTeX Warning: Reference `fig:cangelosi-results' on page 1 undefined on input l
-ine 905.
-
-
-LaTeX Warning: Reference `fig:average-identity' on page 1 undefined on input li
-ne 905.
-
-[26 <./results/average-relu.png> <./figs/fitness.png> <./results/average-identi
-ty.png> <./results/average-sigmoid.png>]
-
-LaTeX Warning: Reference `section:simulation-parameters' on page 1 undefined on
- input line 907.
-
-
-LaTeX Warning: Reference `section:efficiency' on page 1 undefined on input line
- 909.
-
-
-LaTeX Warning: Reference `section:efficiency' on page 1 undefined on input line
- 915.
-
-<results/language.png, id=765, 501.5538pt x 267.399pt>
+ [26 <./results/average-relu.png> <./figs/fitness.png> <./results/average-ident
+ity.png> <./results/average-sigmoid.png>]
+<results/language.png, id=810, 501.5538pt x 267.399pt>
 File: results/language.png Graphic file (type png)
 <use results/language.png>
-Package pdftex.def Info: results/language.png  used on input line 945.
+Package pdftex.def Info: results/language.png  used on input line 947.
 (pdftex.def)             Requested size: 386.95897pt x 206.30995pt.
-<results/correlation.png, id=766, 539.8569pt x 308.5929pt>
+<results/correlation.png, id=811, 539.8569pt x 308.5929pt>
 File: results/correlation.png Graphic file (type png)
 <use results/correlation.png>
-Package pdftex.def Info: results/correlation.png  used on input line 952.
+Package pdftex.def Info: results/correlation.png  used on input line 955.
 (pdftex.def)             Requested size: 386.95897pt x 221.19788pt.
-
-LaTeX Warning: Reference `fig:language-evolved3' on page 1 undefined on input l
-ine 957.
-
-
-LaTeX Warning: Reference `section:efficiency' on page 1 undefined on input line
- 957.
-
-
-LaTeX Warning: Reference `fig:correlation' on page 1 undefined on input line 95
-9.
-
-
-LaTeX Warning: Reference `fig:language-evolved3' on page 1 undefined on input l
-ine 959.
-
-
-LaTeX Warning: Reference `fig:correlation' on page 1 undefined on input line 95
-9.
-
-[27]
-
-LaTeX Warning: Reference `section:popfit' on page 1 undefined on input line 973
-.
-
-<results/ten-none-identity.png, id=775, 401.8212pt x 307.8702pt>
+ [27]
+<results/ten-none-identity.png, id=824, 401.8212pt x 307.8702pt>
 File: results/ten-none-identity.png Graphic file (type png)
 <use results/ten-none-identity.png>
-Package pdftex.def Info: results/ten-none-identity.png  used on input line 980.
+Package pdftex.def Info: results/ten-none-identity.png  used on input line 981.
 
 (pdftex.def)             Requested size: 237.01411pt x 181.59955pt.
-<results/ten-none-relu.png, id=776, 403.9893pt x 307.1475pt>
+<results/ten-none-relu.png, id=825, 403.9893pt x 307.1475pt>
 File: results/ten-none-relu.png Graphic file (type png)
 <use results/ten-none-relu.png>
-Package pdftex.def Info: results/ten-none-relu.png  used on input line 987.
+Package pdftex.def Info: results/ten-none-relu.png  used on input line 988.
 (pdftex.def)             Requested size: 237.01411pt x 180.19844pt.
-
-LaTeX Warning: Reference `fig:ten-none-identity' on page 1 undefined on input l
-ine 993.
-
-
-LaTeX Warning: Reference `fig:ten-none-relu' on page 1 undefined on input line 
-993.
-
-
-LaTeX Warning: Reference `fig:weights-2000' on page 1 undefined on input line 9
-95.
-
-
-LaTeX Warning: Reference `fig:convergence' on page 1 undefined on input line 99
-5.
-
-<results/weights-2000-none2.png, id=777, 430.0065pt x 302.0886pt>
+<results/weights-2000-none2.png, id=830, 430.0065pt x 302.0886pt>
 File: results/weights-2000-none2.png Graphic file (type png)
 <use results/weights-2000-none2.png>
 Package pdftex.def Info: results/weights-2000-none2.png  used on input line 100
-2.
+3.
 (pdftex.def)             Requested size: 237.01411pt x 166.50877pt.
-<results/convergence.png, id=778, 441.93105pt x 308.5929pt>
+<results/convergence.png, id=831, 441.93105pt x 308.5929pt>
 File: results/convergence.png Graphic file (type png)
 <use results/convergence.png>
-Package pdftex.def Info: results/convergence.png  used on input line 1009.
+Package pdftex.def Info: results/convergence.png  used on input line 1010.
 (pdftex.def)             Requested size: 237.01411pt x 165.50287pt.
-
-LaTeX Warning: Reference `section:neural' on page 1 undefined on input line 101
-5.
-
-[28 <./results/language.png>]
-
-LaTeX Warning: Reference `fig:compare' on page 1 undefined on input line 1020.
-
-<results/compare2.png, id=785, 396.7623pt x 306.06345pt>
+ [28 <./results/language.png>]
+<results/compare2.png, id=840, 396.7623pt x 306.06345pt>
 File: results/compare2.png Graphic file (type png)
 <use results/compare2.png>
-Package pdftex.def Info: results/compare2.png  used on input line 1024.
-(pdftex.def)             Requested size: 483.69687pt x 373.13531pt.
-
-LaTeX Warning: Reference `fig:poisonous-behaviour' on page 1 undefined on input
- line 1029.
-
-
-LaTeX Warning: Reference `fig:poisonous-behaviour' on page 1 undefined on input
- line 1081.
-
-
-LaTeX Warning: Reference `fig:ten-none-identity' on page 1 undefined on input l
-ine 1083.
-
-[29 <./results/correlation.png>]
-
-LaTeX Warning: Reference `fig:ten-none-relu' on page 1 undefined on input line 
-1085.
-
-
-LaTeX Warning: Reference `fig:poisonous-behaviour' on page 1 undefined on input
- line 1085.
-
-[30 <./results/ten-none-identity.png> <./results/ten-none-relu.png> <./results/
-weights-2000-none2.png> <./results/convergence.png>]
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 10
-97.
-
-
-LaTeX Warning: Reference `section:popfit' on page 1 undefined on input line 109
-7.
-
-[31 <./results/compare2.png>]
-<results/average-55.png, id=805, 404.712pt x 307.50885pt>
+Package pdftex.def Info: results/compare2.png  used on input line 1026.
+(pdftex.def)             Requested size: 435.32422pt x 335.81618pt.
+ [29 <./results/correlation.png>] [30 <./results/ten-none-identity.png> <./resu
+lts/ten-none-relu.png> <./results/weights-2000-none2.png> <./results/convergenc
+e.png>] [31 <./results/compare2.png>]
+<results/average-55.png, id=869, 404.712pt x 307.50885pt>
 File: results/average-55.png Graphic file (type png)
 <use results/average-55.png>
-Package pdftex.def Info: results/average-55.png  used on input line 1106.
+Package pdftex.def Info: results/average-55.png  used on input line 1108.
 (pdftex.def)             Requested size: 237.01411pt x 180.09135pt.
-<results/average-10510.png, id=806, 402.18256pt x 307.8702pt>
+<results/average-10510.png, id=870, 402.18256pt x 307.8702pt>
 File: results/average-10510.png Graphic file (type png)
 <use results/average-10510.png>
-Package pdftex.def Info: results/average-10510.png  used on input line 1113.
+Package pdftex.def Info: results/average-10510.png  used on input line 1115.
 (pdftex.def)             Requested size: 237.01411pt x 181.43513pt.
-
-
-LaTeX Warning: Reference `fig:average-55' on page 1 undefined on input line 111
-9.
-
-
-LaTeX Warning: Reference `fig:average-relu' on page 1 undefined on input line 1
-119.
-
-
-LaTeX Warning: Reference `fig:average-10510' on page 1 undefined on input line 
-1119.
-
-
-LaTeX Warning: Reference `section:behaviouranalysis' on page 1 undefined on inp
-ut line 1119.
-
-
-LaTeX Warning: Reference `table:constants' on page 1 undefined on input line 11
-23.
-
-[32]
-<results/average-short-epo.png, id=813, 403.2666pt x 305.7021pt>
+ [32]
+<results/average-short-epo.png, id=882, 403.2666pt x 305.7021pt>
 File: results/average-short-epo.png Graphic file (type png)
 <use results/average-short-epo.png>
-Package pdftex.def Info: results/average-short-epo.png  used on input line 1130
+Package pdftex.def Info: results/average-short-epo.png  used on input line 1132
 .
 (pdftex.def)             Requested size: 237.01411pt x 179.67696pt.
-<results/average-long-epo.png, id=814, 402.90524pt x 305.34074pt>
+<results/average-long-epo.png, id=883, 402.90524pt x 305.34074pt>
 File: results/average-long-epo.png Graphic file (type png)
 <use results/average-long-epo.png>
-Package pdftex.def Info: results/average-long-epo.png  used on input line 1137.
+Package pdftex.def Info: results/average-long-epo.png  used on input line 1139.
 
 (pdftex.def)             Requested size: 237.01411pt x 179.62299pt.
-
-
-LaTeX Warning: Reference `fig:average-short-epo' on page 1 undefined on input l
-ine 1143.
-
-
-LaTeX Warning: Reference `fig:average-long-epo' on page 1 undefined on input li
-ne 1143.
-
-<results/average-mut20.png, id=815, 402.90524pt x 308.95425pt>
+<results/average-mut20.png, id=886, 402.90524pt x 308.95425pt>
 File: results/average-mut20.png Graphic file (type png)
 <use results/average-mut20.png>
-Package pdftex.def Info: results/average-mut20.png  used on input line 1152.
+Package pdftex.def Info: results/average-mut20.png  used on input line 1154.
 (pdftex.def)             Requested size: 237.01411pt x 181.7487pt.
-<results/average-mut50.png, id=816, 402.18256pt x 306.06345pt>
+<results/average-mut50.png, id=887, 402.18256pt x 306.06345pt>
 File: results/average-mut50.png Graphic file (type png)
 <use results/average-mut50.png>
-Package pdftex.def Info: results/average-mut50.png  used on input line 1159.
+Package pdftex.def Info: results/average-mut50.png  used on input line 1161.
 (pdftex.def)             Requested size: 237.01411pt x 180.37036pt.
-<results/average-keep10.png, id=817, 404.712pt x 308.23155pt>
+<results/average-keep10.png, id=888, 404.712pt x 308.23155pt>
 File: results/average-keep10.png Graphic file (type png)
 <use results/average-keep10.png>
-Package pdftex.def Info: results/average-keep10.png  used on input line 1170.
+Package pdftex.def Info: results/average-keep10.png  used on input line 1172.
 (pdftex.def)             Requested size: 237.01411pt x 180.5146pt.
-<results/average-keep05.png, id=818, 403.9893pt x 312.9291pt>
+<results/average-keep05.png, id=889, 403.9893pt x 312.9291pt>
 File: results/average-keep05.png Graphic file (type png)
 <use results/average-keep05.png>
-Package pdftex.def Info: results/average-keep05.png  used on input line 1177.
+Package pdftex.def Info: results/average-keep05.png  used on input line 1179.
 (pdftex.def)             Requested size: 237.01411pt x 183.5904pt.
-
-LaTeX Warning: Reference `section:behaviouranalysis' on page 1 undefined on inp
-ut line 1183.
-
-
-LaTeX Warning: Reference `fig:average-relu' on page 1 undefined on input line 1
-185.
-
-[33 <./results/average-55.png> <./results/average-10510.png>] [34 <./results/av
-erage-short-epo.png> <./results/average-long-epo.png> <./results/average-mut20.
-png> <./results/average-mut50.png>]
-
-LaTeX Warning: Reference `section:popfit' on page 1 undefined on input line 119
-1.
-
-
-LaTeX Warning: Reference `section:simulation-parameters' on page 1 undefined on
- input line 1193.
-
-
-LaTeX Warning: Reference `fig:cangelosi-results' on page 1 undefined on input l
-ine 1193.
-
-
-LaTeX Warning: Reference `section:behaviouranalysis' on page 1 undefined on inp
-ut line 1195.
-
-[35 <./results/average-keep10.png> <./results/average-keep05.png>]
+ [33 <./results/average-55.png> <./results/average-10510.png>] [34 <./results/a
+verage-short-epo.png> <./results/average-long-epo.png> <./results/average-mut20
+.png> <./results/average-mut50.png>] [35 <./results/average-keep10.png> <./resu
+lts/average-keep05.png>]
 Chapter 5.
-
-LaTeX Warning: Reference `section:requirements' on page 1 undefined on input li
-ne 1209.
-
 [36
 
 ] (./diss.bbl [37]) [38
@@ -2128,33 +1755,25 @@ File: world_benchmark.py  (verbatim)
 
 ] [40]
 Appendix B.
-<figs/commandline.png, id=873, 482.80376pt x 591.20876pt>
+<figs/commandline.png, id=954, 482.80376pt x 591.20876pt>
 File: figs/commandline.png Graphic file (type png)
 <use figs/commandline.png>
-Package pdftex.def Info: figs/commandline.png  used on input line 1272.
+Package pdftex.def Info: figs/commandline.png  used on input line 1274.
 (pdftex.def)             Requested size: 237.01411pt x 290.22707pt.
-<figs/commandline2.png, id=874, 455.7025pt x 279.0425pt>
+<figs/commandline2.png, id=955, 455.7025pt x 279.0425pt>
 File: figs/commandline2.png Graphic file (type png)
 <use figs/commandline2.png>
-Package pdftex.def Info: figs/commandline2.png  used on input line 1279.
+Package pdftex.def Info: figs/commandline2.png  used on input line 1281.
 (pdftex.def)             Requested size: 237.01411pt x 145.13274pt.
-
-LaTeX Warning: Reference `fig:interactive' on page 1 undefined on input line 12
-87.
-
-
-LaTeX Warning: Reference `fig:interactivesingle' on page 1 undefined on input l
-ine 1289.
-
-<figs/interactive.png, id=877, 1283.79625pt x 521.95pt>
+<figs/interactive.png, id=960, 1283.79625pt x 521.95pt>
 File: figs/interactive.png Graphic file (type png)
 <use figs/interactive.png>
-Package pdftex.def Info: figs/interactive.png  used on input line 1293.
+Package pdftex.def Info: figs/interactive.png  used on input line 1295.
 (pdftex.def)             Requested size: 435.32422pt x 176.98279pt.
-<figs/interactivesingle.png, id=878, 279.0425pt x 425.59pt>
+<figs/interactivesingle.png, id=961, 279.0425pt x 425.59pt>
 File: figs/interactivesingle.png Graphic file (type png)
 <use figs/interactivesingle.png>
-Package pdftex.def Info: figs/interactivesingle.png  used on input line 1300.
+Package pdftex.def Info: figs/interactivesingle.png  used on input line 1302.
 (pdftex.def)             Requested size: 435.32422pt x 663.96965pt.
 [41
 
@@ -2166,65 +1785,49 @@ Appendix C.
 ] [45]
 LaTeX Font Info:    Font shape `T1/stix/bx/n' in size <10> not available
 (Font)              Font shape `T1/stix/b/n' tried instead on input line 81.
- [46] [47] [48] [49])
-runsystem(rm _minted-diss/AA79BDDA18E7AD54F4CE6B4A0FEDE71B4A3378E67C6A61B16FFA0
-FBF2255E8F1.pygtex)...executed.
-
- [50]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1310.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1310.
+ [46] [47] [48] [49]) [50]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1312.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1312.
  (./diss.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1310.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1310.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1312.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1312.
 
 Package rerunfilecheck Info: File `diss.out' has not changed.
-(rerunfilecheck)             Checksum: B2A6589D93EB66FAF2129BF150F43202;3921.
+(rerunfilecheck)             Checksum: 2365E4406FFBF2340B4BDE66934634B5;3708.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1310.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1312.
  ) 
 Here is how much of TeX's memory you used:
- 26125 strings out of 492616
- 486216 string characters out of 6129480
- 562948 words of memory out of 5000000
- 29326 multiletter control sequences out of 15000+600000
+ 26439 strings out of 492616
+ 491662 string characters out of 6129480
+ 572945 words of memory out of 5000000
+ 29640 multiletter control sequences out of 15000+600000
  95915 words of font info for 126 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,48p,1679b,790s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{figure.caption.37} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.33} has been referenced but does not
- exist, replaced by a fixed one
-
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/
-usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}{/usr/local
-/texlive/2019/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc}</usr/local/texlive/2
-019/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texlive
-/2019/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/tex
-live/2019/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/loca
-l/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr/local/
-texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/te
-xlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texliv
-e/2019/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texlive/
-2019/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/201
-9/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2019/t
-exmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2019/texm
-f-dist/fonts/type1/public/stix/stix-mathscr.pfb>
-Output written on diss.pdf (59 pages, 2964095 bytes).
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/stix/stix-ts1.enc}{/usr/loc
+al/texlive/2019/texmf-dist/fonts/enc/dvips/stix/stix-t1.enc}</usr/local/texlive
+/2019/texmf-dist/fonts/type1/public/stix/STIXGeneral-Bold.pfb></usr/local/texli
+ve/2019/texmf-dist/fonts/type1/public/stix/STIXGeneral-Italic.pfb></usr/local/t
+exlive/2019/texmf-dist/fonts/type1/public/stix/STIXGeneral-Regular.pfb></usr/lo
+cal/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr/loca
+l/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb></usr/local/
+texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/te
+xlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texl
+ive/2019/texmf-dist/fonts/type1/public/stix/stix-mathcal.pfb></usr/local/texliv
+e/2019/texmf-dist/fonts/type1/public/stix/stix-mathex.pfb></usr/local/texlive/2
+019/texmf-dist/fonts/type1/public/stix/stix-mathit.pfb></usr/local/texlive/2019
+/texmf-dist/fonts/type1/public/stix/stix-mathrm.pfb></usr/local/texlive/2019/te
+xmf-dist/fonts/type1/public/stix/stix-mathscr.pfb>
+Output written on diss.pdf (59 pages, 2975894 bytes).
 PDF statistics:
- 1071 PDF objects out of 1200 (max. 8388607)
- 927 compressed objects within 10 object streams
- 247 named destinations out of 1000 (max. 500000)
- 638 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1152 PDF objects out of 1200 (max. 8388607)
+ 1008 compressed objects within 11 object streams
+ 244 named destinations out of 1000 (max. 500000)
+ 614 words of extra memory for PDF output out of 10000 (max. 10000000)
 

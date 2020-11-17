@@ -1,5 +1,5 @@
 
-def run_population(entities):
+function run_population(entities):
 
 	for generation in num_generations:
 

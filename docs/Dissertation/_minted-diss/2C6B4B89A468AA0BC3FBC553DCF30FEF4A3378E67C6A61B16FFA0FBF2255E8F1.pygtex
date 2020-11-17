@@ -1,5 +1,5 @@
 \begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{def} \PYG{n+nf}{run\PYGZus{}population}\PYG{p}{(}\PYG{n}{entities}\PYG{p}{):}
+\PYG{n}{function} \PYG{n}{run\PYGZus{}population}\PYG{p}{(}\PYG{n}{entities}\PYG{p}{):}
 
 	\PYG{k}{for} \PYG{n}{generation} \PYG{o+ow}{in} \PYG{n}{num\PYGZus{}generations}\PYG{p}{:}
 

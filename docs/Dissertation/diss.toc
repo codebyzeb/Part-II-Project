@@ -1,5 +1,5 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Prior Work}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.1}Contributions}{1}{section.1.1}% 
 \contentsline {section}{\numberline {1.2}Project Overview}{2}{section.1.2}% 
 \contentsline {chapter}{\numberline {2}Preparation}{3}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}Mushroom World}{3}{section.2.1}% 
@@ -7,36 +7,33 @@
 \contentsline {subsection}{\numberline {2.2.1}Feed-Forward Neural Networks}{4}{subsection.2.2.1}% 
 \contentsline {subsection}{\numberline {2.2.2}Genetic Algorithm}{5}{subsection.2.2.2}% 
 \contentsline {subsection}{\numberline {2.2.3}Population Types}{6}{subsection.2.2.3}% 
-\contentsline {section}{\numberline {2.3}Simulation Analysis}{6}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}Generational Fitness}{6}{subsection.2.3.1}% 
-\contentsline {subsection}{\numberline {2.3.2}Efficiency of Language}{7}{subsection.2.3.2}% 
+\contentsline {section}{\numberline {2.3}Simulation Analysis}{7}{section.2.3}% 
 \contentsline {section}{\numberline {2.4}Requirements Analysis}{8}{section.2.4}% 
 \contentsline {section}{\numberline {2.5}Starting Point}{9}{section.2.5}% 
 \contentsline {section}{\numberline {2.6}Software Engineering}{9}{section.2.6}% 
 \contentsline {subsection}{\numberline {2.6.1}Languages and Libraries}{9}{subsection.2.6.1}% 
-\contentsline {subsection}{\numberline {2.6.2}Project Management}{9}{subsection.2.6.2}% 
+\contentsline {subsection}{\numberline {2.6.2}Project Management}{10}{subsection.2.6.2}% 
 \contentsline {subsection}{\numberline {2.6.3}Version Control}{10}{subsection.2.6.3}% 
 \contentsline {subsection}{\numberline {2.6.4}Development Tools}{10}{subsection.2.6.4}% 
 \contentsline {section}{\numberline {2.7}Summary}{11}{section.2.7}% 
 \contentsline {chapter}{\numberline {3}Implementation}{12}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}High-level Overview}{12}{section.3.1}% 
 \contentsline {section}{\numberline {3.2}Environment}{12}{section.3.2}% 
-\contentsline {subsection}{\numberline {3.2.1}Mushrooms}{12}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.1}Mushrooms}{13}{subsection.3.2.1}% 
 \contentsline {subsection}{\numberline {3.2.2}Representation of the World}{13}{subsection.3.2.2}% 
-\contentsline {subsection}{\numberline {3.2.3}Environment Functionality}{13}{subsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.2.3}Environment Functionality}{15}{subsection.3.2.3}% 
 \contentsline {subsection}{\numberline {3.2.4}Testing}{15}{subsection.3.2.4}% 
 \contentsline {section}{\numberline {3.3}Entities}{15}{section.3.3}% 
-\contentsline {subsection}{\numberline {3.3.1}Abstract Specification}{15}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.1}Abstract Specification}{16}{subsection.3.3.1}% 
 \contentsline {subsection}{\numberline {3.3.2}Neural Network Entity}{16}{subsection.3.3.2}% 
-\contentsline {subsection}{\numberline {3.3.3}Reproduction}{17}{subsection.3.3.3}% 
 \contentsline {section}{\numberline {3.4}Simulation}{18}{section.3.4}% 
 \contentsline {subsection}{\numberline {3.4.1}Initialising the Simulation}{18}{subsection.3.4.1}% 
 \contentsline {subsection}{\numberline {3.4.2}Single-Entity Simulation Run}{18}{subsection.3.4.2}% 
 \contentsline {subsection}{\numberline {3.4.3}Genetic Algorithm}{19}{subsection.3.4.3}% 
 \contentsline {subsection}{\numberline {3.4.4}Running the Simulations Using HPC}{20}{subsection.3.4.4}% 
-\contentsline {subsection}{\numberline {3.4.5}Optimisations}{21}{subsection.3.4.5}% 
+\contentsline {subsection}{\numberline {3.4.5}Optimisations}{20}{subsection.3.4.5}% 
 \contentsline {subsection}{\numberline {3.4.6}Interactivity}{22}{subsection.3.4.6}% 
-\contentsline {subsection}{\numberline {3.4.7}Data Recording}{23}{subsection.3.4.7}% 
+\contentsline {subsection}{\numberline {3.4.7}Data Recording}{22}{subsection.3.4.7}% 
 \contentsline {section}{\numberline {3.5}Simulation Analysis}{23}{section.3.5}% 
 \contentsline {subsection}{\numberline {3.5.1}QI Score}{23}{subsection.3.5.1}% 
 \contentsline {section}{\numberline {3.6}Summary}{24}{section.3.6}% 
